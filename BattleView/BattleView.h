@@ -13,33 +13,36 @@
 
 #include "gmplugin.h"
 
+#define BATTLEVIEW_PLUGIN_VERSION 0.0f
 
-class BattleViewPlugin: public Plugin {
+class BattleViewPlugin : public Plugin
+{
+    StringClass m_battleview_ini_key = "BattleView";
+    StringClass m_battleview_ini_mode_key = "mode";
+    int m_battleview_mode;
 
 public:
-
     BattleViewPlugin();
 
-    ~BattleViewPlugin();
+    ~BattleViewPlugin() override;
 
-    virtual void OnLoadGlobalINISettings(INIClass *SSGMIni);
+    void OnLoadGlobalINISettings(INIClass* ssgm_ini) override;
 
-    virtual void OnFreeData();
+    void OnFreeData() override;
 
-    virtual void OnLoadMapINISettings(INIClass *SSGMIni);
+    void OnLoadMapINISettings(INIClass* ssgm_ini) override;
 
-    virtual void OnFreeMapData();
+    void OnFreeMapData() override;
 
-    virtual bool OnChat(int PlayerID, TextMessageEnum Type, const wchar_t *Message, int receiverID);
+    bool OnChat(int player_id, TextMessageEnum type, const wchar_t* message, int receiver_id) override;
 
-    virtual void OnLoadLevel();
+    void OnLoadLevel() override;
 
-    virtual void OnGameOver();
+    void OnGameOver() override;
 
-    virtual void OnPlayerJoin(int PlayerID, const char *PlayerName);
+    void OnPlayerJoin(int player_id, const char* player_name) override;
 
-    virtual void OnPlayerLeave(int PlayerID);
+    void OnPlayerLeave(int player_id) override;
 
-    virtual void OnThink();
-
+    void OnThink() override;
 };

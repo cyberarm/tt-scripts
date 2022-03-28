@@ -13,11 +13,12 @@
 #include "BattleView.h"
 #include "engine_tt.h"
 #include "engine_io.h"
+#include "Defines.h"
+#include "GameObjManager.h"
 #include "gmgame.h"
 
 BattleViewPlugin::BattleViewPlugin() {
-    Console_Output(__FUNCTION__ "\n");
-    helloWorldString = "Hello World!";
+    Console_Output("[BattleView] Loading cyberarm's BattleView Plugin v%d\n", BATTLEVIEW_PLUGIN_VERSION);
     RegisterEvent(EVENT_GLOBAL_INI, this);
     RegisterEvent(EVENT_MAP_INI, this);
     RegisterEvent(EVENT_CHAT_HOOK, this);
@@ -29,7 +30,7 @@ BattleViewPlugin::BattleViewPlugin() {
 }
 
 BattleViewPlugin::~BattleViewPlugin() {
-    Console_Output(__FUNCTION__ "\n");
+    Console_Output("[BattleView] Unloading cyberarm's BattleView Plugin v%d\n", BATTLEVIEW_PLUGIN_VERSION);
     UnregisterEvent(EVENT_GLOBAL_INI, this);
     UnregisterEvent(EVENT_MAP_INI, this);
     UnregisterEvent(EVENT_CHAT_HOOK, this);
@@ -40,18 +41,20 @@ BattleViewPlugin::~BattleViewPlugin() {
     UnregisterEvent(EVENT_THINK_HOOK, this);
 }
 
-void BattleViewPlugin::OnLoadGlobalINISettings(INIClass *SSGMIni) {
-    SSGMIni->Get_String(helloWorldString, "General", "Hello World!");
+void BattleViewPlugin::OnLoadGlobalINISettings(INIClass *ssgm_ini) {
+    Console_Output("[BattleView] Attempting to load global INI settings...\n");
+    m_battleview_mode = ssgm_ini->Get_Int(m_battleview_ini_key, m_battleview_ini_mode_key, 0);
     Console_Output(__FUNCTION__ "\n");
 }
 
+// Don't need?
 void BattleViewPlugin::OnFreeData() {
     Console_Output(__FUNCTION__ "\n");
 }
 
 // Configure Mode level
-void BattleViewPlugin::OnLoadMapINISettings(INIClass *SSGMIni) {
-    Console_Output(__FUNCTION__ "\n");
+void BattleViewPlugin::OnLoadMapINISettings(INIClass *ssgm_ini) {
+    Console_Output("[BattleView] Attempting to load map INI settings...\n");
 }
 
 void BattleViewPlugin::OnFreeMapData() {
@@ -59,11 +62,12 @@ void BattleViewPlugin::OnFreeMapData() {
 }
 
 // Maybe handle configuration chat commands?
-bool BattleViewPlugin::OnChat(int PlayerID, TextMessageEnum Type, const wchar_t *Message, int receiverID) {
+bool BattleViewPlugin::OnChat(int player_id, TextMessageEnum type, const wchar_t *message, int receiver_id) {
     Console_Output(__FUNCTION__ "\n");
     return true;
 }
 
+// TODO: Cache current server and map name
 void BattleViewPlugin::OnLoadLevel() {
     Console_Output(__FUNCTION__ "\n");
 }
@@ -72,17 +76,39 @@ void BattleViewPlugin::OnGameOver() {
     Console_Output(__FUNCTION__ "\n");
 }
 
-void BattleViewPlugin::OnPlayerJoin(int PlayerID, const char *PlayerName) {
+void BattleViewPlugin::OnPlayerJoin(int player_id, const char *player_name) {
     Console_Output(__FUNCTION__ "\n");
 }
 
-void BattleViewPlugin::OnPlayerLeave(int PlayerID) {
+void BattleViewPlugin::OnPlayerLeave(int player_id) {
     Console_Output(__FUNCTION__ "\n");
 }
 
 // This will probably be our favorite callback
 void BattleViewPlugin::OnThink() {
     Console_Output(__FUNCTION__ "\n");
+
+    for (SLNode<BuildingGameObj> *z = GameObjManager::BuildingGameObjList.Head(); z; z = z->Next()) {
+        GameObject *building = z->Data();
+
+        Vector3 pos;
+        building->Get_Position(&pos);
+        Get_Team
+    }
+
+    for (SLNode<cPlayer> *z = Get_Player_List()->Head(); z; z = z->Next()) {
+        cPlayer * player = z->Data();
+
+        Vector3 pos;
+
+        player->Get_Is_Active();
+        player->Get_Is_In_Game();
+        player->Is_Team_Player();
+        player->Get_World_Position(pos);
+
+        if (player->Get_Is_In_Game() && player->Get_Player_Type() == Team) {
+        }
+    }
 }
 
 BattleViewPlugin battleViewPlugin;

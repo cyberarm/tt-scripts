@@ -12,13 +12,13 @@
 #pragma once
 
 class SH_PCT_Custom : public ScriptImpClass {
-    void Custom(GameObject *obj, int type, int param, GameObject *sender);
+	void Custom(GameObject *obj,int type,int param,GameObject *sender);
 };
 
 class SH_PCT_Powerup : public ScriptImpClass {
-    void Custom(GameObject *obj, int type, int param, GameObject *sender);
+	void Custom(GameObject *obj,int type,int param,GameObject *sender);
 };
 
 class SH_Spawn_Difficulty : public ScriptImpClass {
-    void Created(GameObject *obj);
+	void Created(GameObject *obj);
 };

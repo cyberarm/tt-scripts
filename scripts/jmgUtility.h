@@ -1,6 +1,5 @@
 
 #pragma once
-
 #include "general.h"
 #include "scripts.h"
 #include "engine.h"
@@ -10,7 +9,6 @@
 #include "PhysicsSceneClass.h"
 #include "MoveablePhysClass.h"
 #include "VehicleGameObj.h"
-
 #define PI 3.14159265f
 #define PI180 PI/180
 
@@ -22,9 +20,8 @@
 * \ingroup JmgUtility
 */
 class JMG_Utility_Check_If_Script_Is_In_Library : public ScriptImpClass {
-    void Created(GameObject *obj);
-
-    void Timer_Expired(GameObject *obj, int number);
+	void Created(GameObject *obj);
+	void Timer_Expired(GameObject *obj,int number);
 };
 
 /*!
@@ -55,15 +52,12 @@ class JMG_Utility_Check_If_Script_Is_In_Library : public ScriptImpClass {
 * \ingroup JmgUtility
 */
 class JMG_Send_Custom_When_Custom_Sequence_Matched : public ScriptImpClass {
-    int depth;
-    int failCount;
-    bool enabled;
-
-    void Created(GameObject *obj);
-
-    void Custom(GameObject *obj, int message, int param, GameObject *sender);
-
-    void Send_Custom(GameObject *obj, int custom, int param);
+	int depth;
+	int failCount;
+	bool enabled;
+	void Created(GameObject *obj);
+	void Custom(GameObject *obj,int message,int param,GameObject *sender);
+	void Send_Custom(GameObject *obj,int custom,int param);
 };
 
 /*!
@@ -72,9 +66,8 @@ class JMG_Send_Custom_When_Custom_Sequence_Matched : public ScriptImpClass {
 * \ingroup JmgUtility
 */
 class JMG_Utility_Change_Model_On_Timer : public ScriptImpClass {
-    void Created(GameObject *obj);
-
-    void Timer_Expired(GameObject *obj, int number);
+	void Created(GameObject *obj);
+	void Timer_Expired(GameObject *obj,int number);
 };
 
 /*!
@@ -108,20 +101,15 @@ class JMG_Utility_Change_Model_On_Timer : public ScriptImpClass {
 * \ingroup JmgUtility
 */
 class JMG_Utility_Emulate_DamageableStaticPhys : public ScriptImpClass {
-    int team;
-    bool alive;
-    bool playingTransition;
-    bool playingTwitch;
-
-    void Created(GameObject *obj);
-
-    void Damaged(GameObject *obj, GameObject *damager, float damage);
-
-    void Animation_Complete(GameObject *obj, const char *anim);
-
-    void Play_Animation(GameObject *obj, bool loop, float start, float end);
+	int team;
+	bool alive;
+	bool playingTransition;
+	bool playingTwitch;
+	void Created(GameObject *obj);
+	void Damaged(GameObject *obj,GameObject *damager,float damage);
+	void Animation_Complete(GameObject *obj,const char *anim);
+	void Play_Animation(GameObject *obj,bool loop,float start,float end);
 };
-
 /*!
 * \brief Displays a hud message to all players on custom
 * \Custom - Custom message to trigger on
@@ -132,9 +120,8 @@ class JMG_Utility_Emulate_DamageableStaticPhys : public ScriptImpClass {
 * \ingroup JmgUtility
 */
 class JMG_Utility_Display_HUD_Info_Text_All_Players_Custom : public ScriptImpClass {
-    void Custom(GameObject *obj, int message, int param, GameObject *sender);
+	void Custom(GameObject *obj,int message,int param,GameObject *sender);
 };
-
 /*!
 * \brief Displays a hud message to a player on custom
 * \Custom - Custom message to trigger on
@@ -145,18 +132,16 @@ class JMG_Utility_Display_HUD_Info_Text_All_Players_Custom : public ScriptImpCla
 * \ingroup JmgUtility
 */
 class JMG_Utility_Display_HUD_Info_Text_To_Sender_On_Custom : public ScriptImpClass {
-    void Custom(GameObject *obj, int message, int param, GameObject *sender);
+	void Custom(GameObject *obj,int message,int param,GameObject *sender);
 };
-
 /*!
 * \brief Soldier well enter the nearest vehicle on custom
 * \author jgray
 * \ingroup JmgUtility
 */
 class JMG_Utility_Soldier_Transition_On_Custom : public ScriptImpClass {
-    void Custom(GameObject *obj, int message, int param, GameObject *sender);
+	void Custom(GameObject *obj,int message,int param,GameObject *sender);
 };
-
 /*!
 * \brief On Poke sends custom to self
 * \Custom - Message to send when poked
@@ -167,13 +152,10 @@ class JMG_Utility_Soldier_Transition_On_Custom : public ScriptImpClass {
 * \ingroup JmgUtility
 */
 class JMG_Utility_Poke_Send_Self_Custom : public ScriptImpClass {
-    bool poked;
-
-    void Created(GameObject *obj);
-
-    void Poked(GameObject *obj, GameObject *poker);
-
-    void Timer_Expired(GameObject *obj, int number);
+	bool poked;
+	void Created(GameObject *obj);
+	void Poked(GameObject *obj, GameObject *poker);
+	void Timer_Expired(GameObject *obj,int number);
 };
 
 /*!
@@ -183,84 +165,68 @@ class JMG_Utility_Poke_Send_Self_Custom : public ScriptImpClass {
 * \author jgray
 * \ingroup JmgUtility
 */
-class JMG_Turret_Spawn : public ScriptImpClass {
-    int turretId;
-    bool hasDriver;
-
-    void Created(GameObject *obj);
-
-    void Custom(GameObject *obj, int message, int param, GameObject *sender);
-
-    void Killed(GameObject *obj, GameObject *killer);
-
-    void Destroyed(GameObject *obj);
-
-    void Detach(GameObject *obj);
+class JMG_Turret_Spawn : public ScriptImpClass
+{
+  int turretId;
+  bool hasDriver;
+  void Created(GameObject *obj);
+  void Custom(GameObject *obj,int message,int param,GameObject *sender);
+  void Killed(GameObject *obj,GameObject *killer);
+  void Destroyed(GameObject *obj);
+  void Detach(GameObject *obj);
 };
 
 /*!
-* \brief Basic Engineer AI that will try to repair all OBJECTs in the patrol range, if an enemy gets close they will also shoot at them with their weapon preset.
+* \brief Basic Engineer AI that will try to repair all OBJECTs in the patrol range, if an enemy gets close they will also shoot at them with their weapon preset. 
 * \ AI is granted the weapons if it does not have them.
 * \RepaiarGun_Preset - Weapon preset to use to repair objects
 * \Weapon_Preset - Weapon preset to use to attack enemies, if null the AI cannot attack enemies
 * \PatrolRange - Area they can wander around in and search for things to repair
 * \BaseCenterPoint - Center of the area they can wander in, if 0 0 0 it defaults to their create location
 * \MinHP[Soldiers|Vehicles|Turrets] - HP must be below this value to be a repaireable target 0 disables the category
-* \MinHP[EngineerTarget|C4|Beacon] - EngineerTarget is designated by any object with the script JMG_Utility_AI_Engineer_Repair_Target attached HP percent must be
-* \ below this value. Beacon C4 means that the engineer will repair enemy beacons and C4 that currently have over this much of their max health, 1 disables it
+* \MinHP[EngineerTarget|C4|Beacon] - EngineerTarget is designated by any object with the script JMG_Utility_AI_Engineer_Repair_Target attached HP percent must be 
+* \ below this value. Beacon C4 means that the engineer will repair enemy beacons and C4 that currently have over this much of their max health, 1 disables it 
 * \ (the reason for this is is that you can make more engineers attempt to repair C4 or beacons with higher health this way)
-* \Priority[RepairTargets|C4|Beacons] - This attempts to make some targets more valuable than others by tricking the AI into thinking they are further or nearer
+* \Priority[RepairTargets|C4|Beacons] - This attempts to make some targets more valuable than others by tricking the AI into thinking they are further or nearer 
 * \ to it, this would allow you to make the AI always think beacons were super close thus it would always choose those to remove first
 * \author jgray
 * \ingroup JmgUtility
 */
 class JMG_Utility_AI_Engineer : public ScriptImpClass {
-    bool canFight;
-    Vector3 centerLocation;
-    float maxRange;
-    int aiIgnorePlayers[128];
-    float repairGunRange;
-    float repairGunEffectiveRange;
-    float weaponRange;
-    float weaponEffectiveRange;
-    bool repairGun;
-    int actionUpdate;
-    int targetId;
-    float targetDistance;
-    int targetUpdate;
-    int samePosition;
-    Vector3 lastPos;
-    Vector3 moveLocation;
-    int repairTargetId;
-    GameObject *lastTarget;
-    GameObject *lastSecondaryTarget;
-    bool lastRepairTarget;
-    bool lastUseRepairGun;
-    int wanderPointGroup;
-    int randomResetAmount;
-
-    void Created(GameObject *obj);
-
-    void Enemy_Seen(GameObject *obj, GameObject *seen);
-
-    void Timer_Expired(GameObject *obj, int number);
-
-    void AttackTarget(GameObject *obj, GameObject *target, GameObject *secondaryTarget, bool repairTarget,
-                      bool useRepairGun);
-
-    void Action_Complete(GameObject *obj, int action_id, ActionCompleteReason reason);
-
-    void Damaged(GameObject *obj, GameObject *damager, float damage);
-
-    bool inRange(GameObject *obj);
-
-    inline bool Valid_Repair_Target(GameObject *obj, GameObject *target, int playerType);
-
-    inline bool Valid_Repair_Target_C4(GameObject *obj, GameObject *target, int playerType);
-
-    bool Get_Random_Wander_Point(Vector3 *position);
+	bool canFight;
+	Vector3 centerLocation;
+	float maxRange;
+	int aiIgnorePlayers[128];
+	float repairGunRange;
+	float repairGunEffectiveRange;
+	float weaponRange;
+	float weaponEffectiveRange;
+	bool repairGun;
+	int actionUpdate;
+	int targetId;
+	float targetDistance;
+	int targetUpdate;
+	int samePosition;
+	Vector3 lastPos;
+	Vector3 moveLocation;
+	int repairTargetId;
+	GameObject *lastTarget;
+	GameObject *lastSecondaryTarget;
+	bool lastRepairTarget;
+	bool lastUseRepairGun;
+	int wanderPointGroup;
+	int randomResetAmount;
+	void Created(GameObject *obj);
+	void Enemy_Seen(GameObject *obj,GameObject *seen);
+	void Timer_Expired(GameObject *obj,int number);
+	void AttackTarget(GameObject *obj,GameObject *target,GameObject *secondaryTarget,bool repairTarget,bool useRepairGun);
+	void Action_Complete(GameObject *obj,int action_id,ActionCompleteReason reason);
+	void Damaged(GameObject *obj,GameObject *damager,float damage);
+	bool inRange(GameObject *obj);
+	inline bool Valid_Repair_Target(GameObject *obj,GameObject *target,int playerType);
+	inline bool Valid_Repair_Target_C4(GameObject *obj,GameObject *target,int playerType);
+	bool Get_Random_Wander_Point(Vector3 *position);
 };
-
 /*!
 * \brief Will change the visibility of an object on custom for the specified player id
 * \Custom - Custom to trigger this script on
@@ -270,603 +236,629 @@ class JMG_Utility_AI_Engineer : public ScriptImpClass {
 * \ingroup JmgUtility
 */
 class JMG_Utility_Set_Object_Visibility_For_Player_On_Custom : public ScriptImpClass {
-    void Custom(GameObject *obj, int message, int param, GameObject *sender);
+	void Custom(GameObject *obj,int message,int param,GameObject *sender);
 };
-
-class JmgUtility {
+class JmgUtility
+{
 public:
-    struct GenericDateTime {
-        int month;
-        int day;
-        int year;
-        int hour;
-        int minute;
-        int second;
-        unsigned long lTime;
+	struct GenericDateTime
+	{
+		int month;
+		int day;
+		int year;
+		int hour;
+		int minute;
+		int second;
+		unsigned long lTime;
+		GenericDateTime(const GenericDateTime &dateTime)
+		{
+			this->month = dateTime.month;
+			this->day = dateTime.day;
+			this->year = dateTime.year;
+			this->hour = dateTime.hour;
+			this->minute = dateTime.minute;
+			this->second = dateTime.second;
+			this->lTime = dateTime.lTime;
+		}
+		GenericDateTime()
+		{
+			time_t theTime = time(0);
+			struct tm *timeinfo;
+			time(&theTime);
+			timeinfo = localtime(&theTime);
+			this->year = timeinfo->tm_year+1900;
+			this->month = timeinfo->tm_mon+1;
+			this->day = timeinfo->tm_mday;
+			this->hour = timeinfo->tm_hour;
+			this->minute = timeinfo->tm_min;
+			this->second = timeinfo->tm_sec;
+			this->lTime = (long)mktime(timeinfo);
+		}
+		void DebugTime()
+		{
+			char debug[220];
+			sprintf(debug,"msg %d/%d/%d %d:%02d:%02d {%lu}",month,day,year,hour,minute,second,lTime);
+			Console_Input(debug);
+		}
+	};
+	static bool IsInPathfindZone(Vector3 spot)
+	{
+		if (!Get_Random_Pathfind_Spot(spot,5.0f,&spot))
+			return false;
+		return true;
+	}
+	static void RotateZoneBox(float Angle,Matrix3 Basis)
+	{
+		Angle = Angle*3.14159265f/180.0f;
+		float Sin = sin(Angle);
+		float Cos = cos(Angle);
+		Basis[0][0] = Cos;Basis[0][1] = Sin;Basis[0][2] = 0.0f;
+		Basis[1][0] = Sin;Basis[1][1] = Cos;Basis[1][2] = 0.0f;
+		Basis[2][0] = 0.0f;Basis[2][1] = 0.0f;Basis[2][2] = 1.0f;
+	}
+	static float rotationClamp(float startRotation,float addRotation)
+	{
+		startRotation += addRotation;
+		while (startRotation > 180)
+			startRotation -= 360;
+		while (startRotation < -180)
+			startRotation += 360;
+		return startRotation;
+	}
+	static char *JMG_Get_Compass_Directions(float compassDegree)
+	{
+		static char name[6];
+		sprintf(name,"%s",compassDegree <= -168.75 ? "W":
+			compassDegree <= -146.25 ? "WSW":
+			compassDegree <= -123.75 ? "SW":
+			compassDegree <= -101.25 ? "SSW":
+			compassDegree <= -78.75 ? "S":
+			compassDegree <= -56.25 ? "SSE":
+			compassDegree <= -33.75 ? "SE":
+			compassDegree <= -11.25 ? "ESE":
+			compassDegree <= 11.25 ? "E":
+			compassDegree <= 33.75 ? "ENE":
+			compassDegree <= 56.25 ? "NE":
+			compassDegree <= 78.75 ? "NNE":
+			compassDegree <= 101.25 ? "N":
+			compassDegree <= 123.75 ? "NNW":
+			compassDegree <= 146.25 ? "NW":
+			compassDegree <= 168.75 ? "WNW":
+			compassDegree <= 180 ? "W" : "ERROR");
+		return name;
+	}
+	static char *formatDigitGrouping(double money)
+	{
+		static char groupedMoney[43];
+		if (abs(money) > 100000000000000000000000000.0)
+		{
+			sprintf(groupedMoney,"%.2lf",money);
+			return groupedMoney;
+		}
+		char sMoney[40],tMoney[53],fMoney[53];
+		sprintf(sMoney,"%.0lf",abs(money));
+		int length = strlen(sMoney),count = -1,pos;
+		pos = length+1+(length-1)/3;
+		tMoney[pos] = '\0';
+		for (int x = length;x >= 0;x--)
+		{
+			pos--;
+			tMoney[pos] = sMoney[x];
+			count++;
+			if (count == 3 && pos > 0)
+			{
+				count = 0;
+				pos--;
+				tMoney[pos] = ',';
+			}
+		}
+		if (money < 0)
+			sprintf(fMoney,"-%s",tMoney);
+		else
+			sprintf(fMoney,"%s",tMoney);
 
-        GenericDateTime(const GenericDateTime &dateTime) {
-            this->month = dateTime.month;
-            this->day = dateTime.day;
-            this->year = dateTime.year;
-            this->hour = dateTime.hour;
-            this->minute = dateTime.minute;
-            this->second = dateTime.second;
-            this->lTime = dateTime.lTime;
-        }
-
-        GenericDateTime() {
-            time_t theTime = time(0);
-            struct tm *timeinfo;
-            time(&theTime);
-            timeinfo = localtime(&theTime);
-            this->year = timeinfo->tm_year + 1900;
-            this->month = timeinfo->tm_mon + 1;
-            this->day = timeinfo->tm_mday;
-            this->hour = timeinfo->tm_hour;
-            this->minute = timeinfo->tm_min;
-            this->second = timeinfo->tm_sec;
-            this->lTime = (long) mktime(timeinfo);
-        }
-
-        void DebugTime() {
-            char debug[220];
-            sprintf(debug, "msg %d/%d/%d %d:%02d:%02d {%lu}", month, day, year, hour, minute, second, lTime);
-            Console_Input(debug);
-        }
-    };
-
-    static bool IsInPathfindZone(Vector3 spot) {
-        if (!Get_Random_Pathfind_Spot(spot, 5.0f, &spot))
-            return false;
-        return true;
-    }
-
-    static void RotateZoneBox(float Angle, Matrix3 Basis) {
-        Angle = Angle * 3.14159265f / 180.0f;
-        float Sin = sin(Angle);
-        float Cos = cos(Angle);
-        Basis[0][0] = Cos;
-        Basis[0][1] = Sin;
-        Basis[0][2] = 0.0f;
-        Basis[1][0] = Sin;
-        Basis[1][1] = Cos;
-        Basis[1][2] = 0.0f;
-        Basis[2][0] = 0.0f;
-        Basis[2][1] = 0.0f;
-        Basis[2][2] = 1.0f;
-    }
-
-    static float rotationClamp(float startRotation, float addRotation) {
-        startRotation += addRotation;
-        while (startRotation > 180)
-            startRotation -= 360;
-        while (startRotation < -180)
-            startRotation += 360;
-        return startRotation;
-    }
-
-    static char *JMG_Get_Compass_Directions(float compassDegree) {
-        static char name[6];
-        sprintf(name, "%s", compassDegree <= -168.75 ? "W" :
-                            compassDegree <= -146.25 ? "WSW" :
-                            compassDegree <= -123.75 ? "SW" :
-                            compassDegree <= -101.25 ? "SSW" :
-                            compassDegree <= -78.75 ? "S" :
-                            compassDegree <= -56.25 ? "SSE" :
-                            compassDegree <= -33.75 ? "SE" :
-                            compassDegree <= -11.25 ? "ESE" :
-                            compassDegree <= 11.25 ? "E" :
-                            compassDegree <= 33.75 ? "ENE" :
-                            compassDegree <= 56.25 ? "NE" :
-                            compassDegree <= 78.75 ? "NNE" :
-                            compassDegree <= 101.25 ? "N" :
-                            compassDegree <= 123.75 ? "NNW" :
-                            compassDegree <= 146.25 ? "NW" :
-                            compassDegree <= 168.75 ? "WNW" :
-                            compassDegree <= 180 ? "W" : "ERROR");
-        return name;
-    }
-
-    static char *formatDigitGrouping(double money) {
-        static char groupedMoney[43];
-        if (abs(money) > 100000000000000000000000000.0) {
-            sprintf(groupedMoney, "%.2lf", money);
-            return groupedMoney;
-        }
-        char sMoney[40], tMoney[53], fMoney[53];
-        sprintf(sMoney, "%.0lf", abs(money));
-        int length = strlen(sMoney), count = -1, pos;
-        pos = length + 1 + (length - 1) / 3;
-        tMoney[pos] = '\0';
-        for (int x = length; x >= 0; x--) {
-            pos--;
-            tMoney[pos] = sMoney[x];
-            count++;
-            if (count == 3 && pos > 0) {
-                count = 0;
-                pos--;
-                tMoney[pos] = ',';
-            }
-        }
-        if (money < 0)
-            sprintf(fMoney, "-%s", tMoney);
-        else
-            sprintf(fMoney, "%s", tMoney);
-
-        sprintf(sMoney, "%.2lf", abs(money));
-        int nLength = strlen(sMoney);
-        pos = strlen(fMoney);
-        for (int x = length; x < nLength; x++) {
-            fMoney[pos] = sMoney[x];
-            pos++;
-        }
-        fMoney[pos] = '\0';
-        sprintf(groupedMoney, "%s", fMoney);
-        return groupedMoney;
-    }
-
-    static char *formatDigitGrouping(unsigned long value) {
-        static char groupedMoney[43];
-        if (value > 10000000000000000000) {
-            sprintf(groupedMoney, "%lu", value);
-            return groupedMoney;
-        }
-        char sValue[40], tValue[53], fValue[53];
-        sprintf(sValue, "%lu", value);
-        int length = strlen(sValue), count = -1, pos;
-        pos = length + 1 + (length - 1) / 3;
-        tValue[pos] = '\0';
-        for (int x = length; x >= 0; x--) {
-            pos--;
-            tValue[pos] = sValue[x];
-            count++;
-            if (count == 3 && pos > 0) {
-                count = 0;
-                pos--;
-                tValue[pos] = ',';
-            }
-        }
-        sprintf(fValue, "%s", tValue);
-
-        sprintf(groupedMoney, "%s", fValue);
-        return groupedMoney;
-    }
-
-    static char JMG_Get_Sex(GameObject *obj) {
-        int TestID = Commands->Get_ID(obj);
-        if (!obj || !TestID)
-            return '\0';
-        if (!Get_Model(obj) || !_stricmp(Get_Model(obj), "null"))
-            return '\0';
-        if (!Get_Sex(obj))
-            return '\0';
-        return Get_Sex(obj);
-    }
-
-    static const char *JMG_Get_Units_Sex(GameObject *Unit) {
-        if (JMG_Get_Sex(Unit) == 'A')
-            return "himself";
-        else if (JMG_Get_Sex(Unit) == 'B')
-            return "herself";
-        else
-            return "itself";
-    }
-
-    static const char *JMG_Get_Units_Sex2(GameObject *Unit) {
-        if (JMG_Get_Sex(Unit) == 'A')
-            return "his";
-        else if (JMG_Get_Sex(Unit) == 'B')
-            return "her";
-        else
-            return "its";
-    }
-
-    static const char *JMG_Get_Units_Sex3(GameObject *Unit) {
-        if (JMG_Get_Sex(Unit) == 'A')
-            return "he";
-        else if (JMG_Get_Sex(Unit) == 'B')
-            return "she";
-        else
-            return "it";
-    }
-
-    static char *AorAn(const char *name) {
-        static char retChar[2];
-        if (strlen(name) == 0)
-            sprintf(retChar, "A");
-        else {
-            if (name[0] == 'A' || name[0] == 'a' || name[0] == 'E' || name[0] == 'e' || name[0] == 'I' ||
-                name[0] == 'i' || name[0] == 'O' || name[0] == 'o' || name[0] == 'U' || name[0] == 'u' ||
-                name[0] == 'Y' || name[0] == 'y')
-                sprintf(retChar, "An");
-            else
-                sprintf(retChar, "A");
-        }
-        return retChar;
-    }
-
-    static char *AorAn2(const char *name) {
-        static char retChar[2];
-        if (strlen(name) == 0)
-            sprintf(retChar, "a");
-        else {
-            if (name[0] == 'A' || name[0] == 'a' || name[0] == 'E' || name[0] == 'e' || name[0] == 'I' ||
-                name[0] == 'i' || name[0] == 'O' || name[0] == 'o' || name[0] == 'U' || name[0] == 'u' ||
-                name[0] == 'Y' || name[0] == 'y')
-                sprintf(retChar, "an");
-            else
-                sprintf(retChar, "a");
-        }
-        return retChar;
-    }
-
-    static char *Get_The_Units_Name(GameObject *Unit) {
-        static char RetChar[512];
-        if (Commands->Is_A_Star(Unit))
-            sprintf(RetChar, "%s", Get_Player_Name(Unit));
-        else {
-            const char *name = Get_Translated_Preset_Name(Unit);
-            sprintf(RetChar, "%s %s", AorAn(name), name);
-        }
-        return RetChar;
-    }
-
-    static char *Get_The_Units_Name2(GameObject *Unit) {
-        static char RetChar[512];
-        if (Commands->Is_A_Star(Unit))
-            sprintf(RetChar, "%s", Get_Player_Name(Unit));
-        else {
-            const char *name = Get_Translated_Preset_Name(Unit);
-            sprintf(RetChar, "%s %s", AorAn2(name), Get_Translated_Preset_Name(Unit));
-        }
-        return RetChar;
-    }
-
-    static long JMG_Get_Player_ID(GameObject *obj) {
-        if (!obj)
-            return 0;
-        SoldierGameObj *o = obj->As_SoldierGameObj();
-        if (!o)
-            return 0;
-        if (!((cPlayer *) o->Get_Player_Data()))
-            return 0;
-        return ((cPlayer *) o->Get_Player_Data())->Get_Id();
-    }
-
-    static int JMG_Get_Current_Weapon_ID(GameObject *obj) {
-        if (!obj)
-            return -1;
-        PhysicalGameObj *o2 = obj->As_PhysicalGameObj();
-        if (!o2)
-            return -1;
-        ArmedGameObj *o3 = o2->As_ArmedGameObj();
-        if (!o3)
-            return -1;
-        WeaponBagClass *w = o3->Get_Weapon_Bag();
-        if ((w->Get_Index()) && (w->Get_Index() < w->Get_Count()))
-            return w->Peek_Weapon(w->Get_Index())->Get_ID();
-        return -1;
-    }
-
-    static float SimpleDistance(const Vector3 &Pos1, const Vector3 &Pos2) {
-        float DiffX = Pos1.X - Pos2.X;
-        float DiffY = Pos1.Y - Pos2.Y;
-        float DiffZ = Pos1.Z - Pos2.Z;
-        return (DiffX * DiffX + DiffY * DiffY + DiffZ * DiffZ);
-    }
-
-    static float SimpleFlatDistance(const Vector3 &Pos1, const Vector3 &Pos2) {
-        float DiffX = Pos1.X - Pos2.X;
-        float DiffY = Pos1.Y - Pos2.Y;
-        return (DiffX * DiffX + DiffY * DiffY);
-    }
-
-    static float MathClamp(float Value, float Min, float Max) {
-        if (Value > Max)
-            return Max;
-        if (Value < Min)
-            return Min;
-        return Value;
-    }
-
-    static double MathClampDouble(double Value, double Min, double Max) {
-        if (Value > Max)
-            return Max;
-        if (Value < Min)
-            return Min;
-        return Value;
-    }
-
-    static int MathClampInt(int Value, int Min, int Max) {
-        if (Value > Max)
-            return Max;
-        if (Value < Min)
-            return Min;
-        return Value;
-    }
-
-    static void DisplayChatMessage(GameObject *obj, int Red, int Green, int Blue, const char *Message) {
-        if (!obj)
-            return;
-        int Strlen = strlen(Message);
-        if (Strlen < 220) {
-            Send_Message_Player(obj, Red, Green, Blue, Message);
-            return;
-        }
-        int x;
-        char msg[230];
-        for (x = 0; x < 220 && x < Strlen; x++)
-            msg[x] = Message[x];
-        msg[x] = '\0';
-        Send_Message_Player(obj, 255, 0, 200, msg);
-    }
-
-    static void MessageAllPlayers(int Red, int Green, int Blue, const char *MSG) {
-        for (int x = 0; x < 128; x++) {
-            GameObject * Player = Get_GameObj(x);
-            if (!Player)
-                continue;
-            DisplayChatMessage(Player, Red, Green, Blue, MSG);
-        }
-    }
-
-    static void MessageTeamPlayers(int Red, int Green, int Blue, int Team, const char *MSG) {
-        for (int x = 0; x < 128; x++) {
-            GameObject * Player = Get_GameObj(x);
-            if (!Player || Get_Team(x) != Team)
-                continue;
-            DisplayChatMessage(Player, Red, Green, Blue, MSG);
-        }
-    }
-
-    static void MessageTeamPlayersType(int Red, int Green, int Blue, int Team, const char *MSG) {
-        for (int x = 0; x < 128; x++) {
-            GameObject * Player = Get_GameObj(x);
-            if (!Player || Commands->Get_Player_Type(Player) != Team)
-                continue;
-            DisplayChatMessage(Player, Red, Green, Blue, MSG);
-        }
-    }
-
-    static void MessageTeamPlayersAndType(int Red, int Green, int Blue, int Team, const char *MSG) {
-        for (int x = 0; x < 128; x++) {
-            GameObject * Player = Get_GameObj(x);
-            if (!Player || !(Commands->Get_Player_Type(Player) == Team || Get_Team(x) == Team))
-                continue;
-            DisplayChatMessage(Player, Red, Green, Blue, MSG);
-        }
-    }
-
-    static GameObject *FindNearestPlayer(const Vector3 &pos) {
-        GameObject * nearestPlayer = NULL;
-        float nearest = -1.0f;
-        for (int x = 1; x < 128; x++) {
-            GameObject * player = Get_GameObj(x);
-            if (!player || Get_Player_Type(player) == -4)
-                continue;
-            float tempDist = SimpleDistance(pos, Commands->Get_Position(player));
-            if (nearest < 0 || tempDist < nearest) {
-                nearest = tempDist;
-                nearestPlayer = player;
-            }
-        }
-        return nearestPlayer;
-    }
-
-    static char *Rp2Encrypt(const char *String, int EncryptionFactor, int Start) {
-        static char FinalString[65536];
-        sprintf(FinalString, " ");
-        int loops = strlen(String), x = 0;
-        int CurrentAdd = Start;
-        while (x < loops) {
-            if (String[x] > 31 && String[x] < 127) {
-                int Temp = (String[x] + CurrentAdd);
-                while (Temp > 126)
-                    Temp -= 95;
-                FinalString[x] = (char) Temp;
-            } else
-                FinalString[x] = String[x];
-            x++;
-            CurrentAdd++;
-            if (CurrentAdd > EncryptionFactor)
-                CurrentAdd = 1;
-            FinalString[x] = '\0';
-        }
-        return FinalString;
-    }
-
-    static char *Rp2Encrypt2(const char *String, int EncryptionFactor, int Start) {
-        static char FinalString[65536];
-        sprintf(FinalString, " ");
-        int loops = strlen(String), x = 0;
-        int CurrentAdd = Start;
-        while (x < loops) {
-            if (String[x] > 31 && String[x] < 127) {
-                int Temp = (String[x] + CurrentAdd);
-                while (Temp > 126)
-                    Temp -= 95;
-                FinalString[x] = (char) Temp;
-            } else
-                FinalString[x] = String[x];
-            x++;
-            CurrentAdd++;
-            if (CurrentAdd > EncryptionFactor)
-                CurrentAdd = 1;
-            FinalString[x] = '\0';
-        }
-        return FinalString;
-    }
-
-    static char *Rp2Encrypt3(const char *String, int EncryptionFactor, int Start) {
-        static char FinalString[65536];
-        sprintf(FinalString, " ");
-        int loops = strlen(String), x = 0;
-        int CurrentAdd = Start;
-        while (x < loops) {
-            if (String[x] > 31 && String[x] < 127) {
-                int Temp = (String[x] + CurrentAdd);
-                while (Temp > 126)
-                    Temp -= 95;
-                FinalString[x] = (char) Temp;
-            } else
-                FinalString[x] = String[x];
-            x++;
-            CurrentAdd++;
-            if (CurrentAdd > EncryptionFactor)
-                CurrentAdd = 1;
-            FinalString[x] = '\0';
-        }
-        return FinalString;
-    }
-
-    static char *Rp2Encrypt4(const char *String, int EncryptionFactor, int Start) {
-        static char FinalString[65536];
-        sprintf(FinalString, " ");
-        int loops = strlen(String), x = 0;
-        int CurrentAdd = Start;
-        while (x < loops) {
-            if (String[x] > 31 && String[x] < 127) {
-                int Temp = (String[x] + CurrentAdd);
-                while (Temp > 126)
-                    Temp -= 95;
-                FinalString[x] = (char) Temp;
-            } else
-                FinalString[x] = String[x];
-            x++;
-            CurrentAdd++;
-            if (CurrentAdd > EncryptionFactor)
-                CurrentAdd = 1;
-            FinalString[x] = '\0';
-        }
-        return FinalString;
-    }
-
-    static char *Rp2Decrypt(const char *String, int EncryptionFactor, int Start) {
-        static char FinalString[65536];
-        int loops = strlen(String), x = 0;
-        int CurrentAdd = Start;
-        while (x < loops) {
-            if (String[x] > 31 && String[x] < 127) {
-                int Temp = String[x] - CurrentAdd;
-                while (!(Temp > 31))
-                    Temp += 95;
-                FinalString[x] = (char) Temp;
-            } else if (String[x] == '\n')
-                FinalString[x] = '\0';
-            else
-                FinalString[x] = String[x];
-            x++;
-            CurrentAdd++;
-            if (CurrentAdd > EncryptionFactor)
-                CurrentAdd = 1;
-            FinalString[x] = '\0';
-        }
-        return FinalString;
-    }
-
-    static bool IsTruePhysicalObject(GameObject *obj) {
-        if (obj->As_ScriptableGameObj() && obj->As_PhysicalGameObj()) {
-            if (obj->As_SoldierGameObj())
-                return true;
-            if (obj->As_VehicleGameObj()) {
-                //TODO: asdfasdf
-                /*if (Is_DecorationPhys(obj))
+		sprintf(sMoney,"%.2lf",abs(money));
+		int nLength = strlen(sMoney);
+		pos = strlen(fMoney);
+		for (int x = length;x < nLength;x++)
+		{
+			fMoney[pos] = sMoney[x];
+			pos++;
+		}
+		fMoney[pos] = '\0';
+		sprintf(groupedMoney,"%s",fMoney);
+		return groupedMoney;
+	}
+	static char *formatDigitGrouping(unsigned long value)
+	{
+		static char groupedMoney[43];
+		if (value > 10000000000000000000)
+		{
+			sprintf(groupedMoney,"%lu",value);
+			return groupedMoney;
+		}
+		char sValue[40],tValue[53],fValue[53];
+		sprintf(sValue,"%lu",value);
+		int length = strlen(sValue),count = -1,pos;
+		pos = length+1+(length-1)/3;
+		tValue[pos] = '\0';
+		for (int x = length;x >= 0;x--)
+		{
+			pos--;
+			tValue[pos] = sValue[x];
+			count++;
+			if (count == 3 && pos > 0)
+			{
+				count = 0;
+				pos--;
+				tValue[pos] = ',';
+			}
+		}
+		sprintf(fValue,"%s",tValue);
+	
+		sprintf(groupedMoney,"%s",fValue);
+		return groupedMoney;
+	}
+	static char JMG_Get_Sex(GameObject *obj)
+	{
+		int TestID = Commands->Get_ID(obj);
+		if (!obj || !TestID)
+			return '\0';
+		if (!Get_Model(obj) || !_stricmp(Get_Model(obj),"null"))
+			return '\0';
+		if (!Get_Sex(obj))
+			return '\0';
+		return Get_Sex(obj);
+	}
+	static const char *JMG_Get_Units_Sex(GameObject *Unit)
+	{
+		if (JMG_Get_Sex(Unit) == 'A')
+			return "himself";
+		else if (JMG_Get_Sex(Unit) == 'B')
+			return "herself";
+		else
+			return "itself";
+	}
+	static const char *JMG_Get_Units_Sex2(GameObject *Unit)
+	{
+		if (JMG_Get_Sex(Unit) == 'A')
+			return "his";
+		else if (JMG_Get_Sex(Unit) == 'B')
+			return "her";
+		else
+			return "its";
+	}
+	static const char *JMG_Get_Units_Sex3(GameObject *Unit)
+	{
+		if (JMG_Get_Sex(Unit) == 'A')
+			return "he";
+		else if (JMG_Get_Sex(Unit) == 'B')
+			return "she";
+		else
+			return "it";
+	}
+	static char *AorAn(const char *name)
+	{
+		static char retChar[2];
+		if (strlen(name) == 0)
+			sprintf(retChar,"A");
+		else
+		{
+			if (name[0] == 'A' || name[0] == 'a' || name[0] == 'E' || name[0] == 'e' || name[0] == 'I' || name[0] == 'i' || name[0] == 'O' || name[0] == 'o' || name[0] == 'U' || name[0] == 'u' || name[0] == 'Y' || name[0] == 'y')
+				sprintf(retChar,"An");
+			else
+				sprintf(retChar,"A");
+		}
+		return retChar;
+	}
+	static char *AorAn2(const char *name)
+	{
+		static char retChar[2];
+		if (strlen(name) == 0)
+			sprintf(retChar,"a");
+		else
+		{
+			if (name[0] == 'A' || name[0] == 'a' || name[0] == 'E' || name[0] == 'e' || name[0] == 'I' || name[0] == 'i' || name[0] == 'O' || name[0] == 'o' || name[0] == 'U' || name[0] == 'u' || name[0] == 'Y' || name[0] == 'y')
+				sprintf(retChar,"an");
+			else
+				sprintf(retChar,"a");
+		}
+		return retChar;
+	}
+	static char *Get_The_Units_Name(GameObject *Unit)
+	{
+		static char RetChar[512];
+		if (Commands->Is_A_Star(Unit))
+			sprintf(RetChar,"%s",Get_Player_Name(Unit));
+		else
+		{
+			const char *name = Get_Translated_Preset_Name(Unit);
+			sprintf(RetChar,"%s %s",AorAn(name),name);
+		}
+		return RetChar;
+	}
+	static char *Get_The_Units_Name2(GameObject *Unit)
+	{
+		static char RetChar[512];
+		if (Commands->Is_A_Star(Unit))
+			sprintf(RetChar,"%s",Get_Player_Name(Unit));
+		else
+		{
+			const char *name = Get_Translated_Preset_Name(Unit);
+			sprintf(RetChar,"%s %s",AorAn2(name),Get_Translated_Preset_Name(Unit));
+		}
+		return RetChar;
+	}
+	static long JMG_Get_Player_ID(GameObject *obj)
+	{
+		if (!obj)
+			return 0;
+		SoldierGameObj *o = obj->As_SoldierGameObj();
+		if (!o)
+			return 0;
+		if (!((cPlayer *)o->Get_Player_Data()))
+			return 0;
+		return ((cPlayer *)o->Get_Player_Data())->Get_Id();
+	}
+	static int JMG_Get_Current_Weapon_ID(GameObject *obj)
+	{
+		if (!obj)
+			return -1;
+		PhysicalGameObj *o2 = obj->As_PhysicalGameObj();
+		if (!o2)
+			return -1;
+		ArmedGameObj *o3 = o2->As_ArmedGameObj();
+		if (!o3)
+			return -1;
+		WeaponBagClass *w = o3->Get_Weapon_Bag();
+		if ((w->Get_Index()) && (w->Get_Index() < w->Get_Count()))
+			return w->Peek_Weapon(w->Get_Index())->Get_ID();
+		return -1;
+	}
+	static float SimpleDistance(const Vector3 &Pos1,const Vector3 &Pos2)
+	{
+		float DiffX = Pos1.X-Pos2.X;
+		float DiffY = Pos1.Y-Pos2.Y;
+		float DiffZ = Pos1.Z-Pos2.Z;
+		return (DiffX*DiffX+DiffY*DiffY+DiffZ*DiffZ);
+	}
+	static float SimpleFlatDistance(const Vector3 &Pos1,const Vector3 &Pos2)
+	{
+		float DiffX = Pos1.X-Pos2.X;
+		float DiffY = Pos1.Y-Pos2.Y;
+		return (DiffX*DiffX+DiffY*DiffY);
+	}
+	static float MathClamp(float Value,float Min,float Max)
+	{
+		if (Value > Max)
+			return Max;
+		if (Value < Min)
+			return Min;
+		return Value;
+	}
+	static double MathClampDouble(double Value,double Min,double Max)
+	{
+		if (Value > Max)
+			return Max;
+		if (Value < Min)
+			return Min;
+		return Value;
+	}
+	static int MathClampInt(int Value,int Min,int Max)
+	{
+		if (Value > Max)
+			return Max;
+		if (Value < Min)
+			return Min;
+		return Value;
+	}
+	static void DisplayChatMessage(GameObject *obj,int Red,int Green,int Blue,const char *Message)
+	{
+		if (!obj)
+			return;
+		int Strlen = strlen(Message);
+		if (Strlen < 220)
+		{
+			Send_Message_Player(obj,Red,Green,Blue,Message);
+			return;
+		}
+		int x;
+		char msg[230];
+		for (x = 0;x < 220 && x < Strlen;x++)
+			msg[x] = Message[x];
+		msg[x] = '\0';
+		Send_Message_Player(obj,255,0,200,msg);
+	}
+	static void MessageAllPlayers(int Red,int Green,int Blue,const char *MSG)
+	{
+		for (int x = 0;x < 128;x++)
+		{
+			GameObject *Player = Get_GameObj(x);
+			if (!Player)
+				continue;
+			DisplayChatMessage(Player,Red,Green,Blue,MSG);
+		}
+	}
+	static void MessageTeamPlayers(int Red,int Green,int Blue,int Team,const char *MSG)
+	{
+		for (int x = 0;x < 128;x++)
+		{
+			GameObject *Player = Get_GameObj(x);
+			if (!Player || Get_Team(x) != Team)
+				continue;
+			DisplayChatMessage(Player,Red,Green,Blue,MSG);
+		}
+	}
+	static void MessageTeamPlayersType(int Red,int Green,int Blue,int Team,const char *MSG)
+	{
+		for (int x = 0;x < 128;x++)
+		{
+			GameObject *Player = Get_GameObj(x);
+			if (!Player || Commands->Get_Player_Type(Player) != Team)
+				continue;
+			DisplayChatMessage(Player,Red,Green,Blue,MSG);
+		}
+	}
+	static void MessageTeamPlayersAndType(int Red,int Green,int Blue,int Team,const char *MSG)
+	{
+		for (int x = 0;x < 128;x++)
+		{
+			GameObject *Player = Get_GameObj(x);
+			if (!Player || !(Commands->Get_Player_Type(Player) == Team || Get_Team(x) == Team))
+				continue;
+			DisplayChatMessage(Player,Red,Green,Blue,MSG);
+		}
+	}
+	static GameObject *FindNearestPlayer(const Vector3 &pos)
+	{
+		GameObject *nearestPlayer = NULL;
+		float nearest = -1.0f;
+		for (int x = 1;x < 128;x++)
+		{
+			GameObject *player = Get_GameObj(x);
+			if (!player || Get_Player_Type(player) == -4)
+				continue;
+			float tempDist = SimpleDistance(pos,Commands->Get_Position(player));
+			if (nearest < 0 || tempDist < nearest)
+			{
+				nearest = tempDist;
+				nearestPlayer = player;
+			}
+		}
+		return nearestPlayer;
+	}
+	static char *Rp2Encrypt(const char *String,int EncryptionFactor,int Start)
+	{
+		static char FinalString[65536];
+		sprintf(FinalString," ");
+		int loops = strlen(String),x = 0;
+		int CurrentAdd = Start;
+		while (x < loops)
+		{
+			if (String[x] > 31 && String[x] < 127)
+			{
+				int Temp = (String[x]+CurrentAdd);
+				while (Temp > 126)
+					Temp -= 95;
+				FinalString[x] = (char)Temp;
+			}
+			else
+				FinalString[x] = String[x];
+			x++;
+			CurrentAdd++;
+			if (CurrentAdd > EncryptionFactor)
+				CurrentAdd = 1;
+			FinalString[x] = '\0';
+		}
+		return FinalString;
+	}
+	static char *Rp2Encrypt2(const char *String,int EncryptionFactor,int Start)
+	{
+		static char FinalString[65536];
+		sprintf(FinalString," ");
+		int loops = strlen(String),x = 0;
+		int CurrentAdd = Start;
+		while (x < loops)
+		{
+			if (String[x] > 31 && String[x] < 127)
+			{
+				int Temp = (String[x]+CurrentAdd);
+				while (Temp > 126)
+					Temp -= 95;
+				FinalString[x] = (char)Temp;
+			}
+			else
+				FinalString[x] = String[x];
+			x++;
+			CurrentAdd++;
+			if (CurrentAdd > EncryptionFactor)
+				CurrentAdd = 1;
+			FinalString[x] = '\0';
+		}
+		return FinalString;
+	}
+	static char *Rp2Encrypt3(const char *String,int EncryptionFactor,int Start)
+	{
+		static char FinalString[65536];
+		sprintf(FinalString," ");
+		int loops = strlen(String),x = 0;
+		int CurrentAdd = Start;
+		while (x < loops)
+		{
+			if (String[x] > 31 && String[x] < 127)
+			{
+				int Temp = (String[x]+CurrentAdd);
+				while (Temp > 126)
+					Temp -= 95;
+				FinalString[x] = (char)Temp;
+			}
+			else
+				FinalString[x] = String[x];
+			x++;
+			CurrentAdd++;
+			if (CurrentAdd > EncryptionFactor)
+				CurrentAdd = 1;
+			FinalString[x] = '\0';
+		}
+		return FinalString;
+	}
+	static char *Rp2Encrypt4(const char *String,int EncryptionFactor,int Start)
+	{
+		static char FinalString[65536];
+		sprintf(FinalString," ");
+		int loops = strlen(String),x = 0;
+		int CurrentAdd = Start;
+		while (x < loops)
+		{
+			if (String[x] > 31 && String[x] < 127)
+			{
+				int Temp = (String[x]+CurrentAdd);
+				while (Temp > 126)
+					Temp -= 95;
+				FinalString[x] = (char)Temp;
+			}
+			else
+				FinalString[x] = String[x];
+			x++;
+			CurrentAdd++;
+			if (CurrentAdd > EncryptionFactor)
+				CurrentAdd = 1;
+			FinalString[x] = '\0';
+		}
+		return FinalString;
+	}
+	static char *Rp2Decrypt(const char *String,int EncryptionFactor,int Start)
+	{
+		static char FinalString[65536];
+		int loops = strlen(String),x = 0;
+		int CurrentAdd = Start;
+		while (x < loops)
+		{
+			if (String[x] > 31 && String[x] < 127)
+			{
+				int Temp = String[x]-CurrentAdd;
+				while (!(Temp > 31))
+					Temp += 95;
+				FinalString[x] = (char)Temp;
+			}
+			else
+				if (String[x] == '\n')
+					FinalString[x] = '\0';
+				else
+					FinalString[x] = String[x];
+			x++;
+			CurrentAdd++;
+			if (CurrentAdd > EncryptionFactor)
+				CurrentAdd = 1;
+			FinalString[x] = '\0';
+		}
+		return FinalString;
+	}
+	static bool IsTruePhysicalObject(GameObject *obj)
+	{
+		if (obj->As_ScriptableGameObj() && obj->As_PhysicalGameObj())
+		{
+			if (obj->As_SoldierGameObj())
+				return true;
+			if (obj->As_VehicleGameObj())
+			{
+				//TODO: asdfasdf
+				/*if (Is_DecorationPhys(obj))
 					return false;
 				if (Is_DynamicAnimPhys(obj))
 					return false;
 				if (Is_TimedDecorationPhys(obj))
 					return false;*/
-                return true;
-            }
-        }
-        return false;
-    }
-
-    static float MathClampDegrees(float Value) {
-        while (Value < -180.0f)
-            return Value + 360.0f;
-        while (Value > 180.0f)
-            return Value - 360.0f;
-        return Value;
-    }
-
-    static bool hasStatedDeathMessage[128];
-
-    static void setStatedDeathMessage(int playerId, bool value) {
-        hasStatedDeathMessage[playerId] = value;
-    }
-
-    static void JMG_Player_Death_Message(GameObject *obj, GameObject *killer, const char *overrideMessage) {
-        int playerId = JMG_Get_Player_ID(obj);
-        if (hasStatedDeathMessage[playerId])
-            return;
-        char deathMsg[500];
-        if (overrideMessage)
-            sprintf(deathMsg, "%s", overrideMessage);
-        else if (!killer)
-            sprintf(deathMsg, "%s died", JmgUtility::Get_The_Units_Name(obj));
-        else if (killer == obj)
-            sprintf(deathMsg, "%s killed %s", JmgUtility::Get_The_Units_Name(obj), JmgUtility::JMG_Get_Units_Sex(obj));
-        else
-            sprintf(deathMsg, "%s killed %s", JmgUtility::Get_The_Units_Name(killer),
-                    JmgUtility::Get_The_Units_Name2(obj));
-        if (Commands->Is_A_Star(obj))
-            MessageAllPlayers(255, 255, 0, deathMsg);
-        hasStatedDeathMessage[playerId] = true;
-    }
-
-    static void SetHUDHelpText(unsigned long stringId, Vector3 color) {
-        for (int x = 0; x < 128; x++) {
-            GameObject * Player = Get_GameObj(x);
-            if (!Player)
-                continue;
-            Set_HUD_Help_Text_Player(Player, stringId, color);
-        }
-    }
-
-    static void SetHUDHelpText(unsigned long stringId, const char *message, Vector3 color) {
-        for (int x = 0; x < 128; x++) {
-            GameObject * Player = Get_GameObj(x);
-            if (!Player)
-                continue;
-            Set_HUD_Help_Text_Player_Text(Player, stringId, message, color);
-        }
-    }
-
-    static bool DegreeDiff(float Deg1, float Deg2, float MaxDiff) {
-        if (abs(Deg1 - Deg2) <= MaxDiff)
-            return true;
-        if (360 - abs(Deg1 - Deg2) <= MaxDiff)
-            return true;
-        return false;
-    }
-
-    static bool CanSeeStealth(int stealthModeOverride, GameObject *obj, GameObject *seen) {
-        if (stealthModeOverride == -1)
-            return false;
-        if (!stealthModeOverride && seen->As_SmartGameObj() && seen->As_SmartGameObj()->Is_Stealthed()) {
-            float dist = JmgUtility::SimpleDistance(Commands->Get_Position(obj), Commands->Get_Position(seen));
-            if (seen->As_SoldierGameObj() && dist > seen->As_SoldierGameObj()->Get_Stealth_Fade_Distance() *
-                                                    seen->As_SoldierGameObj()->Get_Stealth_Fade_Distance())
-                return false;
-            else if (seen->As_VehicleGameObj() && dist > seen->As_VehicleGameObj()->Get_Stealth_Fade_Distance() *
-                                                         seen->As_VehicleGameObj()->Get_Stealth_Fade_Distance())
-                return false;
-            else if (dist > seen->As_SmartGameObj()->Get_Stealth_Fade_Distance() *
-                            seen->As_SmartGameObj()->Get_Stealth_Fade_Distance())
-                return false;
-        }
-        return true;
-    }
-
-    static void Create_2D_Wave_Sound_Dialog(const char *soundName) {
-        for (int x = 1; x < 128; x++) {
-            GameObject * player = Get_GameObj(x);
-            if (!player)
-                continue;
-            Create_2D_Wave_Sound_Dialog_Player(player, soundName);
-        }
-    }
+				return true;
+			}
+		}
+		return false;
+	}
+	static float MathClampDegrees(float Value)
+	{
+		while (Value < -180.0f)
+			return Value+360.0f;
+		while (Value > 180.0f)
+			return Value-360.0f;
+		return Value;
+	}
+	static bool hasStatedDeathMessage[128];
+	static void setStatedDeathMessage(int playerId,bool value)
+	{
+		hasStatedDeathMessage[playerId] = value;
+	}
+	static void JMG_Player_Death_Message(GameObject *obj,GameObject *killer,const char *overrideMessage)
+	{
+		int playerId = JMG_Get_Player_ID(obj);
+		if (hasStatedDeathMessage[playerId])
+			return;
+		char deathMsg[500];
+		if (overrideMessage)
+			sprintf(deathMsg,"%s",overrideMessage);
+		else if (!killer)
+			sprintf(deathMsg,"%s died",JmgUtility::Get_The_Units_Name(obj));
+		else if (killer == obj)
+			sprintf(deathMsg,"%s killed %s",JmgUtility::Get_The_Units_Name(obj),JmgUtility::JMG_Get_Units_Sex(obj));
+		else
+			sprintf(deathMsg,"%s killed %s",JmgUtility::Get_The_Units_Name(killer),JmgUtility::Get_The_Units_Name2(obj));
+		if (Commands->Is_A_Star(obj))
+			MessageAllPlayers(255,255,0,deathMsg);
+		hasStatedDeathMessage[playerId] = true;
+	}
+	static void SetHUDHelpText(unsigned long stringId,Vector3 color)
+	{
+		for (int x = 0;x < 128;x++)
+		{
+			GameObject *Player = Get_GameObj(x);
+			if (!Player)
+				continue;
+			Set_HUD_Help_Text_Player(Player,stringId,color);
+		}
+	}
+	static void SetHUDHelpText(unsigned long stringId,const char *message,Vector3 color)
+	{
+		for (int x = 0;x < 128;x++)
+		{
+			GameObject *Player = Get_GameObj(x);
+			if (!Player)
+				continue;
+			Set_HUD_Help_Text_Player_Text(Player,stringId,message,color);
+		}
+	}
+	static bool DegreeDiff(float Deg1,float Deg2,float MaxDiff)
+	{
+		if (abs(Deg1-Deg2) <= MaxDiff)
+			return true;
+		if (360-abs(Deg1-Deg2) <= MaxDiff)
+			return true;
+		return false;
+	}
+	static bool CanSeeStealth(int stealthModeOverride,GameObject *obj,GameObject *seen)
+	{
+		if (stealthModeOverride == -1)
+			return false;
+		if (!stealthModeOverride && seen->As_SmartGameObj() && seen->As_SmartGameObj()->Is_Stealthed())
+		{
+			float dist = JmgUtility::SimpleDistance(Commands->Get_Position(obj),Commands->Get_Position(seen));
+			if (seen->As_SoldierGameObj() && dist > seen->As_SoldierGameObj()->Get_Stealth_Fade_Distance()*seen->As_SoldierGameObj()->Get_Stealth_Fade_Distance())
+				return false;
+			else if (seen->As_VehicleGameObj() && dist > seen->As_VehicleGameObj()->Get_Stealth_Fade_Distance()*seen->As_VehicleGameObj()->Get_Stealth_Fade_Distance())
+				return false;	
+			else if (dist > seen->As_SmartGameObj()->Get_Stealth_Fade_Distance()*seen->As_SmartGameObj()->Get_Stealth_Fade_Distance())
+				return false;
+		}
+		return true;
+	}
+	static void Create_2D_Wave_Sound_Dialog(const char *soundName)
+	{
+		for (int x = 1;x < 128;x++)
+		{
+			GameObject *player = Get_GameObj(x);
+			if (!player)
+				continue;
+			Create_2D_Wave_Sound_Dialog_Player(player,soundName);
+		}
+	}
 };
 
 /*!
@@ -879,15 +871,13 @@ public:
 * \ingroup JmgUtility
 */
 class JMG_Utility_Objective_System_Objective_GameObject : public ScriptImpClass {
-    void Created(GameObject *obj);
-
+	void Created(GameObject *obj);
 public:
-    int objectiveId;
-    int objectivePriority;
-    char preset[128];
-    bool attach;
+	int objectiveId;
+	int objectivePriority;
+	char preset[128];
+	bool attach;
 };
-
 /*!
 * \brief Attached by the objective controller so the code can remove the object when needed
 * \GameObjectID - ID of the gameobject that was created by the controller
@@ -896,1166 +886,1160 @@ public:
 * \ingroup JmgUtility
 */
 class JMG_Utility_Objective_System_Objective_GameObject_Tracker : public ScriptImpClass {
-    void Created(GameObject *obj);
-
+	void Created(GameObject *obj);
 public:
-    int gameObjectId;
-    int markerId;
+	int gameObjectId;
+	int markerId;
 };
 
-class NewObjectiveSystem {
-    bool objectiveStringIdsLoaded;
-    const char *objectiveNewString;
-    const char *objectiveCancelledString;
-    const char *objectiveStatusChangedString;
-    const char *objectivePrioritieStrings[12];
-    const char *objectiveStatusStrings[4];
-    const char *objectiveListString;
-    const char *objectiveUpdateObjectiveString;
-    const char *objectiveCancelledStringNumbered;
-    const char *objectiveStatusChangedStringNumbered;
-    const char *objectiveUpdateObjectiveStringNumbered;
-    char primaryObjectiveModel[32];
-    char secondaryObjectiveModel[32];
-    char tertiaryObjectiveModel[32];
-    bool showRadarStars;
+class NewObjectiveSystem
+{
+	bool objectiveStringIdsLoaded;
+	const char *objectiveNewString;
+	const char *objectiveCancelledString;
+	const char *objectiveStatusChangedString;
+	const char *objectivePrioritieStrings[12];
+	const char *objectiveStatusStrings[4];
+	const char *objectiveListString;
+	const char *objectiveUpdateObjectiveString;
+	const char *objectiveCancelledStringNumbered;
+	const char *objectiveStatusChangedStringNumbered;
+	const char *objectiveUpdateObjectiveStringNumbered;
+	char primaryObjectiveModel[32];
+	char secondaryObjectiveModel[32];
+	char tertiaryObjectiveModel[32];
+	bool showRadarStars;
 public:
-    enum Priority {
-        Undefined = -1,
-        Unknown,
-        Primary,
-        Secondary,
-        Tertiary,
-        Quaternary,
-        Quinary,
-        Senary,
-        Septenary,
-        Octonary,
-        Nonary,
-        Denary,
-        Bonus
-    };
-    enum Status {
-        Removed = -2, NotDefined = -1, Pending, Accomplished, Failed, Hidden
-    };
-    int controllerId;
-    char infantryAttachBone[32];
-
-    struct ObjectiveVisibleSettingOverride {
-        int objectiveId;
-        char markerModel[16];
-        int markerColor;
-        char attachBone[16];
-        bool overrideTextColor;
-        Vector3 textColor;
-        bool overrideHudColor;
-        Vector3 hudColor;
-
-        ObjectiveVisibleSettingOverride(int objectiveId, const char *model, int markerColor, const char *attachBone,
-                                        bool overrideTextColor, Vector3 textColor, bool overrideHudColor,
-                                        Vector3 hudColor) {
-            this->objectiveId = objectiveId;
-            sprintf(this->markerModel, "%s", model);
-            this->markerColor = markerColor;
-            sprintf(this->attachBone, "%s", attachBone);
-            this->overrideTextColor = overrideTextColor;
-            this->textColor = textColor;
-            this->overrideHudColor = overrideHudColor;
-            this->hudColor = hudColor;
-        }
-    };
-
-    SList<ObjectiveVisibleSettingOverride> overrideVisibleObjectiveSettings;
+	enum Priority{Undefined=-1,Unknown,Primary,Secondary,Tertiary,Quaternary,Quinary,Senary,Septenary,Octonary,Nonary,Denary,Bonus};
+	enum Status{Removed=-2,NotDefined=-1,Pending,Accomplished,Failed,Hidden};
+	int controllerId;
+	char infantryAttachBone[32];
+	struct ObjectiveVisibleSettingOverride
+	{
+		int objectiveId;
+		char markerModel[16];
+		int markerColor;
+		char attachBone[16];
+		bool overrideTextColor;
+		Vector3 textColor;
+		bool overrideHudColor;
+		Vector3 hudColor;
+		ObjectiveVisibleSettingOverride(int objectiveId,const char *model,int markerColor,const char *attachBone,bool overrideTextColor,Vector3 textColor,bool overrideHudColor,Vector3 hudColor)
+		{
+			this->objectiveId = objectiveId;
+			sprintf(this->markerModel,"%s",model);
+			this->markerColor = markerColor;
+			sprintf(this->attachBone,"%s",attachBone);
+			this->overrideTextColor = overrideTextColor;
+			this->textColor = textColor;
+			this->overrideHudColor = overrideHudColor;
+			this->hudColor = hudColor;
+		}
+	};
+	SList<ObjectiveVisibleSettingOverride> overrideVisibleObjectiveSettings;
 private:
-    struct ObjectiveNode {
-        int id;
-        Priority priority;
-        Status status;
-        unsigned long nameId;
-        char *soundFilename;
-        unsigned long descriptionId;
-        int radarMarkerId;
-        bool active;
-        int objectiveNumber;
-        ObjectiveNode *next;
-
-        ObjectiveNode(int id, Priority priority, Status status, unsigned long nameId, char *soundFilename,
-                      unsigned long descriptionId, int radarMarkerId, int objectiveNumber) {
-            this->id = id;
-            this->priority = priority;
-            this->status = status;
-            this->nameId = nameId;
-            this->soundFilename = soundFilename;
-            this->descriptionId = descriptionId;
-            this->radarMarkerId = radarMarkerId;
-            this->active = true;
-            this->objectiveNumber = objectiveNumber;
-            next = NULL;
-        }
-    };
-
-    ObjectiveNode *objectiveNodeList;
-    int objectiveCounts;
-    int team;
-
-    void initilizeStringIds() {
-        objectiveNewString = Get_Translated_String(Get_String_ID_By_Desc("IDS_OBJ2_NEW_OBJ"));
-        objectiveCancelledString = Get_Translated_String(Get_String_ID_By_Desc("IDS_OBJ2_CANCELLED"));
-        objectiveStatusChangedString = Get_Translated_String(Get_String_ID_By_Desc("IDS_OBJ2_STATUS_CHANGED"));
-        objectiveListString = Get_Translated_String(Get_String_ID_By_Desc("IDS_OBJ2_LIST"));
-        objectiveUpdateObjectiveString = Get_Translated_String(Get_String_ID_By_Desc("IDS_OBJ2_UPDATED"));
-        char descriptionString[512];
-        for (int x = 0; x < 12; x++) {
-            sprintf(descriptionString, "IDS_OBJ2_PRIORITY_%0d", x);
-            objectivePrioritieStrings[x] = Get_Translated_String(Get_String_ID_By_Desc(descriptionString));
-        }
-        for (int x = 0; x < 4; x++) {
-            sprintf(descriptionString, "IDS_OBJ2_STATE_%0d", x);
-            objectiveStatusStrings[x] = Get_Translated_String(Get_String_ID_By_Desc(descriptionString));
-        }
-        objectiveCancelledStringNumbered = Get_Translated_String(Get_String_ID_By_Desc("IDS_OBJ2_CANCELLED_NUMBERED"));
-        objectiveStatusChangedStringNumbered = Get_Translated_String(
-                Get_String_ID_By_Desc("IDS_OBJ2_STATUS_CHANGED_NUMBERED"));
-        objectiveUpdateObjectiveStringNumbered = Get_Translated_String(
-                Get_String_ID_By_Desc("IDS_OBJ2_UPDATED_NUMBERED"));
-        objectiveStringIdsLoaded = true;
-    }
-
-    void selectMessageAndColor(int objectiveId, const char *format, Priority priority) {
-        ObjectiveVisibleSettingOverride *overrideMarker = FindOverrideForObjective(objectiveId);
-        if (overrideMarker && overrideMarker->overrideTextColor)
-            JmgUtility::MessageTeamPlayersAndType((int) overrideMarker->textColor.X, (int) overrideMarker->textColor.Y,
-                                                  (int) overrideMarker->textColor.Z, team, format);
-        else
-            switch (priority) {
-                case Primary:
-                    JmgUtility::MessageTeamPlayersAndType(50, 255, 50, team, format);
-                    break;
-                case Secondary:
-                    JmgUtility::MessageTeamPlayersAndType(50, 150, 250, team, format);
-                    break;
-                case Tertiary:
-                case Unknown:
-                    JmgUtility::MessageTeamPlayersAndType(150, 50, 150, team, format);
-                    break;
-                default:
-                    JmgUtility::MessageTeamPlayersAndType(125, 150, 150, team, format);
-                    break;
-            }
-    }
-
-    void messagePlayerAndColor(GameObject *player, const char *format, Priority priority) {
-        switch (priority) {
-            case Primary:
-                JmgUtility::DisplayChatMessage(player, 50, 255, 50, format);
-                break;
-            case Secondary:
-                JmgUtility::DisplayChatMessage(player, 50, 150, 250, format);
-                break;
-            case Tertiary:
-            case Unknown:
-                JmgUtility::DisplayChatMessage(player, 150, 50, 150, format);
-                break;
-            default:
-                JmgUtility::DisplayChatMessage(player, 125, 150, 150, format);
-                break;
-        }
-    }
-
-    char *formatObjectiveString(const char *format, ...) {
-        static char displayMsg[256];
-        va_list args;
-        va_start(args, format);
-        vsprintf(displayMsg, format, args);
-        va_end(args);
-        return displayMsg;
-    }
-
-    bool addObjective(int id, Priority priority, Status status, unsigned long nameId, char *soundFilename,
-                      unsigned long descriptionId, int radarMarkerId, int objectiveNumber) {
-        if (priority == Undefined)
-            return false;
-        if (!objectiveStringIdsLoaded)
-            initilizeStringIds();
-        ObjectiveNode *current = objectiveNodeList;
-        if (!objectiveNodeList)
-            objectiveNodeList = new ObjectiveNode(id, priority, status, nameId, soundFilename, descriptionId,
-                                                  radarMarkerId, objectiveNumber);
-        while (current) {
-            if (current->id == id)
-                if (current->active) {
-                    Destroy_Radar_Marker(current->radarMarkerId);
-                    return false;
-                } else {
-                    Destroy_Radar_Marker(current->radarMarkerId);
-                    current->id = id;
-                    current->priority = priority;
-                    current->status = status;
-                    current->nameId = nameId;
-                    current->soundFilename = soundFilename;
-                    current->descriptionId = descriptionId;
-                    current->radarMarkerId = radarMarkerId;
-                    current->objectiveNumber = objectiveNumber;
-                    current->active = true;
-                    break;
-                }
-            if (!current->next) {
-                current->next = new ObjectiveNode(id, priority, status, nameId, soundFilename, descriptionId,
-                                                  radarMarkerId, objectiveNumber);
-                break;
-            }
-            current = current->next;
-        }
-        objectiveCounts++;
-        if (status != Hidden && descriptionId) {
-            selectMessageAndColor(id, formatObjectiveString(objectiveNewString, objectivePrioritieStrings[priority]),
-                                  priority);
-            if (objectiveNumber)
-                selectMessageAndColor(id, formatObjectiveString(Get_Translated_String(descriptionId), objectiveNumber),
-                                      priority);
-            else
-                selectMessageAndColor(id, Get_Translated_String(descriptionId), priority);
-        }
-        return true;
-    }
-
-    void Destroy_Radar_Marker(int markerId) {
-        Destroy_Objective_GameObject(markerId);
-        GameObject * marker = Commands->Find_Object(markerId);
-        if (!marker)
-            return;
-        Commands->Destroy_Object(marker);
-    }
-
-    ObjectiveVisibleSettingOverride *FindOverrideForObjective(int objectiveId) {
-        for (SLNode<ObjectiveVisibleSettingOverride> *node = overrideVisibleObjectiveSettings.Head(); node; node = node->Next())
-            if (node->Data() && node->Data()->objectiveId == objectiveId)
-                return node->Data();
-        return NULL;
-    }
-
-    GameObject *Create_Radar_Marker(Vector3 pos, Priority priority, int objectiveId) {
-        GameObject * radarMarker = Commands->Create_Object("Daves Arrow", pos);
-        Commands->Set_Player_Type(radarMarker, team);
-        Commands->Set_Is_Visible(radarMarker, false);
-        ObjectiveVisibleSettingOverride *overrideMarker = FindOverrideForObjective(objectiveId);
-        if (overrideMarker && _stricmp(overrideMarker->markerModel, ""))
-            Commands->Set_Model(radarMarker, overrideMarker->markerModel);
-        else
-            switch (priority) {
-                case Priority::Primary:
-                    Commands->Set_Model(radarMarker, primaryObjectiveModel);
-                    break;
-                case Priority::Secondary:
-                    Commands->Set_Model(radarMarker, secondaryObjectiveModel);
-                    break;
-                case Priority::Tertiary:
-                    Commands->Set_Model(radarMarker, tertiaryObjectiveModel);
-                    break;
-                default:
-                    Commands->Set_Model(radarMarker, "null");
-                    break;
-            }
-        if (showRadarStars) {
-            Commands->Set_Obj_Radar_Blip_Shape(radarMarker, RADAR_BLIP_SHAPE_OBJECTIVE);
-            if (overrideMarker && overrideMarker->markerColor != -1)
-                Commands->Set_Obj_Radar_Blip_Color(radarMarker, overrideMarker->markerColor);
-            else
-                Commands->Set_Obj_Radar_Blip_Color(radarMarker,
-                                                   priority == Primary ? RADAR_BLIP_COLOR_PRIMARY_OBJECTIVE :
-                                                   priority == Secondary ? RADAR_BLIP_COLOR_SECONDARY_OBJECTIVE
-                                                                         : RADAR_BLIP_COLOR_TERTIARY_OBJECTIVE);
-        }
-        Create_Objective_GameObject(radarMarker, objectiveId, priority, overrideMarker);
-        return radarMarker;
-    }
-
+	struct ObjectiveNode
+	{
+		int id;
+		Priority priority;
+		Status status;
+		unsigned long nameId;
+		char *soundFilename;
+		unsigned long descriptionId;
+		int radarMarkerId;
+		bool active;
+		int objectiveNumber;
+		ObjectiveNode *next;
+		ObjectiveNode(int id, Priority priority, Status status, unsigned long nameId, char *soundFilename, unsigned long descriptionId,int radarMarkerId,int objectiveNumber)
+		{
+			this->id = id;
+			this->priority = priority;
+			this->status = status;
+			this->nameId = nameId;
+			this->soundFilename = soundFilename;
+			this->descriptionId = descriptionId;
+			this->radarMarkerId = radarMarkerId;
+			this->active = true;
+			this->objectiveNumber = objectiveNumber;
+			next = NULL;
+		}
+	};
+	ObjectiveNode *objectiveNodeList;
+	int objectiveCounts;
+	int team;
+	void initilizeStringIds()
+	{
+		objectiveNewString = Get_Translated_String(Get_String_ID_By_Desc("IDS_OBJ2_NEW_OBJ"));
+		objectiveCancelledString = Get_Translated_String(Get_String_ID_By_Desc("IDS_OBJ2_CANCELLED"));
+		objectiveStatusChangedString = Get_Translated_String(Get_String_ID_By_Desc("IDS_OBJ2_STATUS_CHANGED"));
+		objectiveListString = Get_Translated_String(Get_String_ID_By_Desc("IDS_OBJ2_LIST"));
+		objectiveUpdateObjectiveString = Get_Translated_String(Get_String_ID_By_Desc("IDS_OBJ2_UPDATED"));
+		char descriptionString[512];
+		for (int x = 0;x < 12;x++)
+		{
+			sprintf(descriptionString,"IDS_OBJ2_PRIORITY_%0d",x);
+			objectivePrioritieStrings[x] = Get_Translated_String(Get_String_ID_By_Desc(descriptionString));
+		}
+		for (int x = 0;x < 4;x++)
+		{
+			sprintf(descriptionString,"IDS_OBJ2_STATE_%0d",x);
+			objectiveStatusStrings[x] = Get_Translated_String(Get_String_ID_By_Desc(descriptionString));
+		}
+		objectiveCancelledStringNumbered = Get_Translated_String(Get_String_ID_By_Desc("IDS_OBJ2_CANCELLED_NUMBERED"));
+		objectiveStatusChangedStringNumbered = Get_Translated_String(Get_String_ID_By_Desc("IDS_OBJ2_STATUS_CHANGED_NUMBERED"));
+		objectiveUpdateObjectiveStringNumbered = Get_Translated_String(Get_String_ID_By_Desc("IDS_OBJ2_UPDATED_NUMBERED"));
+		objectiveStringIdsLoaded = true;
+	}
+	void selectMessageAndColor(int objectiveId,const char *format,Priority priority)
+	{
+		ObjectiveVisibleSettingOverride *overrideMarker = FindOverrideForObjective(objectiveId);
+		if (overrideMarker && overrideMarker->overrideTextColor)
+			JmgUtility::MessageTeamPlayersAndType((int)overrideMarker->textColor.X,(int)overrideMarker->textColor.Y,(int)overrideMarker->textColor.Z,team,format);
+		else
+			switch (priority)
+			{
+			case Primary: JmgUtility::MessageTeamPlayersAndType(50,255,50,team,format); break;
+			case Secondary: JmgUtility::MessageTeamPlayersAndType(50,150,250,team,format); break;
+			case Tertiary:case Unknown: JmgUtility::MessageTeamPlayersAndType(150,50,150,team,format); break;
+			default: JmgUtility::MessageTeamPlayersAndType(125,150,150,team,format); break;
+			}
+	}
+	void messagePlayerAndColor(GameObject *player,const char *format,Priority priority)
+	{
+		switch (priority)
+		{
+		case Primary: JmgUtility::DisplayChatMessage(player,50,255,50,format); break;
+		case Secondary: JmgUtility::DisplayChatMessage(player,50,150,250,format); break;
+		case Tertiary:case Unknown: JmgUtility::DisplayChatMessage(player,150,50,150,format); break;
+		default: JmgUtility::DisplayChatMessage(player,125,150,150,format); break;
+		}
+	}
+	char *formatObjectiveString(const char *format,...)
+	{
+		static char displayMsg[256];
+		va_list args;
+		va_start(args,format);
+		vsprintf(displayMsg,format,args);
+		va_end(args);
+		return displayMsg;
+	}
+	bool addObjective(int id, Priority priority, Status status, unsigned long nameId, char *soundFilename, unsigned long descriptionId,int radarMarkerId,int objectiveNumber)
+	{
+		if (priority == Undefined)
+			return false;
+		if (!objectiveStringIdsLoaded)
+			initilizeStringIds();
+		ObjectiveNode *current = objectiveNodeList;
+		if (!objectiveNodeList)
+			objectiveNodeList = new ObjectiveNode(id,priority,status,nameId,soundFilename,descriptionId,radarMarkerId,objectiveNumber);
+		while (current)
+		{
+			if (current->id == id)
+				if (current->active)
+				{
+					Destroy_Radar_Marker(current->radarMarkerId);
+					return false;
+				}
+				else
+				{
+					Destroy_Radar_Marker(current->radarMarkerId);
+					current->id = id;
+					current->priority = priority;
+					current->status = status;
+					current->nameId = nameId;
+					current->soundFilename = soundFilename;
+					current->descriptionId = descriptionId;
+					current->radarMarkerId = radarMarkerId;
+					current->objectiveNumber = objectiveNumber;
+					current->active = true;
+					break;
+				}
+			if (!current->next)
+			{
+				current->next = new ObjectiveNode(id,priority,status,nameId,soundFilename,descriptionId,radarMarkerId,objectiveNumber);
+				break;
+			}
+			current = current->next;
+		}
+		objectiveCounts++;
+		if (status != Hidden && descriptionId)
+		{
+			selectMessageAndColor(id,formatObjectiveString(objectiveNewString,objectivePrioritieStrings[priority]),priority);
+			if (objectiveNumber)
+				selectMessageAndColor(id,formatObjectiveString(Get_Translated_String(descriptionId),objectiveNumber),priority);
+			else
+				selectMessageAndColor(id,Get_Translated_String(descriptionId),priority);
+		}
+		return true;
+	}
+	void Destroy_Radar_Marker(int markerId)
+	{
+		Destroy_Objective_GameObject(markerId);
+		GameObject *marker = Commands->Find_Object(markerId);
+		if (!marker)
+			return;
+		Commands->Destroy_Object(marker);
+	}
+	ObjectiveVisibleSettingOverride *FindOverrideForObjective(int objectiveId)
+	{
+		for (SLNode<ObjectiveVisibleSettingOverride> *node = overrideVisibleObjectiveSettings.Head();node;node = node->Next())
+			if (node->Data() && node->Data()->objectiveId == objectiveId)
+				return node->Data();
+		return NULL;
+	}
+	GameObject *Create_Radar_Marker(Vector3 pos, Priority priority,int objectiveId)
+	{
+		GameObject *radarMarker = Commands->Create_Object("Daves Arrow",pos);
+		Commands->Set_Player_Type(radarMarker,team);
+		Commands->Set_Is_Visible(radarMarker,false);
+		ObjectiveVisibleSettingOverride *overrideMarker = FindOverrideForObjective(objectiveId);
+		if (overrideMarker && _stricmp(overrideMarker->markerModel,""))
+			Commands->Set_Model(radarMarker,overrideMarker->markerModel);
+		else
+			switch (priority)
+			{
+				case Priority::Primary:Commands->Set_Model(radarMarker,primaryObjectiveModel);break;
+				case Priority::Secondary:Commands->Set_Model(radarMarker,secondaryObjectiveModel);break;
+				case Priority::Tertiary:Commands->Set_Model(radarMarker,tertiaryObjectiveModel);break;
+				default:Commands->Set_Model(radarMarker,"null");break;
+			}
+		if (showRadarStars)
+		{
+			Commands->Set_Obj_Radar_Blip_Shape(radarMarker,RADAR_BLIP_SHAPE_OBJECTIVE);
+			if (overrideMarker && overrideMarker->markerColor != -1)
+				Commands->Set_Obj_Radar_Blip_Color(radarMarker,overrideMarker->markerColor);
+			else
+				Commands->Set_Obj_Radar_Blip_Color(radarMarker,priority == Primary ? RADAR_BLIP_COLOR_PRIMARY_OBJECTIVE : priority == Secondary ? RADAR_BLIP_COLOR_SECONDARY_OBJECTIVE : RADAR_BLIP_COLOR_TERTIARY_OBJECTIVE);
+		}
+		Create_Objective_GameObject(radarMarker,objectiveId,priority,overrideMarker);
+		return radarMarker;
+	}
 public:
-    NewObjectiveSystem(int team, bool showRadarStars = true, const char *primaryObjectiveModel = "null",
-                       const char *secondaryObjectiveModel = "null", const char *tertiaryObjectiveModel = "null") {
-        sprintf(infantryAttachBone, "c pelvis");
-        this->team = team;
-        objectiveStringIdsLoaded = false;
-        objectiveCounts = 0;
-        sprintf(this->primaryObjectiveModel, "%s", primaryObjectiveModel);
-        sprintf(this->secondaryObjectiveModel, "%s", secondaryObjectiveModel);
-        sprintf(this->tertiaryObjectiveModel, "%s", tertiaryObjectiveModel);
-        this->showRadarStars = showRadarStars;
-        objectiveNodeList = NULL;
-        overrideVisibleObjectiveSettings.Remove_All();
-    }
-
-    ~NewObjectiveSystem() {
-        objectiveStringIdsLoaded = false;
-        objectiveCounts = 0;
-        ObjectiveNode *temp = objectiveNodeList, *die;
-        while (temp) {
-            die = temp;
-            temp = temp->next;
-            delete die;
-        }
-        objectiveNodeList = NULL;
-    }
-
-    bool Add_Objective(int objectiveId, Priority priority, Status status, unsigned long nameId, char *soundFilename,
-                       unsigned long descriptionId, GameObject *blipUnit, int objectiveNumber = 0) {
-        if (!blipUnit)
-            return false;
-        GameObject * radarMarker = Create_Radar_Marker(Commands->Get_Position(blipUnit), priority, objectiveId);
-        if (!radarMarker)
-            return false;
-        ObjectiveVisibleSettingOverride *overrideMarker = FindOverrideForObjective(objectiveId);
-        if (overrideMarker && _stricmp(overrideMarker->attachBone, ""))
-            Commands->Attach_To_Object_Bone(radarMarker, blipUnit, overrideMarker->attachBone);
-        else
-            Commands->Attach_To_Object_Bone(radarMarker, blipUnit,
-                                            blipUnit->As_SoldierGameObj() ? infantryAttachBone : "origin");
-        return addObjective(objectiveId, priority, status, nameId, soundFilename, descriptionId,
-                            Commands->Get_ID(radarMarker), objectiveNumber);
-    }
-
-    bool Add_Objective(int objectiveId, Priority priority, Status status, unsigned long nameId, char *soundFilename,
-                       unsigned long descriptionId, Vector3 blipPosition, int objectiveNumber = 0) {
-        GameObject * radarMarker = Create_Radar_Marker(blipPosition, priority, objectiveId);
-        if (!radarMarker)
-            return false;
-        return addObjective(objectiveId, priority, status, nameId, soundFilename, descriptionId,
-                            Commands->Get_ID(radarMarker), objectiveNumber);
-    }
-
-    bool Get_Radar_Blip_Position(int objectiveId, Vector3 *position) {
-        ObjectiveNode *current = objectiveNodeList;
-        while (current) {
-            if (current->id == objectiveId) {
-                GameObject * objectiveMarker = Commands->Find_Object(current->radarMarkerId);
-                if (objectiveMarker) {
-                    *position = Commands->Get_Position(objectiveMarker);
-                    return true;
-                }
-                return false;
-            }
-            current = current->next;
-        }
-        return false;
-    }
-
-    void Set_Radar_Blip(int objectiveId, GameObject *blipUnit, const char *modelOverride = NULL) {
-        if (!blipUnit)
-            return;
-        ObjectiveNode *current = objectiveNodeList;
-        while (current) {
-            if (current->id == objectiveId) {
-                Destroy_Radar_Marker(current->radarMarkerId);
-                GameObject * radarMarker = Create_Radar_Marker(Commands->Get_Position(blipUnit), current->priority,
-                                                               objectiveId);
-                if (!radarMarker)
-                    return;
-                Commands->Attach_To_Object_Bone(radarMarker, blipUnit,
-                                                blipUnit->As_SoldierGameObj() ? infantryAttachBone : "origin");
-                current->radarMarkerId = Commands->Get_ID(radarMarker);
-                return;
-            }
-            current = current->next;
-        }
-    }
-
-    void Remove_Radar_Blip(int objectiveId) {
-        ObjectiveNode *current = objectiveNodeList;
-        while (current) {
-            if (current->id == objectiveId) {
-                Destroy_Radar_Marker(current->radarMarkerId);
-                return;
-            }
-            current = current->next;
-        }
-    }
-
-    void Set_Radar_Blip(int objectiveId, Vector3 blipPosition, const char *modelOverride = NULL) {
-        ObjectiveNode *current = objectiveNodeList;
-        while (current) {
-            if (current->id == objectiveId) {
-                Destroy_Radar_Marker(current->radarMarkerId);
-                GameObject * radarMarker = Create_Radar_Marker(blipPosition, current->priority, objectiveId);
-                if (!radarMarker)
-                    return;
-                current->radarMarkerId = Commands->Get_ID(radarMarker);
-                return;
-            }
-            current = current->next;
-        }
-    }
-
-    bool Add_Objective(int objectiveId, Priority priority, Status status, unsigned long nameId, char *soundFilename,
-                       unsigned long descriptionId, int objectiveNumber = 0) {
-        return addObjective(objectiveId, priority, status, nameId, soundFilename, descriptionId, 0, objectiveNumber);
-    }
-
-    long Get_Mission_Text_Id(int objectiveId) {
-        ObjectiveNode *current = objectiveNodeList;
-        while (current) {
-            if (current->id == objectiveId)
-                return current->nameId;
-            current = current->next;
-        }
-        return 0;
-    }
-
-    bool Remove_Objective(int objectiveId) {
-        ObjectiveNode *current = objectiveNodeList;
-        while (current) {
-            if (current->id == objectiveId)
-                if (current->active) {
-                    objectiveCounts--;
-                    if (current->status == Pending && current->nameId)
-                        if (current->objectiveNumber)
-                            selectMessageAndColor(objectiveId, formatObjectiveString(objectiveCancelledStringNumbered,
-                                                                                     objectivePrioritieStrings[current->priority],
-                                                                                     current->objectiveNumber),
-                                                  current->priority);
-                        else
-                            selectMessageAndColor(objectiveId, formatObjectiveString(objectiveCancelledString,
-                                                                                     objectivePrioritieStrings[current->priority]),
-                                                  current->priority);
-                    Destroy_Radar_Marker(current->radarMarkerId);
-                    current->active = false;
-                    return true;
-                } else
-                    return false;
-            current = current->next;
-        }
-        return true;
-    }
-
-    bool Set_Objective_Status(int objectiveId, Status status) {
-        ObjectiveNode *current = objectiveNodeList;
-        while (current) {
-            if (current->id == objectiveId)
-                if (current->status != status) {
-                    if (status != Hidden && current->status != Hidden && current->nameId)
-                        if (current->objectiveNumber)
-                            selectMessageAndColor(objectiveId,
-                                                  formatObjectiveString(objectiveStatusChangedStringNumbered,
-                                                                        objectivePrioritieStrings[current->priority],
-                                                                        current->objectiveNumber,
-                                                                        objectiveStatusStrings[status]),
-                                                  current->priority);
-                        else
-                            selectMessageAndColor(objectiveId, formatObjectiveString(objectiveStatusChangedString,
-                                                                                     objectivePrioritieStrings[current->priority],
-                                                                                     objectiveStatusStrings[status]),
-                                                  current->priority);
-                    GameObject * marker = Commands->Find_Object(current->radarMarkerId);
-                    if (marker) {
-                        if (status == Pending) {
-                            Commands->Set_Is_Rendered(marker, true);
-                            if (showRadarStars)
-                                Commands->Set_Obj_Radar_Blip_Shape(marker, RADAR_BLIP_SHAPE_OBJECTIVE);
-                        } else {
-                            Commands->Set_Is_Rendered(marker, false);
-                            if (showRadarStars)
-                                Commands->Set_Obj_Radar_Blip_Shape(marker, RADAR_BLIP_SHAPE_NONE);
-                        }
-                        Commands->Set_Player_Type(marker, status == Pending);
-                    }
-                    current->status = status;
-                    return true;
-                } else
-                    return false;
-            current = current->next;
-        }
-        return true;
-    }
-
-    bool Set_Objective_Mission(int objectiveId, unsigned int nameStringId, unsigned int descriptionStringId) {
-        ObjectiveNode *current = objectiveNodeList;
-        while (current) {
-            if (current->id == objectiveId)
-                if (current->nameId != nameStringId || current->descriptionId != descriptionStringId) {
-                    current->nameId = nameStringId;
-                    current->descriptionId = descriptionStringId;
-                    if (current->status != Hidden && descriptionStringId) {
-                        if (current->objectiveNumber) {
-                            selectMessageAndColor(objectiveId,
-                                                  formatObjectiveString(objectiveUpdateObjectiveStringNumbered,
-                                                                        objectivePrioritieStrings[current->priority],
-                                                                        current->objectiveNumber), current->priority);
-                            selectMessageAndColor(objectiveId,
-                                                  formatObjectiveString(Get_Translated_String(descriptionStringId),
-                                                                        current->objectiveNumber), current->priority);
-                        } else {
-                            selectMessageAndColor(objectiveId, formatObjectiveString(objectiveUpdateObjectiveString,
-                                                                                     objectivePrioritieStrings[current->priority]),
-                                                  current->priority);
-                            selectMessageAndColor(objectiveId, Get_Translated_String(descriptionStringId),
-                                                  current->priority);
-                        }
-                    }
-                    return true;
-                } else
-                    return false;
-            current = current->next;
-        }
-        return true;
-    }
-
-    Status Get_Objective_Status(int objectiveId) {
-        ObjectiveNode *current = objectiveNodeList;
-        while (current) {
-            if (current->id == objectiveId)
-                if (current->active)
-                    return current->status;
-                else
-                    return Removed;
-            current = current->next;
-        }
-        return NotDefined;
-    }
-
-    Priority Get_Objective_Priority(int objectiveId) {
-        ObjectiveNode *current = objectiveNodeList;
-        while (current) {
-            if (current->id == objectiveId)
-                return current->priority;
-            current = current->next;
-        }
-        return Undefined;
-    }
-
-    int Get_Objective_Status_Count(Status status, Priority requiredPriority = Undefined) {
-        int count = 0;
-        ObjectiveNode *current = objectiveNodeList;
-        while (current) {
-            if (current->active && current->status == status &&
-                (requiredPriority == Undefined || current->priority == requiredPriority))
-                count++;
-            current = current->next;
-        }
-        return count;
-    }
-
-    int Get_Objective_Priority_Count(Priority requiredPriority, Status status = NotDefined) {
-        int count = 0;
-        ObjectiveNode *current = objectiveNodeList;
-        while (current) {
-            if (current->active && current->priority == requiredPriority &&
-                (status == NotDefined || current->status == status))
-                count++;
-            current = current->next;
-        }
-        return count;
-    }
-
-    void Dispaly_First_Pending_Primary_Objective_On_Hud(GameObject *obj) {
-        ObjectiveNode *current = objectiveNodeList;
-        while (current) {
-            if (current->active && current->status == Pending && current->priority == Priority::Primary &&
-                current->nameId) {
-                ObjectiveVisibleSettingOverride *overrideMarker = FindOverrideForObjective(current->id);
-                if (overrideMarker && overrideMarker->overrideHudColor)
-                    Set_HUD_Help_Text_Player(obj, current->nameId, Vector3(overrideMarker->hudColor.X / 255.0f,
-                                                                           overrideMarker->hudColor.Y / 255.0f,
-                                                                           overrideMarker->hudColor.Z / 255.0f));
-                else
-                    Set_HUD_Help_Text_Player(obj, current->nameId, Vector3(0, 1, 0));
-                return;
-            }
-            current = current->next;
-        }
-    }
-
-    void Display_Current_Objectives(GameObject *player, Priority priority) {
-        messagePlayerAndColor(player, formatObjectiveString(objectiveListString, objectivePrioritieStrings[priority]),
-                              priority);
-        ObjectiveNode *current = objectiveNodeList;
-        while (current) {
-            if (current->active && current->status == Pending && current->priority == priority && current->nameId) {
-                char objectiveMsg[220];
-                if (current->objectiveNumber)
-                    sprintf(objectiveMsg, "*%s",
-                            formatObjectiveString(Get_Translated_String(current->nameId), current->objectiveNumber));
-                else
-                    sprintf(objectiveMsg, "*%s", Get_Translated_String(current->nameId));
-                messagePlayerAndColor(player, objectiveMsg, priority);
-            }
-            current = current->next;
-        }
-    }
-
-    void Display_All_Objectives(GameObject *player) {
-        int counts[12];
-        for (int x = 0; x < 12; x++)
-            counts[x] = Get_Objective_Status_Count(Pending, (Priority) x);
-        for (int x = 0; x < 12; x++)
-            if (counts[x])
-                Display_Current_Objectives(player, (Priority) x);
-    }
-
-    int Get_First_Pending_Objective_Of_Priority(Priority priority) {
-        ObjectiveNode *current = objectiveNodeList;
-        while (current) {
-            if (current->active && current->status == Pending && current->priority == priority && current->nameId)
-                return current->id;
-            current = current->next;
-        }
-        return 0;
-    }
-
-    Vector3 Get_Hud_Help_Text_Color(int objectiveId, Priority priority) {
-        ObjectiveVisibleSettingOverride *overrideMarker = FindOverrideForObjective(objectiveId);
-        if (overrideMarker && overrideMarker->overrideHudColor)
-            return Vector3(overrideMarker->hudColor.X / 255.0f, overrideMarker->hudColor.Y / 255.0f,
-                           overrideMarker->hudColor.Z / 255.0f);
-        switch (priority) {
-            case Priority::Primary:
-                return Vector3(0.196f, 0.882f, 0.196f);
-            case Priority::Secondary:
-                return Vector3(0.196f, 0.588f, 0.98f);
-            case Priority::Tertiary:
-                return Vector3(0.588f, 0.196f, 0.588f);
-            default:
-                return Vector3(1.0f, 1.0f, 1.0f);
-        }
-    }
-
-    void Create_Objective_GameObject(GameObject *radarMarker, int objectiveId, int objectivePriority,
-                                     ObjectiveVisibleSettingOverride *overrideMarker) {
-        GameObject * obj = Commands->Find_Object(controllerId);
-        if (!obj)
-            return;
-        const SimpleDynVecClass<GameObjObserverClass *> &observer_list = obj->Get_Observers();
-        for (int index = 0; index < observer_list.Count(); index++)
-            if (!_stricmp(observer_list[index]->Get_Name(), "JMG_Utility_Objective_System_Objective_GameObject")) {
-                JMG_Utility_Objective_System_Objective_GameObject *script = (JMG_Utility_Objective_System_Objective_GameObject *) observer_list[index];
-                if (script && (script->objectiveId == objectiveId || script->objectiveId == -2) &&
-                    (script->objectivePriority == objectivePriority || script->objectivePriority == -2)) {
-                    GameObject * object = Commands->Create_Object(script->preset, Commands->Get_Position(radarMarker));
-                    if (script->attach)
-                        if (overrideMarker && _stricmp(overrideMarker->attachBone, ""))
-                            Commands->Attach_To_Object_Bone(object, radarMarker, overrideMarker->attachBone);
-                        else
-                            Commands->Attach_To_Object_Bone(object, radarMarker, "origin");
-                    char params[128];
-                    sprintf(params, "%d,%d", Commands->Get_ID(object), Commands->Get_ID(radarMarker));
-                    Commands->Attach_Script(obj, "JMG_Utility_Objective_System_Objective_GameObject_Tracker", params);
-                }
-            }
-    }
-
-    void Destroy_Objective_GameObject(int markerId) {
-        GameObject * obj = Commands->Find_Object(controllerId);
-        if (!obj)
-            return;
-        const SimpleDynVecClass<GameObjObserverClass *> &observer_list = obj->Get_Observers();
-        for (int index = 0; index < observer_list.Count(); index++)
-            if (!_stricmp(observer_list[index]->Get_Name(),
-                          "JMG_Utility_Objective_System_Objective_GameObject_Tracker")) {
-                JMG_Utility_Objective_System_Objective_GameObject_Tracker *script = (JMG_Utility_Objective_System_Objective_GameObject_Tracker *) observer_list[index];
-                if (script && script->markerId == markerId) {
-                    GameObject * object = Commands->Find_Object(script->gameObjectId);
-                    if (object)
-                        Commands->Destroy_Object(object);
-                    script->Destroy_Script();
-                }
-            }
-    }
-
-    bool Check_If_All_Objectives_Are_Complete(int objectiveIds[], int count) {
-        for (int x = 0; x < count; x++) {
-            if (Get_Objective_Status(objectiveIds[x]) != Status::Accomplished)
-                return false;
-        }
-        return true;
-    }
-
-    GameObject *GetObjectiveMarker(int objectiveMarkerId, GameObject *sender, int objectiveId);
+	NewObjectiveSystem(int team,bool showRadarStars = true,const char *primaryObjectiveModel = "null",const char *secondaryObjectiveModel = "null",const char *tertiaryObjectiveModel = "null")
+	{
+		sprintf(infantryAttachBone,"c pelvis");
+		this->team = team;
+		objectiveStringIdsLoaded = false;
+		objectiveCounts = 0;
+		sprintf(this->primaryObjectiveModel,"%s",primaryObjectiveModel);
+		sprintf(this->secondaryObjectiveModel,"%s",secondaryObjectiveModel);
+		sprintf(this->tertiaryObjectiveModel,"%s",tertiaryObjectiveModel);
+		this->showRadarStars = showRadarStars;
+		objectiveNodeList = NULL;
+		overrideVisibleObjectiveSettings.Remove_All();
+	}
+	~NewObjectiveSystem()
+	{
+		objectiveStringIdsLoaded = false;
+		objectiveCounts = 0;
+		ObjectiveNode *temp = objectiveNodeList,*die;
+		while (temp)
+		{
+			die = temp;
+			temp = temp->next;
+			delete die;
+		}
+		objectiveNodeList = NULL;
+	}
+	bool Add_Objective(int objectiveId, Priority priority, Status status, unsigned long nameId, char *soundFilename, unsigned long descriptionId,GameObject *blipUnit,int objectiveNumber = 0)
+	{
+		if (!blipUnit)
+			return false;
+		GameObject *radarMarker = Create_Radar_Marker(Commands->Get_Position(blipUnit),priority,objectiveId);
+		if (!radarMarker)
+			return false;
+		ObjectiveVisibleSettingOverride *overrideMarker = FindOverrideForObjective(objectiveId);
+		if (overrideMarker && _stricmp(overrideMarker->attachBone,""))
+			Commands->Attach_To_Object_Bone(radarMarker,blipUnit,overrideMarker->attachBone);
+		else
+			Commands->Attach_To_Object_Bone(radarMarker,blipUnit,blipUnit->As_SoldierGameObj() ? infantryAttachBone : "origin");
+		return addObjective(objectiveId,priority,status,nameId,soundFilename,descriptionId,Commands->Get_ID(radarMarker),objectiveNumber);
+	}
+	bool Add_Objective(int objectiveId, Priority priority, Status status, unsigned long nameId, char *soundFilename, unsigned long descriptionId,Vector3 blipPosition,int objectiveNumber = 0)
+	{
+		GameObject *radarMarker = Create_Radar_Marker(blipPosition,priority,objectiveId);
+		if (!radarMarker)
+			return false;
+		return addObjective(objectiveId,priority,status,nameId,soundFilename,descriptionId,Commands->Get_ID(radarMarker),objectiveNumber);
+	}
+	bool Get_Radar_Blip_Position(int objectiveId,Vector3 *position)
+	{
+		ObjectiveNode *current = objectiveNodeList;
+		while (current)
+		{
+			if (current->id == objectiveId)
+			{
+				GameObject *objectiveMarker = Commands->Find_Object(current->radarMarkerId);
+				if (objectiveMarker)
+				{
+					*position = Commands->Get_Position(objectiveMarker);
+					return true;
+				}
+				return false;
+			}
+			current = current->next;
+		}
+		return false;
+	}
+	void Set_Radar_Blip(int objectiveId,GameObject *blipUnit,const char *modelOverride = NULL)
+	{
+		if (!blipUnit)
+			return;
+		ObjectiveNode *current = objectiveNodeList;
+		while (current)
+		{
+			if (current->id == objectiveId)
+			{
+				Destroy_Radar_Marker(current->radarMarkerId);
+				GameObject *radarMarker = Create_Radar_Marker(Commands->Get_Position(blipUnit),current->priority,objectiveId);
+				if (!radarMarker)
+					return;
+				Commands->Attach_To_Object_Bone(radarMarker,blipUnit,blipUnit->As_SoldierGameObj() ? infantryAttachBone : "origin");
+				current->radarMarkerId = Commands->Get_ID(radarMarker);
+				return;
+			}
+			current = current->next;
+		}
+	}
+	void Remove_Radar_Blip(int objectiveId)
+	{
+		ObjectiveNode *current = objectiveNodeList;
+		while (current)
+		{
+			if (current->id == objectiveId)
+			{
+				Destroy_Radar_Marker(current->radarMarkerId);
+				return;
+			}
+			current = current->next;
+		}
+	}
+	void Set_Radar_Blip(int objectiveId,Vector3 blipPosition,const char *modelOverride = NULL)
+	{
+		ObjectiveNode *current = objectiveNodeList;
+		while (current)
+		{
+			if (current->id == objectiveId)
+			{
+				Destroy_Radar_Marker(current->radarMarkerId);
+				GameObject *radarMarker = Create_Radar_Marker(blipPosition,current->priority,objectiveId);
+				if (!radarMarker)
+					return;
+				current->radarMarkerId = Commands->Get_ID(radarMarker);
+				return;
+			}
+			current = current->next;
+		}
+	}
+	bool Add_Objective(int objectiveId, Priority priority, Status status, unsigned long nameId, char *soundFilename, unsigned long descriptionId,int objectiveNumber = 0)
+	{
+		return addObjective(objectiveId,priority,status,nameId,soundFilename,descriptionId,0,objectiveNumber);
+	}
+	long Get_Mission_Text_Id(int objectiveId)
+	{
+		ObjectiveNode *current = objectiveNodeList;
+		while (current)
+		{
+			if (current->id == objectiveId)
+				return current->nameId;
+			current = current->next;
+		}
+		return 0;
+	}
+	bool Remove_Objective(int objectiveId)
+	{
+		ObjectiveNode *current = objectiveNodeList;
+		while (current)
+		{
+			if (current->id == objectiveId)
+				if (current->active)
+				{
+					objectiveCounts--;
+					if (current->status == Pending && current->nameId)
+						if (current->objectiveNumber)
+							selectMessageAndColor(objectiveId,formatObjectiveString(objectiveCancelledStringNumbered,objectivePrioritieStrings[current->priority],current->objectiveNumber),current->priority);
+						else
+							selectMessageAndColor(objectiveId,formatObjectiveString(objectiveCancelledString,objectivePrioritieStrings[current->priority]),current->priority);
+					Destroy_Radar_Marker(current->radarMarkerId);
+					current->active = false;
+					return true;
+				}
+				else
+					return false;
+			current = current->next;
+		}
+		return true;
+	}
+	bool Set_Objective_Status(int objectiveId,Status status)
+	{
+		ObjectiveNode *current = objectiveNodeList;
+		while (current)
+		{
+			if (current->id == objectiveId)
+				if (current->status != status)
+				{
+					if (status != Hidden && current->status != Hidden && current->nameId)
+						if (current->objectiveNumber)
+							selectMessageAndColor(objectiveId,formatObjectiveString(objectiveStatusChangedStringNumbered,objectivePrioritieStrings[current->priority],current->objectiveNumber,objectiveStatusStrings[status]),current->priority);
+						else
+							selectMessageAndColor(objectiveId,formatObjectiveString(objectiveStatusChangedString,objectivePrioritieStrings[current->priority],objectiveStatusStrings[status]),current->priority);
+					GameObject *marker = Commands->Find_Object(current->radarMarkerId);
+					if (marker)
+					{
+						if (status == Pending)
+						{
+							Commands->Set_Is_Rendered(marker,true);
+							if (showRadarStars)
+								Commands->Set_Obj_Radar_Blip_Shape(marker,RADAR_BLIP_SHAPE_OBJECTIVE);
+						}
+						else
+						{
+							Commands->Set_Is_Rendered(marker,false);
+							if (showRadarStars)
+								Commands->Set_Obj_Radar_Blip_Shape(marker,RADAR_BLIP_SHAPE_NONE);
+						}
+						Commands->Set_Player_Type(marker,status == Pending);
+					}
+					current->status = status;
+					return true;
+				}
+				else
+					return false;
+			current = current->next;
+		}
+		return true;
+	}
+	bool Set_Objective_Mission(int objectiveId,unsigned int nameStringId,unsigned int descriptionStringId)
+	{
+		ObjectiveNode *current = objectiveNodeList;
+		while (current)
+		{
+			if (current->id == objectiveId)
+				if (current->nameId != nameStringId || current->descriptionId != descriptionStringId)
+				{
+					current->nameId = nameStringId;
+					current->descriptionId = descriptionStringId;
+					if (current->status != Hidden && descriptionStringId)
+					{
+						if (current->objectiveNumber)
+						{
+							selectMessageAndColor(objectiveId,formatObjectiveString(objectiveUpdateObjectiveStringNumbered,objectivePrioritieStrings[current->priority],current->objectiveNumber),current->priority);
+							selectMessageAndColor(objectiveId,formatObjectiveString(Get_Translated_String(descriptionStringId),current->objectiveNumber),current->priority);
+						}
+						else
+						{
+							selectMessageAndColor(objectiveId,formatObjectiveString(objectiveUpdateObjectiveString,objectivePrioritieStrings[current->priority]),current->priority);
+							selectMessageAndColor(objectiveId,Get_Translated_String(descriptionStringId),current->priority);
+						}
+					}
+					return true;
+				}
+				else
+					return false;
+			current = current->next;
+		}
+		return true;
+	}
+	Status Get_Objective_Status(int objectiveId)
+	{
+		ObjectiveNode *current = objectiveNodeList;
+		while (current)
+		{
+			if (current->id == objectiveId)
+				if (current->active)
+					return current->status;
+				else
+					return Removed;
+			current = current->next;
+		}
+		return NotDefined;
+	}
+	Priority Get_Objective_Priority(int objectiveId)
+	{
+		ObjectiveNode *current = objectiveNodeList;
+		while (current)
+		{
+			if (current->id == objectiveId)
+				return current->priority;
+			current = current->next;
+		}
+		return Undefined;
+	}
+	int Get_Objective_Status_Count(Status status,Priority requiredPriority = Undefined)
+	{
+		int count = 0;
+		ObjectiveNode *current = objectiveNodeList;
+		while (current)
+		{
+			if (current->active && current->status == status && (requiredPriority == Undefined || current->priority == requiredPriority))
+				count++;
+			current = current->next;
+		}
+		return count;
+	}
+	int Get_Objective_Priority_Count(Priority requiredPriority,Status status = NotDefined)
+	{
+		int count = 0;
+		ObjectiveNode *current = objectiveNodeList;
+		while (current)
+		{
+			if (current->active && current->priority == requiredPriority && (status == NotDefined || current->status == status))
+				count++;
+			current = current->next;
+		}
+		return count;
+	}
+	void Dispaly_First_Pending_Primary_Objective_On_Hud(GameObject *obj)
+	{
+		ObjectiveNode *current = objectiveNodeList;
+		while (current)
+		{
+			if (current->active && current->status == Pending && current->priority == Priority::Primary && current->nameId)
+			{
+				ObjectiveVisibleSettingOverride *overrideMarker = FindOverrideForObjective(current->id);
+				if (overrideMarker && overrideMarker->overrideHudColor)
+					Set_HUD_Help_Text_Player(obj,current->nameId,Vector3(overrideMarker->hudColor.X/255.0f,overrideMarker->hudColor.Y/255.0f,overrideMarker->hudColor.Z/255.0f));
+				else
+					Set_HUD_Help_Text_Player(obj,current->nameId,Vector3(0,1,0));
+				return;
+			}
+			current = current->next;
+		}
+	}
+	void Display_Current_Objectives(GameObject *player,Priority priority)
+	{
+		messagePlayerAndColor(player,formatObjectiveString(objectiveListString,objectivePrioritieStrings[priority]),priority);
+		ObjectiveNode *current = objectiveNodeList;
+		while (current)
+		{
+			if (current->active && current->status == Pending && current->priority == priority && current->nameId)
+			{
+				char objectiveMsg[220];
+				if (current->objectiveNumber)
+					sprintf(objectiveMsg,"*%s",formatObjectiveString(Get_Translated_String(current->nameId),current->objectiveNumber));
+				else
+					sprintf(objectiveMsg,"*%s",Get_Translated_String(current->nameId));
+				messagePlayerAndColor(player,objectiveMsg,priority);
+			}
+			current = current->next;
+		}
+	}
+	void Display_All_Objectives(GameObject *player)
+	{
+		int counts[12];
+		for (int x = 0;x < 12;x++)
+			counts[x] = Get_Objective_Status_Count(Pending,(Priority)x);
+		for (int x = 0;x < 12;x++)
+			if (counts[x])
+				Display_Current_Objectives(player,(Priority)x);
+	}
+	int Get_First_Pending_Objective_Of_Priority(Priority priority)
+	{
+		ObjectiveNode *current = objectiveNodeList;
+		while (current)
+		{
+			if (current->active && current->status == Pending && current->priority == priority && current->nameId)
+				return current->id;
+			current = current->next;
+		}
+		return 0;
+	}
+	Vector3 Get_Hud_Help_Text_Color(int objectiveId,Priority priority)
+	{
+		ObjectiveVisibleSettingOverride *overrideMarker = FindOverrideForObjective(objectiveId);
+		if (overrideMarker && overrideMarker->overrideHudColor)
+			return Vector3(overrideMarker->hudColor.X/255.0f,overrideMarker->hudColor.Y/255.0f,overrideMarker->hudColor.Z/255.0f);
+		switch (priority)
+		{
+		case Priority::Primary:
+			return Vector3(0.196f,0.882f,0.196f);
+		case Priority::Secondary:
+			return Vector3(0.196f,0.588f,0.98f);
+		case Priority::Tertiary:
+			return Vector3(0.588f,0.196f,0.588f);
+		default:
+			return Vector3(1.0f,1.0f,1.0f);
+		}
+	}
+	void Create_Objective_GameObject(GameObject *radarMarker,int objectiveId,int objectivePriority,ObjectiveVisibleSettingOverride *overrideMarker)
+	{
+		GameObject *obj = Commands->Find_Object(controllerId);
+		if (!obj)
+			return;
+		const SimpleDynVecClass<GameObjObserverClass *> & observer_list = obj->Get_Observers();
+		for(int index = 0;index < observer_list.Count();index++)
+			if (!_stricmp(observer_list[index]->Get_Name(),"JMG_Utility_Objective_System_Objective_GameObject"))
+			{
+				JMG_Utility_Objective_System_Objective_GameObject *script = (JMG_Utility_Objective_System_Objective_GameObject*)observer_list[index];
+				if (script && (script->objectiveId == objectiveId || script->objectiveId == -2) && (script->objectivePriority == objectivePriority || script->objectivePriority == -2))
+				{
+					GameObject *object = Commands->Create_Object(script->preset,Commands->Get_Position(radarMarker));
+					if (script->attach)
+						if (overrideMarker && _stricmp(overrideMarker->attachBone,""))
+							Commands->Attach_To_Object_Bone(object,radarMarker,overrideMarker->attachBone);
+						else
+							Commands->Attach_To_Object_Bone(object,radarMarker,"origin");
+					char params[128];
+					sprintf(params,"%d,%d",Commands->Get_ID(object),Commands->Get_ID(radarMarker));
+					Commands->Attach_Script(obj,"JMG_Utility_Objective_System_Objective_GameObject_Tracker",params);
+				}
+			}
+	}
+	void Destroy_Objective_GameObject(int markerId)
+	{
+		GameObject *obj = Commands->Find_Object(controllerId);
+		if (!obj)
+			return;
+		const SimpleDynVecClass<GameObjObserverClass *> & observer_list = obj->Get_Observers();
+		for(int index = 0;index < observer_list.Count();index++)
+			if (!_stricmp(observer_list[index]->Get_Name(),"JMG_Utility_Objective_System_Objective_GameObject_Tracker"))
+			{
+				JMG_Utility_Objective_System_Objective_GameObject_Tracker *script = (JMG_Utility_Objective_System_Objective_GameObject_Tracker*)observer_list[index];
+				if (script && script->markerId == markerId)
+				{
+					GameObject *object = Commands->Find_Object(script->gameObjectId);
+					if (object)
+						Commands->Destroy_Object(object);
+					script->Destroy_Script();
+				}
+			}
+	}
+	bool Check_If_All_Objectives_Are_Complete(int objectiveIds[],int count)
+	{
+		for (int x = 0;x < count;x++)
+		{
+			if (Get_Objective_Status(objectiveIds[x]) != Status::Accomplished)
+				return false;
+		}
+		return true;
+	}
+	GameObject *GetObjectiveMarker(int objectiveMarkerId,GameObject *sender,int objectiveId);
 };
 
-class ClientNetworkObjectPositionSync {
+class ClientNetworkObjectPositionSync
+{
 public:
-    struct SyncObjectNode {
-        int id;
-        float facing;
-        Vector3 position;
-        struct SyncObjectNode *next;
+	struct SyncObjectNode
+	{
+		int id;
+		float facing;
+		Vector3 position;
+		struct SyncObjectNode *next;
+		SyncObjectNode(GameObject *obj)
+		{
+			this->id = Commands->Get_ID(obj);
+			this->facing = Commands->Get_Facing(obj);
+			this->position = Commands->Get_Position(obj);
+			this->next = NULL;
+		}
 
-        SyncObjectNode(GameObject *obj) {
-            this->id = Commands->Get_ID(obj);
-            this->facing = Commands->Get_Facing(obj);
-            this->position = Commands->Get_Position(obj);
-            this->next = NULL;
-        }
-
-    };
-
+	};
 private:
-    SyncObjectNode *syncObjectNodeList;
-
-    struct SyncControl {
-        bool syncedPlayers[128];
-        SyncObjectNode *lastSyncNode[128];
-
-        SyncControl() {
-            for (int x = 0; x < 128; x++) {
-                syncedPlayers[x] = false;
-                lastSyncNode[x] = NULL;
-            }
-        }
-
-        void clientNoLongerSynced(int playerId) {
-            syncedPlayers[playerId] = false;
-            lastSyncNode[playerId] = NULL;
-        }
-    };
-
-    SyncControl syncControl;
+	SyncObjectNode *syncObjectNodeList;
+	struct SyncControl
+	{
+		bool syncedPlayers[128];
+		SyncObjectNode *lastSyncNode[128];
+		SyncControl()
+		{
+			for (int x = 0;x < 128;x++)
+			{
+				syncedPlayers[x] = false;
+				lastSyncNode[x] = NULL;
+			}
+		}
+		void clientNoLongerSynced(int playerId)
+		{
+			syncedPlayers[playerId] = false;
+			lastSyncNode[playerId] = NULL;
+		}
+	};
+	SyncControl syncControl;
 public:
-    ClientNetworkObjectPositionSync() {
-        syncObjectNodeList = NULL;
-        syncControl = SyncControl();
-    }
-
-    SyncObjectNode *addNode(GameObject *obj) {
-        int id = Commands->Get_ID(obj);
-        SyncObjectNode *current = syncObjectNodeList;
-        if (!syncObjectNodeList)
-            return syncObjectNodeList = new SyncObjectNode(obj);
-        while (current) {
-            if (!current->id) {
-                current->id = id;
-                current->facing = Commands->Get_Facing(obj);
-                current->position = Commands->Get_Position(obj);
-                return current;
-            }
-            if (current->id == id)
-                return current;
-            if (!current->next) {
-                current->next = new SyncObjectNode(obj);
-                return current->next;
-            }
-            current = current->next;
-        }
-        return NULL;
-    };
-
-    void checkForPlayersThatLeftTheGame() {
-        for (int x = 1; x < 128; x++) {
-            GameObject * player = Get_GameObj(x);
-            if (!player)
-                syncControl.clientNoLongerSynced(x);
-        }
-    }
-
-    void triggerSingleNetworkSync() {
-        for (int x = 1; x < 128; x++) {
-            if (syncControl.syncedPlayers[x])
-                continue;
-            GameObject * player = Get_GameObj(x);
-            if (!player)
-                continue;
-            if (!syncControl.lastSyncNode[x])
-                syncControl.lastSyncNode[x] = syncObjectNodeList;
-            if (syncControl.lastSyncNode[x]) {
-                if (syncControl.lastSyncNode[x]->id) {
-                    GameObject * syncObject = Commands->Find_Object(syncControl.lastSyncNode[x]->id);
-                    if (syncObject)
-                        Force_Position_Update_Player(player, syncObject);
-                }
-                syncControl.lastSyncNode[x] = syncControl.lastSyncNode[x]->next;
-            }
-            if (!syncControl.lastSyncNode[x])
-                syncControl.syncedPlayers[x] = true;
-        }
-    }
-
-    void Empty_List() {
-        SyncObjectNode *temp = syncObjectNodeList, *die;
-        while (temp) {
-            die = temp;
-            temp = temp->next;
-            delete die;
-        }
-        syncObjectNodeList = NULL;
-        syncControl = SyncControl();
-    }
+	ClientNetworkObjectPositionSync()
+	{
+		syncObjectNodeList = NULL;
+		syncControl = SyncControl();
+	}
+	SyncObjectNode *addNode(GameObject *obj)
+	{
+		int id = Commands->Get_ID(obj);
+		SyncObjectNode *current = syncObjectNodeList;
+		if (!syncObjectNodeList)
+			return syncObjectNodeList = new SyncObjectNode(obj);
+		while (current)
+		{
+			if (!current->id)
+			{
+				current->id = id;
+				current->facing = Commands->Get_Facing(obj);
+				current->position = Commands->Get_Position(obj);
+				return current;
+			}
+			if (current->id == id)
+				return current;
+			if (!current->next)
+			{
+				current->next = new SyncObjectNode(obj);
+				return current->next;
+			}
+			current = current->next;
+		}
+		return NULL;
+	};
+	void checkForPlayersThatLeftTheGame()
+	{
+		for (int x = 1;x < 128;x++)
+		{
+			GameObject *player = Get_GameObj(x);
+			if (!player)
+				syncControl.clientNoLongerSynced(x);
+		}
+	}
+	void triggerSingleNetworkSync()
+	{
+		for (int x = 1;x < 128;x++)
+		{
+			if (syncControl.syncedPlayers[x])
+				continue;
+			GameObject *player = Get_GameObj(x);
+			if (!player)
+				continue;
+			if (!syncControl.lastSyncNode[x])
+				syncControl.lastSyncNode[x] = syncObjectNodeList;
+			if (syncControl.lastSyncNode[x])
+			{
+				if (syncControl.lastSyncNode[x]->id)
+				{
+					GameObject *syncObject = Commands->Find_Object(syncControl.lastSyncNode[x]->id);
+					if (syncObject)
+						Force_Position_Update_Player(player,syncObject);
+				}
+				syncControl.lastSyncNode[x] = syncControl.lastSyncNode[x]->next;
+			}
+			if (!syncControl.lastSyncNode[x])
+				syncControl.syncedPlayers[x] = true;
+		}
+	}
+	void Empty_List()
+	{
+		SyncObjectNode *temp = syncObjectNodeList,*die;
+		while (temp)
+		{
+			die = temp;
+			temp = temp->next;
+			delete die;
+		}
+		syncObjectNodeList = NULL;
+		syncControl = SyncControl();
+	}
 };
 
-class Rp2SimplePositionSystem {
+class Rp2SimplePositionSystem
+{
 public:
-    struct SimplePositionNode {
-        int id;
-        float facing;
-        Vector3 position;
-        int value;
-        struct SimplePositionNode *next;
+	struct SimplePositionNode
+	{
+		int id;
+		float facing;
+		Vector3 position;
+		int value;
+		struct SimplePositionNode *next;
+		SimplePositionNode(GameObject *obj,int value = 0)
+		{
+			this->id = Commands->Get_ID(obj);
+			this->facing = Commands->Get_Facing(obj);
+			this->position = Commands->Get_Position(obj);
+			this->value = value;
+			this->next = NULL;
+		}
+	};
+	SimplePositionNode *SimplePositionNodeList;
+	int ObjectCount;
+	Rp2SimplePositionSystem()
+	{
+		ObjectCount = 0;
+		SimplePositionNodeList = NULL;
+	}
+	Rp2SimplePositionSystem &operator += (GameObject *obj)
+	{
+		int id = Commands->Get_ID(obj);
+		SimplePositionNode *Current = SimplePositionNodeList;
+		if (!SimplePositionNodeList)
+			SimplePositionNodeList = new SimplePositionNode(obj);
+		while (Current)
+		{
+			if (Current->id == id)
+				return *this;
+			if (!Current->next)
+			{
+				Current->next = new SimplePositionNode(obj);
+				break;
+			}
+			Current = Current->next;
+		}
+		ObjectCount++;
+		return *this;
+	};
+	Rp2SimplePositionSystem &operator += (SimplePositionNode *node)
+	{
+		SimplePositionNode *Current = SimplePositionNodeList;
+		if (!SimplePositionNodeList)
+			SimplePositionNodeList = node;
+		while (Current)
+		{
+			if (Current->id == node->id)
+				return *this;
+			if (!Current->next)
+			{
+				Current->next = node;
+				break;
+			}
+			Current = Current->next;
+		}
+		ObjectCount++;
+		return *this;
+	};
+	void Empty_List()
+	{
+		ObjectCount = 0;
+		SimplePositionNode *temp,*die;
+		temp = SimplePositionNodeList;
+		while (temp)
+		{
+			die = temp;
+			temp = temp->next;
+			delete die;
+		}
+		SimplePositionNodeList = NULL;
+	}
+	SimplePositionNode *GetRandomFromGroup(int value)
+	{
+		int random = Commands->Get_Random_Int(0,ObjectCount*2),original;
+		original = random;
+		SimplePositionNode *Current = SimplePositionNodeList;
+		while (Current)
+		{
+			if (random && value == Current->value)
+				random--;
+			if (!random && value == Current->value)
+				return Current;
+			Current = Current->next;
+			if (!Current && original != random && original)
+				Current = SimplePositionNodeList;
+		}
+		return NULL;
+	}
+	SimplePositionNode *GetNextFromGroup(int value,SimplePositionNode *last)
+	{
+		bool found = false;
+		SimplePositionNode *Current = SimplePositionNodeList;
+		while (Current)
+		{
+			if (found && value == Current->value)
+				return Current;
+			if (Current == last && value == Current->value)
+				found = true;
+			Current = Current->next;
+			if (!Current)
+				Current = SimplePositionNodeList;
+		}
+		return NULL;
+	}
+	SimplePositionNode *GetRandom()
+	{
+		int random = Commands->Get_Random_Int(0,ObjectCount*2);
+		SimplePositionNode *Current = SimplePositionNodeList;
+		while (Current)
+		{
+			if (random)
+				random--;
+			if (!random)
+				return Current;
+			Current = Current->next;
+			if (!Current)
+				Current = SimplePositionNodeList;
+		}
+		return NULL;
+	}
+	SimplePositionNode *GetNearest(Vector3 pos)
+	{
+		float LongestDistance = 0;
+		SimplePositionNode *TempObject = NULL;
+		SimplePositionNode *Current = SimplePositionNodeList;
+		while (Current)
+		{
+			float Temp = JmgUtility::SimpleDistance(Current->position,pos);
+			if (!TempObject || Temp < LongestDistance)
+			{
+				TempObject = Current;
+				LongestDistance = Temp;
+			}
+			Current = Current->next;
+		}
+		return TempObject;
+	}
+	SimplePositionNode *GetNearestFromGroup(int groupId,Vector3 pos)
+	{
+		float LongestDistance = 0;
+		SimplePositionNode *TempObject = NULL;
+		SimplePositionNode *Current = SimplePositionNodeList;
+		while (Current)
+		{
+			if (Current->value == groupId)
+			{
+				float Temp = JmgUtility::SimpleDistance(Current->position,pos);
+				if (!TempObject || Temp < LongestDistance)
+				{
+					TempObject = Current;
+					LongestDistance = Temp;
+				}
+			}
+			Current = Current->next;
+		}
+		return TempObject;
+	}
+	Vector3 GetNearestVector(Vector3 pos)
+	{
+		SimplePositionNode *TempObject = GetNearest(pos);
+		if (TempObject)
+			return TempObject->position;
+		return Vector3();
+	}
+	SimplePositionNode *GetNearestFlat(Vector3 pos)
+	{
+		float LongestDistance = 0;
+		SimplePositionNode *TempObject = NULL;
+		SimplePositionNode *Current = SimplePositionNodeList;
+		while (Current)
+		{
+			float Temp = JmgUtility::SimpleFlatDistance(Current->position,pos);
+			if (!TempObject || Temp < LongestDistance)
+			{
+				TempObject = Current;
+				LongestDistance = Temp;
+			}
+			Current = Current->next;
+		}
+		return TempObject;
+	}
+	SimplePositionNode *GetRandom(int minVal)
+	{
+		int repeatLimit = ObjectCount;
+		int random = Commands->Get_Random_Int(0,ObjectCount*2);
+		SimplePositionNode *Current = SimplePositionNodeList;
+		while (Current)
+		{
+			if (random && Current->value <= minVal)
+				random--;
+			if (!random && Current->value <= minVal)
+				return Current;
+			Current = Current->next;
+			if (!Current && repeatLimit)
+			{
+				repeatLimit--;
+				Current = SimplePositionNodeList;
+			}
+		}
+		return NULL;
+	}
+	SimplePositionNode *GetRandomExcluding(SimplePositionNode *node)
+	{
+		int repeatLimit = ObjectCount;
+		int random = Commands->Get_Random_Int(0,ObjectCount*2);
+		SimplePositionNode *Current = SimplePositionNodeList;
+		while (Current)
+		{
+			if (random)
+				random--;
+			if (!random && node != Current)
+				return Current;
+			Current = Current->next;
+			if (!Current && repeatLimit)
+			{
+				repeatLimit--;
+				Current = SimplePositionNodeList;
+			}
+		}
+		return NULL;
+	}
+	SimplePositionNode *GetRandomLowestValue()
+	{
+		int lowest = -1;
+		SimplePositionNode *current = SimplePositionNodeList;
+		while (current)
+		{
+			if (lowest == -1 || current->value <= lowest)
+				lowest = current->value;
+			current = current->next;
+		}
+		int random = Commands->Get_Random_Int(0,ObjectCount*2)+1;
+		int originalRandom = random;
+		current = SimplePositionNodeList;
+		while (current)
+		{
+			if (random && current->value == lowest)
+				random--;
+			if (!random)
+				return current;
+			current = current->next;
+			if (!current && originalRandom != random)
+				current = SimplePositionNodeList;
+		}
+		return NULL;
+	}
+	SimplePositionNode *GetRandomOutsideOfRange(float range,Vector3 pos)
+	{
+		range *= range;
+		SimplePositionNode *current = SimplePositionNodeList;
+		int random = Commands->Get_Random_Int(0,ObjectCount*2)+1;
+		int originalRandom = random;
+		while (current)
+		{
+			if (JmgUtility::SimpleDistance(current->position,pos) > range && random)
+				random--;
+			if (!random)
+				return current;
+			current = current->next;
+			if (!current && originalRandom != random)
+				current = SimplePositionNodeList;
+		}
+		return NULL;
+	}
+	SimplePositionNode *GetRandomOutsideOfRangeInGroup(int value,float range,Vector3 pos)
+	{
+		range *= range;
+		SimplePositionNode *current = SimplePositionNodeList;
+		int random = Commands->Get_Random_Int(0,ObjectCount*2)+1;
+		int originalRandom = random;
+		while (current)
+		{
+			if (current->value == value && JmgUtility::SimpleDistance(current->position,pos) > range && random)
+				random--;
+			if (current->value == value && !random)
+				return current;
+			current = current->next;
+			if (!current && originalRandom != random)
+				current = SimplePositionNodeList;
+		}
+		return NULL;
+	}
+	SimplePositionNode *GetFurthestInGroup(int value,Vector3 pos)
+	{
+		float LongestDistance = 0;
+		SimplePositionNode *TempObject = NULL;
+		SimplePositionNode *Current = SimplePositionNodeList;
+		while (Current)
+		{
+			if (Current->value == value)
+			{
+				float Temp = JmgUtility::SimpleDistance(Current->position,pos);
+				if (!TempObject || Temp > LongestDistance)
+				{
+					TempObject = Current;
+					LongestDistance = Temp;
+				}
+			}
+			Current = Current->next;
+		}
+		return TempObject;
+	}
+	SimplePositionNode *GetRandomInsideOfRangeInGroup(int value,float range,Vector3 pos)
+	{
+		range *= range;
+		SimplePositionNode *current = SimplePositionNodeList;
+		int random = Commands->Get_Random_Int(0,ObjectCount*2)+1;
+		int originalRandom = random;
+		while (current)
+		{
+			if (current->value == value && JmgUtility::SimpleDistance(current->position,pos) <= range && random)
+				random--;
+			if (value && !random)
+				return current;
+			current = current->next;
+			if (!current && originalRandom != random)
+				current = SimplePositionNodeList;
+		}
+		return NULL;
+	}
+	SimplePositionNode *GetLowestValueFurthestFromSpot(Vector3 pos)
+	{
+		int lowest = -1;
+		SimplePositionNode *current = SimplePositionNodeList,*bestNode = NULL;
+		while (current)
+		{
+			if (lowest == -1 || current->value <= lowest)
+				lowest = current->value;
+			current = current->next;
+		}
 
-        SimplePositionNode(GameObject *obj, int value = 0) {
-            this->id = Commands->Get_ID(obj);
-            this->facing = Commands->Get_Facing(obj);
-            this->position = Commands->Get_Position(obj);
-            this->value = value;
-            this->next = NULL;
-        }
-    };
-
-    SimplePositionNode *SimplePositionNodeList;
-    int ObjectCount;
-
-    Rp2SimplePositionSystem() {
-        ObjectCount = 0;
-        SimplePositionNodeList = NULL;
-    }
-
-    Rp2SimplePositionSystem &operator+=(GameObject *obj) {
-        int id = Commands->Get_ID(obj);
-        SimplePositionNode *Current = SimplePositionNodeList;
-        if (!SimplePositionNodeList)
-            SimplePositionNodeList = new SimplePositionNode(obj);
-        while (Current) {
-            if (Current->id == id)
-                return *this;
-            if (!Current->next) {
-                Current->next = new SimplePositionNode(obj);
-                break;
-            }
-            Current = Current->next;
-        }
-        ObjectCount++;
-        return *this;
-    };
-
-    Rp2SimplePositionSystem &operator+=(SimplePositionNode *node) {
-        SimplePositionNode *Current = SimplePositionNodeList;
-        if (!SimplePositionNodeList)
-            SimplePositionNodeList = node;
-        while (Current) {
-            if (Current->id == node->id)
-                return *this;
-            if (!Current->next) {
-                Current->next = node;
-                break;
-            }
-            Current = Current->next;
-        }
-        ObjectCount++;
-        return *this;
-    };
-
-    void Empty_List() {
-        ObjectCount = 0;
-        SimplePositionNode *temp, *die;
-        temp = SimplePositionNodeList;
-        while (temp) {
-            die = temp;
-            temp = temp->next;
-            delete die;
-        }
-        SimplePositionNodeList = NULL;
-    }
-
-    SimplePositionNode *GetRandomFromGroup(int value) {
-        int random = Commands->Get_Random_Int(0, ObjectCount * 2), original;
-        original = random;
-        SimplePositionNode *Current = SimplePositionNodeList;
-        while (Current) {
-            if (random && value == Current->value)
-                random--;
-            if (!random && value == Current->value)
-                return Current;
-            Current = Current->next;
-            if (!Current && original != random && original)
-                Current = SimplePositionNodeList;
-        }
-        return NULL;
-    }
-
-    SimplePositionNode *GetNextFromGroup(int value, SimplePositionNode *last) {
-        bool found = false;
-        SimplePositionNode *Current = SimplePositionNodeList;
-        while (Current) {
-            if (found && value == Current->value)
-                return Current;
-            if (Current == last && value == Current->value)
-                found = true;
-            Current = Current->next;
-            if (!Current)
-                Current = SimplePositionNodeList;
-        }
-        return NULL;
-    }
-
-    SimplePositionNode *GetRandom() {
-        int random = Commands->Get_Random_Int(0, ObjectCount * 2);
-        SimplePositionNode *Current = SimplePositionNodeList;
-        while (Current) {
-            if (random)
-                random--;
-            if (!random)
-                return Current;
-            Current = Current->next;
-            if (!Current)
-                Current = SimplePositionNodeList;
-        }
-        return NULL;
-    }
-
-    SimplePositionNode *GetNearest(Vector3 pos) {
-        float LongestDistance = 0;
-        SimplePositionNode *TempObject = NULL;
-        SimplePositionNode *Current = SimplePositionNodeList;
-        while (Current) {
-            float Temp = JmgUtility::SimpleDistance(Current->position, pos);
-            if (!TempObject || Temp < LongestDistance) {
-                TempObject = Current;
-                LongestDistance = Temp;
-            }
-            Current = Current->next;
-        }
-        return TempObject;
-    }
-
-    SimplePositionNode *GetNearestFromGroup(int groupId, Vector3 pos) {
-        float LongestDistance = 0;
-        SimplePositionNode *TempObject = NULL;
-        SimplePositionNode *Current = SimplePositionNodeList;
-        while (Current) {
-            if (Current->value == groupId) {
-                float Temp = JmgUtility::SimpleDistance(Current->position, pos);
-                if (!TempObject || Temp < LongestDistance) {
-                    TempObject = Current;
-                    LongestDistance = Temp;
-                }
-            }
-            Current = Current->next;
-        }
-        return TempObject;
-    }
-
-    Vector3 GetNearestVector(Vector3 pos) {
-        SimplePositionNode *TempObject = GetNearest(pos);
-        if (TempObject)
-            return TempObject->position;
-        return Vector3();
-    }
-
-    SimplePositionNode *GetNearestFlat(Vector3 pos) {
-        float LongestDistance = 0;
-        SimplePositionNode *TempObject = NULL;
-        SimplePositionNode *Current = SimplePositionNodeList;
-        while (Current) {
-            float Temp = JmgUtility::SimpleFlatDistance(Current->position, pos);
-            if (!TempObject || Temp < LongestDistance) {
-                TempObject = Current;
-                LongestDistance = Temp;
-            }
-            Current = Current->next;
-        }
-        return TempObject;
-    }
-
-    SimplePositionNode *GetRandom(int minVal) {
-        int repeatLimit = ObjectCount;
-        int random = Commands->Get_Random_Int(0, ObjectCount * 2);
-        SimplePositionNode *Current = SimplePositionNodeList;
-        while (Current) {
-            if (random && Current->value <= minVal)
-                random--;
-            if (!random && Current->value <= minVal)
-                return Current;
-            Current = Current->next;
-            if (!Current && repeatLimit) {
-                repeatLimit--;
-                Current = SimplePositionNodeList;
-            }
-        }
-        return NULL;
-    }
-
-    SimplePositionNode *GetRandomExcluding(SimplePositionNode *node) {
-        int repeatLimit = ObjectCount;
-        int random = Commands->Get_Random_Int(0, ObjectCount * 2);
-        SimplePositionNode *Current = SimplePositionNodeList;
-        while (Current) {
-            if (random)
-                random--;
-            if (!random && node != Current)
-                return Current;
-            Current = Current->next;
-            if (!Current && repeatLimit) {
-                repeatLimit--;
-                Current = SimplePositionNodeList;
-            }
-        }
-        return NULL;
-    }
-
-    SimplePositionNode *GetRandomLowestValue() {
-        int lowest = -1;
-        SimplePositionNode *current = SimplePositionNodeList;
-        while (current) {
-            if (lowest == -1 || current->value <= lowest)
-                lowest = current->value;
-            current = current->next;
-        }
-        int random = Commands->Get_Random_Int(0, ObjectCount * 2) + 1;
-        int originalRandom = random;
-        current = SimplePositionNodeList;
-        while (current) {
-            if (random && current->value == lowest)
-                random--;
-            if (!random)
-                return current;
-            current = current->next;
-            if (!current && originalRandom != random)
-                current = SimplePositionNodeList;
-        }
-        return NULL;
-    }
-
-    SimplePositionNode *GetRandomOutsideOfRange(float range, Vector3 pos) {
-        range *= range;
-        SimplePositionNode *current = SimplePositionNodeList;
-        int random = Commands->Get_Random_Int(0, ObjectCount * 2) + 1;
-        int originalRandom = random;
-        while (current) {
-            if (JmgUtility::SimpleDistance(current->position, pos) > range && random)
-                random--;
-            if (!random)
-                return current;
-            current = current->next;
-            if (!current && originalRandom != random)
-                current = SimplePositionNodeList;
-        }
-        return NULL;
-    }
-
-    SimplePositionNode *GetRandomOutsideOfRangeInGroup(int value, float range, Vector3 pos) {
-        range *= range;
-        SimplePositionNode *current = SimplePositionNodeList;
-        int random = Commands->Get_Random_Int(0, ObjectCount * 2) + 1;
-        int originalRandom = random;
-        while (current) {
-            if (current->value == value && JmgUtility::SimpleDistance(current->position, pos) > range && random)
-                random--;
-            if (current->value == value && !random)
-                return current;
-            current = current->next;
-            if (!current && originalRandom != random)
-                current = SimplePositionNodeList;
-        }
-        return NULL;
-    }
-
-    SimplePositionNode *GetFurthestInGroup(int value, Vector3 pos) {
-        float LongestDistance = 0;
-        SimplePositionNode *TempObject = NULL;
-        SimplePositionNode *Current = SimplePositionNodeList;
-        while (Current) {
-            if (Current->value == value) {
-                float Temp = JmgUtility::SimpleDistance(Current->position, pos);
-                if (!TempObject || Temp > LongestDistance) {
-                    TempObject = Current;
-                    LongestDistance = Temp;
-                }
-            }
-            Current = Current->next;
-        }
-        return TempObject;
-    }
-
-    SimplePositionNode *GetRandomInsideOfRangeInGroup(int value, float range, Vector3 pos) {
-        range *= range;
-        SimplePositionNode *current = SimplePositionNodeList;
-        int random = Commands->Get_Random_Int(0, ObjectCount * 2) + 1;
-        int originalRandom = random;
-        while (current) {
-            if (current->value == value && JmgUtility::SimpleDistance(current->position, pos) <= range && random)
-                random--;
-            if (value && !random)
-                return current;
-            current = current->next;
-            if (!current && originalRandom != random)
-                current = SimplePositionNodeList;
-        }
-        return NULL;
-    }
-
-    SimplePositionNode *GetLowestValueFurthestFromSpot(Vector3 pos) {
-        int lowest = -1;
-        SimplePositionNode *current = SimplePositionNodeList, *bestNode = NULL;
-        while (current) {
-            if (lowest == -1 || current->value <= lowest)
-                lowest = current->value;
-            current = current->next;
-        }
-
-        current = SimplePositionNodeList;
-        float dist = 0;
-        while (current) {
-            float tempDist = JmgUtility::SimpleDistance(pos, current->position);
-            if (!bestNode || tempDist > dist) {
-                bestNode = current;
-                dist = tempDist;
-            }
-            current = current->next;
-        }
-        return bestNode;
-    }
-
-    SimplePositionNode *GetSpotNotVisibileFromSpot(Vector3 pos);
-
-    SimplePositionNode *GetNonVisibleSpotFromPlayers(int value);
-
-    SimplePositionNode *GetFurthestSpotFromPlayers(int value) {
-        SimplePositionNode *current = SimplePositionNodeList, *bestNode = NULL;
-        float dist = 0;
-        while (current) {
-            if (current->value == value) {
-                GameObject * player = Commands->Get_A_Star(current->position);
-                if (!player)
-                    continue;
-                float tempDist = JmgUtility::SimpleDistance(Commands->Get_Position(player), current->position);
-                if (!bestNode || tempDist > dist) {
-                    bestNode = current;
-                    dist = tempDist;
-                }
-            }
-            current = current->next;
-        }
-        return bestNode;
-    }
-
-    void DecreaseValue() {
-        SimplePositionNode *Current = SimplePositionNodeList;
-        while (Current) {
-            if (Current->value)
-                Current->value--;
-            Current = Current->next;
-        }
-    }
+		current = SimplePositionNodeList;
+		float dist = 0;
+		while (current)
+		{
+			float tempDist = JmgUtility::SimpleDistance(pos,current->position);
+			if (!bestNode || tempDist > dist)
+			{
+				bestNode = current;
+				dist = tempDist;
+			}
+			current = current->next;
+		}
+		return bestNode;
+	}
+	SimplePositionNode *GetSpotNotVisibileFromSpot(Vector3 pos);
+	SimplePositionNode *GetNonVisibleSpotFromPlayers(int value);
+	SimplePositionNode *GetFurthestSpotFromPlayers(int value)
+	{
+		SimplePositionNode *current = SimplePositionNodeList,*bestNode = NULL;
+		float dist = 0;
+		while (current)
+		{
+			if (current->value == value)
+			{
+				GameObject *player = Commands->Get_A_Star(current->position);
+				if (!player)
+					continue;
+				float tempDist = JmgUtility::SimpleDistance(Commands->Get_Position(player),current->position);
+				if (!bestNode || tempDist > dist)
+				{
+					bestNode = current;
+					dist = tempDist;
+				}
+			}
+			current = current->next;
+		}
+		return bestNode;
+	}
+	void DecreaseValue()
+	{
+		SimplePositionNode *Current = SimplePositionNodeList;
+		while (Current)
+		{
+			if (Current->value)
+				Current->value--;
+			Current = Current->next;
+		}
+	}
 };
-
 /*!
 * \brief An object that will have its position synced by JMG_Utility_Sync_System_Controller
 * \author jgray
 * \ingroup JmgUtility
 */
-class JMG_Utility_Sync_System_Object : public ScriptImpClass {
-    ClientNetworkObjectPositionSync::SyncObjectNode *syncNode;
-
-    void Created(GameObject *obj);
-
-    void Timer_Expired(GameObject *obj, int number);
-
-    void Killed(GameObject *obj, GameObject *killer);
-
-    void Destroyed(GameObject *obj);
-
-    void Detach(GameObject *obj);
-
+class JMG_Utility_Sync_System_Object : public ScriptImpClass
+{
+	ClientNetworkObjectPositionSync::SyncObjectNode *syncNode;
+	void Created(GameObject *obj);
+	void Timer_Expired(GameObject *obj,int number);
+	void Killed(GameObject *obj,GameObject *killer);
+	void Destroyed(GameObject *obj);
+	void Detach(GameObject *obj);
 public:
-    JMG_Utility_Sync_System_Object() {
-        syncNode = NULL;
-    }
+	JMG_Utility_Sync_System_Object()
+	{
+		syncNode = NULL;
+	}
 };
 
 /*!
@@ -2064,17 +2048,14 @@ public:
 * \author jgray
 * \ingroup JmgUtility
 */
-class JMG_Utility_Sync_System_Controller : public ScriptImpClass {
-    void Created(GameObject *obj);
-
-    void Timer_Expired(GameObject *obj, int number);
-
-    void Destroyed(GameObject *obj);
-
-    void Detach(GameObject *obj);
-
+class JMG_Utility_Sync_System_Controller : public ScriptImpClass
+{
+	void Created(GameObject *obj);
+	void Timer_Expired(GameObject *obj,int number);
+	void Destroyed(GameObject *obj);
+	void Detach(GameObject *obj);
 public:
-    JMG_Utility_Sync_System_Controller();
+	JMG_Utility_Sync_System_Controller();
 };
 
 /*!
@@ -2083,10 +2064,10 @@ public:
 * \author jgray
 * \ingroup JmgUtility
 */
-class JMG_Utility_Sync_Object_Periodically : public ScriptImpClass {
-    void Created(GameObject *obj);
-
-    void Timer_Expired(GameObject *obj, int number);
+class JMG_Utility_Sync_Object_Periodically : public ScriptImpClass
+{
+	void Created(GameObject *obj);
+	void Timer_Expired(GameObject *obj,int number);
 };
 
 /*!
@@ -2102,63 +2083,61 @@ class JMG_Utility_Sync_Object_Periodically : public ScriptImpClass {
 * \author jgray
 * \ingroup JmgUtility
 */
-class JMG_Utility_Basic_Spawner : public ScriptImpClass {
-    int spawnLimit;
-    int spawnedId;
-    bool enabled;
-    float respawnTime;
-    int attachScriptsGroupId;
-
-    void Created(GameObject *obj);
-
-    void Timer_Expired(GameObject *obj, int number);
-
-    void Custom(GameObject *obj, int message, int param, GameObject *sender);
-
-    void CalculateRespawnTime();
-
+class JMG_Utility_Basic_Spawner : public ScriptImpClass
+{
+	int spawnLimit;
+	int spawnedId;
+	bool enabled;
+	float respawnTime;
+	int attachScriptsGroupId;
+	void Created(GameObject *obj);
+	void Timer_Expired(GameObject *obj,int number);
+	void Custom(GameObject *obj,int message,int param,GameObject *sender);
+	void CalculateRespawnTime();
 public:
-    static Vector3 preSpawnLocation;
+	static Vector3 preSpawnLocation;
 };
 
-class JMG_Utility_Basic_Spawner_Spawned_Object : public ScriptImpClass {
-    void Destroyed(GameObject *obj);
+class JMG_Utility_Basic_Spawner_Spawned_Object : public ScriptImpClass
+{
+	void Destroyed(GameObject *obj);
 };
 
-struct JMGVehicleAction {
-    int targetId;
-    Vector3 position;
-    int useAmmo;
-    bool backward;
-    bool following;
-    float arriveDistance;
-
-    JMGVehicleAction() {
-        targetId = 0;
-        useAmmo = 0;
-        position = Vector3();
-        backward = false;
-        following = false;
-        arriveDistance = 0.0f;
-    }
-
-    bool operator==(JMGVehicleAction jva) {
-        return (targetId == jva.targetId && position == jva.position && useAmmo == jva.useAmmo);
-    }
-
-    bool operator!=(JMGVehicleAction jva) {
-        return (!(*this == jva));
-    }
-
-    JMGVehicleAction &operator=(JMGVehicleAction jva) {
-        targetId = jva.targetId;
-        useAmmo = jva.useAmmo;
-        position = jva.position;
-        backward = jva.backward;
-        following = jva.following;
-        arriveDistance = jva.arriveDistance;
-        return *this;
-    }
+struct JMGVehicleAction
+{
+	int targetId;
+	Vector3 position;
+	int useAmmo;
+	bool backward;
+	bool following;
+	float arriveDistance;
+	JMGVehicleAction()
+	{
+		targetId = 0;
+		useAmmo = 0;
+		position = Vector3();
+		backward = false;
+		following = false;
+		arriveDistance = 0.0f;
+	}
+	bool operator == (JMGVehicleAction jva)
+	{
+		return (targetId == jva.targetId && position == jva.position && useAmmo == jva.useAmmo);
+	}
+	bool operator != (JMGVehicleAction jva)
+	{
+		return (!(*this == jva));
+	}
+	JMGVehicleAction &operator = (JMGVehicleAction jva)
+	{
+		targetId = jva.targetId;
+		useAmmo = jva.useAmmo;
+		position = jva.position;
+		backward = jva.backward;
+		following = jva.following;
+		arriveDistance = jva.arriveDistance;
+		return *this;
+	}
 };
 
 
@@ -2189,200 +2168,181 @@ struct JMGVehicleAction {
 * \ingroup JmgUtility
 */
 class JMG_Utility_AI_Vehicle : public ScriptImpClass {
-    struct JMGVehicleAmmo {
-        bool allowError;
-        float range;
-        float speed;
-
-        JMGVehicleAmmo() {
-            allowError = false;
-            range = 0.0f;
-            speed = 400.0f;
-        }
-    };
-
-    JMGVehicleAmmo primary;
-    JMGVehicleAmmo secondary;
-    JMGVehicleAction currentAction;
-    JMGVehicleAction lastAction;
-    bool overrideFireMode;
-    bool overridePrimary;
-    int retreatTime;
-    int lastSeenCount;
-    int reverseTime;
-    int stuckCount;
-    int useAmmo;
-    int doNotUsePathfind;
-    float lastHealth;
-    float minDistanceSquared;
-    bool moving;
-    bool attacking;
-    int badDestAttempt;
-    Vector3 mypos;
-    Vector3 homepos;
-    Vector3 retreatPos;
-    int myteam;
-    bool inRange;
-    bool drivingBackward;
-    bool firstRetreat;
-    float maxHuntRangeSquared;
-    Vector3 lastWanderPointSpot;
-    float grabNextPointDistance;
-    float retreatDistanceSquared;
-
-    void Created(GameObject *obj);
-
-    void Action_Complete(GameObject *obj, int action, ActionCompleteReason reason);
-
-    void Custom(GameObject *obj, int message, int param, GameObject *sender);
-
-    void Enemy_Seen(GameObject *obj, GameObject *seen);
-
-    void Damaged(GameObject *obj, GameObject *damager, float damage);
-
-    void Timer_Expired(GameObject *obj, int number);
-
-    void RunAttack(GameObject *obj, GameObject *target);
-
-    int GetThreatRating(GameObject *obj);
-
-    GameObject *GetAttackObject(GameObject *obj);
-
-    GameObject *SelectTarget(GameObject *obj, GameObject *target);
-
-    GameObject *SetTarget(GameObject *target);
-
-    GameObject *GetClosest(GameObject *obj, GameObject *new_target, GameObject *old_target);
-
-    int SelectAmmo(GameObject *target);
-
-    void StuckCheck(GameObject *obj);
-
-    void ReturnHome(GameObject *obj);
-
-    void AttackMove(GameObject *obj, GameObject *target, bool followTarget, Vector3 targetLocation, int fireMode,
-                    float weaponError, bool forceUpdate, float arriveDistance);
-
-    JMGVehicleAmmo DefineAmmo(const AmmoDefinitionClass *ammo);
-
-    bool GetRandomPosition(Vector3 *position);
-
-    bool GetRandomPositionOutsideOfRange(Vector3 *position);
+	struct JMGVehicleAmmo
+	{
+		bool allowError;
+		float range;
+		float speed;
+		JMGVehicleAmmo()
+		{
+			allowError = false;
+			range = 0.0f;
+			speed = 400.0f;
+		}
+	};
+	JMGVehicleAmmo primary;
+	JMGVehicleAmmo secondary;
+	JMGVehicleAction currentAction;
+	JMGVehicleAction lastAction;
+	bool overrideFireMode;
+	bool overridePrimary;
+	int retreatTime;
+	int lastSeenCount;
+	int reverseTime;
+	int stuckCount;
+	int useAmmo;
+	int doNotUsePathfind;
+	float lastHealth;
+	float minDistanceSquared;
+	bool moving;
+	bool attacking;
+	int badDestAttempt;
+	Vector3 mypos;
+	Vector3 homepos;
+	Vector3 retreatPos;
+	int myteam;
+	bool inRange;
+	bool drivingBackward;
+	bool firstRetreat;
+	float maxHuntRangeSquared;
+	Vector3 lastWanderPointSpot;
+	float grabNextPointDistance;
+	float retreatDistanceSquared;
+	void Created(GameObject *obj);
+	void Action_Complete(GameObject *obj,int action,ActionCompleteReason reason);
+	void Custom(GameObject *obj,int message,int param,GameObject *sender);
+	void Enemy_Seen(GameObject *obj,GameObject *seen);
+	void Damaged(GameObject *obj,GameObject *damager,float damage);
+	void Timer_Expired(GameObject *obj,int number);
+	void RunAttack(GameObject *obj,GameObject *target);
+	int GetThreatRating(GameObject * obj);
+	GameObject *GetAttackObject(GameObject * obj);
+	GameObject *SelectTarget(GameObject *obj,GameObject *target);
+	GameObject *SetTarget(GameObject *target);
+	GameObject *GetClosest(GameObject *obj,GameObject *new_target,GameObject *old_target);
+	int SelectAmmo(GameObject *target);
+	void StuckCheck(GameObject *obj);
+	void ReturnHome(GameObject * obj);
+	void AttackMove(GameObject *obj,GameObject *target,bool followTarget,Vector3 targetLocation,int fireMode,float weaponError,bool forceUpdate,float arriveDistance);
+	JMGVehicleAmmo DefineAmmo(const AmmoDefinitionClass *ammo);
+	bool GetRandomPosition(Vector3 *position);
+	bool GetRandomPositionOutsideOfRange(Vector3 *position);
 };
 
-class DynamicClockSystem {
+class DynamicClockSystem
+{
 public:
-    struct DynamicClockSystemNode {
-        int clockId;
-        GameObject *clock;
-        bool alarmSet;
-        int alarmHour;
-        int alarmMinute;
-        int alarmSounding;
-        struct DynamicClockSystemNode *next;
-
-        DynamicClockSystemNode(GameObject *obj) {
-            clockId = Commands->Get_ID(obj);
-            clock = obj;
-            alarmSet = false;
-            alarmHour = 12;
-            alarmMinute = 0;
-            alarmSounding = 0;
-            next = NULL;
-        }
-    };
-
+	struct DynamicClockSystemNode
+	{
+		int clockId;
+		GameObject *clock;
+		bool alarmSet;
+		int alarmHour;
+		int alarmMinute;
+		int alarmSounding;
+		struct DynamicClockSystemNode *next;
+		DynamicClockSystemNode(GameObject *obj)
+		{
+			clockId = Commands->Get_ID(obj);
+			clock = obj;
+			alarmSet = false;
+			alarmHour = 12;
+			alarmMinute = 0;
+			alarmSounding = 0;
+			next = NULL;
+		}
+	};
 private:
-    bool HasLoaded;
-    struct DynamicClockSystemNode *DynamicClockSystemNodeList;
+	bool HasLoaded;
+	struct DynamicClockSystemNode *DynamicClockSystemNodeList;
 public:
-    DynamicClockSystem() {
-        HasLoaded = false;
-        DynamicClockSystemNodeList = NULL;
-    }
-
-    DynamicClockSystem &operator+=(GameObject *obj) {
-        DynamicClockSystemNode *Current = DynamicClockSystemNodeList;
-        if (!DynamicClockSystemNodeList)
-            DynamicClockSystemNodeList = new DynamicClockSystemNode(obj);
-        while (Current) {
-            if (Current->clock == obj)
-                return *this;
-            if (!Current->clock) {
-                Current->clockId = Commands->Get_ID(obj);
-                Current->clock = obj;
-                return *this;
-            }
-            if (!Current->next) {
-                Current->next = new DynamicClockSystemNode(obj);
-                return *this;
-            }
-            Current = Current->next;
-        }
-        return *this;
-    }
-
-    DynamicClockSystem &operator-=(GameObject *obj) {
-        if (!DynamicClockSystemNodeList)
-            return *this;
-        DynamicClockSystemNode *Current = DynamicClockSystemNodeList;
-        while (Current) {
-            if (Current->clock == obj) {
-                Current->clock = NULL;
-                break;
-            }
-            Current = Current->next;
-        }
-        return *this;
-    }
-
-    void emptyList() {
-        HasLoaded = false;
-        DynamicClockSystemNode *temp, *die;
-        temp = DynamicClockSystemNodeList;
-        while (temp) {
-            die = temp;
-            temp = temp->next;
-            delete die;
-        }
-        DynamicClockSystemNodeList = NULL;
-    }
-
-    inline void updateClocks() {
-        time_t t = time(0);
-        struct tm *ptm = localtime(&t);
-        int curTime = ptm->tm_hour % 24;
-        curTime = (curTime < 0 ? curTime + 24 : curTime);
-        float frame = (curTime * 60.0f + ptm->tm_min);
-        DynamicClockSystemNode *Current = DynamicClockSystemNodeList;
-        while (Current) {
-            if (Current->clock)
-                Commands->Set_Animation(Current->clock, "s_ecwClock.a_ecwClock", false, 0, frame, frame, true);
-            Current = Current->next;
-        }
-    }
+	DynamicClockSystem()
+	{
+		HasLoaded = false;
+		DynamicClockSystemNodeList = NULL;
+	}
+	DynamicClockSystem &operator += (GameObject *obj)
+	{
+		DynamicClockSystemNode *Current = DynamicClockSystemNodeList;
+		if (!DynamicClockSystemNodeList)
+			DynamicClockSystemNodeList = new DynamicClockSystemNode(obj);
+		while (Current)
+		{
+			if (Current->clock == obj)
+				return *this;
+			if (!Current->clock)
+			{
+				Current->clockId = Commands->Get_ID(obj);
+				Current->clock = obj;
+				return *this;
+			}
+			if (!Current->next)
+			{
+				Current->next = new DynamicClockSystemNode(obj);
+				return *this;
+			}
+			Current = Current->next;
+		}
+		return *this;
+	}
+	DynamicClockSystem &operator -= (GameObject *obj)
+	{
+		if (!DynamicClockSystemNodeList)
+			return *this;
+		DynamicClockSystemNode *Current = DynamicClockSystemNodeList;
+		while (Current)
+		{
+			if (Current->clock == obj)
+			{
+				Current->clock = NULL;
+				break;
+			}
+			Current = Current->next;
+		}
+		return *this;
+	}
+	void emptyList()
+	{
+		HasLoaded = false;
+		DynamicClockSystemNode *temp,*die;
+		temp = DynamicClockSystemNodeList;
+		while (temp)
+		{
+			die = temp;
+			temp = temp->next;
+			delete die;
+		}
+		DynamicClockSystemNodeList = NULL;
+	}
+	inline void updateClocks()
+	{
+		time_t t = time(0);
+		struct tm *ptm = localtime(&t);
+		int curTime = ptm->tm_hour%24;
+		curTime = (curTime < 0 ? curTime+24 : curTime);
+		float frame = (curTime*60.0f+ptm->tm_min);
+		DynamicClockSystemNode *Current = DynamicClockSystemNodeList;
+		while (Current)
+		{
+			if (Current->clock)
+				Commands->Set_Animation(Current->clock,"s_ecwClock.a_ecwClock",false,0,frame,frame,true);
+			Current = Current->next;
+		}
+	}
 };
-
 class JMG_Utility_Dynamic_Clock_Control : public ScriptImpClass {
-    int lastMinute;
-
-    void Created(GameObject *obj);
-
-    void Timer_Expired(GameObject *obj, int number);
-
-    void Destroyed(GameObject *obj);
-
-    int getMinute();
+	int lastMinute;
+	void Created(GameObject *obj);
+	void Timer_Expired(GameObject *obj,int number);
+	void Destroyed(GameObject *obj);
+	int getMinute();
 };
 
 class JMG_Utility_Dynamic_Clock_Object : public ScriptImpClass {
-    int animSynced[128];
-
-    void Created(GameObject *obj);
-
-    void Timer_Expired(GameObject *obj, int number);
-
-    void Destroyed(GameObject *obj);
+	int animSynced[128];
+	void Created(GameObject *obj);
+	void Timer_Expired(GameObject *obj,int number);
+	void Destroyed(GameObject *obj);
 };
 
 /*!
@@ -2395,9 +2355,8 @@ class JMG_Utility_Dynamic_Clock_Object : public ScriptImpClass {
 * \ingroup JmgUtility
 */
 class JMG_Utility_Change_Screen_Color_While_In_Zone : public ScriptImpClass {
-    void Entered(GameObject *obj, GameObject *enterer);
-
-    void Exited(GameObject *obj, GameObject *exiter);
+	void Entered(GameObject *obj,GameObject *enterer);
+	void Exited(GameObject *obj,GameObject *exiter);
 };
 
 /*!
@@ -2405,8 +2364,9 @@ class JMG_Utility_Change_Screen_Color_While_In_Zone : public ScriptImpClass {
 * \author jgray
 * \ingroup JmgUtility
 */
-class JMG_Utility_Reset_Screen_Color_When_Destroyed : public ScriptImpClass {
-    void Destroyed(GameObject *obj);
+class JMG_Utility_Reset_Screen_Color_When_Destroyed : public ScriptImpClass
+{
+  void Destroyed(GameObject *obj);
 };
 
 /*!
@@ -2416,21 +2376,15 @@ class JMG_Utility_Reset_Screen_Color_When_Destroyed : public ScriptImpClass {
 * \ingroup JmgUtility
 */
 class JMG_Utility_Play_Music_On_Join_Controller : public ScriptImpClass {
-    bool playingMusic[128];
-
-    void Created(GameObject *obj);
-
-    void Timer_Expired(GameObject *obj, int number);
-
-    void Destroyed(GameObject *obj);
-
-    void Detach(GameObject *obj);
-
-    static char musicFileName[256];
+	bool playingMusic[128];
+	void Created(GameObject *obj);
+	void Timer_Expired(GameObject *obj,int number);
+	void Destroyed(GameObject *obj);
+	void Detach(GameObject *obj);
+	static char musicFileName[256];
 public:
-    static bool controllerPlaced;
-
-    SCRIPTS_API static void Set_Music(const char *musicFilName, int fadeOut, int fadeIn);
+	static bool controllerPlaced;
+	SCRIPTS_API static void Set_Music(const char *musicFilName,int fadeOut,int fadeIn);
 };
 
 /*!
@@ -2442,7 +2396,7 @@ public:
 * \ingroup JmgUtility
 */
 class JMG_Utility_Play_Music_On_Join_Change_Music : public ScriptImpClass {
-    void Created(GameObject *obj);
+	void Created(GameObject *obj);
 };
 
 /*!
@@ -2477,20 +2431,15 @@ class JMG_Utility_Play_Music_On_Join_Change_Music : public ScriptImpClass {
 * \ingroup JmgUtility
 */
 class JMG_Utility_Toggle_Door : public ScriptImpClass {
-    float preDamagedFrame;
-    char originalModel[16];
-    bool open;
-    bool enabled;
-
-    void Created(GameObject *obj);
-
-    void Poked(GameObject *obj, GameObject *poker);
-
-    void Damaged(GameObject *obj, GameObject *damager, float damage);
-
-    void Custom(GameObject *obj, int message, int param, GameObject *sender);
-
-    void SendCustom(GameObject *obj, int param);
+	float preDamagedFrame;
+	char originalModel[16];
+	bool open;
+	bool enabled;
+	void Created(GameObject *obj);
+	void Poked(GameObject *obj,GameObject *poker);
+	void Damaged(GameObject *obj,GameObject *damager,float damage);
+	void Custom(GameObject *obj,int message,int param,GameObject *sender);
+	void SendCustom(GameObject *obj,int param);
 };
 
 /*!
@@ -2501,7 +2450,7 @@ class JMG_Utility_Toggle_Door : public ScriptImpClass {
 * \ingroup JmgUtility
 */
 class JMG_Utility_Set_Animation_Frame_On_Creation : public ScriptImpClass {
-    void Created(GameObject *obj);
+	void Created(GameObject *obj);
 };
 
 /*!
@@ -2513,14 +2462,11 @@ class JMG_Utility_Set_Animation_Frame_On_Creation : public ScriptImpClass {
 * \ingroup JmgUtility
 */
 class JMG_Utility_Set_Model_On_Damage_Percent_3_States : public ScriptImpClass {
-    int damageState;
-    float healthThresholds[3];
-
-    void Created(GameObject *obj);
-
-    void Damaged(GameObject *obj, GameObject *damager, float damage);
-
-    void SetModel(GameObject *obj);
+	int damageState;
+	float healthThresholds[3];
+	void Created(GameObject *obj);
+	void Damaged(GameObject *obj,GameObject *damager,float damage);
+	void SetModel(GameObject *obj);
 };
 
 /*!
@@ -2533,14 +2479,11 @@ class JMG_Utility_Set_Model_On_Damage_Percent_3_States : public ScriptImpClass {
 * \ingroup JmgUtility
 */
 class JMG_Utility_Set_Model_On_Damage_Percent_4_States : public ScriptImpClass {
-    int damageState;
-    float healthThresholds[4];
-
-    void Created(GameObject *obj);
-
-    void Damaged(GameObject *obj, GameObject *damager, float damage);
-
-    void SetModel(GameObject *obj);
+	int damageState;
+	float healthThresholds[4];
+	void Created(GameObject *obj);
+	void Damaged(GameObject *obj,GameObject *damager,float damage);
+	void SetModel(GameObject *obj);
 };
 
 /*!
@@ -2549,12 +2492,10 @@ class JMG_Utility_Set_Model_On_Damage_Percent_4_States : public ScriptImpClass {
 * \ingroup JmgUtility
 */
 class JMG_Utility_PCT : public ScriptImpClass {
-    void Created(GameObject *obj);
-
-    void Poked(GameObject *obj, GameObject *poker);
-
+	void Created(GameObject *obj);
+	void Poked(GameObject *obj, GameObject *poker);
 public:
-    static int pctInaccessible[128];
+	static int pctInaccessible[128];
 };
 
 /*!
@@ -2563,9 +2504,8 @@ public:
 * \ingroup JmgUtility
 */
 class JMG_Utility_PCT_Inaccessible_Zone : public ScriptImpClass {
-    void Entered(GameObject *obj, GameObject *enterer);
-
-    void Exited(GameObject *obj, GameObject *exiter);
+	void Entered(GameObject *obj,GameObject *enterer);
+	void Exited(GameObject *obj,GameObject *exiter);
 };
 
 /*!
@@ -2574,9 +2514,8 @@ class JMG_Utility_PCT_Inaccessible_Zone : public ScriptImpClass {
 * \ingroup JmgUtility
 */
 class JMG_Utility_PCT_Inaccessible_Zone_Attach : public ScriptImpClass {
-    void Destroyed(GameObject *obj);
+	void Destroyed(GameObject *obj);
 };
-
 /*!
 * \brief Displays a hud message to all players on custom, allows user to override string with custom string
 * \Custom - Custom message to trigger the script on
@@ -2587,7 +2526,7 @@ class JMG_Utility_PCT_Inaccessible_Zone_Attach : public ScriptImpClass {
 * \ingroup JmgUtility
 */
 class JMG_Utility_Display_HUD_Info_Text_All_Players_Custom_Replace_String : public ScriptImpClass {
-    void Custom(GameObject *obj, int message, int param, GameObject *sender);
+	void Custom(GameObject *obj,int message,int param,GameObject *sender);
 };
 
 /*!
@@ -2599,7 +2538,7 @@ class JMG_Utility_Display_HUD_Info_Text_All_Players_Custom_Replace_String : publ
 * \ingroup JmgUtility
 */
 class JMG_Utility_Display_Text_Message_To_All_Players_On_Custom : public ScriptImpClass {
-    void Custom(GameObject *obj, int message, int param, GameObject *sender);
+	void Custom(GameObject *obj,int message,int param,GameObject *sender);
 };
 
 /*!
@@ -2610,9 +2549,8 @@ class JMG_Utility_Display_Text_Message_To_All_Players_On_Custom : public ScriptI
 * \ingroup JmgUtility
 */
 class JMG_Utility_Set_Team_On_Create : public ScriptImpClass {
-    void Created(GameObject *obj);
-
-    void Timer_Expired(GameObject *obj, int number);
+	void Created(GameObject *obj);
+	void Timer_Expired(GameObject *obj,int number);
 };
 
 /*!
@@ -2630,48 +2568,43 @@ class JMG_Utility_Set_Team_On_Create : public ScriptImpClass {
 * \ingroup JmgUtility
 */
 class JMG_Utility_AI_Aggressive_Melee : public ScriptImpClass {
-    float noPathfindRange;
-    int LastSeen;
-    int lastSeenSecondary;
-    int currentTargetID;
-    int secondaryTargetId;
-    int huntorattack;
-    int waitcount;
-    Vector3 homelocation;
-    float speed;
-    int minVisibilityTime;
-    int maxVisibilityTime;
-    float maxHuntDistance;
-    Vector3 lastPos;
-    int stuckTime;
-
-    void Created(GameObject *obj);
-
-    void Timer_Expired(GameObject *obj, int number);
-
-    void Enemy_Seen(GameObject *obj, GameObject *seen);
-
-    void Damaged(GameObject *obj, GameObject *damager, float damage);
-
-    bool chooseTarget(GameObject *obj, GameObject *damager, int *compareId, int *seenTimer);
+	float noPathfindRange;
+	int LastSeen;
+	int lastSeenSecondary;
+	int currentTargetID;
+	int secondaryTargetId;
+	int huntorattack;
+	int waitcount;
+	Vector3 homelocation;
+	float speed;
+	int minVisibilityTime;
+	int maxVisibilityTime;
+	float maxHuntDistance;
+	Vector3 lastPos;
+	int stuckTime;
+	void Created(GameObject *obj);
+	void Timer_Expired(GameObject *obj,int number);
+	void Enemy_Seen(GameObject *obj,GameObject *seen);
+	void Damaged(GameObject *obj,GameObject *damager,float damage);
+	bool chooseTarget(GameObject *obj,GameObject *damager,int *compareId,int *seenTimer);
 };
 
 /*!
 * \brief Script used to make placeable/building objects for infantry
-* \WeaponPreset ï¿½ Weapon that must be selected to deploy/preview
-* \PreviewPreset ï¿½ Preset that is used to display the preview
+* \WeaponPreset – Weapon that must be selected to deploy/preview
+* \PreviewPreset – Preset that is used to display the preview
 * \DeployPreset - Preset that is placed when the deploy key is pressed
-* \RepairedPreset ï¿½ Preset that is used when the deployed preset has been fully repaired
+* \RepairedPreset – Preset that is used when the deployed preset has been fully repaired
 * \PlaceablePreview - 3d model used to show the object can be placed
 * \UnPlaceablePreview - 3d model used to show the object cannot be placed
 * \EnableCustom - Custom message used to enable placement
 * \DisableCustom - Custom message used to disable placement (used by db building checking and water)
-* \DeployCustom ï¿½ Custom message that is used to place the deploy preset and sets the ammo to 0, also starts the regain time.
-* \RegainTimer - Timer used to give the player the next deployable object after the last was placed
+* \DeployCustom – Custom message that is used to place the deploy preset and sets the ammo to 0, also starts the regain time.
+* \RegainTimer - Timer used to give the player the next deployable object after the last was placed 
 * \Cost - How much it costs the player to place this object
-* \MessageColor[R|G|B] ï¿½ Color of messages to display to the player
-* \DeploymentBlockedMessage ï¿½ Message to display when the object cannot be deployed
-* \PlacementMessage ï¿½ Message that appears when the reload time has finished
+* \MessageColor[R|G|B] – Color of messages to display to the player
+* \DeploymentBlockedMessage – Message to display when the object cannot be deployed
+* \PlacementMessage – Message that appears when the reload time has finished 
 * \GrantWeapon - If 1 the weapon defined will be granted as soon as the script is attached.
 * \RegenStartsAfterRepair - If 0 regen countdown starts the second you place the object, otherwise it can't start until you repair the object
 * \MatchTeam[Preview|Deployed|Repaired] - Match team controls what teams everything is hooked too when placed, if 1 it matches the player teams, if 0 it keeps it set to whatever the preset has for team
@@ -2680,33 +2613,25 @@ class JMG_Utility_AI_Aggressive_Melee : public ScriptImpClass {
 * \ingroup JmgUtility
 */
 class JMG_Utility_Infantry_Placed_Buildable_Object : public ScriptImpClass {
-    bool canRegen;
-    int previewObjectId;
-    int placementBlocked;
-    int reloadTime;
-
-    void Created(GameObject *obj);
-
-    void Timer_Expired(GameObject *obj, int number);
-
-    void Custom(GameObject *obj, int message, int param, GameObject *sender);
-
-    void Killed(GameObject *obj, GameObject *killer);
-
-    void Destroyed(GameObject *obj);
-
-    void DestroyPreview();
-
+	bool canRegen;
+	int previewObjectId;
+	int placementBlocked;
+	int reloadTime;
+	void Created(GameObject *obj);
+	void Timer_Expired(GameObject *obj,int number);
+	void Custom(GameObject *obj,int message,int param,GameObject *sender);
+	void Killed(GameObject *obj,GameObject *killer);
+	void Destroyed(GameObject *obj);
+	void DestroyPreview();
 public:
-    JMG_Utility_Infantry_Placed_Buildable_Object() {
-        placementBlocked = 0;
-    }
+	JMG_Utility_Infantry_Placed_Buildable_Object()
+	{
+		placementBlocked = 0;
+	}
 };
-
 class JMG_Utility_Infantry_Placed_Buildable_Object_Attached : public ScriptImpClass {
-    void Damaged(GameObject *obj, GameObject *damager, float damage);
-
-    void Killed(GameObject *obj, GameObject *killer);
+	void Damaged(GameObject *obj,GameObject *damager,float damage);
+	void Killed(GameObject *obj,GameObject *killer);
 };
 
 
@@ -2717,9 +2642,8 @@ class JMG_Utility_Infantry_Placed_Buildable_Object_Attached : public ScriptImpCl
 * \ingroup JmgUtility
 */
 class JMG_Utility_Lock_Weapon_Selection_While_Script_Attached : public ScriptImpClass {
-    void Created(GameObject *obj);
-
-    void Timer_Expired(GameObject *obj, int number);
+	void Created(GameObject *obj);
+	void Timer_Expired(GameObject *obj,int number);
 };
 
 /*!
@@ -2728,11 +2652,10 @@ class JMG_Utility_Lock_Weapon_Selection_While_Script_Attached : public ScriptImp
 * \ingroup JmgUtility
 */
 class JMG_Utility_Swimming_zDefault_Map_Fog_Values : public ScriptImpClass {
-    void Created(GameObject *obj);
+	void Created(GameObject *obj);
 };
-
 /*!
-* \brief Used to trigger the simple swimming animation system this is to be used along side JMG_Utility_Swimming_Infantry,
+* \brief Used to trigger the simple swimming animation system this is to be used along side JMG_Utility_Swimming_Infantry, 
 * \ any soldiers that enter the script zone without JMG_Utility_Swimming_Infantry attached will die.
 * \ JMG_Utility_Swimming_Infantry_AI is now automatically attached to AI infantry 7.1
 * \WaterColor[R|G|B] - Color to fade the screen while in this swimming zone
@@ -2744,53 +2667,48 @@ class JMG_Utility_Swimming_zDefault_Map_Fog_Values : public ScriptImpClass {
 * \ingroup JmgUtility
 */
 class JMG_Utility_Swimming_Zone : public ScriptImpClass {
-    void Created(GameObject *obj);
-
-    void Entered(GameObject *obj, GameObject *enter);
-
-    void Exited(GameObject *obj, GameObject *exiter);
-
+	void Created(GameObject *obj);
+	void Entered(GameObject *obj,GameObject *enter);
+	void Exited(GameObject *obj,GameObject *exiter);
 public:
-    struct PlayerWaterNode {
-        Vector3 waterColor;
-        float waterColorOpacity;
-        float waterMinViewDistance;
-        float waterMaxViewDistance;
-
-        PlayerWaterNode() {
-            this->waterColor = Vector3(0.28f, 0.43f, 0.55f);
-            this->waterColorOpacity = 0.5f;
-            this->waterMinViewDistance = 5.0f;
-            this->waterMaxViewDistance = 15.0f;
-        }
-
-        PlayerWaterNode(Vector3 waterColor, float waterColorOpacity, float waterMinViewDistance,
-                        float waterMaxViewDistance) {
-            this->waterColor = waterColor;
-            this->waterColorOpacity = waterColorOpacity;
-            this->waterMinViewDistance = waterMinViewDistance;
-            this->waterMaxViewDistance = waterMaxViewDistance;
-        }
-    };
-
-    static JMG_Utility_Swimming_Zone::PlayerWaterNode waterNode[128];
-    static float fogMinDistance;
-    static float fogMaxDistance;
-
-    SCRIPTS_API static void Update_Fog_Settings(float minFog, float maxFog);
+	struct PlayerWaterNode
+	{
+		Vector3 waterColor;
+		float waterColorOpacity;
+		float waterMinViewDistance;
+		float waterMaxViewDistance;
+		PlayerWaterNode()
+		{
+			this->waterColor = Vector3(0.28f,0.43f,0.55f);
+			this->waterColorOpacity = 0.5f;
+			this->waterMinViewDistance = 5.0f;
+			this->waterMaxViewDistance = 15.0f;
+		}
+		PlayerWaterNode(Vector3 waterColor,float waterColorOpacity,float waterMinViewDistance,float waterMaxViewDistance)
+		{
+			this->waterColor = waterColor;
+			this->waterColorOpacity = waterColorOpacity;
+			this->waterMinViewDistance = waterMinViewDistance;
+			this->waterMaxViewDistance = waterMaxViewDistance;
+		}
+	};
+	static JMG_Utility_Swimming_Zone::PlayerWaterNode waterNode[128];
+	static float fogMinDistance;
+	static float fogMaxDistance;
+	SCRIPTS_API static void Update_Fog_Settings(float minFog,float maxFog);
 };
 
-/*!
-* \brief This script allows a soldier to swim when in a swimming zone. Weapon that is granted should use the Launcher position as
-* \ Renegade never made use of that animation set. If using my swimming animations make sure there is a plane for infantry
-* \ to stand on 1.466 meters below the water surface. The underwater[playerId] can be accessed from anywhere, allowing you to disable
-* \ screen fading when underwater from other scripts.
-* \WeaponPreset - Weapon to lock the player to while swimming, make sure its type launcher to make use of my animations
-* \DrownTime - Time it takes before you start taking damage when crouched under water for long periods of time
-* \StarDrownSequence - How long before you start taking damage to start fading the screen red and the heart beat sound
-* \GaspForBreath - This sound is played when you surface from under water after long periods of time
-* \PantingSoundEmitterModel - This 3d object is attached to the player and should be a looped sound effect, it exists while getting close to drowning
-* \HeartBeatSoundEmitterModel - This 3d object is attached to the player and should be a looped sound effect, it exists while catching your breath
+/*! 
+* \brief This script allows a soldier to swim when in a swimming zone. Weapon that is granted should use the Launcher position as  
+* \ Renegade never made use of that animation set. If using my swimming animations make sure there is a plane for infantry 
+* \ to stand on 1.466 meters below the water surface. The underwater[playerId] can be accessed from anywhere, allowing you to disable  
+* \ screen fading when underwater from other scripts. 
+* \WeaponPreset - Weapon to lock the player to while swimming, make sure its type launcher to make use of my animations 
+* \DrownTime - Time it takes before you start taking damage when crouched under water for long periods of time 
+* \StarDrownSequence - How long before you start taking damage to start fading the screen red and the heart beat sound 
+* \GaspForBreath - This sound is played when you surface from under water after long periods of time 
+* \PantingSoundEmitterModel - This 3d object is attached to the player and should be a looped sound effect, it exists while getting close to drowning 
+* \HeartBeatSoundEmitterModel - This 3d object is attached to the player and should be a looped sound effect, it exists while catching your breath 
 * \DrownDamageRate - Damage applied 10 times a second while drowning
 * \CatchBreathRate - Rate at which a character catches its breath when out of the water, 0.1 would recover 1 second of air every second
 * \WaterDamageAmount - Amount of damage to apply to the character while swimming, is applied 10 tiems a second, default is 0
@@ -2806,49 +2724,37 @@ public:
 * \ingroup JmgUtility
 */
 class JMG_Utility_Swimming_Infantry : public ScriptImpClass {
-    int heartBeatSoundId;
-    int pantSoundId;
-    char enterWeapon[256];
-    int playerId;
-    bool startedFadeRed;
-    float drownTime;
-    bool underwater;
-    int waterZoneCount;
-    int lastWaterZoneId;
-    time_t lastDisplayTime;
-    float defaultSpeed;
-    int waterDamageDelayTime;
-    int waterDamageDelayTimeRecover;
-    int remainingWaterDamageDelay;
-    char originalSkin[128];
-    char originalArmor[128];
-    char originalModel[128];
-
-    void Created(GameObject *obj);
-
-    void Timer_Expired(GameObject *obj, int number);
-
-    void Custom(GameObject *obj, int message, int param, GameObject *sender);
-
-    void Killed(GameObject *obj, GameObject *killer);
-
-    void Destroyed(GameObject *obj);
-
-    void Detach(GameObject *obj);
-
-    void CreateSoundEmitter(GameObject *obj, const char *model, int *soundId);
-
-    void DestroySoundEmitter(int *soundId);
-
-    void HideSoundEmitter(int *soundId);
-
+	int heartBeatSoundId;
+	int pantSoundId;
+	char enterWeapon[256];
+	int playerId;
+	bool startedFadeRed;
+	float drownTime;
+	bool underwater;
+	int waterZoneCount;
+	int lastWaterZoneId;
+	time_t lastDisplayTime;
+	float defaultSpeed;
+	int waterDamageDelayTime;
+	int waterDamageDelayTimeRecover;
+	int remainingWaterDamageDelay;
+	char originalSkin[128];
+	char originalArmor[128];
+	char originalModel[128];
+	void Created(GameObject *obj);
+	void Timer_Expired(GameObject *obj,int number);
+	void Custom(GameObject *obj,int message,int param,GameObject *sender);
+	void Killed(GameObject *obj,GameObject *killer);
+	void Destroyed(GameObject *obj);
+	void Detach(GameObject *obj);
+	void CreateSoundEmitter(GameObject *obj,const char *model,int *soundId);
+	void DestroySoundEmitter(int *soundId);
+	void HideSoundEmitter(int *soundId);
 public:
-    static bool isUnderwater[128];
-    static bool isInWater[128];
-
-    static bool getInWater(int playerId) { return isUnderwater[playerId]; }
-
-    static bool getIsUnderwater(int playerId) { return isInWater[playerId]; }
+	static bool isUnderwater[128];
+	static bool isInWater[128];
+	static bool getInWater(int playerId){return isUnderwater[playerId];}
+	static bool getIsUnderwater(int playerId){return isInWater[playerId];}
 };
 
 /*!
@@ -2862,7 +2768,7 @@ public:
 * \ingroup JmgUtility
 */
 class JMG_Utility_Zone_Enable_Spawners_In_Range : public ScriptImpClass {
-    void Entered(GameObject *obj, GameObject *enterer);
+	void Entered(GameObject *obj,GameObject *enterer);
 };
 
 /*!
@@ -2877,11 +2783,9 @@ class JMG_Utility_Zone_Enable_Spawners_In_Range : public ScriptImpClass {
 * \ingroup JmgUtility
 */
 class JMG_Utility_Display_Message_On_Vehicle_Enter : public ScriptImpClass {
-    bool hasShownMessage[128];
-
-    void Created(GameObject *obj);
-
-    void Custom(GameObject *obj, int message, int param, GameObject *sender);
+	bool hasShownMessage[128];
+	void Created(GameObject *obj);
+	void Custom(GameObject *obj,int message,int param,GameObject *sender);
 };
 
 /*!
@@ -2896,7 +2800,7 @@ class JMG_Utility_Display_Message_On_Vehicle_Enter : public ScriptImpClass {
 * \ingroup JmgUtility
 */
 class JMG_Utility_Zone_Apply_Damage_On_Enter : public ScriptImpClass {
-    void Entered(GameObject *obj, GameObject *enter);
+	void Entered(GameObject *obj,GameObject *enter);
 };
 
 /*!
@@ -2910,26 +2814,20 @@ class JMG_Utility_Zone_Apply_Damage_On_Enter : public ScriptImpClass {
 * \ingroup JmgUtility
 */
 class JMG_Utility_AI_Guardian_Aircraft : public ScriptImpClass {
-    float fireRange;
-    Vector3 dpPosition;
-    int EnemyID;
-    int EnemyTimeOutTime;
-    Vector3 LastPos;
-    int stealthModeOverride;
-    int newPointDelay;
-    int remainingDelay;
-
-    void Created(GameObject *obj);
-
-    void Timer_Expired(GameObject *obj, int number);
-
-    void Enemy_Seen(GameObject *obj, GameObject *seen);
-
-    void Damaged(GameObject *obj, GameObject *damager, float damage);
-
-    void Goto_Location(GameObject *obj);
-
-    bool Get_A_Defense_Point(Vector3 *position);
+	float fireRange;
+	Vector3 dpPosition;
+	int EnemyID;
+	int EnemyTimeOutTime;
+	Vector3 LastPos;
+	int stealthModeOverride;
+	int newPointDelay;
+	int remainingDelay;
+	void Created(GameObject *obj);
+	void Timer_Expired(GameObject *obj,int number);
+	void Enemy_Seen(GameObject *obj,GameObject *seen);
+	void Damaged(GameObject *obj,GameObject *damager,float damage);
+	void Goto_Location(GameObject *obj);
+	bool Get_A_Defense_Point(Vector3 *position);
 };
 
 /*!
@@ -2949,9 +2847,8 @@ class JMG_Utility_AI_Guardian_Aircraft : public ScriptImpClass {
 * \ingroup JmgUtility
 */
 class JMG_Utility_Switch_Weapon_While_Primary_Empty : public ScriptImpClass {
-    void Created(GameObject *obj);
-
-    void Timer_Expired(GameObject *obj, int number);
+	void Created(GameObject *obj);
+	void Timer_Expired(GameObject *obj,int number);
 };
 
 /*!
@@ -2967,11 +2864,9 @@ class JMG_Utility_Switch_Weapon_While_Primary_Empty : public ScriptImpClass {
 * \ingroup JmgUtility
 */
 class JMG_Utility_Send_Custom_When_Near_Building : public ScriptImpClass {
-    bool nearBuilding;
-
-    void Created(GameObject *obj);
-
-    void Timer_Expired(GameObject *obj, int number);
+	bool nearBuilding;
+	void Created(GameObject *obj);
+	void Timer_Expired(GameObject *obj,int number);
 };
 
 /*!
@@ -2980,13 +2875,12 @@ class JMG_Utility_Send_Custom_When_Near_Building : public ScriptImpClass {
 * \ingroup JmgUtility
 */
 class JMG_Utility_AI_Engineer_Repair_Target : public ScriptImpClass {
-    void Created(GameObject *obj);
+	void Created(GameObject *obj);
 };
 
 class JMG_Utility_Reset_Screen_Fade_And_Fog_On_Destroy : public ScriptImpClass {
-    void Destroyed(GameObject *obj);
-
-    void Detach(GameObject *obj);
+	void Destroyed(GameObject *obj);
+	void Detach(GameObject *obj);
 };
 
 /*!
@@ -3020,193 +2914,185 @@ class JMG_Utility_Reset_Screen_Fade_And_Fog_On_Destroy : public ScriptImpClass {
 * \ingroup JmgUtility
 */
 class JMG_Utility_AI_Goto_Player : public ScriptImpClass {
-    enum aiState {
-        IDLE, HUNTING_STAR, ATTACKING_TARGET, RETURNING_HOME, WANDERING_GROUP, ACTION_BADPATH
-    };
-
-    struct LastAction {
-        int targetId;
-        Vector3 location;
-        float speed;
-        float distance;
-        bool attack;
-        bool overrideLocation;
-
-        LastAction() {
-        }
-
-        LastAction(int targetId, Vector3 location, float speed, float distance, bool attack, bool overrideLocation) {
-            this->targetId = targetId;
-            this->location = location;
-            this->speed = speed;
-            this->distance = distance;
-            this->attack = attack;
-            this->overrideLocation = overrideLocation;
-        }
-    };
-
-    struct ValidLastLocation {
-        bool valid;
-        Vector3 location;
-
-        ValidLastLocation(bool valid) {
-            this->valid = valid;
-        }
-
-        ValidLastLocation(int enemyId);
-    };
-
-    float maxSightFromHomeLocation;
-    LastAction lastAction;
-    aiState state;
-    Vector3 homeLocation;
-    bool huntStealth;
-    int targetId;
-    int lastSeenTime;
-    float weaponRange;
-    float weaponEffectiveRange;
-    int huntingStarId;
-    int ignoreStarsTime[128];
-    float huntSearchDistance;
-    float huntArriveDistance;
-    float attackArriveDistance;
-    int stuckTime;
-    int reverseTime;
-    Vector3 lastPosition;
-    bool moveBackward;
-    float wanderDistanceOverride;
-    int wanderingAiGroupId;
-    float wanderSpeed;
-    float huntSpeed;
-    float attackSpeed;
-    float returnHomeSpeed;
-    int changeWanderGroupCustom;
-    int changeWanderSpeedCustom;
-    int changeHuntDistanceCustom;
-    int changeReturnHomeSpeedCustom;
-    int changeHuntSpeedCustom;
-    int changeMaxSightFromHomeLocationCustom;
-    int changeAttackSpeedCustom;
-
-    void Created(GameObject *obj);
-
-    void Enemy_Seen(GameObject *obj, GameObject *seen);
-
-    void Timer_Expired(GameObject *obj, int number);
-
-    void Action_Complete(GameObject *obj, int action_id, ActionCompleteReason reason);
-
-    void Custom(GameObject *obj, int message, int param, GameObject *sender);
-
-    void Damaged(GameObject *obj, GameObject *damager, float damage);
-
-    void Attack_Move(GameObject *obj, GameObject *target, Vector3 location, float speed, float distance, bool attack,
-                     bool overrideLocation);
-
-    GameObject *findClosestStar(GameObject *obj);
-
-    void Return_Home(GameObject *obj, ValidLastLocation goNearLastWanderPoint);
-
-    void Stuck_Check(GameObject *obj, Vector3 targetPos);
-
-    void Cant_Get_To_target(GameObject *obj);
-
-    bool GetRandomPosition(Vector3 *position);
-
-    bool Choose_Target(GameObject *obj, GameObject *target);
+	enum aiState{IDLE,HUNTING_STAR,ATTACKING_TARGET,RETURNING_HOME,WANDERING_GROUP,ACTION_BADPATH};
+	struct LastAction
+	{
+		int targetId;
+		Vector3 location;
+		float speed;
+		float distance;
+		bool attack;
+		bool overrideLocation;
+		LastAction()
+		{
+		}
+		LastAction(int targetId,Vector3 location,float speed,float distance,bool attack,bool overrideLocation)
+		{
+			this->targetId = targetId;
+			this->location = location;
+			this->speed = speed;
+			this->distance = distance;
+			this->attack = attack;
+			this->overrideLocation = overrideLocation;
+		}
+	};
+	struct ValidLastLocation
+	{
+		bool valid;
+		Vector3 location;
+		ValidLastLocation(bool valid)
+		{
+			this->valid = valid;
+		}
+		ValidLastLocation(int enemyId);
+	};
+	float maxSightFromHomeLocation;
+	LastAction lastAction;
+	aiState state;
+	Vector3 homeLocation;
+	bool huntStealth;
+	int targetId;
+	int lastSeenTime;
+	float weaponRange;
+	float weaponEffectiveRange;
+	int huntingStarId;
+	int ignoreStarsTime[128];
+	float huntSearchDistance;
+	float huntArriveDistance;
+	float attackArriveDistance;
+	int stuckTime;
+	int reverseTime;
+	Vector3 lastPosition;
+	bool moveBackward;
+	float wanderDistanceOverride;
+	int wanderingAiGroupId;
+	float wanderSpeed;
+	float huntSpeed;
+	float attackSpeed;
+	float returnHomeSpeed;
+	int changeWanderGroupCustom;
+	int changeWanderSpeedCustom;
+	int changeHuntDistanceCustom;
+	int changeReturnHomeSpeedCustom;
+	int changeHuntSpeedCustom;
+	int changeMaxSightFromHomeLocationCustom;
+	int changeAttackSpeedCustom;
+	void Created(GameObject *obj);
+	void Enemy_Seen(GameObject *obj,GameObject *seen);
+	void Timer_Expired(GameObject *obj,int number);
+	void Action_Complete(GameObject *obj,int action_id,ActionCompleteReason reason);
+	void Custom(GameObject *obj,int message,int param,GameObject *sender);
+	void Damaged(GameObject *obj,GameObject *damager,float damage);
+	void Attack_Move(GameObject *obj,GameObject *target,Vector3 location,float speed,float distance,bool attack,bool overrideLocation);
+	GameObject *findClosestStar(GameObject *obj);
+	void Return_Home(GameObject *obj,ValidLastLocation goNearLastWanderPoint);
+	void Stuck_Check(GameObject *obj,Vector3 targetPos);
+	void Cant_Get_To_target(GameObject *obj);
+	bool GetRandomPosition(Vector3 *position);
+	bool Choose_Target(GameObject *obj,GameObject *target);
 };
 
-class AggressiveAttackSpotSystem {
+class AggressiveAttackSpotSystem
+{
 public:
-    struct AggressiveAttackSpotNode {
-        int id;
-        Vector3 position;
-        Vector3 attackOffset;
-        bool alive;
-        int groupId;
-        struct AggressiveAttackSpotNode *next;
-
-        AggressiveAttackSpotNode(GameObject *obj, int groupId, Vector3 attackOffset) {
-            this->id = Commands->Get_ID(obj);
-            this->position = Commands->Get_Position(obj);
-            this->attackOffset = attackOffset;
-            this->alive = true;
-            this->groupId = groupId;
-            this->next = NULL;
-        }
-    };
-
+	struct AggressiveAttackSpotNode
+	{
+		int id;
+		Vector3 position;
+		Vector3 attackOffset;
+		bool alive;
+		int groupId;
+		struct AggressiveAttackSpotNode *next;
+		AggressiveAttackSpotNode(GameObject *obj,int groupId,Vector3 attackOffset)
+		{
+			this->id = Commands->Get_ID(obj);
+			this->position = Commands->Get_Position(obj);
+			this->attackOffset = attackOffset;
+			this->alive = true;
+			this->groupId = groupId;
+			this->next = NULL;
+		}
+	};
 private:
-    int nodeCount;
-    AggressiveAttackSpotNode *aggressiveAttackSpotNodeList;
+	int nodeCount;
+	AggressiveAttackSpotNode *aggressiveAttackSpotNodeList;
 public:
-    AggressiveAttackSpotSystem() {
-        nodeCount = 0;
-        aggressiveAttackSpotNodeList = NULL;
-    }
-
-    AggressiveAttackSpotNode *addNode(GameObject *obj, int groupId, Vector3 attackOffset) {
-        int id = Commands->Get_ID(obj);
-        AggressiveAttackSpotNode *current = aggressiveAttackSpotNodeList;
-        nodeCount++;
-        if (!aggressiveAttackSpotNodeList)
-            return aggressiveAttackSpotNodeList = new AggressiveAttackSpotNode(obj, groupId, attackOffset);
-        while (current) {
-            if (current->id == id) {
-                nodeCount--;
-                return current;
-            }
-            if (!current->next) {
-                current->next = new AggressiveAttackSpotNode(obj, groupId, attackOffset);
-                return current->next;
-            }
-            current = current->next;
-        }
-        return NULL;
-    }
-
-    void killNode(GameObject *obj) {
-        int id = Commands->Get_ID(obj);
-        AggressiveAttackSpotNode *current = aggressiveAttackSpotNodeList;
-        while (current) {
-            if (current->id == id)
-                current->alive = false;
-            current = current->next;
-        }
-    }
-
-    AggressiveAttackSpotNode *GetRandomNode(int groupId) {
-        if (The_Game()->Is_Game_Over())
-            return NULL;
-        int lastCount = -1;
-        int random = nodeCount > 0 ? Commands->Get_Random_Int(0, nodeCount * 2) : 0;
-        AggressiveAttackSpotNode *current = aggressiveAttackSpotNodeList;
-        while (current) {
-            if (current->alive && (groupId == -1 || current->groupId == groupId)) {
-                if (random)
-                    random--;
-                if (!random)
-                    return current;
-            }
-            current = current->next;
-            if (!current && lastCount != random) {
-                lastCount = random;
-                current = aggressiveAttackSpotNodeList;
-            }
-        }
-        return NULL;
-    }
-
-    void Empty_List() {
-        nodeCount = 0;
-        AggressiveAttackSpotNode *temp = aggressiveAttackSpotNodeList, *die;
-        while (temp) {
-            die = temp;
-            temp = temp->next;
-            delete die;
-        }
-        aggressiveAttackSpotNodeList = NULL;
-    }
+	AggressiveAttackSpotSystem()
+	{
+		nodeCount = 0;
+		aggressiveAttackSpotNodeList = NULL;
+	}
+	AggressiveAttackSpotNode *addNode(GameObject *obj,int groupId,Vector3 attackOffset)
+	{
+		int id = Commands->Get_ID(obj);
+		AggressiveAttackSpotNode *current = aggressiveAttackSpotNodeList;
+		nodeCount++;
+		if (!aggressiveAttackSpotNodeList)
+			return aggressiveAttackSpotNodeList = new AggressiveAttackSpotNode(obj,groupId,attackOffset);
+		while (current)
+		{
+			if (current->id == id)
+			{
+				nodeCount--;
+				return current;
+			}
+			if (!current->next)
+			{
+				current->next = new AggressiveAttackSpotNode(obj,groupId,attackOffset);
+				return current->next;
+			}
+			current = current->next;
+		}
+		return NULL;
+	}
+	void killNode(GameObject *obj)
+	{
+		int id = Commands->Get_ID(obj);
+		AggressiveAttackSpotNode *current = aggressiveAttackSpotNodeList;
+		while (current)
+		{
+			if (current->id == id)
+				current->alive = false;
+			current = current->next;
+		}
+	}
+	AggressiveAttackSpotNode *GetRandomNode(int groupId)
+	{
+		if (The_Game()->Is_Game_Over())
+			return NULL;
+		int lastCount = -1;
+		int random = nodeCount > 0 ? Commands->Get_Random_Int(0,nodeCount*2) : 0;
+		AggressiveAttackSpotNode *current = aggressiveAttackSpotNodeList;
+		while (current)
+		{
+			if (current->alive && (groupId == -1 || current->groupId == groupId))
+			{
+				if (random)
+					random--;
+				if (!random)
+					return current;
+			}
+			current = current->next;
+			if (!current && lastCount != random)
+			{
+				lastCount = random;
+				current = aggressiveAttackSpotNodeList;
+			}
+		}
+		return NULL;
+	}
+	void Empty_List()
+	{
+		nodeCount = 0;
+		AggressiveAttackSpotNode *temp = aggressiveAttackSpotNodeList,*die;
+		while (temp)
+		{
+			die = temp;
+			temp = temp->next;
+			delete die;
+		}
+		aggressiveAttackSpotNodeList = NULL;
+	}
 };
 
 /*!
@@ -3214,10 +3100,10 @@ public:
 * \author jgray
 * \ingroup JmgUtility
 */
-class JMG_Utility_AI_Aggressive_Attack_Spot_Control : public ScriptImpClass {
-    void Created(GameObject *obj);
-
-    void Destroyed(GameObject *obj);
+class JMG_Utility_AI_Aggressive_Attack_Spot_Control : public ScriptImpClass
+{
+	void Created(GameObject *obj);
+	void Destroyed(GameObject *obj);
 };
 
 /*!
@@ -3227,21 +3113,18 @@ class JMG_Utility_AI_Aggressive_Attack_Spot_Control : public ScriptImpClass {
 * \author jgray
 * \ingroup JmgUtility
 */
-class JMG_Utility_AI_Aggressive_Attack_Spot_Point : public ScriptImpClass {
-    AggressiveAttackSpotSystem::AggressiveAttackSpotNode *node;
-
-    void Created(GameObject *obj);
-
-    void Timer_Expired(GameObject *obj, int number);
-
-    void Killed(GameObject *obj, GameObject *killer);
-
-    void Destroyed(GameObject *obj);
-
+class JMG_Utility_AI_Aggressive_Attack_Spot_Point : public ScriptImpClass
+{
+	AggressiveAttackSpotSystem::AggressiveAttackSpotNode *node;
+	void Created(GameObject *obj);
+	void Timer_Expired(GameObject *obj,int number);
+	void Killed(GameObject *obj,GameObject *killer);
+	void Destroyed(GameObject *obj);
 public:
-    JMG_Utility_AI_Aggressive_Attack_Spot_Point() {
-        node = NULL;
-    }
+	JMG_Utility_AI_Aggressive_Attack_Spot_Point()
+	{
+		node = NULL;
+	}
 };
 
 /*!
@@ -3252,19 +3135,17 @@ public:
 * \author jgray
 * \ingroup JmgUtility
 */
-class JMG_Utility_AI_Aggressive_Attack_Spot_Point2 : public ScriptImpClass {
-    AggressiveAttackSpotSystem::AggressiveAttackSpotNode *node;
-
-    void Created(GameObject *obj);
-
-    void Timer_Expired(GameObject *obj, int number);
-
-    void Destroyed(GameObject *obj);
-
+class JMG_Utility_AI_Aggressive_Attack_Spot_Point2 : public ScriptImpClass
+{
+	AggressiveAttackSpotSystem::AggressiveAttackSpotNode *node;
+	void Created(GameObject *obj);
+	void Timer_Expired(GameObject *obj,int number);
+	void Destroyed(GameObject *obj);
 public:
-    JMG_Utility_AI_Aggressive_Attack_Spot_Point2() {
-        node = NULL;
-    }
+	JMG_Utility_AI_Aggressive_Attack_Spot_Point2()
+	{
+		node = NULL;
+	}
 };
 
 /*!
@@ -3288,78 +3169,65 @@ public:
 * \ingroup JmgUtility
 */
 class JMG_Utility_AI_Aggressive_Attack_Spot : public ScriptImpClass {
-    enum aiState {
-        IDLE, ATTACKING_POINT, RETURNING_HOME, ATTACKING_ATTACKER, ACTION_BADPATH
-    };
-
-    struct LastAction {
-        int targetId;
-        Vector3 location;
-        float speed;
-        float distance;
-        bool attack;
-        bool overrideLocation;
-        bool attackingPoint;
-
-        LastAction() {
-        }
-
-        LastAction(int targetId, Vector3 location, float speed, float distance, bool attack, bool overrideLocation,
-                   bool attackingPoint) {
-            this->targetId = targetId;
-            this->location = location;
-            this->speed = speed;
-            this->distance = distance;
-            this->attack = attack;
-            this->overrideLocation = overrideLocation;
-            this->attackingPoint = attackingPoint;
-        }
-    };
-
-    AggressiveAttackSpotSystem::AggressiveAttackSpotNode *attackNode;
-    LastAction lastAction;
-    aiState state;
-    Vector3 homeLocation;
-    int targetId;
-    int lastSeenTime;
-    float weaponRange;
-    float weaponEffectiveRange;
-    float attackArriveDistance;
-    float attackPointArriveDistance;
-    int stuckTime;
-    int reverseTime;
-    bool reactToAttackChance;
-    Vector3 lastPosition;
-    bool moveBackward;
-    bool usePrimaryFire;
-
-    void Created(GameObject *obj);
-
-    void Enemy_Seen(GameObject *obj, GameObject *seen);
-
-    void Timer_Expired(GameObject *obj, int number);
-
-    void Action_Complete(GameObject *obj, int action_id, ActionCompleteReason reason);
-
-    void Damaged(GameObject *obj, GameObject *damager, float damage);
-
-    void Attack_Move(GameObject *obj, GameObject *target, Vector3 location, float speed, float distance, bool attack,
-                     bool overrideLocation, bool attackingPoint);
-
-    void Stuck_Check(GameObject *obj, Vector3 targetPos);
-
-    void IdleChoice(GameObject *obj, bool allowAttackPoint);
-
-    bool Choose_Target(GameObject *obj, GameObject *target);
-
+	enum aiState{IDLE,ATTACKING_POINT,RETURNING_HOME,ATTACKING_ATTACKER,ACTION_BADPATH};
+	struct LastAction
+	{
+		int targetId;
+		Vector3 location;
+		float speed;
+		float distance;
+		bool attack;
+		bool overrideLocation;
+		bool attackingPoint;
+		LastAction()
+		{
+		}
+		LastAction(int targetId,Vector3 location,float speed,float distance,bool attack,bool overrideLocation,bool attackingPoint)
+		{
+			this->targetId = targetId;
+			this->location = location;
+			this->speed = speed;
+			this->distance = distance;
+			this->attack = attack;
+			this->overrideLocation = overrideLocation;
+			this->attackingPoint = attackingPoint;
+		}
+	};
+	AggressiveAttackSpotSystem::AggressiveAttackSpotNode *attackNode;
+	LastAction lastAction;
+	aiState state;
+	Vector3 homeLocation;
+	int targetId;
+	int lastSeenTime;
+	float weaponRange;
+	float weaponEffectiveRange;
+	float attackArriveDistance;
+	float attackPointArriveDistance;
+	int stuckTime;
+	int reverseTime;
+	bool reactToAttackChance;
+	Vector3 lastPosition;
+	bool moveBackward;
+	bool usePrimaryFire;
+	void Created(GameObject *obj);
+	void Enemy_Seen(GameObject *obj,GameObject *seen);
+	void Timer_Expired(GameObject *obj,int number);
+	void Action_Complete(GameObject *obj,int action_id,ActionCompleteReason reason);
+	void Damaged(GameObject *obj,GameObject *damager,float damage);
+	void Attack_Move(GameObject *obj,GameObject *target,Vector3 location,float speed,float distance,bool attack,bool overrideLocation,bool attackingPoint);
+	void Stuck_Check(GameObject *obj,Vector3 targetPos);
+	void IdleChoice(GameObject *obj,bool allowAttackPoint);
+	bool Choose_Target(GameObject *obj,GameObject *target);
 public:
-    JMG_Utility_AI_Aggressive_Attack_Spot() {
-        attackNode = NULL;
-    }
+	JMG_Utility_AI_Aggressive_Attack_Spot()
+	{
+		attackNode = NULL;
+	}
 };
 
-class JMG_Utility_Destroy_Objects_In_ID_Range_On_Death : public ScriptImpClass {
-    void Destroyed(GameObject *obj);
+class JMG_Utility_Destroy_Objects_In_ID_Range_On_Death : public ScriptImpClass
+{
+	void Destroyed(GameObject *obj);
 };
 
 /*!
@@ -3372,7 +3240,7 @@ class JMG_Utility_Destroy_Objects_In_ID_Range_On_Death : public ScriptImpClass {
 * \ingroup JmgUtility
 */
 class JMG_Utility_Custom_Enable_Spawners_In_Range : public ScriptImpClass {
-    void Custom(GameObject *obj, int message, int param, GameObject *sender);
+	void Custom(GameObject *obj,int message,int param,GameObject *sender);
 };
 
 /*!
@@ -3382,29 +3250,27 @@ class JMG_Utility_Custom_Enable_Spawners_In_Range : public ScriptImpClass {
 * \Custom - Custom to send
 * \Param - Parameter to send with the message
 * \Delay - Time delay to add to the sent message
-* \TriggerOn[eq|<|>] - Defines what to trigger on, putting a 1 in the parameter makes that value checked, (obviously = means equal to the player count, < means less than the player count, > means greater than the player count)
+* \TriggerOn[eq|<|>] - Defines what to trigger on, putting a 1 in the parameter makes that value checked, (obviously = means equal to the player count, < means less than the player count, > means greater than the player count) 
 * \SupressMatchSpam - Makes it so the condition can't trigger again until the condition has not been meet then is meet again, useful for < or >
 * \DestroyAfterTrigger - Makes the script remove itself after it fires once
 * \author jgray
 * \ingroup JmgUtility
 */
-class JMG_Utility_Send_Custom_On_Player_Count : public ScriptImpClass {
-    int custom;
-    int param;
-    float delay;
-    int id;
-    bool supressMatchSpam;
-    Vector3 triggerEq;
-    int playerCountParam;
-    int playerCount;
-    bool conditionMatching;
-    bool destroyAfterTrigger;
-
-    void Created(GameObject *obj);
-
-    void Timer_Expired(GameObject *obj, int number);
-
-    void Send_The_Message(GameObject *obj, int tempCount);
+class JMG_Utility_Send_Custom_On_Player_Count : public ScriptImpClass
+{
+	int custom;
+	int param;
+	float delay;
+	int id;
+	bool supressMatchSpam;
+	Vector3 triggerEq;
+	int playerCountParam;
+	int playerCount;
+	bool conditionMatching;
+	bool destroyAfterTrigger;
+	void Created(GameObject *obj);
+	void Timer_Expired(GameObject *obj,int number);
+	void Send_The_Message(GameObject *obj,int tempCount);
 };
 
 /*!
@@ -3418,7 +3284,7 @@ class JMG_Utility_Send_Custom_On_Player_Count : public ScriptImpClass {
 * \ingroup JmgUtility
 */
 class JMG_Utility_Send_Custom_To_Preset_On_Message : public ScriptImpClass {
-    void Custom(GameObject *obj, int message, int param, GameObject *sender);
+	void Custom(GameObject *obj,int message,int param,GameObject *sender);
 };
 
 /*!
@@ -3431,13 +3297,11 @@ class JMG_Utility_Send_Custom_To_Preset_On_Message : public ScriptImpClass {
 * \ingroup JmgUtility
 */
 class JMG_Utility_Basic_Spawner_Attach_Script : public ScriptImpClass {
-    int scriptsGroupId;
-    char *params;
-    char script[128];
-
-    void Created(GameObject *obj);
-
-    void Custom(GameObject *obj, int message, int param, GameObject *sender);
+	int scriptsGroupId;
+	char *params;
+	char script[128];
+	void Created(GameObject *obj);
+	void Custom(GameObject *obj,int message,int param,GameObject *sender);
 };
 
 /*!
@@ -3451,7 +3315,7 @@ class JMG_Utility_Basic_Spawner_Attach_Script : public ScriptImpClass {
 * \ingroup JmgUtility
 */
 class JMG_Utility_Send_Custom_On_Preset_Enter : public ScriptImpClass {
-    void Entered(GameObject *obj, GameObject *enter);
+	void Entered(GameObject *obj,GameObject *enter);
 };
 
 /*!
@@ -3460,10 +3324,10 @@ class JMG_Utility_Send_Custom_On_Preset_Enter : public ScriptImpClass {
 * \author jgray
 * \ingroup JmgUtility
 */
-class JMG_Utility_Basic_Spawner_Set_Prespawn_Location : public ScriptImpClass {
-    void Created(GameObject *obj);
-
-    void Destroyed(GameObject *obj);
+class JMG_Utility_Basic_Spawner_Set_Prespawn_Location : public ScriptImpClass
+{
+	void Created(GameObject *obj);
+	void Destroyed(GameObject *obj);
 };
 
 
@@ -3476,7 +3340,7 @@ class JMG_Utility_Basic_Spawner_Set_Prespawn_Location : public ScriptImpClass {
 * \ingroup JmgUtility
 */
 class JMG_Utility_Teleport_On_Pickup : public ScriptImpClass {
-    void Custom(GameObject *obj, int message, int param, GameObject *sender);
+	void Custom(GameObject *obj,int message,int param,GameObject *sender);
 };
 
 /*!
@@ -3492,7 +3356,7 @@ class JMG_Utility_Teleport_On_Pickup : public ScriptImpClass {
 * \ingroup JmgUtility
 */
 class JMG_Utility_Zone_Set_Animation : public ScriptImpClass {
-    void Entered(GameObject *obj, GameObject *enter);
+	void Entered(GameObject *obj,GameObject *enter);
 };
 
 /*!
@@ -3501,8 +3365,9 @@ class JMG_Utility_Zone_Set_Animation : public ScriptImpClass {
 * \author jgray
 * \ingroup JmgUtility
 */
-class JMG_Utility_Scale_Infantry : public ScriptImpClass {
-    void Created(GameObject *obj);
+class JMG_Utility_Scale_Infantry : public ScriptImpClass
+{
+	void Created(GameObject *obj);
 };
 
 /*!
@@ -3511,10 +3376,10 @@ class JMG_Utility_Scale_Infantry : public ScriptImpClass {
 * \author jgray
 * \ingroup JmgUtility
 */
-class JMG_Utility_Set_Innate_On_Create : public ScriptImpClass {
-    void Created(GameObject *obj);
-
-    void Timer_Expired(GameObject *obj, int number);
+class JMG_Utility_Set_Innate_On_Create : public ScriptImpClass
+{
+	void Created(GameObject *obj);
+	void Timer_Expired(GameObject *obj,int number);
 };
 
 /*!
@@ -3523,8 +3388,9 @@ class JMG_Utility_Set_Innate_On_Create : public ScriptImpClass {
 * \author jgray
 * \ingroup JmgUtility
 */
-class JMG_Utility_Set_Soldier_Damage_Animations : public ScriptImpClass {
-    void Created(GameObject *obj);
+class JMG_Utility_Set_Soldier_Damage_Animations : public ScriptImpClass
+{
+	void Created(GameObject *obj);
 };
 
 /*!
@@ -3538,7 +3404,7 @@ class JMG_Utility_Set_Soldier_Damage_Animations : public ScriptImpClass {
 * \ingroup JmgUtility
 */
 class JMG_Utility_Play_Music_On_Join_Enter_Change_Music : public ScriptImpClass {
-    void Entered(GameObject *obj, GameObject *enter);
+	void Entered(GameObject *obj,GameObject *enter);
 };
 
 /*!
@@ -3550,7 +3416,7 @@ class JMG_Utility_Play_Music_On_Join_Enter_Change_Music : public ScriptImpClass 
 * \ingroup JmgUtility
 */
 class JMG_Utility_Play_Music_On_Join_Killed_Change_Music : public ScriptImpClass {
-    void Killed(GameObject *obj, GameObject *killer);
+	void Killed(GameObject *obj,GameObject *killer);
 };
 
 /*!
@@ -3593,19 +3459,15 @@ IDS_OBJ2_UPDATED_NUMBERED			%s mission objective %d updated:
 * \author jgray
 * \ingroup JmgUtility
 */
-class JMG_Utility_Objective_System_Controller : public ScriptImpClass {
-    char playerNames[128][256];
-
-    void Created(GameObject *obj);
-
-    void Timer_Expired(GameObject *obj, int number);
-
-    void Destroyed(GameObject *obj);
-
-    void Detach(GameObject *obj);
-
+class JMG_Utility_Objective_System_Controller : public ScriptImpClass
+{
+	char playerNames[128][256];
+	void Created(GameObject *obj);
+	void Timer_Expired(GameObject *obj,int number);
+	void Destroyed(GameObject *obj);
+	void Detach(GameObject *obj);
 public:
-    static bool controllerPlaced;
+	static bool controllerPlaced;
 };
 
 /*!
@@ -3620,16 +3482,14 @@ public:
 * \ingroup JmgUtility
 */
 class JMG_Utility_Objective_System_Objective_Update_Enter : public ScriptImpClass {
-    bool triggered;
-
-    void Entered(GameObject *obj, GameObject *enter);
-
-    void Custom(GameObject *obj, int message, int param, GameObject *sender);
-
+	bool triggered;
+	void Entered(GameObject *obj,GameObject *enter);
+	void Custom(GameObject *obj,int message,int param,GameObject *sender);
 public:
-    JMG_Utility_Objective_System_Objective_Update_Enter() {
-        triggered = false;
-    }
+	JMG_Utility_Objective_System_Objective_Update_Enter()
+	{
+		triggered = false;
+	}
 };
 
 /*!
@@ -3644,7 +3504,7 @@ public:
 * \ingroup JmgUtility
 */
 class JMG_Utility_Objective_System_Objective_Update_Pickup : public ScriptImpClass {
-    void Custom(GameObject *obj, int message, int param, GameObject *sender);
+	void Custom(GameObject *obj,int message,int param,GameObject *sender);
 };
 
 /*!
@@ -3659,7 +3519,7 @@ class JMG_Utility_Objective_System_Objective_Update_Pickup : public ScriptImpCla
 * \ingroup JmgUtility
 */
 class JMG_Utility_Objective_System_Objective_Update_Killed : public ScriptImpClass {
-    void Killed(GameObject *obj, GameObject *damager);
+	void Killed(GameObject *obj, GameObject *damager);
 };
 
 
@@ -3675,7 +3535,7 @@ class JMG_Utility_Objective_System_Objective_Update_Killed : public ScriptImpCla
 * \ingroup JmgUtility
 */
 class JMG_Utility_Objective_System_Objective_Update_Custom : public ScriptImpClass {
-    void Custom(GameObject *obj, int message, int param, GameObject *sender);
+	void Custom(GameObject *obj,int message,int param,GameObject *sender);
 };
 
 /*!
@@ -3687,7 +3547,7 @@ class JMG_Utility_Objective_System_Objective_Update_Custom : public ScriptImpCla
 * \ingroup JmgUtility
 */
 class JMG_Utility_Destroyed_Apply_Damage : public ScriptImpClass {
-    void Destroyed(GameObject *obj);
+	void Destroyed(GameObject *obj);
 };
 
 /*!
@@ -3698,17 +3558,15 @@ class JMG_Utility_Destroyed_Apply_Damage : public ScriptImpClass {
 * \author jgray
 * \ingroup JmgUtility
 */
-class JMG_Utility_Scale_Damage_By_Player_Count : public ScriptImpClass {
-    int maxPlayersToScaleFor;
-    float maxScaleFactor;
-    float damageRefund;
-    int resurrectCount;
-
-    void Created(GameObject *obj);
-
-    void Timer_Expired(GameObject *obj, int number);
-
-    void Damaged(GameObject *obj, GameObject *damager, float damage);
+class JMG_Utility_Scale_Damage_By_Player_Count : public ScriptImpClass
+{
+	int maxPlayersToScaleFor;
+	float maxScaleFactor;
+	float damageRefund;
+	int resurrectCount;
+	void Created(GameObject *obj);
+	void Timer_Expired(GameObject *obj,int number);
+	void Damaged(GameObject *obj,GameObject *damager,float damage);
 };
 
 /*!
@@ -3719,17 +3577,15 @@ class JMG_Utility_Scale_Damage_By_Player_Count : public ScriptImpClass {
 * \author jgray
 * \ingroup JmgUtility
 */
-class JMG_Utility_Scale_Damage_Square_By_Player_Count : public ScriptImpClass {
-    int maxPlayersToScaleFor;
-    float maxScaleFactor;
-    float damageRefund;
-    int resurrectCount;
-
-    void Created(GameObject *obj);
-
-    void Timer_Expired(GameObject *obj, int number);
-
-    void Damaged(GameObject *obj, GameObject *damager, float damage);
+class JMG_Utility_Scale_Damage_Square_By_Player_Count : public ScriptImpClass
+{
+	int maxPlayersToScaleFor;
+	float maxScaleFactor;
+	float damageRefund;
+	int resurrectCount;
+	void Created(GameObject *obj);
+	void Timer_Expired(GameObject *obj,int number);
+	void Damaged(GameObject *obj,GameObject *damager,float damage);
 };
 
 /*!
@@ -3748,26 +3604,23 @@ class JMG_Utility_Scale_Damage_Square_By_Player_Count : public ScriptImpClass {
 * \author jgray
 * \ingroup JmgUtility
 */
-class JMG_Utility_Regen_HitPoints : public ScriptImpClass {
-    bool regenHealth;
-    int regenArmor;
-    float healthAmount;
-    float armorAmount;
-    float healthPerPlayer;
-    float armorPerPlayer;
-    float rate;
-    float damageDelay;
-    bool enabled;
-    float scaleHealthPerHeal;
-    float scaleArmorPerHeal;
-
-    void Created(GameObject *obj);
-
-    void Timer_Expired(GameObject *obj, int number);
-
-    void Damaged(GameObject *obj, GameObject *damager, float damage);
-
-    float ScaleValue(float value, float scale);
+class JMG_Utility_Regen_HitPoints : public ScriptImpClass
+{
+	bool regenHealth;
+	int regenArmor;
+	float healthAmount;
+	float armorAmount;
+	float healthPerPlayer;
+	float armorPerPlayer;
+	float rate;
+	float damageDelay;
+	bool enabled;
+	float scaleHealthPerHeal;
+	float scaleArmorPerHeal;
+	void Created(GameObject *obj);
+	void Timer_Expired(GameObject *obj,int number);
+	void Damaged(GameObject *obj,GameObject *damager,float damage);
+	float ScaleValue(float value,float scale);
 };
 
 /*!
@@ -3776,12 +3629,12 @@ class JMG_Utility_Regen_HitPoints : public ScriptImpClass {
 * \author jgray
 * \ingroup JmgUtility
 */
-class JMG_Utility_Toggle_Flight_On_Delay : public ScriptImpClass {
-    void Created(GameObject *obj);
-
-    void Timer_Expired(GameObject *obj, int number);
+class JMG_Utility_Toggle_Flight_On_Delay : public ScriptImpClass
+{
+	void Created(GameObject *obj);
+	void Timer_Expired(GameObject *obj,int number);
 };
-
+	
 
 /*!
 * \brief Plays an animation and locks the soldier in place when they run out of armor, when armor is full again they stand back up
@@ -3796,33 +3649,30 @@ class JMG_Utility_Toggle_Flight_On_Delay : public ScriptImpClass {
 * \author jgray
 * \ingroup JmgUtility
 */
-class JMG_Utility_Fainting_Soldier : public ScriptImpClass {
-    int posLockId;
-    bool fainted;
-    char faintAnimation[32];
-    char layAnimation[32];
-    char standAnimation[32];
-    char faintSound[256];
-    char standSound[256];
-    bool changeArmorTypeWhenKnockedOut;
-    char armorTypeWhileKnockedOut[256];
-    char armorType[256];
-    int originalTeam;
-    int teamWhileKnockedOut;
-
-    void Created(GameObject *obj);
-
-    void Timer_Expired(GameObject *obj, int number);
-
-    void Animation_Complete(GameObject *obj, const char *animation);
-
-    void Destroyed(GameObject *obj);
+class JMG_Utility_Fainting_Soldier : public ScriptImpClass
+{
+	int posLockId;
+	bool fainted;
+	char faintAnimation[32];
+	char layAnimation[32];
+	char standAnimation[32];
+	char faintSound[256];
+	char standSound[256];
+	bool changeArmorTypeWhenKnockedOut;
+	char armorTypeWhileKnockedOut[256];
+	char armorType[256];
+	int originalTeam;
+	int teamWhileKnockedOut;
+	void Created(GameObject *obj);
+	void Timer_Expired(GameObject *obj,int number);
+	void Animation_Complete(GameObject *obj,const char *animation);
+	void Destroyed(GameObject *obj);
 };
 
 /*!
 * \brief Makes a unit move between wander points, it'll strafe at the target while it has one, clone of JMG_Utility_AI_Guardian_Aircraft but with pathfind enabled
 * \WanderingAIGroupID - Group of points to wander between
-* \WanderSpeed - Speed the unit moves at
+* \WanderSpeed - Speed the unit moves at 
 * \FireRange - Max range that it can use it's guns, if less than 0 it uses the current weapon held's max range
 * \CheckBlocked - Whether to check if the target spot is blocked before firing
 * \StealthModeOverride - 0 = normal stealth detection, 1 = sees everything, -1 = can't see any stealthed enemies
@@ -3830,24 +3680,18 @@ class JMG_Utility_Fainting_Soldier : public ScriptImpClass {
 * \ingroup JmgUtility
 */
 class JMG_Utility_AI_Guardian_Infantry : public ScriptImpClass {
-    float fireRange;
-    Vector3 dpPosition;
-    int EnemyID;
-    int EnemyTimeOutTime;
-    Vector3 LastPos;
-    int stealthModeOverride;
-
-    void Created(GameObject *obj);
-
-    void Timer_Expired(GameObject *obj, int number);
-
-    void Enemy_Seen(GameObject *obj, GameObject *seen);
-
-    void Damaged(GameObject *obj, GameObject *damager, float damage);
-
-    void Goto_Location(GameObject *obj);
-
-    bool Get_A_Defense_Point(Vector3 *position);
+	float fireRange;
+	Vector3 dpPosition;
+	int EnemyID;
+	int EnemyTimeOutTime;
+	Vector3 LastPos;
+	int stealthModeOverride;
+	void Created(GameObject *obj);
+	void Timer_Expired(GameObject *obj,int number);
+	void Enemy_Seen(GameObject *obj,GameObject *seen);
+	void Damaged(GameObject *obj,GameObject *damager,float damage);
+	void Goto_Location(GameObject *obj);
+	bool Get_A_Defense_Point(Vector3 *position);
 };
 
 /*!
@@ -3856,24 +3700,23 @@ class JMG_Utility_AI_Guardian_Infantry : public ScriptImpClass {
 * \author jgray
 * \ingroup JmgUtility
 */
-class JMG_Utility_Set_Innate_Max_Wander_Distance : public ScriptImpClass {
-    void Created(GameObject *obj);
+class JMG_Utility_Set_Innate_Max_Wander_Distance : public ScriptImpClass
+{
+	void Created(GameObject *obj);
 };
 
 /*!
-* \brief Selects empty hands on create, the weapon it was holding before script attach is counted as the primary weapon,
+* \brief Selects empty hands on create, the weapon it was holding before script attach is counted as the primary weapon, 
 * \ once a custom is received it switches back to the primary weapon.
 * \Custom - Custom to trigger switching back to the primary weapon on.
 * \author jgray
 * \ingroup JmgUtility
 */
 class JMG_Utility_Switch_Weapon_To_Empty_Hands_Until_Custom : public ScriptImpClass {
-    int custom;
-    char weaponName[256];
-
-    void Created(GameObject *obj);
-
-    void Custom(GameObject *obj, int message, int param, GameObject *sender);
+	int custom;
+	char weaponName[256];
+	void Created(GameObject *obj);
+	void Custom(GameObject *obj,int message,int param,GameObject *sender);
 };
 
 
@@ -3886,11 +3729,9 @@ class JMG_Utility_Switch_Weapon_To_Empty_Hands_Until_Custom : public ScriptImpCl
 * \ingroup JmgUtility
 */
 class JMG_Utility_Set_Skin_And_Shield_Type_On_Custom : public ScriptImpClass {
-    int custom;
-
-    void Created(GameObject *obj);
-
-    void Custom(GameObject *obj, int message, int param, GameObject *sender);
+	int custom;
+	void Created(GameObject *obj);
+	void Custom(GameObject *obj,int message,int param,GameObject *sender);
 };
 
 /*!
@@ -3906,7 +3747,7 @@ class JMG_Utility_Set_Skin_And_Shield_Type_On_Custom : public ScriptImpClass {
 * \ingroup JmgUtility
 */
 class JMG_Utility_Zone_Damage_All_In_ID_Range_On_Enter : public ScriptImpClass {
-    void Entered(GameObject *obj, GameObject *enterer);
+	void Entered(GameObject *obj,GameObject *enterer);
 };
 
 /*!
@@ -3921,7 +3762,7 @@ class JMG_Utility_Zone_Damage_All_In_ID_Range_On_Enter : public ScriptImpClass {
 * \ingroup JmgUtility
 */
 class JMG_Utility_Zone_Send_Custom_To_All_With_Script : public ScriptImpClass {
-    void Entered(GameObject *obj, GameObject *enterer);
+	void Entered(GameObject *obj,GameObject *enterer);
 };
 
 /*!
@@ -3933,13 +3774,11 @@ class JMG_Utility_Zone_Send_Custom_To_All_With_Script : public ScriptImpClass {
 * \ingroup JmgUtility
 */
 class JMG_Utility_HitPoints_In_Range_Change_Model : public ScriptImpClass {
-    bool modelSet;
-    float upperHP;
-    float lowerHP;
-
-    void Created(GameObject *obj);
-
-    void Timer_Expired(GameObject *obj, int number);
+	bool modelSet;
+	float upperHP;
+	float lowerHP;
+	void Created(GameObject *obj);
+	void Timer_Expired(GameObject *obj,int number);
 };
 
 /*!
@@ -3952,17 +3791,13 @@ class JMG_Utility_HitPoints_In_Range_Change_Model : public ScriptImpClass {
 * \ingroup JmgUtility
 */
 class JMG_Utility_HitPoints_In_Range_Attach_Preset : public ScriptImpClass {
-    int presetId;
-    float upperHP;
-    float lowerHP;
-
-    void Created(GameObject *obj);
-
-    void Timer_Expired(GameObject *obj, int number);
-
-    void Killed(GameObject *obj, GameObject *killer);
-
-    void Destroyed(GameObject *obj);
+	int presetId;
+	float upperHP;
+	float lowerHP;
+	void Created(GameObject *obj);
+	void Timer_Expired(GameObject *obj,int number);
+	void Killed(GameObject *obj,GameObject *killer);
+	void Destroyed(GameObject *obj);
 };
 
 /*!
@@ -3974,13 +3809,11 @@ class JMG_Utility_HitPoints_In_Range_Attach_Preset : public ScriptImpClass {
 * \ingroup JmgUtility
 */
 class JMG_Utility_HitPoints_In_Range_Enable_Spawner : public ScriptImpClass {
-    bool enabled;
-    float upperHP;
-    float lowerHP;
-
-    void Created(GameObject *obj);
-
-    void Timer_Expired(GameObject *obj, int number);
+	bool enabled;
+	float upperHP;
+	float lowerHP;
+	void Created(GameObject *obj);
+	void Timer_Expired(GameObject *obj,int number);
 };
 
 /*!
@@ -3994,17 +3827,13 @@ class JMG_Utility_HitPoints_In_Range_Enable_Spawner : public ScriptImpClass {
 * \ingroup JmgUtility
 */
 class JMG_Utility_HitPoints_In_Range_Create_Preset : public ScriptImpClass {
-    int presetId;
-    float upperHP;
-    float lowerHP;
-
-    void Created(GameObject *obj);
-
-    void Timer_Expired(GameObject *obj, int number);
-
-    void Killed(GameObject *obj, GameObject *killer);
-
-    void Destroyed(GameObject *obj);
+	int presetId;
+	float upperHP;
+	float lowerHP;
+	void Created(GameObject *obj);
+	void Timer_Expired(GameObject *obj,int number);
+	void Killed(GameObject *obj,GameObject *killer);
+	void Destroyed(GameObject *obj);
 };
 
 /*!
@@ -4019,13 +3848,11 @@ class JMG_Utility_HitPoints_In_Range_Create_Preset : public ScriptImpClass {
 * \ingroup JmgUtility
 */
 class JMG_Utility_HitPoints_In_Range_Send_Custom : public ScriptImpClass {
-    bool inRange;
-    float upperHP;
-    float lowerHP;
-
-    void Created(GameObject *obj);
-
-    void Timer_Expired(GameObject *obj, int number);
+	bool inRange;
+	float upperHP;
+	float lowerHP;
+	void Created(GameObject *obj);
+	void Timer_Expired(GameObject *obj,int number);
 };
 
 /*!
@@ -4038,11 +3865,9 @@ class JMG_Utility_HitPoints_In_Range_Send_Custom : public ScriptImpClass {
 * \ingroup JmgUtility
 */
 class JMG_Utility_Custom_Set_Weather_Precipitation : public ScriptImpClass {
-    int custom;
-
-    void Created(GameObject *obj);
-
-    void Custom(GameObject *obj, int message, int param, GameObject *sender);
+	int custom;
+	void Created(GameObject *obj);
+	void Custom(GameObject *obj,int message,int param,GameObject *sender);
 };
 
 /*!
@@ -4055,11 +3880,9 @@ class JMG_Utility_Custom_Set_Weather_Precipitation : public ScriptImpClass {
 * \ingroup JmgUtility
 */
 class JMG_Utility_Custom_Set_Weather_Fog : public ScriptImpClass {
-    int custom;
-
-    void Created(GameObject *obj);
-
-    void Custom(GameObject *obj, int message, int param, GameObject *sender);
+	int custom;
+	void Created(GameObject *obj);
+	void Custom(GameObject *obj,int message,int param,GameObject *sender);
 };
 
 /*!
@@ -4073,11 +3896,9 @@ class JMG_Utility_Custom_Set_Weather_Fog : public ScriptImpClass {
 * \ingroup JmgUtility
 */
 class JMG_Utility_Custom_Set_Weather_Wind : public ScriptImpClass {
-    int custom;
-
-    void Created(GameObject *obj);
-
-    void Custom(GameObject *obj, int message, int param, GameObject *sender);
+	int custom;
+	void Created(GameObject *obj);
+	void Custom(GameObject *obj,int message,int param,GameObject *sender);
 };
 
 /*!
@@ -4086,18 +3907,16 @@ class JMG_Utility_Custom_Set_Weather_Wind : public ScriptImpClass {
 * \Intensity - How intense the lightning is
 * \StartDistance - How far away is the cloest lightning strikes
 * \EndDistance - How far away is the furthest lightning strikes
-* \Heading - What direction is the lightning
+* \Heading - What direction is the lightning 
 * \Distribution - How spread out is the lightning
 * \TransitionTime - Amount of time it takes for the new value to be at full effect
 * \author jgray
 * \ingroup JmgUtility
 */
 class JMG_Utility_Custom_Set_Weather_Lightning : public ScriptImpClass {
-    int custom;
-
-    void Created(GameObject *obj);
-
-    void Custom(GameObject *obj, int message, int param, GameObject *sender);
+	int custom;
+	void Created(GameObject *obj);
+	void Custom(GameObject *obj,int message,int param,GameObject *sender);
 };
 
 /*!
@@ -4106,18 +3925,16 @@ class JMG_Utility_Custom_Set_Weather_Lightning : public ScriptImpClass {
 * \Intensity - How intense the warblitz is
 * \StartDistance - How far away is the cloest warblitz strikes
 * \EndDistance - How far away is the furthest warblitz strikes
-* \Heading - What direction is the warblitz
+* \Heading - What direction is the warblitz 
 * \Distribution - How spread out is the warblitz
 * \TransitionTime - Amount of time it takes for the new value to be at full effect
 * \author jgray
 * \ingroup JmgUtility
 */
 class JMG_Utility_Custom_Set_Weather_War_Blitz : public ScriptImpClass {
-    int custom;
-
-    void Created(GameObject *obj);
-
-    void Custom(GameObject *obj, int message, int param, GameObject *sender);
+	int custom;
+	void Created(GameObject *obj);
+	void Custom(GameObject *obj,int message,int param,GameObject *sender);
 };
 
 /*!
@@ -4130,11 +3947,9 @@ class JMG_Utility_Custom_Set_Weather_War_Blitz : public ScriptImpClass {
 * \ingroup JmgUtility
 */
 class JMG_Utility_Custom_Set_Weather_Clouds : public ScriptImpClass {
-    int custom;
-
-    void Created(GameObject *obj);
-
-    void Custom(GameObject *obj, int message, int param, GameObject *sender);
+	int custom;
+	void Created(GameObject *obj);
+	void Custom(GameObject *obj,int message,int param,GameObject *sender);
 };
 
 /*!
@@ -4148,13 +3963,10 @@ class JMG_Utility_Custom_Set_Weather_Clouds : public ScriptImpClass {
 * \ingroup JmgUtility
 */
 class JMG_Utility_Play_Music_On_Join_Custom_Change_Music : public ScriptImpClass {
-    int custom;
-
-    void Created(GameObject *obj);
-
-    void Timer_Expired(GameObject *obj, int number);
-
-    void Custom(GameObject *obj, int message, int param, GameObject *sender);
+	int custom;
+	void Created(GameObject *obj);
+	void Timer_Expired(GameObject *obj,int number);
+	void Custom(GameObject *obj,int message,int param,GameObject *sender);
 };
 
 /*!
@@ -4171,7 +3983,7 @@ class JMG_Utility_Play_Music_On_Join_Custom_Change_Music : public ScriptImpClass
 * \ingroup JmgUtility
 */
 class JMG_Utility_Zone_Send_Custom_If_Has_Weapon : public ScriptImpClass {
-    void Entered(GameObject *obj, GameObject *enterer);
+	void Entered(GameObject *obj,GameObject *enterer);
 };
 
 
@@ -4188,13 +4000,11 @@ class JMG_Utility_Zone_Send_Custom_If_Has_Weapon : public ScriptImpClass {
 * \ingroup JmgUtility
 */
 class JMG_Utility_Receive_All_Customs_To_Send_Custom : public ScriptImpClass {
-    int resetCustom;
-    int customs[10];
-    bool receivedCustoms[10];
-
-    void Created(GameObject *obj);
-
-    void Custom(GameObject *obj, int message, int param, GameObject *sender);
+	int resetCustom;
+	int customs[10];
+	bool receivedCustoms[10];
+	void Created(GameObject *obj);
+	void Custom(GameObject *obj,int message,int param,GameObject *sender);
 };
 
 /*!
@@ -4209,22 +4019,17 @@ class JMG_Utility_Receive_All_Customs_To_Send_Custom : public ScriptImpClass {
 * \ingroup JmgUtility
 */
 class JMG_Utility_Zone_Teleport_To_Random_Wander_Point : public ScriptImpClass {
-    bool retryOnFailure;
-    int playerType;
-    float safeTeleportDistance;
-    int wanderPointGroup;
-    int changeGroupIDCustom;
-    bool aiOnly;
-
-    void Created(GameObject *obj);
-
-    void Entered(GameObject *obj, GameObject *enterer);
-
-    void Custom(GameObject *obj, int message, int param, GameObject *sender);
-
-    bool Get_A_Defense_Point(Vector3 *position, float *facing);
-
-    bool Grab_Teleport_Spot(GameObject *enter, int attempts);
+	bool retryOnFailure;
+	int playerType;
+	float safeTeleportDistance;
+	int wanderPointGroup;
+	int changeGroupIDCustom;
+	bool aiOnly;
+	void Created(GameObject *obj);
+	void Entered(GameObject *obj,GameObject *enterer);
+	void Custom(GameObject *obj,int message,int param,GameObject *sender);
+	bool Get_A_Defense_Point(Vector3 *position,float *facing);
+	bool Grab_Teleport_Spot(GameObject *enter,int attempts);
 };
 
 /*!
@@ -4233,14 +4038,11 @@ class JMG_Utility_Zone_Teleport_To_Random_Wander_Point : public ScriptImpClass {
 * \ingroup JmgUtility
 */
 class JMG_Utility_Zone_Teleport_To_Random_Wander_Point_Attach : public ScriptImpClass {
-    float safeTeleportDistance;
-    int wanderPointGroup;
-
-    void Created(GameObject *obj);
-
-    void Timer_Expired(GameObject *obj, int number);
-
-    bool Get_A_Defense_Point(Vector3 *position, float *facing);
+	float safeTeleportDistance;
+	int wanderPointGroup;
+	void Created(GameObject *obj);
+	void Timer_Expired(GameObject *obj,int number);
+	bool Get_A_Defense_Point(Vector3 *position,float *facing);
 };
 
 /*!
@@ -4251,12 +4053,10 @@ class JMG_Utility_Zone_Teleport_To_Random_Wander_Point_Attach : public ScriptImp
 * \ingroup JmgUtility
 */
 class JMG_Utility_Zone_Set_Player_Type : public ScriptImpClass {
-    int requiredPlayerType;
-    int setPlayerType;
-
-    void Created(GameObject *obj);
-
-    void Entered(GameObject *obj, GameObject *enterer);
+	int requiredPlayerType;
+	int setPlayerType;
+	void Created(GameObject *obj);
+	void Entered(GameObject *obj,GameObject *enterer);
 };
 
 /*!
@@ -4271,16 +4071,14 @@ class JMG_Utility_Zone_Set_Player_Type : public ScriptImpClass {
 * \ingroup JmgUtility
 */
 class JMG_Utility_Zone_Send_Custom_Enter : public ScriptImpClass {
-    int playerType;
-    int custom;
-    int param;
-    float delay;
-    int id;
-    bool triggerOnce;
-
-    void Created(GameObject *obj);
-
-    void Entered(GameObject *obj, GameObject *enterer);
+	int playerType;
+	int custom;
+	int param;
+	float delay;
+	int id;
+	bool triggerOnce;
+	void Created(GameObject *obj);
+	void Entered(GameObject *obj,GameObject *enterer);
 };
 
 /*!
@@ -4294,11 +4092,9 @@ class JMG_Utility_Zone_Send_Custom_Enter : public ScriptImpClass {
 * \ingroup JmgUtility
 */
 class JMG_Utility_Custom_Destroy_Closest_Object_To_Position : public ScriptImpClass {
-    int custom;
-
-    void Created(GameObject *obj);
-
-    void Custom(GameObject *obj, int message, int param, GameObject *sender);
+	int custom;
+	void Created(GameObject *obj);
+	void Custom(GameObject *obj,int message,int param,GameObject *sender);
 };
 
 /*!
@@ -4311,7 +4107,7 @@ class JMG_Utility_Custom_Destroy_Closest_Object_To_Position : public ScriptImpCl
 * \ingroup JmgUtility
 */
 class JMG_Utility_Zone_Set_Spawner : public ScriptImpClass {
-    void Entered(GameObject *obj, GameObject *enterer);
+	void Entered(GameObject *obj,GameObject *enterer);
 };
 
 /*!
@@ -4323,7 +4119,7 @@ class JMG_Utility_Zone_Set_Spawner : public ScriptImpClass {
 * \ingroup JmgUtility
 */
 class JMG_Utility_Persistant_Weapon_Powerup : public ScriptImpClass {
-    void Custom(GameObject *obj, int message, int param, GameObject *sender);
+	void Custom(GameObject *obj,int message,int param,GameObject *sender);
 };
 
 /*!
@@ -4332,9 +4128,8 @@ class JMG_Utility_Persistant_Weapon_Powerup : public ScriptImpClass {
 * \ingroup JmgUtility
 */
 class JMG_Utility_Persistant_Weapon_zStandin : public ScriptImpClass {
-    void Created(GameObject *obj);
-
-    void Timer_Expired(GameObject *obj, int number);
+	void Created(GameObject *obj);
+	void Timer_Expired(GameObject *obj,int number);
 };
 
 /*!
@@ -4343,16 +4138,12 @@ class JMG_Utility_Persistant_Weapon_zStandin : public ScriptImpClass {
 * \ingroup JmgUtility
 */
 class JMG_Utility_Persistant_Weapon_zAttached : public ScriptImpClass {
-    int disarmCustom;
-    char weaponName[256];
-
-    void Created(GameObject *obj);
-
-    void Timer_Expired(GameObject *obj, int number);
-
-    void Custom(GameObject *obj, int message, int param, GameObject *sender);
-
-    void Destroyed(GameObject *obj);
+	int disarmCustom;
+	char weaponName[256];
+	void Created(GameObject *obj);
+	void Timer_Expired(GameObject *obj,int number);
+	void Custom(GameObject *obj,int message,int param,GameObject *sender);
+	void Destroyed(GameObject *obj);
 };
 
 /*!
@@ -4366,20 +4157,16 @@ class JMG_Utility_Persistant_Weapon_zAttached : public ScriptImpClass {
 * \ingroup JmgUtility
 */
 class JMG_Utility_Custom_Teleport_Players_Outside_Range_To_Wanderpoints : public ScriptImpClass {
-    Vector3 scanTeleportSpot;
-    int playerType;
-    float safeTeleportDistance;
-    float teleportIgnoreDistance;
-    int wanderPointGroup;
-    int custom;
-
-    void Created(GameObject *obj);
-
-    void Custom(GameObject *obj, int message, int param, GameObject *sender);
-
-    bool Get_A_Defense_Point(Vector3 *position, float *facing);
-
-    bool Grab_Teleport_Spot(GameObject *enter, int attempts);
+	Vector3 scanTeleportSpot;
+	int playerType;
+	float safeTeleportDistance;
+	float teleportIgnoreDistance;
+	int wanderPointGroup;
+	int custom;
+	void Created(GameObject *obj);
+	void Custom(GameObject *obj,int message,int param,GameObject *sender);
+	bool Get_A_Defense_Point(Vector3 *position,float *facing);
+	bool Grab_Teleport_Spot(GameObject *enter,int attempts);
 };
 
 
@@ -4393,11 +4180,9 @@ class JMG_Utility_Custom_Teleport_Players_Outside_Range_To_Wanderpoints : public
 * \ingroup JmgUtility
 */
 class JMG_Utility_Custom_Set_Tile_Frame : public ScriptImpClass {
-    int custom;
-
-    void Created(GameObject *obj);
-
-    void Custom(GameObject *obj, int message, int param, GameObject *sender);
+	int custom;
+	void Created(GameObject *obj);
+	void Custom(GameObject *obj,int message,int param,GameObject *sender);
 };
 
 /*!
@@ -4413,12 +4198,13 @@ class JMG_Utility_Custom_Set_Tile_Frame : public ScriptImpClass {
 * \ingroup JmgUtility
 */
 class JMG_Utility_Zone_Send_Custom_No_Weapon : public ScriptImpClass {
-    void Entered(GameObject *obj, GameObject *enterer);
+	void Entered(GameObject *obj,GameObject *enterer);
 };
 
 
+
 /*!
-* \brief Reads text from a file and displays it to the screen,
+* \brief Reads text from a file and displays it to the screen, 
 * \ the text in a file is broken every 150 characters (tries to end the current word) and then delayed by 6 seconds
 * \ Note: This will only work once because of how it works
 * \Custom - Custom to trigger this script on
@@ -4439,43 +4225,37 @@ The expected format of the file is always Tag Line Tag Line, never add blank lin
 * \ingroup JmgUtility
 */
 class JMG_Utility_Custom_Display_Briefing_Message : public ScriptImpClass {
-    struct BriefingTextNode {
-        char Text[256];
-        float Delay;
-        BriefingTextNode *next;
-
-        BriefingTextNode(const char *text) {
-            Delay = 0.0f;
-            sprintf(Text, "%s", text);
-            next = NULL;
-        }
-
-        BriefingTextNode(const char *text, float delay) {
-            Delay = delay;
-            sprintf(Text, "%s", text);
-            next = NULL;
-        }
-
-        BriefingTextNode() {
-            next = NULL;
-        }
-    };
-
-    BriefingTextNode *BriefingText;
-    BriefingTextNode *CurrentNode;
-    bool triggered;
-
-    void Created(GameObject *obj);
-
-    void Timer_Expired(GameObject *obj, int number);
-
-    void Custom(GameObject *obj, int message, int param, GameObject *sender);
-
-    void Destroyed(GameObject *obj);
-
-    void AddNewTextNode();
-
-    void RemoveTextNodes();
+	struct BriefingTextNode
+	{
+		char Text[256];
+		float Delay;
+		BriefingTextNode *next;
+		BriefingTextNode(const char *text)
+		{
+			Delay = 0.0f;
+			sprintf(Text,"%s",text); 
+			next = NULL;
+		}
+		BriefingTextNode(const char *text,float delay)
+		{
+			Delay = delay;
+			sprintf(Text,"%s",text); 
+			next = NULL;
+		}
+		BriefingTextNode()
+		{
+			next = NULL;
+		}
+	};
+	BriefingTextNode *BriefingText;
+	BriefingTextNode *CurrentNode;
+	bool triggered;
+	void Created(GameObject *obj);
+	void Timer_Expired(GameObject *obj,int number);
+	void Custom(GameObject *obj,int message,int param,GameObject *sender);
+	void Destroyed(GameObject *obj);
+	void AddNewTextNode();
+	void RemoveTextNodes();
 };
 
 /*!
@@ -4486,14 +4266,11 @@ class JMG_Utility_Custom_Display_Briefing_Message : public ScriptImpClass {
 * \ingroup JmgUtility
 */
 class JMG_Utility_Zone_Set_Player_Team : public ScriptImpClass {
-    int requiredPlayerTeam;
-    int setPlayerTeam;
-
-    void Created(GameObject *obj);
-
-    void Entered(GameObject *obj, GameObject *enterer);
+	int requiredPlayerTeam;
+	int setPlayerTeam;
+	void Created(GameObject *obj);
+	void Entered(GameObject *obj,GameObject *enterer);
 };
-
 /*!
 * \brief Used to update your objectives
 * \NewObjectiveID - ID of the new objective to add
@@ -4506,16 +4283,14 @@ class JMG_Utility_Zone_Set_Player_Team : public ScriptImpClass {
 * \ingroup JmgUtility
 */
 class JMG_Utility_Objective_System_Objective_Update_Create : public ScriptImpClass {
-    bool triggered;
-
-    void Created(GameObject *obj);
-
-    void Timer_Expired(GameObject *obj, int number);
-
+	bool triggered;
+	void Created(GameObject *obj);
+	void Timer_Expired(GameObject *obj,int number);
 public:
-    JMG_Utility_Objective_System_Objective_Update_Create() {
-        triggered = false;
-    }
+	JMG_Utility_Objective_System_Objective_Update_Create()
+	{
+		triggered = false;
+	}
 };
 
 /*!
@@ -4527,11 +4302,9 @@ public:
 * \ingroup JmgUtility
 */
 class JMG_Utility_Objective_System_Objective_Remove_Custom : public ScriptImpClass {
-    int custom;
-
-    void Created(GameObject *obj);
-
-    void Custom(GameObject *obj, int message, int param, GameObject *sender);
+	int custom;
+	void Created(GameObject *obj);
+	void Custom(GameObject *obj,int message,int param,GameObject *sender);
 };
 
 /*!
@@ -4542,11 +4315,9 @@ class JMG_Utility_Objective_System_Objective_Remove_Custom : public ScriptImpCla
 * \ingroup JmgUtility
 */
 class JMG_Utility_Delay_Then_Rotate_Camera : public ScriptImpClass {
-    bool triggered;
-
-    void Created(GameObject *obj);
-
-    void Timer_Expired(GameObject *obj, int number);
+	bool triggered;
+	void Created(GameObject *obj);
+	void Timer_Expired(GameObject *obj,int number);
 };
 
 /*!
@@ -4559,14 +4330,12 @@ class JMG_Utility_Delay_Then_Rotate_Camera : public ScriptImpClass {
 * \ingroup JmgUtility
 */
 class JMG_Utility_Damage_SmartGameObjects_In_Range : public ScriptImpClass {
-    float range;
-    float damage;
-    char warhead[128];
-    float rate;
-
-    void Created(GameObject *obj);
-
-    void Timer_Expired(GameObject *obj, int number);
+	float range;
+	float damage;
+	char warhead[128];
+	float rate;
+	void Created(GameObject *obj);
+	void Timer_Expired(GameObject *obj,int number);
 };
 
 /*!
@@ -4577,12 +4346,10 @@ class JMG_Utility_Damage_SmartGameObjects_In_Range : public ScriptImpClass {
 * \ingroup JmgUtility
 */
 class JMG_Utility_Unstick_Infantry_If_Stuck : public ScriptImpClass {
-    float distance;
-    float rate;
-
-    void Created(GameObject *obj);
-
-    void Timer_Expired(GameObject *obj, int number);
+	float distance;
+	float rate;
+	void Created(GameObject *obj);
+	void Timer_Expired(GameObject *obj,int number);
 };
 
 /*!
@@ -4598,13 +4365,11 @@ class JMG_Utility_Unstick_Infantry_If_Stuck : public ScriptImpClass {
 * \ingroup JmgUtility
 */
 class JMG_Utility_Custom_Send_Custom_On_Count : public ScriptImpClass {
-    int custom;
-    int resetCustom;
-    int count;
-
-    void Created(GameObject *obj);
-
-    void Custom(GameObject *obj, int message, int param, GameObject *sender);
+	int custom;
+	int resetCustom;
+	int count;
+	void Created(GameObject *obj);
+	void Custom(GameObject *obj,int message,int param,GameObject *sender);
 };
 
 /*!
@@ -4614,13 +4379,10 @@ class JMG_Utility_Custom_Send_Custom_On_Count : public ScriptImpClass {
 * \ingroup JmgUtility
 */
 class JMG_Utility_Custom_Destroy_Self : public ScriptImpClass {
-    int custom;
-
-    void Created(GameObject *obj);
-
-    void Custom(GameObject *obj, int message, int param, GameObject *sender);
+	int custom;
+	void Created(GameObject *obj);
+	void Custom(GameObject *obj,int message,int param,GameObject *sender);
 };
-
 /*!
 * \brief Changes the player's team to the value specified, then kills the player, finally subtracting 1 from the death count
 * \RequiredPlayerTeam - Player team that the player has to be in order to be changed
@@ -4629,12 +4391,10 @@ class JMG_Utility_Custom_Destroy_Self : public ScriptImpClass {
 * \ingroup JmgUtility
 */
 class JMG_Utility_Zone_Set_Player_Team2 : public ScriptImpClass {
-    int requiredPlayerTeam;
-    int setPlayerTeam;
-
-    void Created(GameObject *obj);
-
-    void Entered(GameObject *obj, GameObject *enterer);
+	int requiredPlayerTeam;
+	int setPlayerTeam;
+	void Created(GameObject *obj);
+	void Entered(GameObject *obj,GameObject *enterer);
 };
 
 /*!
@@ -4648,9 +4408,8 @@ class JMG_Utility_Zone_Set_Player_Team2 : public ScriptImpClass {
 * \ingroup JmgUtility
 */
 class JMG_Utility_Poke_Send_Custom : public ScriptImpClass {
-    void Created(GameObject *obj);
-
-    void Poked(GameObject *obj, GameObject *poker);
+	void Created(GameObject *obj);
+	void Poked(GameObject *obj, GameObject *poker);
 };
 
 /*!
@@ -4660,7 +4419,7 @@ class JMG_Utility_Poke_Send_Custom : public ScriptImpClass {
 * \ingroup JmgUtility
 */
 class JMG_Utility_Set_Collision_Group : public ScriptImpClass {
-    void Created(GameObject *obj);
+	void Created(GameObject *obj);
 };
 
 /*!
@@ -4672,15 +4431,12 @@ class JMG_Utility_Set_Collision_Group : public ScriptImpClass {
 * \ingroup JmgUtility
 */
 class JMG_Utility_Cap_Credits : public ScriptImpClass {
-    int team;
-    float credits;
-    int custom;
-
-    void Created(GameObject *obj);
-
-    void Timer_Expired(GameObject *obj, int number);
-
-    void Custom(GameObject *obj, int message, int param, GameObject *sender);
+	int team;
+	float credits;
+	int custom;
+	void Created(GameObject *obj);
+	void Timer_Expired(GameObject *obj,int number);
+	void Custom(GameObject *obj,int message,int param,GameObject *sender);
 };
 
 /*!
@@ -4694,11 +4450,9 @@ class JMG_Utility_Cap_Credits : public ScriptImpClass {
 * \ingroup JmgUtility
 */
 class JMG_Utility_Custom_Apply_Damage : public ScriptImpClass {
-    int custom;
-
-    void Created(GameObject *obj);
-
-    void Custom(GameObject *obj, int message, int param, GameObject *sender);
+	int custom;
+	void Created(GameObject *obj);
+	void Custom(GameObject *obj,int message,int param,GameObject *sender);
 };
 
 /*!
@@ -4732,107 +4486,87 @@ class JMG_Utility_Custom_Apply_Damage : public ScriptImpClass {
 * \ingroup JmgUtility
 */
 class JMG_Utility_AI_Goto_Enemy : public ScriptImpClass {
-    enum aiState {
-        IDLE, HUNTING_STAR, ATTACKING_TARGET, RETURNING_HOME, WANDERING_GROUP, ACTION_BADPATH
-    };
-
-    struct LastAction {
-        int targetId;
-        Vector3 location;
-        float speed;
-        float distance;
-        bool attack;
-        bool overrideLocation;
-
-        LastAction() {
-        }
-
-        LastAction(int targetId, Vector3 location, float speed, float distance, bool attack, bool overrideLocation) {
-            this->targetId = targetId;
-            this->location = location;
-            this->speed = speed;
-            this->distance = distance;
-            this->attack = attack;
-            this->overrideLocation = overrideLocation;
-        }
-
-        bool operator==(LastAction l) {
-            return (targetId == l.targetId && JmgUtility::SimpleDistance(location, l.location) <= 0.0f &&
-                    speed == l.speed && distance == l.distance && attack == l.attack &&
-                    overrideLocation == l.overrideLocation);
-        }
-    };
-
-    struct ValidLastLocation {
-        bool valid;
-        Vector3 location;
-
-        ValidLastLocation(bool valid) {
-            this->valid = valid;
-        }
-
-        ValidLastLocation(int enemyId);
-    };
-
-    LastAction lastAction;
-    aiState state;
-    Vector3 homeLocation;
-    float maxSightFromHomeLocation;
-    bool huntStealth;
-    int targetId;
-    int lastSeenTime;
-    float weaponRange;
-    float weaponEffectiveRange;
-    int huntingEnemyId;
-    int removeIgnoreTime;
-    int ignoreEnemyId;
-    float huntSearchDistance;
-    float huntArriveDistance;
-    float attackArriveDistance;
-    int stuckTime;
-    int reverseTime;
-    Vector3 lastPosition;
-    bool moveBackward;
-    float wanderDistanceOverride;
-    int wanderingAiGroupId;
-    float wanderSpeed;
-    float huntSpeed;
-    float attackSpeed;
-    float returnHomeSpeed;
-    int changeWanderGroupCustom;
-    int changeWanderSpeedCustom;
-    int changeHuntDistanceCustom;
-    int changeReturnHomeSpeedCustom;
-    int changeHuntSpeedCustom;
-    int changeMaxSightFromHomeLocationCustom;
-    int changeAttackSpeedCustom;
-
-    void Created(GameObject *obj);
-
-    void Enemy_Seen(GameObject *obj, GameObject *seen);
-
-    void Timer_Expired(GameObject *obj, int number);
-
-    void Custom(GameObject *obj, int message, int param, GameObject *sender);
-
-    void Action_Complete(GameObject *obj, int action_id, ActionCompleteReason reason);
-
-    void Damaged(GameObject *obj, GameObject *damager, float damage);
-
-    void Attack_Move(GameObject *obj, GameObject *target, Vector3 location, float speed, float distance, bool attack,
-                     bool overrideLocation);
-
-    GameObject *findClosestStar(GameObject *obj);
-
-    void Return_Home(GameObject *obj, ValidLastLocation goNearLastWanderPoint);
-
-    void Stuck_Check(GameObject *obj, Vector3 targetPos);
-
-    void Cant_Get_To_target(GameObject *obj);
-
-    bool GetRandomPosition(Vector3 *position);
-
-    bool Choose_Target(GameObject *obj, GameObject *target);
+	enum aiState{IDLE,HUNTING_STAR,ATTACKING_TARGET,RETURNING_HOME,WANDERING_GROUP,ACTION_BADPATH};
+	struct LastAction
+	{
+		int targetId;
+		Vector3 location;
+		float speed;
+		float distance;
+		bool attack;
+		bool overrideLocation;
+		LastAction()
+		{
+		}
+		LastAction(int targetId,Vector3 location,float speed,float distance,bool attack,bool overrideLocation)
+		{
+			this->targetId = targetId;
+			this->location = location;
+			this->speed = speed;
+			this->distance = distance;
+			this->attack = attack;
+			this->overrideLocation = overrideLocation;
+		}
+		bool operator == (LastAction l)
+		{
+			return (targetId == l.targetId && JmgUtility::SimpleDistance(location,l.location) <= 0.0f && speed == l.speed && distance == l.distance && attack == l.attack && overrideLocation == l.overrideLocation);
+		}
+	};
+	struct ValidLastLocation
+	{
+		bool valid;
+		Vector3 location;
+		ValidLastLocation(bool valid)
+		{
+			this->valid = valid;
+		}
+		ValidLastLocation(int enemyId);
+	};
+	LastAction lastAction;
+	aiState state;
+	Vector3 homeLocation;
+	float maxSightFromHomeLocation;
+	bool huntStealth;
+	int targetId;
+	int lastSeenTime;
+	float weaponRange;
+	float weaponEffectiveRange;
+	int huntingEnemyId;
+	int removeIgnoreTime;
+	int ignoreEnemyId;
+	float huntSearchDistance;
+	float huntArriveDistance;
+	float attackArriveDistance;
+	int stuckTime;
+	int reverseTime;
+	Vector3 lastPosition;
+	bool moveBackward;
+	float wanderDistanceOverride;
+	int wanderingAiGroupId;
+	float wanderSpeed;
+	float huntSpeed;
+	float attackSpeed;
+	float returnHomeSpeed;
+	int changeWanderGroupCustom;
+	int changeWanderSpeedCustom;
+	int changeHuntDistanceCustom;
+	int changeReturnHomeSpeedCustom;
+	int changeHuntSpeedCustom;
+	int changeMaxSightFromHomeLocationCustom;
+	int changeAttackSpeedCustom;
+	void Created(GameObject *obj);
+	void Enemy_Seen(GameObject *obj,GameObject *seen);
+	void Timer_Expired(GameObject *obj,int number);
+	void Custom(GameObject *obj,int message,int param,GameObject *sender);
+	void Action_Complete(GameObject *obj,int action_id,ActionCompleteReason reason);
+	void Damaged(GameObject *obj,GameObject *damager,float damage);
+	void Attack_Move(GameObject *obj,GameObject *target,Vector3 location,float speed,float distance,bool attack,bool overrideLocation);
+	GameObject *findClosestStar(GameObject *obj);
+	void Return_Home(GameObject *obj,ValidLastLocation goNearLastWanderPoint);
+	void Stuck_Check(GameObject *obj,Vector3 targetPos);
+	void Cant_Get_To_target(GameObject *obj);
+	bool GetRandomPosition(Vector3 *position);
+	bool Choose_Target(GameObject *obj,GameObject *target);
 };
 
 /*!
@@ -4866,101 +4600,83 @@ class JMG_Utility_AI_Goto_Enemy : public ScriptImpClass {
 * \ingroup JmgUtility
 */
 class JMG_Utility_AI_Goto_Enemy_Not_Star : public ScriptImpClass {
-    enum aiState {
-        IDLE, HUNTING_STAR, ATTACKING_TARGET, RETURNING_HOME, WANDERING_GROUP, ACTION_BADPATH
-    };
-
-    struct LastAction {
-        int targetId;
-        Vector3 location;
-        float speed;
-        float distance;
-        bool attack;
-        bool overrideLocation;
-
-        LastAction() {
-        }
-
-        LastAction(int targetId, Vector3 location, float speed, float distance, bool attack, bool overrideLocation) {
-            this->targetId = targetId;
-            this->location = location;
-            this->speed = speed;
-            this->distance = distance;
-            this->attack = attack;
-            this->overrideLocation = overrideLocation;
-        }
-    };
-
-    struct ValidLastLocation {
-        bool valid;
-        Vector3 location;
-
-        ValidLastLocation(bool valid) {
-            this->valid = valid;
-        }
-
-        ValidLastLocation(int enemyId);
-    };
-
-    float maxSightFromHomeLocation;
-    LastAction lastAction;
-    aiState state;
-    Vector3 homeLocation;
-    bool huntStealth;
-    int targetId;
-    int lastSeenTime;
-    float weaponRange;
-    float weaponEffectiveRange;
-    int huntingEnemyId;
-    int removeIgnoreTime;
-    int ignoreEnemyId;
-    float huntSearchDistance;
-    float huntArriveDistance;
-    float attackArriveDistance;
-    int stuckTime;
-    int reverseTime;
-    Vector3 lastPosition;
-    bool moveBackward;
-    float wanderDistanceOverride;
-    int wanderingAiGroupId;
-    float wanderSpeed;
-    float huntSpeed;
-    float attackSpeed;
-    float returnHomeSpeed;
-    int changeWanderGroupCustom;
-    int changeWanderSpeedCustom;
-    int changeHuntDistanceCustom;
-    int changeReturnHomeSpeedCustom;
-    int changeHuntSpeedCustom;
-    int changeMaxSightFromHomeLocationCustom;
-    int changeAttackSpeedCustom;
-
-    void Created(GameObject *obj);
-
-    void Enemy_Seen(GameObject *obj, GameObject *seen);
-
-    void Timer_Expired(GameObject *obj, int number);
-
-    void Custom(GameObject *obj, int message, int param, GameObject *sender);
-
-    void Action_Complete(GameObject *obj, int action_id, ActionCompleteReason reason);
-
-    void Damaged(GameObject *obj, GameObject *damager, float damage);
-
-    void Attack_Move(GameObject *obj, GameObject *target, Vector3 location, float speed, float distance, bool attack,
-                     bool overrideLocation);
-
-    GameObject *findClosestStar(GameObject *obj);
-
-    void Return_Home(GameObject *obj, ValidLastLocation goNearLastWanderPoint);
-
-    void Stuck_Check(GameObject *obj, Vector3 targetPos);
-
-    void Cant_Get_To_target(GameObject *obj);
-
-    bool GetRandomPosition(Vector3 *position);
-
-    bool Choose_Target(GameObject *obj, GameObject *target);
+	enum aiState{IDLE,HUNTING_STAR,ATTACKING_TARGET,RETURNING_HOME,WANDERING_GROUP,ACTION_BADPATH};
+	struct LastAction
+	{
+		int targetId;
+		Vector3 location;
+		float speed;
+		float distance;
+		bool attack;
+		bool overrideLocation;
+		LastAction()
+		{
+		}
+		LastAction(int targetId,Vector3 location,float speed,float distance,bool attack,bool overrideLocation)
+		{
+			this->targetId = targetId;
+			this->location = location;
+			this->speed = speed;
+			this->distance = distance;
+			this->attack = attack;
+			this->overrideLocation = overrideLocation;
+		}
+	};
+	struct ValidLastLocation
+	{
+		bool valid;
+		Vector3 location;
+		ValidLastLocation(bool valid)
+		{
+			this->valid = valid;
+		}
+		ValidLastLocation(int enemyId);
+	};
+	float maxSightFromHomeLocation;
+	LastAction lastAction;
+	aiState state;
+	Vector3 homeLocation;
+	bool huntStealth;
+	int targetId;
+	int lastSeenTime;
+	float weaponRange;
+	float weaponEffectiveRange;
+	int huntingEnemyId;
+	int removeIgnoreTime;
+	int ignoreEnemyId;
+	float huntSearchDistance;
+	float huntArriveDistance;
+	float attackArriveDistance;
+	int stuckTime;
+	int reverseTime;
+	Vector3 lastPosition;
+	bool moveBackward;
+	float wanderDistanceOverride;
+	int wanderingAiGroupId;
+	float wanderSpeed;
+	float huntSpeed;
+	float attackSpeed;
+	float returnHomeSpeed;
+	int changeWanderGroupCustom;
+	int changeWanderSpeedCustom;
+	int changeHuntDistanceCustom;
+	int changeReturnHomeSpeedCustom;
+	int changeHuntSpeedCustom;
+	int changeMaxSightFromHomeLocationCustom;
+	int changeAttackSpeedCustom;
+	void Created(GameObject *obj);
+	void Enemy_Seen(GameObject *obj,GameObject *seen);
+	void Timer_Expired(GameObject *obj,int number);
+	void Custom(GameObject *obj,int message,int param,GameObject *sender);
+	void Action_Complete(GameObject *obj,int action_id,ActionCompleteReason reason);
+	void Damaged(GameObject *obj,GameObject *damager,float damage);
+	void Attack_Move(GameObject *obj,GameObject *target,Vector3 location,float speed,float distance,bool attack,bool overrideLocation);
+	GameObject *findClosestStar(GameObject *obj);
+	void Return_Home(GameObject *obj,ValidLastLocation goNearLastWanderPoint);
+	void Stuck_Check(GameObject *obj,Vector3 targetPos);
+	void Cant_Get_To_target(GameObject *obj);
+	bool GetRandomPosition(Vector3 *position);
+	bool Choose_Target(GameObject *obj,GameObject *target);
 };
 
 /*!
@@ -4970,10 +4686,10 @@ class JMG_Utility_AI_Goto_Enemy_Not_Star : public ScriptImpClass {
 * \author jgray
 * \ingroup JmgUtility
 */
-class JMG_Utility_Grant_Key_On_Create : public ScriptImpClass {
-    AggressiveAttackSpotSystem::AggressiveAttackSpotNode *node;
-
-    void Created(GameObject *obj);
+class JMG_Utility_Grant_Key_On_Create : public ScriptImpClass
+{
+	AggressiveAttackSpotSystem::AggressiveAttackSpotNode *node;
+	void Created(GameObject *obj);
 };
 
 /*!
@@ -4989,17 +4705,15 @@ class JMG_Utility_Grant_Key_On_Create : public ScriptImpClass {
 * \ingroup JmgUtility
 */
 class JMG_Utility_Custom_Send_Custom : public ScriptImpClass {
-    int recieveMessage;
-    int id;
-    int custom;
-    int Param;
-    float delay;
-    float randomDelay;
-    float randomChance;
-
-    void Created(GameObject *obj);
-
-    void Custom(GameObject *obj, int message, int param, GameObject *sender);
+	int recieveMessage;
+	int id;
+	int custom;
+	int Param;
+	float delay;
+	float randomDelay;
+	float randomChance;
+	void Created(GameObject *obj);
+	void Custom(GameObject *obj,int message,int param,GameObject *sender);
 };
 
 /*!
@@ -5014,20 +4728,17 @@ class JMG_Utility_Custom_Send_Custom : public ScriptImpClass {
 * \ingroup JmgUtility
 */
 class JMG_Utility_Damage_Unoccupied_Vehicle : public ScriptImpClass {
-    bool hasBeenOccupied;
-    float rate;
-    float damage;
-    char warhead[128];
-    float delay;
-    float maxDelay;
-    float decreaseTick;
-    float increaseTick;
-
-    void Created(GameObject *obj);
-
-    void Timer_Expired(GameObject *obj, int number);
-
-    void Custom(GameObject *obj, int message, int param, GameObject *sender);
+	bool hasBeenOccupied;
+	float rate;
+	float damage;
+	char warhead[128];
+	float delay;
+	float maxDelay;
+	float decreaseTick;
+	float increaseTick;
+	void Created(GameObject *obj);
+	void Timer_Expired(GameObject *obj,int number);
+	void Custom(GameObject *obj,int message,int param,GameObject *sender);
 };
 
 /*!
@@ -5040,20 +4751,18 @@ class JMG_Utility_Damage_Unoccupied_Vehicle : public ScriptImpClass {
 * \ingroup JmgUtility
 */
 class JMG_Utility_Custom_Damage_All_Soldiers_On_Team : public ScriptImpClass {
-    int custom;
-    int team;
-    float damage;
-    char warhead[128];
-
-    void Created(GameObject *obj);
-
-    void Custom(GameObject *obj, int message, int param, GameObject *sender);
+	int custom;
+	int team;
+	float damage;
+	char warhead[128];
+	void Created(GameObject *obj);
+	void Custom(GameObject *obj,int message,int param,GameObject *sender);
 };
 
 /*!
 * \brief Makes a unit move between wander points, it'll strafe at the target while it has one, clone of JMG_Utility_AI_Guardian_Aircraft but with pathfind enabled and allows you to turn off the engine on arrival, also well throw itself into reverse if it gets stuck
 * \WanderingAIGroupID - Group of points to wander between
-* \WanderSpeed - Speed the unit moves at
+* \WanderSpeed - Speed the unit moves at 
 * \FireRange - Max range that it can use it's guns, if less than 0 it uses the current weapon held's max range
 * \CheckBlocked - Whether to check if the target spot is blocked before firing
 * \AimAtFeet - Should the vehicle aim at the feet of infantry
@@ -5063,27 +4772,21 @@ class JMG_Utility_Custom_Damage_All_Soldiers_On_Team : public ScriptImpClass {
 * \ingroup JmgUtility
 */
 class JMG_Utility_AI_Guardian_Vehicle : public ScriptImpClass {
-    float fireRange;
-    bool aimAtFeet;
-    Vector3 dpPosition;
-    int EnemyID;
-    int EnemyTimeOutTime;
-    Vector3 LastPos;
-    int backward;
-    int stuckTime;
-    int stealthModeOverride;
-
-    void Created(GameObject *obj);
-
-    void Timer_Expired(GameObject *obj, int number);
-
-    void Enemy_Seen(GameObject *obj, GameObject *seen);
-
-    void Damaged(GameObject *obj, GameObject *damager, float damage);
-
-    void Goto_Location(GameObject *obj);
-
-    bool Get_A_Defense_Point(Vector3 *position);
+	float fireRange;
+	bool aimAtFeet;
+	Vector3 dpPosition;
+	int EnemyID;
+	int EnemyTimeOutTime;
+	Vector3 LastPos;
+	int backward;
+	int stuckTime;
+	int stealthModeOverride;
+	void Created(GameObject *obj);
+	void Timer_Expired(GameObject *obj,int number);
+	void Enemy_Seen(GameObject *obj,GameObject *seen);
+	void Damaged(GameObject *obj,GameObject *damager,float damage);
+	void Goto_Location(GameObject *obj);
+	bool Get_A_Defense_Point(Vector3 *position);
 };
 
 /*!
@@ -5096,11 +4799,9 @@ class JMG_Utility_AI_Guardian_Vehicle : public ScriptImpClass {
 * \ingroup JmgUtility
 */
 class JMG_Utility_Custom_Destroy_Closest_Model_To_Position : public ScriptImpClass {
-    int custom;
-
-    void Created(GameObject *obj);
-
-    void Custom(GameObject *obj, int message, int param, GameObject *sender);
+	int custom;
+	void Created(GameObject *obj);
+	void Custom(GameObject *obj,int message,int param,GameObject *sender);
 };
 
 /*!
@@ -5130,44 +4831,37 @@ class JMG_Utility_Custom_Destroy_Closest_Model_To_Position : public ScriptImpCla
 * \author jgray
 * \ingroup JmgUtility
 */
-class JMG_Utility_Send_Custom_On_Deaths_Controller : public ScriptImpClass {
-    bool requiresADeathToStartNoPlayerAdd;
-    float addDeathsWhenNoPlayers;
-    int noPlayersAddDeathSaftyTime;
-    int currentNoPlayersAddDeathSaftyTime;
-
-    void Created(GameObject *obj);
-
-    void Timer_Expired(GameObject *obj, int number);
-
-    void Custom(GameObject *obj, int message, int param, GameObject *sender);
-
-    void Destroyed(GameObject *obj);
-
-    void Detach(GameObject *obj);
-
-    static char *formatReminderString(const char *format, ...);
-
+class JMG_Utility_Send_Custom_On_Deaths_Controller : public ScriptImpClass
+{
+	bool requiresADeathToStartNoPlayerAdd;
+	float addDeathsWhenNoPlayers;
+	int noPlayersAddDeathSaftyTime;
+	int currentNoPlayersAddDeathSaftyTime;
+	void Created(GameObject *obj);
+	void Timer_Expired(GameObject *obj,int number);
+	void Custom(GameObject *obj,int message,int param,GameObject *sender);
+	void Destroyed(GameObject *obj);
+	void Detach(GameObject *obj);
+	static char *formatReminderString(const char *format,...);
 public:
-    static void ReportLogic(GameObject *obj);
-
-    static int deathCount;
-    static int maxDeaths;
-    static int deathReminder;
-    static int urgentDeathReminder;
-    static int stringId;
-    static int myId;
-    static Vector3 reminderColor;
-    static char reminderMessage[220];
-    static char deathSingular[220];
-    static char deathPlural[220];
-    static char remainingSingular[220];
-    static char remainingPlural[220];
-    static int reminderMessageOrder;
-    static bool controllerPlaced;
-    static bool announceOnFirstDeath;
-    static bool onlyTrackPlayerDeaths;
-    static bool recordAIDeaths;
+	static void ReportLogic(GameObject *obj);
+	static int deathCount;
+	static int maxDeaths;
+	static int deathReminder;
+	static int urgentDeathReminder;
+	static int stringId;
+	static int myId;
+	static Vector3 reminderColor;
+	static char reminderMessage[220];
+	static char deathSingular[220];
+	static char deathPlural[220];
+	static char remainingSingular[220];
+	static char remainingPlural[220];
+	static int reminderMessageOrder;
+	static bool controllerPlaced;
+	static bool announceOnFirstDeath;
+	static bool onlyTrackPlayerDeaths;
+	static bool recordAIDeaths;
 };
 
 /*!
@@ -5175,8 +4869,9 @@ public:
 * \author jgray
 * \ingroup JmgUtility
 */
-class JMG_Utility_Send_Custom_On_Deaths_Reporter : public ScriptImpClass {
-    void Killed(GameObject *obj, GameObject *killer);
+class JMG_Utility_Send_Custom_On_Deaths_Reporter : public ScriptImpClass
+{
+	void Killed(GameObject *obj,GameObject *killer);
 };
 
 /*!
@@ -5185,7 +4880,7 @@ class JMG_Utility_Send_Custom_On_Deaths_Reporter : public ScriptImpClass {
 * \ingroup JmgUtility
 */
 class JMG_Utility_AI_Goto_Player_Ignore_Object : public ScriptImpClass {
-    void Created(GameObject *obj);
+	void Created(GameObject *obj);
 };
 
 
@@ -5195,7 +4890,7 @@ class JMG_Utility_AI_Goto_Player_Ignore_Object : public ScriptImpClass {
 * \ingroup JmgUtility
 */
 class JMG_Utility_AI_Goto_Enemy_Ignore_Object : public ScriptImpClass {
-    void Created(GameObject *obj);
+	void Created(GameObject *obj);
 };
 
 
@@ -5205,7 +4900,7 @@ class JMG_Utility_AI_Goto_Enemy_Ignore_Object : public ScriptImpClass {
 * \ingroup JmgUtility
 */
 class JMG_Utility_AI_Goto_Enemy_Not_Star_Ignore_Object : public ScriptImpClass {
-    void Created(GameObject *obj);
+	void Created(GameObject *obj);
 };
 
 /*!
@@ -5218,11 +4913,9 @@ class JMG_Utility_AI_Goto_Enemy_Not_Star_Ignore_Object : public ScriptImpClass {
 * \ingroup JmgUtility
 */
 class JMG_Utility_Custom_Set_Team_And_Model : public ScriptImpClass {
-    int custom;
-
-    void Created(GameObject *obj);
-
-    void Custom(GameObject *obj, int message, int param, GameObject *sender);
+	int custom;
+	void Created(GameObject *obj);
+	void Custom(GameObject *obj,int message,int param,GameObject *sender);
 };
 
 /*!
@@ -5234,13 +4927,10 @@ class JMG_Utility_Custom_Set_Team_And_Model : public ScriptImpClass {
 * \ingroup JmgUtility
 */
 class JMG_Utility_Death_Warhead_Create_Object : public ScriptImpClass {
-    unsigned int lastDamageWarhead;
-
-    void Created(GameObject *obj);
-
-    void Damaged(GameObject *obj, GameObject *damager, float damage);
-
-    void Killed(GameObject *obj, GameObject *killer);
+	unsigned int lastDamageWarhead;
+	void Created(GameObject *obj);
+	void Damaged(GameObject *obj,GameObject *damager,float damage);
+	void Killed(GameObject *obj,GameObject *killer);
 };
 
 /*!
@@ -5252,12 +4942,10 @@ class JMG_Utility_Death_Warhead_Create_Object : public ScriptImpClass {
 * \ingroup JmgUtility
 */
 class JMG_Utility_Zone_Change_Character_On_Preset_Enter : public ScriptImpClass {
-    int playerType;
-    char entererPreset[256];
-
-    void Created(GameObject *obj);
-
-    void Entered(GameObject *obj, GameObject *enterer);
+	int playerType;
+	char entererPreset[256];
+	void Created(GameObject *obj);
+	void Entered(GameObject *obj,GameObject *enterer);
 };
 
 /*!
@@ -5268,12 +4956,10 @@ class JMG_Utility_Zone_Change_Character_On_Preset_Enter : public ScriptImpClass 
 * \ingroup JmgUtility
 */
 class JMG_Utility_Sync_HP_With_Object : public ScriptImpClass {
-    int id;
-    float rate;
-
-    void Created(GameObject *obj);
-
-    void Timer_Expired(GameObject *obj, int number);
+	int id;
+	float rate;
+	void Created(GameObject *obj);
+	void Timer_Expired(GameObject *obj,int number);
 };
 
 /*!
@@ -5284,36 +4970,26 @@ class JMG_Utility_Sync_HP_With_Object : public ScriptImpClass {
 * \ingroup JmgUtility
 */
 class JMG_Utility_Set_Screen_Color_Fade_Controller : public ScriptImpClass {
-    bool syncedScreen[128];
-
-    void Created(GameObject *obj);
-
-    void Timer_Expired(GameObject *obj, int number);
-
-    void Destroyed(GameObject *obj);
-
-    void Detach(GameObject *obj);
-
-    static Vector3 controllerDefaultColor;
-    static float controllerDefaultOpacity;
+	bool syncedScreen[128];
+	void Created(GameObject *obj);
+	void Timer_Expired(GameObject *obj,int number);
+	void Destroyed(GameObject *obj);
+	void Detach(GameObject *obj);
+	static Vector3 controllerDefaultColor;
+	static float controllerDefaultOpacity;
 public:
-    JMG_Utility_Set_Screen_Color_Fade_Controller() {
-        controllerPlaced = true;
-    }
-
-    static bool controllerPlaced;
-    static Vector3 color[128];
-    static float opacity[128];
-
-    SCRIPTS_API static void Update_Colors(Vector3 Color, float Opacity);
-
-    SCRIPTS_API static void Update_Player_Colors(GameObject *player, Vector3 Color, float Opacity);
-
-    SCRIPTS_API static void Reset_To_Default(GameObject *player);
-
-    SCRIPTS_API static void Update_Player(GameObject *player, float transition);
-
-    SCRIPTS_API static void Update_All_Players(float transition);
+	JMG_Utility_Set_Screen_Color_Fade_Controller()
+	{
+		controllerPlaced = true;
+	}
+	static bool controllerPlaced;
+	static Vector3 color[128];
+	static float opacity[128];
+	SCRIPTS_API static void Update_Colors(Vector3 Color,float Opacity);
+	SCRIPTS_API static void Update_Player_Colors(GameObject *player,Vector3 Color,float Opacity);
+	SCRIPTS_API static void Reset_To_Default(GameObject *player);
+	SCRIPTS_API static void Update_Player(GameObject *player,float transition);
+	SCRIPTS_API static void Update_All_Players(float transition);
 };
 
 /*!
@@ -5327,11 +5003,9 @@ public:
 * \ingroup JmgUtility
 */
 class JMG_Utility_Set_Screen_Color_Fade_On_Custom : public ScriptImpClass {
-    int custom;
-
-    void Created(GameObject *obj);
-
-    void Custom(GameObject *obj, int message, int param, GameObject *sender);
+	int custom;
+	void Created(GameObject *obj);
+	void Custom(GameObject *obj,int message,int param,GameObject *sender);
 };
 
 /*!
@@ -5341,7 +5015,7 @@ class JMG_Utility_Set_Screen_Color_Fade_On_Custom : public ScriptImpClass {
 * \ingroup JmgUtility
 */
 class JMG_Utility_Set_Screen_Color_Fade_Reset_Player_Create : public ScriptImpClass {
-    void Created(GameObject *obj);
+	void Created(GameObject *obj);
 };
 
 /*!
@@ -5352,7 +5026,7 @@ class JMG_Utility_Set_Screen_Color_Fade_Reset_Player_Create : public ScriptImpCl
 * \ingroup JmgUtility
 */
 class JMG_Utility_Set_Screen_Color_Fade_Reset_Player_Enter : public ScriptImpClass {
-    void Entered(GameObject *obj, GameObject *enter);
+	void Entered(GameObject *obj,GameObject *enter);
 };
 
 /*!
@@ -5367,27 +5041,21 @@ class JMG_Utility_Set_Screen_Color_Fade_Reset_Player_Enter : public ScriptImpCla
 * \ingroup JmgUtility
 */
 class JMG_Utility_Simple_Mech : public ScriptImpClass {
-    enum mvmtDir {
-        IDLE, FORWARD, BACKWARD, LEFT, RIGHT
-    };
-    char idleAnimation[32];
-    char forwardAnimation[32];
-    char backwardAnimation[32];
-    char turnLeftAnimation[32];
-    char turnRightAnimation[32];
-    int idleCooldown;
-    int releaseDelay;
-    bool hasIdleAnimation;
-    mvmtDir currentDirection;
-    mvmtDir lastMovementDirection;
-
-    void Created(GameObject *obj);
-
-    void Timer_Expired(GameObject *obj, int number);
-
-    void Animation_Complete(GameObject *obj, const char *animation_name);
-
-    void PlayAnimation(GameObject *obj, mvmtDir direction, float startFrame, float endFrame, bool looped);
+	enum mvmtDir{IDLE,FORWARD,BACKWARD,LEFT,RIGHT};
+	char idleAnimation[32];
+	char forwardAnimation[32];
+	char backwardAnimation[32];
+	char turnLeftAnimation[32];
+	char turnRightAnimation[32];
+	int idleCooldown;
+	int releaseDelay;
+	bool hasIdleAnimation;
+	mvmtDir currentDirection;
+	mvmtDir lastMovementDirection;
+	void Created(GameObject *obj);
+	void Timer_Expired(GameObject *obj,int number);
+	void Animation_Complete(GameObject *obj,const char *animation_name);
+	void PlayAnimation(GameObject *obj,mvmtDir direction,float startFrame,float endFrame,bool looped);
 };
 
 /*!
@@ -5404,15 +5072,12 @@ class JMG_Utility_Simple_Mech : public ScriptImpClass {
 * \ingroup JmgUtility
 */
 class JMG_Utility_Send_Custom_When_Preset_In_Range : public ScriptImpClass {
-    float range;
-    char preset[128];
-    float rate;
-
-    void Created(GameObject *obj);
-
-    void Timer_Expired(GameObject *obj, int number);
+	float range;
+	char preset[128];
+	float rate;
+	void Created(GameObject *obj);
+	void Timer_Expired(GameObject *obj,int number);
 };
-
 /*!
 * \brief Basic turret attach script, turrets match team of vehicle attached to, turrets are destroyed by destroy event
 * \Preset - Preset to create
@@ -5421,8 +5086,9 @@ class JMG_Utility_Send_Custom_When_Preset_In_Range : public ScriptImpClass {
 * \author jgray
 * \ingroup JmgUtility
 */
-class JMG_Utility_Death_Create_Object_At_Bone_Position : public ScriptImpClass {
-    void Killed(GameObject *obj, GameObject *killer);
+class JMG_Utility_Death_Create_Object_At_Bone_Position : public ScriptImpClass
+{
+	void Killed(GameObject *obj,GameObject *killer);
 };
 
 /*!
@@ -5431,7 +5097,7 @@ class JMG_Utility_Death_Create_Object_At_Bone_Position : public ScriptImpClass {
 * \ingroup JmgUtility
 */
 class JMG_Utility_Enable_Loiter : public ScriptImpClass {
-    void Created(GameObject *obj);
+	void Created(GameObject *obj);
 };
 
 /*!
@@ -5442,15 +5108,13 @@ class JMG_Utility_Enable_Loiter : public ScriptImpClass {
 * \ingroup JmgUtility
 */
 class JMG_Utility_Custom_Switch_Weapon : public ScriptImpClass {
-    int custom;
-
-    void Created(GameObject *obj);
-
-    void Custom(GameObject *obj, int message, int param, GameObject *sender);
+	int custom;
+	void Created(GameObject *obj);
+	void Custom(GameObject *obj,int message,int param,GameObject *sender);
 };
 
 /*!
-* \brief Displays HUD messages once at each hour, 30 min, 20 min, 10 min, 5 4 3 2 1 min, 30 sec 10 9 8 7 6 5 4 3 2 1 seconds. Custom messages can be
+* \brief Displays HUD messages once at each hour, 30 min, 20 min, 10 min, 5 4 3 2 1 min, 30 sec 10 9 8 7 6 5 4 3 2 1 seconds. Custom messages can be 
 * \ sent by attaching JMG_Utility_HUD_Count_Down_Messages
 * \TimeInSeconds - Time in seconds that the countdown goes for
 * \StringID - ID of the string to replace and use for the HUD message
@@ -5470,175 +5134,178 @@ class JMG_Utility_Custom_Switch_Weapon : public ScriptImpClass {
 */
 class JMG_Utility_HUD_Count_Down : public ScriptImpClass {
 public:
-    struct CountdownScreenCharacterNode {
-        int id;
-        int charPos;
-        char currentChar;
-        char baseModelName[15];
-        struct CountdownScreenCharacterNode *next;
-
-        CountdownScreenCharacterNode(int id, int charPos, const char *baseModelName) {
-            this->id = id;
-            this->charPos = charPos;
-            this->currentChar = '\0';
-            sprintf(this->baseModelName, "%s", baseModelName);
-            this->next = NULL;
-        }
-    };
-
-    static int highestCharPos;
-    static CountdownScreenCharacterNode *countdownScreenCharacterController;
-
-    static void AddVisualCountdownNode(int id, int charPos, const char *baseModelName) {
-        if (charPos > 5) {
-            Console_Input("msg AddVisualCountdownNode::ERROR charPos can be at most 5!");
-            return;
-        }
-        if (strlen(baseModelName) > 15) {
-            Console_Input(
-                    "msg AddVisualCountdownNode::ERROR baseModelName can be at most 15 characters (remember a number is added to the end)!");
-            return;
-        }
-        if (highestCharPos < charPos)
-            highestCharPos = charPos;
-        CountdownScreenCharacterNode *current = countdownScreenCharacterController;
-        if (!countdownScreenCharacterController)
-            countdownScreenCharacterController = new CountdownScreenCharacterNode(id, charPos, baseModelName);
-        while (current) {
-            if (current->id == id) {
-                Console_Input("msg AddVisualCountdownNode::ERROR: id has already been added once!");
-                return;
-            }
-            if (!current->next) {
-                current->next = new CountdownScreenCharacterNode(id, charPos, baseModelName);
-                return;
-            }
-            current = current->next;
-        }
-    }
-
-    struct SendCustomOnSecondNode {
-        bool hasTriggered;
-        int triggerSecond;
-        int id;
-        int custom;
-        int param;
-        float delay;
-        struct SendCustomOnSecondNode *next;
-
-        SendCustomOnSecondNode(int triggerSecond, int id, int custom, int param, float delay) {
-            this->hasTriggered = false;
-            this->triggerSecond = triggerSecond;
-            this->id = id;
-            this->custom = custom;
-            this->param = param;
-            this->delay = delay;
-            this->next = NULL;
-        }
-    };
-
-    static SendCustomOnSecondNode *sendCustomOnSecondController;
-
-    static void AddSecondNode(int triggerSecond, int id, int custom, int param, float delay) {
-        SendCustomOnSecondNode *current = sendCustomOnSecondController;
-        if (!sendCustomOnSecondController)
-            sendCustomOnSecondController = new SendCustomOnSecondNode(triggerSecond, id, custom, param, delay);
-        while (current) {
-            if (triggerSecond == current->triggerSecond && id == current->id && custom == current->custom &&
-                param == current->param) {
-                Console_Input("msg ERROR: A custom for this trigger second already exists!");
-                return;
-            }
-            if (!current->next) {
-                current->next = new SendCustomOnSecondNode(triggerSecond, id, custom, param, delay);
-                return;
-            }
-            current = current->next;
-        }
-    }
-
-    static bool controllerPlaced;
+	struct CountdownScreenCharacterNode
+	{
+		int id;
+		int charPos;
+		char currentChar;
+		char baseModelName[15];
+		struct CountdownScreenCharacterNode *next;
+		CountdownScreenCharacterNode(int id,int charPos,const char *baseModelName)
+		{
+			this->id = id;
+			this->charPos = charPos;
+			this->currentChar = '\0';
+			sprintf(this->baseModelName,"%s",baseModelName);
+			this->next = NULL;
+		}
+	};
+	static int highestCharPos;
+	static CountdownScreenCharacterNode *countdownScreenCharacterController;
+	static void AddVisualCountdownNode(int id,int charPos,const char *baseModelName)
+	{
+		if (charPos > 5)
+		{
+			Console_Input("msg AddVisualCountdownNode::ERROR charPos can be at most 5!");
+			return;
+		}
+		if (strlen(baseModelName) > 15)
+		{
+			Console_Input("msg AddVisualCountdownNode::ERROR baseModelName can be at most 15 characters (remember a number is added to the end)!");
+			return;
+		}
+		if (highestCharPos < charPos)
+			highestCharPos = charPos;
+		CountdownScreenCharacterNode *current = countdownScreenCharacterController;
+		if (!countdownScreenCharacterController)
+			countdownScreenCharacterController = new CountdownScreenCharacterNode(id,charPos,baseModelName);
+		while (current)
+		{
+			if (current->id == id)
+			{
+				Console_Input("msg AddVisualCountdownNode::ERROR: id has already been added once!");
+				return;
+			}
+			if (!current->next)
+			{
+				current->next = new CountdownScreenCharacterNode(id,charPos,baseModelName);
+				return;
+			}
+			current = current->next;
+		}
+	}
+	struct SendCustomOnSecondNode
+	{
+		bool hasTriggered;
+		int triggerSecond;
+		int id;
+		int custom;
+		int param;
+		float delay;
+		struct SendCustomOnSecondNode *next;
+		SendCustomOnSecondNode(int triggerSecond,int id,int custom,int param,float delay)
+		{
+			this->hasTriggered = false;
+			this->triggerSecond = triggerSecond;
+			this->id = id;
+			this->custom = custom;
+			this->param = param;
+			this->delay = delay;
+			this->next = NULL;
+		}
+	};
+	static SendCustomOnSecondNode *sendCustomOnSecondController;
+	static void AddSecondNode(int triggerSecond,int id,int custom,int param,float delay)
+	{
+		SendCustomOnSecondNode *current = sendCustomOnSecondController;
+		if (!sendCustomOnSecondController)
+			sendCustomOnSecondController = new SendCustomOnSecondNode(triggerSecond,id,custom,param,delay);
+		while (current)
+		{
+			if (triggerSecond == current->triggerSecond && id == current->id && custom == current->custom && param == current->param)
+			{
+				Console_Input("msg ERROR: A custom for this trigger second already exists!");
+				return;
+			}
+			if (!current->next)
+			{
+				current->next = new SendCustomOnSecondNode(triggerSecond,id,custom,param,delay);
+				return;
+			}
+			current = current->next;
+		}
+	}
+	static bool controllerPlaced;
 private:
-    int stringId;
-    Vector3 color;
-    char warningMessage[220];
-    char hourSingular[220];
-    char hourPlural[220];
-    char minuteSingular[220];
-    char minutePlural[220];
-    char secondSingular[220];
-    char secondPlural[220];
-    int seconds;
-    int pauseCustom;
-    bool paused;
-
-    void Created(GameObject *obj);
-
-    void Timer_Expired(GameObject *obj, int number);
-
-    void Custom(GameObject *obj, int message, int param, GameObject *sender);
-
-    void Destroyed(GameObject *obj);
-
-    void Detach(GameObject *obj);
-
-    char *formatReminderString(const char *format, ...);
-
-    void NodeSendCustom(GameObject *obj, int second) {
-        if (!sendCustomOnSecondController)
-            return;
-        SendCustomOnSecondNode *current = sendCustomOnSecondController;
-        while (current) {
-            if (current->triggerSecond == second && !current->hasTriggered) {
-                current->hasTriggered = true;
-                Commands->Send_Custom_Event(obj, Commands->Find_Object(current->id), current->custom, current->param,
-                                            current->delay);
-            }
-            current = current->next;
-        }
-    }
-
-    void CleanupSecondNodes() {
-        controllerPlaced = false;
-        SendCustomOnSecondNode *temp = sendCustomOnSecondController, *die;
-        while (temp) {
-            die = temp;
-            temp = temp->next;
-            delete die;
-        }
-        sendCustomOnSecondController = NULL;
-        CountdownScreenCharacterNode *temp2 = countdownScreenCharacterController, *die2;
-        while (temp2) {
-            GameObject * kill = Commands->Find_Object(temp2->id);
-            if (kill)
-                Commands->Destroy_Object(kill);
-            die2 = temp2;
-            temp2 = temp2->next;
-            delete die2;
-        }
-        countdownScreenCharacterController = NULL;
-        highestCharPos = -1;
-    }
-
-    void UpdateCountdownHudNodes() {
-        if (highestCharPos <= 0)
-            return;
-        char hhmmss[6];
-        sprintf(hhmmss, "%02d%02d%02d", seconds / 3600, (seconds % 3600) / 60, (seconds % 3600) % 60);
-        for (int x = 0; x <= highestCharPos; x++)
-            for (CountdownScreenCharacterNode *current = countdownScreenCharacterController; current; current = current->next) {
-                if (current->charPos == x && current->currentChar != hhmmss[5 - x]) {
-                    GameObject * object = Commands->Find_Object(current->id);
-                    if (!object)
-                        continue;
-                    char model[16];
-                    sprintf(model, "%s%c", current->baseModelName, hhmmss[5 - x]);
-                    Commands->Set_Model(object, model);
-                }
-            }
-    }
+	int stringId;
+	Vector3 color;
+	char warningMessage[220];
+	char hourSingular[220];
+	char hourPlural[220];
+	char minuteSingular[220];
+	char minutePlural[220];
+	char secondSingular[220];
+	char secondPlural[220];
+	int seconds;
+	int pauseCustom;
+	bool paused;
+	void Created(GameObject *obj);
+	void Timer_Expired(GameObject *obj,int number);
+	void Custom(GameObject *obj,int message,int param,GameObject *sender);
+	void Destroyed(GameObject *obj);
+	void Detach(GameObject *obj);
+	char *formatReminderString(const char *format,...);
+	
+	void NodeSendCustom(GameObject *obj,int second)
+	{
+		if (!sendCustomOnSecondController)
+			return;
+		SendCustomOnSecondNode *current = sendCustomOnSecondController;
+		while (current)
+		{
+			if (current->triggerSecond == second && !current->hasTriggered)
+			{
+				current->hasTriggered = true;
+				Commands->Send_Custom_Event(obj,Commands->Find_Object(current->id),current->custom,current->param,current->delay);
+			}
+			current = current->next;
+		}
+	}
+	void CleanupSecondNodes()
+	{
+		controllerPlaced = false;
+		SendCustomOnSecondNode *temp = sendCustomOnSecondController,*die;
+		while (temp)
+		{
+			die = temp;
+			temp = temp->next;
+			delete die;
+		}
+		sendCustomOnSecondController = NULL;
+		CountdownScreenCharacterNode *temp2 = countdownScreenCharacterController,*die2;
+		while (temp2)
+		{
+			GameObject *kill = Commands->Find_Object(temp2->id);
+			if (kill)
+				Commands->Destroy_Object(kill);
+			die2 = temp2;
+			temp2 = temp2->next;
+			delete die2;
+		}
+		countdownScreenCharacterController = NULL;
+		highestCharPos = -1;
+	}
+	void UpdateCountdownHudNodes()
+	{
+		if (highestCharPos <= 0)
+			return;
+		char hhmmss[6];
+		sprintf(hhmmss,"%02d%02d%02d",seconds/3600,(seconds%3600)/60,(seconds%3600)%60);
+		for (int x = 0;x <= highestCharPos;x++)
+			for (CountdownScreenCharacterNode *current = countdownScreenCharacterController;current;current = current->next)
+			{
+				if (current->charPos == x && current->currentChar != hhmmss[5-x])
+				{
+					GameObject *object = Commands->Find_Object(current->id);
+					if (!object)
+						continue;
+					char model[16];
+					sprintf(model,"%s%c",current->baseModelName,hhmmss[5-x]);
+					Commands->Set_Model(object,model);
+				}
+			}
+	}
 };
-
 /*!
 * \brief Sends a custom when TimeInSeconds (on JMG_Utility_HUD_Count_Down) matches the TriggerTime, only will trigger once even if multiple JMG_Utility_HUD_Count_Downs are placed
 * \ Can be placed before JMG_Utility_HUD_Count_Down is placed.
@@ -5652,9 +5319,8 @@ private:
 * \ingroup JmgUtility
 */
 class JMG_Utility_HUD_Count_Down_Send_Custom : public ScriptImpClass {
-    void Created(GameObject *obj);
-
-    void Timer_Expired(GameObject *obj, int number);
+	void Created(GameObject *obj);
+	void Timer_Expired(GameObject *obj,int number);
 };
 
 /*!
@@ -5667,7 +5333,7 @@ class JMG_Utility_HUD_Count_Down_Send_Custom : public ScriptImpClass {
 * \ingroup JmgUtility
 */
 class JMG_Utility_Zone_Screen_Fade : public ScriptImpClass {
-    void Entered(GameObject *obj, GameObject *enter);
+	void Entered(GameObject *obj,GameObject *enter);
 };
 
 /*!
@@ -5678,11 +5344,9 @@ class JMG_Utility_Zone_Screen_Fade : public ScriptImpClass {
 * \ingroup JmgUtility
 */
 class JMG_Utility_Custom_Triggers_Enemy_Seen : public ScriptImpClass {
-    int custom;
-
-    void Created(GameObject *obj);
-
-    void Custom(GameObject *obj, int message, int param, GameObject *sender);
+	int custom;
+	void Created(GameObject *obj);
+	void Custom(GameObject *obj,int message,int param,GameObject *sender);
 };
 
 /*!
@@ -5693,23 +5357,18 @@ class JMG_Utility_Custom_Triggers_Enemy_Seen : public ScriptImpClass {
 * \ingroup JmgUtility
 */
 class JMG_Utility_Screen_Fade_Red_On_Damage : public ScriptImpClass {
-    int playerId;
-    Vector3 fadeColor;
-    float fadeOpacity;
-    float injuryRatio;
-    float lastInjuryRatio;
-    float screenOpacity;
-    float lastScreenOpacity;
-
-    void Created(GameObject *obj);
-
-    void Timer_Expired(GameObject *obj, int number);
-
-    void Damaged(GameObject *obj, GameObject *damager, float damage);
-
-    void ScreenFade(GameObject *obj);
-
-    void Custom(GameObject *obj, int message, int param, GameObject *sender);
+	int playerId;
+	Vector3 fadeColor;
+	float fadeOpacity;
+	float injuryRatio;
+	float lastInjuryRatio;
+	float screenOpacity;
+	float lastScreenOpacity;
+	void Created(GameObject *obj);
+	void Timer_Expired(GameObject *obj,int number);
+	void Damaged(GameObject *obj,GameObject *damager,float damage);
+	void ScreenFade(GameObject *obj);
+	void Custom(GameObject *obj,int message,int param,GameObject *sender);
 };
 
 /*!
@@ -5723,20 +5382,17 @@ class JMG_Utility_Screen_Fade_Red_On_Damage : public ScriptImpClass {
 * \author jgray
 * \ingroup JmgUtility
 */
-class JMG_Utility_Player_Count_Enable_Spawners : public ScriptImpClass {
-    bool enabled;
-    int enableCustom;
-    Vector3 playerCount;
-    Vector3 playerCount2;
-    bool conditionMatching;
-
-    void Created(GameObject *obj);
-
-    void Timer_Expired(GameObject *obj, int number);
-
-    void Custom(GameObject *obj, int message, int param, GameObject *sender);
-
-    void EnableSpawners(bool enable);
+class JMG_Utility_Player_Count_Enable_Spawners : public ScriptImpClass
+{
+	bool enabled;
+	int enableCustom;
+	Vector3 playerCount;
+	Vector3 playerCount2;
+	bool conditionMatching;
+	void Created(GameObject *obj);
+	void Timer_Expired(GameObject *obj,int number);
+	void Custom(GameObject *obj,int message,int param,GameObject *sender);
+	void EnableSpawners(bool enable);
 };
 
 /*!
@@ -5745,9 +5401,8 @@ class JMG_Utility_Player_Count_Enable_Spawners : public ScriptImpClass {
 * \ingroup JmgUtility
 */
 class JMG_Utility_AI_Engineer_Ignore_Target : public ScriptImpClass {
-    void Created(GameObject *obj);
+	void Created(GameObject *obj);
 };
-
 /*!
 * \brief Grants specified weapon to all players in range
 * \WeaponName - Name of the weapon to grant to the player
@@ -5763,25 +5418,22 @@ class JMG_Utility_AI_Engineer_Ignore_Target : public ScriptImpClass {
 * \author jgray
 * \ingroup JmgUtility
 */
-class JMG_Utility_Give_Weapon_In_Range : public ScriptImpClass {
-    float rate;
-    float refillRate;
-    float range;
-    Vector3 location;
-    bool enabled;
-    int enableCustom;
-    char weaponName[256];
-    bool selectWeapon;
-    int weaponAmmo;
-    int refillAmount;
-
-    void Created(GameObject *obj);
-
-    void Timer_Expired(GameObject *obj, int number);
-
-    void Custom(GameObject *obj, int message, int param, GameObject *sender);
-
-    void GrantWeapon();
+class JMG_Utility_Give_Weapon_In_Range : public ScriptImpClass
+{
+	float rate;
+	float refillRate;
+	float range;
+	Vector3 location;
+	bool enabled;
+	int enableCustom;
+	char weaponName[256];
+	bool selectWeapon;
+	int weaponAmmo;
+	int refillAmount;
+	void Created(GameObject *obj);
+	void Timer_Expired(GameObject *obj,int number);
+	void Custom(GameObject *obj,int message,int param,GameObject *sender);
+	void GrantWeapon();
 };
 
 /*!
@@ -5791,20 +5443,17 @@ class JMG_Utility_Give_Weapon_In_Range : public ScriptImpClass {
 * \ingroup JmgUtility
 */
 class JMG_Utility_AI_Follow_Player_On_Poke_Controller : public ScriptImpClass {
-    void Created(GameObject *obj);
-
-    void Destroyed(GameObject *obj);
-
-    void Detach(GameObject *obj);
-
+	void Created(GameObject *obj);
+	void Destroyed(GameObject *obj);
+	void Detach(GameObject *obj);
 public:
-    static bool controllerPlaced;
-    static int maxFollowers;
-    static int followingPlayer[128];
-
-    JMG_Utility_AI_Follow_Player_On_Poke_Controller() {
-        controllerPlaced = true;
-    }
+	static bool controllerPlaced;
+	static int maxFollowers;
+	static int followingPlayer[128];
+	JMG_Utility_AI_Follow_Player_On_Poke_Controller()
+	{
+		controllerPlaced = true;
+	}
 };
 
 /*!
@@ -5831,7 +5480,7 @@ public:
 * \PokedCustom - Custom to send when the follower is poked and starts following
 * \LostCustom - Message to send if the follower gets lost or if they follow the player for to long
 * \InjuredCustom - Message to send when the follower gets injured, requires FallBackWhenOutOfArmor be on
-* \KilledCustom - Message to send if the follower is killed
+* \KilledCustom - Message to send if the follower is killed 
 * \HealedCustom - Message to send when the follower gets to full health, requires FallBackWhenOutOfArmor be on
 * \MaxFollowTime - Amount of time the AI can follow the player before getting bored and running home (in 10ths of a second)
 * \MaxIdleTime - Max amount of time an AI can stand still while "following" a player before running home (in 10ths of a second)
@@ -5839,94 +5488,78 @@ public:
 * \ingroup JmgUtility
 */
 class JMG_Utility_AI_Follow_Player_On_Poke : public ScriptImpClass {
-    GameObject *lastFollow;
-    GameObject *lastTarget;
-    Vector3 lastPos;
-    int maxFollowTime;
-    int maxIdleTime;
-    int currentFollowTime;
-    int currentIdleTime;
-    bool detached;
-    float followDistance;
-    float followNearSpeed;
-    float followFarSpeed;
-    float followFarDistance;
-    float followVeryFarSpeed;
-    float followVeryFarDistance;
-    float runHomeSpeed;
-    int actionUpdate;
-    float weaponRange;
-    float targetDistance;
-    int enemyId;
-    int pokerPlayerId;
-    int playerObjectId;
-    Vector3 homeLocation;
-    Vector3 lastLocation;
-    int enemySeen;
-    bool fallbackWithoutArmor;
-    float healWhileAtHomeLocation;
-    int sendCustomId;
-    int pokedCustom;
-    int lostCustom;
-    int killedCustom;
-    int healedCustom;
-    int injuredCustom;
-    Vector3 messageColor;
-    int messagePokeFollowerId;
-    char messagePokeFollower[220];
-    int messageFollowingYouId;
-    int messageFollowingPlayerId;
-    int messageMaxFollowersId;
-    char messageMaxFollowers[220];
-    int messageHealingRequiredId;
-    int messageFollowerInjuredId;
-    int messageFollowerKilledId;
-    int messageFollowerLostId;
-    bool hurt;
-
-    void Created(GameObject *obj);
-
-    void Enemy_Seen(GameObject *obj, GameObject *seen);
-
-    void Timer_Expired(GameObject *obj, int number);
-
-    void Damaged(GameObject *obj, GameObject *damager, float damage);
-
-    void Poked(GameObject *obj, GameObject *poker);
-
-    void Action_Complete(GameObject *obj, int action_id, ActionCompleteReason reason);
-
-    void Killed(GameObject *obj, GameObject *killer);
-
-    void Destroyed(GameObject *obj);
-
-    void Detach(GameObject *obj);
-
-    void AttackTarget(GameObject *obj, GameObject *follow, GameObject *target, Vector3 location, float speed,
-                      float distance);
-
-    void GiveUpOnPlayer(GameObject *obj, bool pokeable);
-
-    void ForgetEnemy(GameObject *obj);
-
-    void SendCustom(GameObject *obj, int custom);
-
-    char *formatMaxFollowingString(const char *format, ...);
-
-    void ShowPlayerMessage(GameObject *player, int stringId, Vector3 color);
-
+	GameObject *lastFollow;
+	GameObject *lastTarget;
+	Vector3 lastPos;
+	int maxFollowTime;
+	int maxIdleTime;
+	int currentFollowTime;
+	int currentIdleTime;
+	bool detached;
+	float followDistance;
+	float followNearSpeed;
+	float followFarSpeed;
+	float followFarDistance;
+	float followVeryFarSpeed;
+	float followVeryFarDistance;
+	float runHomeSpeed;
+	int actionUpdate;
+	float weaponRange;
+	float targetDistance;
+	int enemyId;
+	int pokerPlayerId;
+	int playerObjectId;
+	Vector3 homeLocation;
+	Vector3 lastLocation;
+	int enemySeen;
+	bool fallbackWithoutArmor;
+	float healWhileAtHomeLocation;
+	int sendCustomId;
+	int pokedCustom;
+	int lostCustom;
+	int killedCustom;
+	int healedCustom;
+	int injuredCustom;
+	Vector3 messageColor;
+	int messagePokeFollowerId;
+	char messagePokeFollower[220];
+	int messageFollowingYouId;
+	int messageFollowingPlayerId;
+	int messageMaxFollowersId;
+	char messageMaxFollowers[220];
+	int messageHealingRequiredId;
+	int messageFollowerInjuredId;
+	int messageFollowerKilledId;
+	int messageFollowerLostId;
+	bool hurt;
+	void Created(GameObject *obj);
+	void Enemy_Seen(GameObject *obj,GameObject *seen);
+	void Timer_Expired(GameObject *obj,int number);
+	void Damaged(GameObject *obj,GameObject *damager,float damage);
+	void Poked(GameObject *obj, GameObject *poker);
+	void Action_Complete(GameObject *obj,int action_id,ActionCompleteReason reason);
+	void Killed(GameObject *obj, GameObject *killer);
+	void Destroyed(GameObject *obj);
+	void Detach(GameObject *obj);
+	void AttackTarget(GameObject *obj,GameObject *follow,GameObject *target,Vector3 location,float speed,float distance);
+	void GiveUpOnPlayer(GameObject *obj,bool pokeable);
+	void ForgetEnemy(GameObject *obj);
+	void SendCustom(GameObject *obj,int custom);
+	char *formatMaxFollowingString(const char *format,...);
+	void ShowPlayerMessage(GameObject *player,int stringId,Vector3 color);
 public:
-    JMG_Utility_AI_Follow_Player_On_Poke() {
-        detached = false;
-        pokerPlayerId = 0;
-    }
+	JMG_Utility_AI_Follow_Player_On_Poke()
+	{
+		detached = false;
+		pokerPlayerId = 0;
+	}
 };
 
 /*!
 * \brief Damages the attached object and teleports it after a timed delay
 * \Delay - Amount of time in seconds to wait
 * \TeleportToObjectID - ID of the object to teleport to
-* \Location - Location to teleport to if no object ID was supplied
+* \Location - Location to teleport to if no object ID was supplied 
 * \DamageAmount - Amount of damage to apply
 * \DamageWarhead - Warhead to use to damage the object
 * \DamageSelf - Should the applied damage count for the object the script is attached to
@@ -5934,9 +5567,8 @@ public:
 * \ingroup JmgUtility
 */
 class JMG_Utility_Timer_Damage_And_Teleport : public ScriptImpClass {
-    void Created(GameObject *obj);
-
-    void Timer_Expired(GameObject *obj, int number);
+	void Created(GameObject *obj);
+	void Timer_Expired(GameObject *obj,int number);
 };
 
 /*!
@@ -5952,7 +5584,7 @@ class JMG_Utility_Timer_Damage_And_Teleport : public ScriptImpClass {
 * \ingroup JmgUtility
 */
 class JMG_Utility_Zone_Send_Custom_If_Has_Script : public ScriptImpClass {
-    void Entered(GameObject *obj, GameObject *enterer);
+	void Entered(GameObject *obj,GameObject *enterer);
 };
 
 /*!
@@ -5968,34 +5600,32 @@ class JMG_Utility_Zone_Send_Custom_If_Has_Script : public ScriptImpClass {
 * \Warning_Color - Color to display the warning HUD message
 * \Screen_Fade_Color - Color to fade the screen to
 * \DamageWarhead - Warhead to use to damage the units
-* \InstantKillWarhead - Warhead to use to kill targets instantly
+* \InstantKillWarhead - Warhead to use to kill targets instantly 
 * \author jgray
 * \ingroup JmgUtility
 */
 class JMG_Utility_Damage_When_Outside_Of_Range : public ScriptImpClass {
-    float warnDistance;
-    float damageDistance;
-    float vehicleWarnDistance;
-    float vehicleDamageDistance;
-    float aircraftWarnDistance;
-    float aircraftDamageDistance;
-    float maxSurviveDistance;
-    Vector3 errorMessageColor;
-    Vector3 screenFadeColor;
-    int warnTime[128];
-    bool screenEffectOn[128];
-    int leavingFieldStringId;
-    char damageWarhead[128];
-    char instantKillWarhead[128];
-
-    void Created(GameObject *obj);
-
-    void Timer_Expired(GameObject *obj, int number);
+	float warnDistance;
+	float damageDistance;
+	float vehicleWarnDistance;
+	float vehicleDamageDistance;
+	float aircraftWarnDistance;
+	float aircraftDamageDistance;
+	float maxSurviveDistance;
+	Vector3 errorMessageColor;
+	Vector3 screenFadeColor;
+	int warnTime[128];
+	bool screenEffectOn[128];
+	int leavingFieldStringId;
+	char damageWarhead[128];
+	char instantKillWarhead[128];
+	void Created(GameObject *obj);
+	void Timer_Expired(GameObject *obj,int number);
 };
 
 /*!
 * \brief Sends a custom message when no more objects of the preset name exist on the map, then removes itself
-* \PresetName - preset name to search for
+* \PresetName - preset name to search for 
 * \StartsEnabled - If 0 it doesn't start scanning until enabled, otherwise starts scanning on attach
 * \EnableOrDisableCustom - Custom used to enable the script, a param of 0 disables the script again, anything besides 0 enables
 * \ID - Id of the object to send the custom to, 0 sends to itself
@@ -6006,15 +5636,12 @@ class JMG_Utility_Damage_When_Outside_Of_Range : public ScriptImpClass {
 * \ingroup JmgUtility
 */
 class JMG_Utility_Send_Custom_When_No_More_Presets_Of_Type_Exist : public ScriptImpClass {
-    char presetName[128];
-    int enableCustom;
-    bool enabled;
-
-    void Created(GameObject *obj);
-
-    void Custom(GameObject *obj, int message, int param, GameObject *sender);
-
-    void Timer_Expired(GameObject *obj, int number);
+	char presetName[128];
+	int enableCustom;
+	bool enabled;
+	void Created(GameObject *obj);
+	void Custom(GameObject *obj,int message,int param,GameObject *sender);
+	void Timer_Expired(GameObject *obj,int number);
 };
 
 /*!
@@ -6031,20 +5658,18 @@ class JMG_Utility_Send_Custom_When_No_More_Presets_Of_Type_Exist : public Script
 * \ingroup JmgUtility
 */
 class JMG_Utility_Send_Custom_When_Player_Outside_Of_Range : public ScriptImpClass {
-    int sleepTime;
-    int sleeping;
-    bool triggerOnce;
-    bool enabled;
-    float distance;
-    float delay;
-    float maxRange;
-    int id;
-    int param;
-    int custom;
-
-    void Created(GameObject *obj);
-
-    void Timer_Expired(GameObject *obj, int number);
+	int sleepTime;
+	int sleeping;
+	bool triggerOnce;
+	bool enabled;
+	float distance;
+	float delay;
+	float maxRange;
+	int id;
+	int param;
+	int custom;
+	void Created(GameObject *obj);
+	void Timer_Expired(GameObject *obj,int number);
 };
 
 /*!
@@ -6053,12 +5678,10 @@ class JMG_Utility_Send_Custom_When_Player_Outside_Of_Range : public ScriptImpCla
 * \ingroup JmgUtility
 */
 class JMG_Utility_Set_Team_To_Neutral_When_No_Armor : public ScriptImpClass {
-    bool hurt;
-    int originalPlayerType;
-
-    void Created(GameObject *obj);
-
-    void Timer_Expired(GameObject *obj, int number);
+	bool hurt;
+	int originalPlayerType;
+	void Created(GameObject *obj);
+	void Timer_Expired(GameObject *obj,int number);
 };
 
 /*!
@@ -6075,16 +5698,13 @@ class JMG_Utility_Set_Team_To_Neutral_When_No_Armor : public ScriptImpClass {
 * \ingroup JmgUtility
 */
 class JMG_Utility_Send_Custom_When_No_More_Units_On_Team_Exist : public ScriptImpClass {
-    bool debug;
-    int team;
-    int enableCustom;
-    bool enabled;
-
-    void Created(GameObject *obj);
-
-    void Custom(GameObject *obj, int message, int param, GameObject *sender);
-
-    void Timer_Expired(GameObject *obj, int number);
+	bool debug;
+	int team;
+	int enableCustom;
+	bool enabled;
+	void Created(GameObject *obj);
+	void Custom(GameObject *obj,int message,int param,GameObject *sender);
+	void Timer_Expired(GameObject *obj,int number);
 };
 
 /*!
@@ -6096,14 +5716,12 @@ class JMG_Utility_Send_Custom_When_No_More_Units_On_Team_Exist : public ScriptIm
 * \ingroup JmgUtility
 */
 class JMG_Utility_Custom_Create_Sound_At_Object_Bone : public ScriptImpClass {
-    char sound[128];
-    char bone[32];
-    int custom;
-    bool enabled;
-
-    void Created(GameObject *obj);
-
-    void Custom(GameObject *obj, int message, int param, GameObject *sender);
+	char sound[128];
+	char bone[32];
+	int custom;
+	bool enabled;
+	void Created(GameObject *obj);
+	void Custom(GameObject *obj,int message,int param,GameObject *sender);
 };
 
 /*!
@@ -6120,15 +5738,13 @@ class JMG_Utility_Custom_Create_Sound_At_Object_Bone : public ScriptImpClass {
 * \ingroup JmgUtility
 */
 class JMG_Utility_Custom_Send_Custom_On_Player_Count : public ScriptImpClass {
-    int custom;
-    int resetCustom;
-    int baseCount;
-    int playerCount;
-    int runningCount;
-
-    void Created(GameObject *obj);
-
-    void Custom(GameObject *obj, int message, int param, GameObject *sender);
+	int custom;
+	int resetCustom;
+	int baseCount;
+	int playerCount;
+	int runningCount;
+	void Created(GameObject *obj);
+	void Custom(GameObject *obj,int message,int param,GameObject *sender);
 };
 
 /*!
@@ -6141,7 +5757,7 @@ class JMG_Utility_Custom_Send_Custom_On_Player_Count : public ScriptImpClass {
 * \ingroup JmgUtility
 */
 class JMG_Utility_Killed_By_Player_Send_Custom : public ScriptImpClass {
-    void Killed(GameObject *obj, GameObject *killer);
+	void Killed(GameObject *obj,GameObject *killer);
 };
 
 /*!
@@ -6150,7 +5766,7 @@ class JMG_Utility_Killed_By_Player_Send_Custom : public ScriptImpClass {
 * \ingroup JmgUtility
 */
 class JMG_Utility_AI_Guardian_Ignored : public ScriptImpClass {
-    void Created(GameObject *obj);
+	void Created(GameObject *obj);
 };
 
 /*!
@@ -6159,7 +5775,7 @@ class JMG_Utility_AI_Guardian_Ignored : public ScriptImpClass {
 * \ingroup JmgUtility
 */
 class JMG_Utility_AI_Vehicle_Ignored : public ScriptImpClass {
-    void Created(GameObject *obj);
+	void Created(GameObject *obj);
 };
 
 /*!
@@ -6173,7 +5789,7 @@ class JMG_Utility_AI_Vehicle_Ignored : public ScriptImpClass {
 * \ingroup JmgUtility
 */
 class JMG_Utility_Killed_By_PresetID_Send_Custom : public ScriptImpClass {
-    void Killed(GameObject *obj, GameObject *killer);
+	void Killed(GameObject *obj,GameObject *killer);
 };
 
 /*!
@@ -6182,7 +5798,7 @@ class JMG_Utility_Killed_By_PresetID_Send_Custom : public ScriptImpClass {
 * \ingroup JmgUtility
 */
 class JMG_Utility_Created_Override_AI_Soldier_Muzzle_Direction : public ScriptImpClass {
-    void Created(GameObject *obj);
+	void Created(GameObject *obj);
 };
 
 /*!
@@ -6201,23 +5817,19 @@ class JMG_Utility_Created_Override_AI_Soldier_Muzzle_Direction : public ScriptIm
 * \ingroup JmgUtility
 */
 class JMG_Utility_Custom_Send_Custom_On_Player_Count_HUD : public ScriptImpClass {
-    bool enabled;
-    Vector3 hudStringColor;
-    char hudMessage[220];
-    int hudStringId;
-    int custom;
-    int resetCustom;
-
-    void Created(GameObject *obj);
-
-    void Custom(GameObject *obj, int message, int param, GameObject *sender);
-
-    char *formatHUDMessage(const char *format, ...);
-
+	bool enabled;
+	Vector3 hudStringColor;
+	char hudMessage[220];
+	int hudStringId;
+	int custom;
+	int resetCustom;
+	void Created(GameObject *obj);
+	void Custom(GameObject *obj,int message,int param,GameObject *sender);
+	char *formatHUDMessage(const char *format,...);
 public:
-    int runningCount;
-    int baseCount;
-    int playerCount;
+	int runningCount;
+	int baseCount;
+	int playerCount;
 };
 
 /*!
@@ -6234,7 +5846,7 @@ public:
 * \ingroup JmgUtility
 */
 class JMG_Utility_Zone_Send_Custom_If_Has_Weapon_Ammo : public ScriptImpClass {
-    void Entered(GameObject *obj, GameObject *enterer);
+	void Entered(GameObject *obj,GameObject *enterer);
 };
 
 /*!
@@ -6245,12 +5857,10 @@ class JMG_Utility_Zone_Send_Custom_If_Has_Weapon_Ammo : public ScriptImpClass {
 * \ingroup JmgUtility
 */
 class JMG_Utility_Custom_Remove_Weapon_From_All_Players : public ScriptImpClass {
-    int custom;
-    char weaponName[128];
-
-    void Created(GameObject *obj);
-
-    void Custom(GameObject *obj, int message, int param, GameObject *sender);
+	int custom;
+	char weaponName[128];
+	void Created(GameObject *obj);
+	void Custom(GameObject *obj,int message,int param,GameObject *sender);
 };
 
 /*!
@@ -6261,12 +5871,10 @@ class JMG_Utility_Custom_Remove_Weapon_From_All_Players : public ScriptImpClass 
 * \ingroup JmgUtility
 */
 class JMG_Utility_Custom_Destroy_All_Presets_By_Name : public ScriptImpClass {
-    int custom;
-    char presetName[128];
-
-    void Created(GameObject *obj);
-
-    void Custom(GameObject *obj, int message, int param, GameObject *sender);
+	int custom;
+	char presetName[128];
+	void Created(GameObject *obj);
+	void Custom(GameObject *obj,int message,int param,GameObject *sender);
 };
 
 /*!
@@ -6281,19 +5889,16 @@ class JMG_Utility_Custom_Destroy_All_Presets_By_Name : public ScriptImpClass {
 * \ingroup JmgUtility
 */
 class JMG_Utility_Send_Custom_When_Damage_Exceedes_Threshold : public ScriptImpClass {
-    int id;
-    int custom;
-    int param;
-    float delay;
-    float damageThreshold;
-    float lockoutTime;
-    float timeRemaining;
-
-    void Created(GameObject *obj);
-
-    void Timer_Expired(GameObject *obj, int number);
-
-    void Damaged(GameObject *obj, GameObject *damager, float damage);
+	int id;
+	int custom;
+	int param;
+	float delay;
+	float damageThreshold;
+	float lockoutTime;
+	float timeRemaining;
+	void Created(GameObject *obj);
+	void Timer_Expired(GameObject *obj,int number);
+	void Damaged(GameObject *obj,GameObject *damager,float damage);
 };
 
 /*!
@@ -6306,14 +5911,12 @@ class JMG_Utility_Send_Custom_When_Damage_Exceedes_Threshold : public ScriptImpC
 * \ingroup JmgUtility
 */
 class JMG_Utility_Custom_Send_Translated_String_To_All_Players : public ScriptImpClass {
-    int custom;
-    Vector3 color;
-    int stringId;
-    bool repeatable;
-
-    void Created(GameObject *obj);
-
-    void Custom(GameObject *obj, int message, int param, GameObject *sender);
+	int custom;
+	Vector3 color;
+	int stringId;
+	bool repeatable;
+	void Created(GameObject *obj);
+	void Custom(GameObject *obj,int message,int param,GameObject *sender);
 };
 
 /*!
@@ -6324,8 +5927,9 @@ class JMG_Utility_Custom_Send_Translated_String_To_All_Players : public ScriptIm
 * \author jgray
 * \ingroup JmgUtility
 */
-class JMG_Utility_Destroyed_Drop_Powerup : public ScriptImpClass {
-    void Destroyed(GameObject *obj);
+class JMG_Utility_Destroyed_Drop_Powerup : public ScriptImpClass
+{
+	void Destroyed(GameObject *obj);
 };
 
 /*!
@@ -6336,8 +5940,9 @@ class JMG_Utility_Destroyed_Drop_Powerup : public ScriptImpClass {
 * \author jgray
 * \ingroup JmgUtility
 */
-class JMG_Utility_Pickup_Attach_Script : public ScriptImpClass {
-    void Custom(GameObject *obj, int message, int param, GameObject *sender);
+class JMG_Utility_Pickup_Attach_Script : public ScriptImpClass
+{
+	void Custom(GameObject *obj,int message,int param,GameObject *sender);
 };
 
 /*!
@@ -6350,7 +5955,7 @@ class JMG_Utility_Pickup_Attach_Script : public ScriptImpClass {
 * \ingroup JmgUtility
 */
 class JMG_Utility_Objective_System_Objective_Status_Update_Custom : public ScriptImpClass {
-    void Custom(GameObject *obj, int message, int param, GameObject *sender);
+	void Custom(GameObject *obj,int message,int param,GameObject *sender);
 };
 
 /*!
@@ -6361,11 +5966,9 @@ class JMG_Utility_Objective_System_Objective_Status_Update_Custom : public Scrip
 * \ingroup JmgUtility
 */
 class JMG_Utility_Objective_System_Objective_Failed_Custom : public ScriptImpClass {
-    int custom;
-
-    void Created(GameObject *obj);
-
-    void Custom(GameObject *obj, int message, int param, GameObject *sender);
+	int custom;
+	void Created(GameObject *obj);
+	void Custom(GameObject *obj,int message,int param,GameObject *sender);
 };
 
 /*!
@@ -6375,17 +5978,15 @@ class JMG_Utility_Objective_System_Objective_Failed_Custom : public ScriptImpCla
 * \ingroup JmgUtility
 */
 class JMG_Utility_Force_Player_Team_At_Gameover : public ScriptImpClass {
-    int team;
-
-    void Created(GameObject *obj);
-
-    void Timer_Expired(GameObject *obj, int number);
+	int team;
+	void Created(GameObject *obj);
+	void Timer_Expired(GameObject *obj,int number);
 };
 
 /*!
 * \brief Makes a unit move between wander points, it'll strafe at the target while it has one, clone of JMG_Utility_AI_Guardian_Aircraft but with pathfind enabled
 * \WanderingAIGroupID - Group of points to wander between
-* \WanderSpeed - Speed the unit moves at
+* \WanderSpeed - Speed the unit moves at 
 * \FireRange - Max range that it can use it's guns, if less than 0 it uses the current weapon held's max range
 * \CheckBlocked - Whether to check if the target spot is blocked before firing
 * \ArriveDistance - Distance to get close to
@@ -6397,28 +5998,22 @@ class JMG_Utility_Force_Player_Team_At_Gameover : public ScriptImpClass {
 * \ingroup JmgUtility
 */
 class JMG_Utility_AI_Guardian_Generic : public ScriptImpClass {
-    float fireRange;
-    float flightHeight;
-    float arriveDistance;
-    float arriveDistanceSq;
-    Vector3 dpPosition;
-    int EnemyID;
-    int EnemyTimeOutTime;
-    Vector3 LastPos;
-    bool primaryFire;
-    int stealthModeOverride;
-
-    void Created(GameObject *obj);
-
-    void Timer_Expired(GameObject *obj, int number);
-
-    void Enemy_Seen(GameObject *obj, GameObject *seen);
-
-    void Damaged(GameObject *obj, GameObject *damager, float damage);
-
-    void Goto_Location(GameObject *obj);
-
-    bool Get_A_Defense_Point(Vector3 *position);
+	float fireRange;
+	float flightHeight;
+	float arriveDistance;
+	float arriveDistanceSq;
+	Vector3 dpPosition;
+	int EnemyID;
+	int EnemyTimeOutTime;
+	Vector3 LastPos;
+	bool primaryFire;
+	int stealthModeOverride;
+	void Created(GameObject *obj);
+	void Timer_Expired(GameObject *obj,int number);
+	void Enemy_Seen(GameObject *obj,GameObject *seen);
+	void Damaged(GameObject *obj,GameObject *damager,float damage);
+	void Goto_Location(GameObject *obj);
+	bool Get_A_Defense_Point(Vector3 *position);
 };
 
 /*!
@@ -6432,15 +6027,13 @@ class JMG_Utility_AI_Guardian_Generic : public ScriptImpClass {
 * \ingroup JmgUtility
 */
 class JMG_Utility_Custom_Create_Object_In_Front_Of_Self : public ScriptImpClass {
-    int custom;
-    char presetName[128];
-    float distance;
-    float height;
-    float rotation;
-
-    void Created(GameObject *obj);
-
-    void Custom(GameObject *obj, int message, int param, GameObject *sender);
+	int custom;
+	char presetName[128];
+	float distance;
+	float height;
+	float rotation;
+	void Created(GameObject *obj);
+	void Custom(GameObject *obj,int message,int param,GameObject *sender);
 };
 
 /*!
@@ -6450,7 +6043,7 @@ class JMG_Utility_Custom_Create_Object_In_Front_Of_Self : public ScriptImpClass 
 * \ingroup JmgUtility
 */
 class JMG_Utility_Send_Custom_When_No_More_Units_On_Team_Exist_Ignore : public ScriptImpClass {
-    void Created(GameObject *obj);
+	void Created(GameObject *obj);
 };
 
 /*!
@@ -6463,14 +6056,12 @@ class JMG_Utility_Send_Custom_When_No_More_Units_On_Team_Exist_Ignore : public S
 * \ingroup JmgUtility
 */
 class JMG_Utility_Custom_Damage_All_Vehicles_On_Team : public ScriptImpClass {
-    int custom;
-    int team;
-    float damage;
-    char warhead[128];
-
-    void Created(GameObject *obj);
-
-    void Custom(GameObject *obj, int message, int param, GameObject *sender);
+	int custom;
+	int team;
+	float damage;
+	char warhead[128];
+	void Created(GameObject *obj);
+	void Custom(GameObject *obj,int message,int param,GameObject *sender);
 };
 
 /*!
@@ -6481,19 +6072,17 @@ class JMG_Utility_Custom_Damage_All_Vehicles_On_Team : public ScriptImpClass {
 * \ingroup JmgUtility
 */
 class JMG_Utility_Kill_Unit_If_Not_Moving_Enough : public ScriptImpClass {
-    int time;
-    int resetTime;
-    float distance;
-    Vector3 lastPos;
-
-    void Created(GameObject *obj);
-
-    void Timer_Expired(GameObject *obj, int number);
+	int time;
+	int resetTime;
+	float distance;
+	Vector3 lastPos;
+	void Created(GameObject *obj);
+	void Timer_Expired(GameObject *obj,int number);
 };
 
 
 /*!
-* \brief Reads text from a file and displays it to the screen,
+* \brief Reads text from a file and displays it to the screen, 
 * \ the text in a file is broken every 150 characters (tries to end the current word) and then delayed by 6 seconds
 * \ Note: This will only work once because of how it works
 * \Custom - Custom to trigger this script on
@@ -6509,43 +6098,37 @@ class JMG_Utility_Kill_Unit_If_Not_Moving_Enough : public ScriptImpClass {
 * \ingroup JmgUtility
 */
 class JMG_Utility_Custom_Display_Briefing_Message_StringID : public ScriptImpClass {
-    struct BriefingTextNode {
-        char Text[256];
-        float Delay;
-        BriefingTextNode *next;
-
-        BriefingTextNode(const char *text) {
-            Delay = 0.0f;
-            sprintf(Text, "%s", text);
-            next = NULL;
-        }
-
-        BriefingTextNode(const char *text, float delay) {
-            Delay = delay;
-            sprintf(Text, "%s", text);
-            next = NULL;
-        }
-
-        BriefingTextNode() {
-            next = NULL;
-        }
-    };
-
-    BriefingTextNode *BriefingText;
-    BriefingTextNode *CurrentNode;
-    bool triggered;
-
-    void Created(GameObject *obj);
-
-    void Timer_Expired(GameObject *obj, int number);
-
-    void Custom(GameObject *obj, int message, int param, GameObject *sender);
-
-    void Destroyed(GameObject *obj);
-
-    void AddNewTextNode();
-
-    void RemoveTextNodes();
+	struct BriefingTextNode
+	{
+		char Text[256];
+		float Delay;
+		BriefingTextNode *next;
+		BriefingTextNode(const char *text)
+		{
+			Delay = 0.0f;
+			sprintf(Text,"%s",text); 
+			next = NULL;
+		}
+		BriefingTextNode(const char *text,float delay)
+		{
+			Delay = delay;
+			sprintf(Text,"%s",text); 
+			next = NULL;
+		}
+		BriefingTextNode()
+		{
+			next = NULL;
+		}
+	};
+	BriefingTextNode *BriefingText;
+	BriefingTextNode *CurrentNode;
+	bool triggered;
+	void Created(GameObject *obj);
+	void Timer_Expired(GameObject *obj,int number);
+	void Custom(GameObject *obj,int message,int param,GameObject *sender);
+	void Destroyed(GameObject *obj);
+	void AddNewTextNode();
+	void RemoveTextNodes();
 };
 
 /*!
@@ -6553,8 +6136,9 @@ class JMG_Utility_Custom_Display_Briefing_Message_StringID : public ScriptImpCla
 * \author jgray
 * \ingroup JmgUtility
 */
-class JMG_Utility_Destroy_Objects_In_ID_Range_On_Killed : public ScriptImpClass {
-    void Killed(GameObject *obj, GameObject *killer);
+class JMG_Utility_Destroy_Objects_In_ID_Range_On_Killed : public ScriptImpClass
+{
+	void Killed(GameObject *obj,GameObject *killer);
 };
 
 /*!
@@ -6568,15 +6152,13 @@ class JMG_Utility_Destroy_Objects_In_ID_Range_On_Killed : public ScriptImpClass 
 * \ingroup JmgUtility
 */
 class JMG_Utility_Timer_Custom : public ScriptImpClass {
-    int id;
-    int message;
-    int param;
-    bool repeat;
-    float time;
-
-    void Created(GameObject *obj);
-
-    void Timer_Expired(GameObject *obj, int number);
+	int id;
+	int message;
+	int param;
+	bool repeat;
+	float time;
+	void Created(GameObject *obj);
+	void Timer_Expired(GameObject *obj,int number);
 };
 
 /*!
@@ -6587,12 +6169,10 @@ class JMG_Utility_Timer_Custom : public ScriptImpClass {
 * \ingroup JmgUtility
 */
 class JMG_Utility_Zone_Change_Character_Model : public ScriptImpClass {
-    int playerType;
-    char newModel[16];
-
-    void Created(GameObject *obj);
-
-    void Entered(GameObject *obj, GameObject *enterer);
+	int playerType;
+	char newModel[16];
+	void Created(GameObject *obj);
+	void Entered(GameObject *obj,GameObject *enterer);
 };
 
 /*!
@@ -6607,18 +6187,15 @@ class JMG_Utility_Zone_Change_Character_Model : public ScriptImpClass {
 * \ingroup JmgUtility
 */
 class JMG_Utility_Timer_Change_Character_Models_On_Team : public ScriptImpClass {
-    bool enabled;
-    int enableCustom;
-    bool repeat;
-    float time;
-    int playerType;
-    char newModel[16];
-
-    void Created(GameObject *obj);
-
-    void Timer_Expired(GameObject *obj, int number);
-
-    void Custom(GameObject *obj, int message, int param, GameObject *sender);
+	bool enabled;
+	int enableCustom;
+	bool repeat;
+	float time;
+	int playerType;
+	char newModel[16];
+	void Created(GameObject *obj);
+	void Timer_Expired(GameObject *obj,int number);
+	void Custom(GameObject *obj,int message,int param,GameObject *sender);
 };
 
 /*!
@@ -6635,20 +6212,17 @@ class JMG_Utility_Timer_Change_Character_Models_On_Team : public ScriptImpClass 
 * \ingroup JmgUtility
 */
 class JMG_Utility_Timer_Change_Character_Models_On_HP : public ScriptImpClass {
-    bool enabled;
-    int enableCustom;
-    bool repeat;
-    float time;
-    int playerType;
-    float maxHp;
-    float minHp;
-    char newModel[16];
-
-    void Created(GameObject *obj);
-
-    void Timer_Expired(GameObject *obj, int number);
-
-    void Custom(GameObject *obj, int message, int param, GameObject *sender);
+	bool enabled;
+	int enableCustom;
+	bool repeat;
+	float time;
+	int playerType;
+	float maxHp;
+	float minHp;
+	char newModel[16];
+	void Created(GameObject *obj);
+	void Timer_Expired(GameObject *obj,int number);
+	void Custom(GameObject *obj,int message,int param,GameObject *sender);
 };
 
 /*!
@@ -6661,7 +6235,7 @@ class JMG_Utility_Timer_Change_Character_Models_On_HP : public ScriptImpClass {
 * \ingroup JmgUtility
 */
 class JMG_Utility_Destroy_Send_Custom : public ScriptImpClass {
-    void Destroyed(GameObject *obj);
+  void Destroyed(GameObject *obj);
 };
 
 /*!
@@ -6671,15 +6245,12 @@ class JMG_Utility_Destroy_Send_Custom : public ScriptImpClass {
 * \ingroup JmgUtility
 */
 class JMG_Utility_Set_Vehicle_Collisions_Ghost_When_Unoccupied : public ScriptImpClass {
-    bool attemptingCollidable;
-    bool ghost;
-    Collision_Group_Type myCollisionGroup;
-
-    void Created(GameObject *obj);
-
-    void Timer_Expired(GameObject *obj, int number);
-
-    void Custom(GameObject *obj, int message, int param, GameObject *sender);
+	bool attemptingCollidable;
+	bool ghost;
+	Collision_Group_Type myCollisionGroup;
+	void Created(GameObject *obj);
+	void Timer_Expired(GameObject *obj,int number);
+	void Custom(GameObject *obj,int message,int param,GameObject *sender);
 };
 
 /*!
@@ -6691,12 +6262,10 @@ class JMG_Utility_Set_Vehicle_Collisions_Ghost_When_Unoccupied : public ScriptIm
 * \ingroup JmgUtility
 */
 class JMG_Utility_Attach_Script_To_All_Players : public ScriptImpClass {
-    char scriptName[256];
-    char params[256];
-
-    void Created(GameObject *obj);
-
-    void Timer_Expired(GameObject *obj, int number);
+	char scriptName[256];
+	char params[256];
+	void Created(GameObject *obj);
+	void Timer_Expired(GameObject *obj,int number);
 };
 
 /*!
@@ -6709,7 +6278,7 @@ class JMG_Utility_Attach_Script_To_All_Players : public ScriptImpClass {
 * \ingroup JmgUtility
 */
 class JMG_Utility_Send_Custom_On_Powerup_Pickup : public ScriptImpClass {
-    void Custom(GameObject *obj, int message, int param, GameObject *sender);
+  void Custom(GameObject *obj,int message,int param,GameObject *sender);
 };
 
 /*!
@@ -6725,20 +6294,16 @@ class JMG_Utility_Send_Custom_On_Powerup_Pickup : public ScriptImpClass {
 * \ingroup JmgUtility
 */
 class JMG_Utility_Set_Bullets_On_Custom_Or_Damage : public ScriptImpClass {
-    char setWeapon[128];
-    bool repeat;
-    int custom;
-    int setBackpackBullets;
-    bool triggerOnDamage;
-    bool fullClip;
-
-    void Created(GameObject *obj);
-
-    void Custom(GameObject *obj, int message, int param, GameObject *sender);
-
-    void Damaged(GameObject *obj, GameObject *damager, float damage);
-
-    void UpdateBullets(GameObject *obj);
+	char setWeapon[128];
+	bool repeat;
+	int custom;
+	int setBackpackBullets;
+	bool triggerOnDamage;
+	bool fullClip;
+	void Created(GameObject *obj);
+	void Custom(GameObject *obj,int message,int param,GameObject *sender);
+	void Damaged(GameObject *obj,GameObject *damager,float damage);
+	void UpdateBullets(GameObject *obj);
 };
 
 /*!
@@ -6751,14 +6316,12 @@ class JMG_Utility_Set_Bullets_On_Custom_Or_Damage : public ScriptImpClass {
 * \ingroup JmgUtility
 */
 class JMG_Utility_Custom_Damage_All_Presets : public ScriptImpClass {
-    int custom;
-    char preset[128];
-    float damage;
-    char warhead[128];
-
-    void Created(GameObject *obj);
-
-    void Custom(GameObject *obj, int message, int param, GameObject *sender);
+	int custom;
+	char preset[128];
+	float damage;
+	char warhead[128];
+	void Created(GameObject *obj);
+	void Custom(GameObject *obj,int message,int param,GameObject *sender);
 };
 
 /*!
@@ -6770,7 +6333,7 @@ class JMG_Utility_Custom_Damage_All_Presets : public ScriptImpClass {
 * \ingroup JmgUtility
 */
 class JMG_Utility_Death_Weapon_Create_Object : public ScriptImpClass {
-    void Killed(GameObject *obj, GameObject *killer);
+	void Killed(GameObject *obj,GameObject *killer);
 };
 
 /*!
@@ -6787,20 +6350,17 @@ class JMG_Utility_Death_Weapon_Create_Object : public ScriptImpClass {
 * \ingroup JmgUtility
 */
 class JMG_Utility_Send_Custom_When_Speed_Exceeds_Amount : public ScriptImpClass {
-    float speed;
-    int id;
-    int custom;
-    int paramx;
-    bool repeat;
-    float rate;
-    bool enabled;
-    int enableCustom;
-
-    void Created(GameObject *obj);
-
-    void Custom(GameObject *obj, int message, int param, GameObject *sender);
-
-    void Timer_Expired(GameObject *obj, int number);
+	float speed;
+	int id;
+	int custom;
+	int paramx;
+	bool repeat;
+	float rate;
+	bool enabled;
+	int enableCustom;
+	void Created(GameObject *obj);
+	void Custom(GameObject *obj,int message,int param,GameObject *sender);
+	void Timer_Expired(GameObject *obj,int number);
 };
 
 /*!
@@ -6817,20 +6377,17 @@ class JMG_Utility_Send_Custom_When_Speed_Exceeds_Amount : public ScriptImpClass 
 * \ingroup JmgUtility
 */
 class JMG_Utility_Send_Custom_When_Speed_Below_Amount : public ScriptImpClass {
-    float speed;
-    int id;
-    int custom;
-    int paramx;
-    bool repeat;
-    float rate;
-    bool enabled;
-    int enableCustom;
-
-    void Created(GameObject *obj);
-
-    void Custom(GameObject *obj, int message, int param, GameObject *sender);
-
-    void Timer_Expired(GameObject *obj, int number);
+	float speed;
+	int id;
+	int custom;
+	int paramx;
+	bool repeat;
+	float rate;
+	bool enabled;
+	int enableCustom;
+	void Created(GameObject *obj);
+	void Custom(GameObject *obj,int message,int param,GameObject *sender);
+	void Timer_Expired(GameObject *obj,int number);
 };
 
 /*!
@@ -6851,33 +6408,25 @@ class JMG_Utility_Send_Custom_When_Speed_Below_Amount : public ScriptImpClass {
 * \ingroup JmgUtility
 */
 class JMG_Utility_Send_Custom_When_Velocity_Exceeds_Amount : public ScriptImpClass {
-    enum SpecialCondition {
-        DOES_NOT_MATTER, HORIZANTAL_IS_GREATER, VERTICAL_IS_GREATER, DOES_NOT_MEET_CONDITION
-    };
-    Vector3 velocityFBL;
-    Vector3 velocityRUD;
-    int id;
-    int custom;
-    int paramx;
-    bool repeat;
-    float rate;
-    bool enabled;
-    int enableCustom;
-    SpecialCondition onlyTriggerOn;
-    Vector3 onlyTriggerOnMinHV;
-    Vector3 onlyTriggerOnMaxHV;
-
-    void Created(GameObject *obj);
-
-    void Custom(GameObject *obj, int message, int param, GameObject *sender);
-
-    void Timer_Expired(GameObject *obj, int number);
-
-    void SendCustom(GameObject *obj, int paramOverride);
-
-    Vector3 SquareVectorSpecial(Vector3 in);
-
-    bool OnlyTriggerOnTest(float horizontalSpeed, float verticalSpeed);
+	enum SpecialCondition{DOES_NOT_MATTER,HORIZANTAL_IS_GREATER,VERTICAL_IS_GREATER,DOES_NOT_MEET_CONDITION};
+	Vector3 velocityFBL;
+	Vector3 velocityRUD;
+	int id;
+	int custom;
+	int paramx;
+	bool repeat;
+	float rate;
+	bool enabled;
+	int enableCustom;
+	SpecialCondition onlyTriggerOn;
+	Vector3 onlyTriggerOnMinHV;
+	Vector3 onlyTriggerOnMaxHV;
+	void Created(GameObject *obj);
+	void Custom(GameObject *obj,int message,int param,GameObject *sender);
+	void Timer_Expired(GameObject *obj,int number);
+	void SendCustom(GameObject *obj,int paramOverride);
+	Vector3 SquareVectorSpecial(Vector3 in);
+	bool OnlyTriggerOnTest(float horizontalSpeed,float verticalSpeed);
 };
 
 /*!
@@ -6885,18 +6434,16 @@ class JMG_Utility_Send_Custom_When_Velocity_Exceeds_Amount : public ScriptImpCla
 * \Custom - custom to trigger on (Hint: Picking up a powerup is 1000000025)
 * \Preset - preset to switch to
 * \Cost - price it costs to change character
-* \SuccessSound - Sound to play when purchase was successful
+* \SuccessSound - Sound to play when purchase was successful 
 * \FailSound - Sound to play when purchase failed
 * \AllowRepurchase - If this is 0 the failed sound will play if you already have the char
 * \author jgray
 * \ingroup JmgUtility
 */
 class JMG_Utility_Custom_Change_Character : public ScriptImpClass {
-    int custom;
-
-    void Created(GameObject *obj);
-
-    void Custom(GameObject *obj, int message, int param, GameObject *sender);
+	int custom;
+	void Created(GameObject *obj);
+	void Custom(GameObject *obj,int message,int param,GameObject *sender);
 };
 
 /*!
@@ -6910,14 +6457,11 @@ class JMG_Utility_Custom_Change_Character : public ScriptImpClass {
 * \ingroup JmgUtility
 */
 class JMG_Utility_Apply_Damage_While_In_Zone : public ScriptImpClass {
-    int team;
-    char params[512];
-
-    void Created(GameObject *obj);
-
-    void Entered(GameObject *obj, GameObject *enterer);
-
-    void Exited(GameObject *obj, GameObject *exiter);
+	int team;
+	char params[512];
+	void Created(GameObject *obj);
+	void Entered(GameObject *obj,GameObject *enterer);
+	void Exited(GameObject *obj,GameObject *exiter);
 };
 
 /*!
@@ -6930,14 +6474,12 @@ class JMG_Utility_Apply_Damage_While_In_Zone : public ScriptImpClass {
 * \ingroup JmgUtility
 */
 class JMG_Utility_Apply_Damage_On_Timer_Base : public ScriptImpClass {
-    float rate;
-    int damagerId;
-    char warhead[128];
-    float damageAmount;
-
-    void Created(GameObject *obj);
-
-    void Timer_Expired(GameObject *obj, int number);
+	float rate;
+	int damagerId;
+	char warhead[128];
+	float damageAmount;
+	void Created(GameObject *obj);
+	void Timer_Expired(GameObject *obj,int number);
 };
 
 /*!
@@ -6952,16 +6494,14 @@ class JMG_Utility_Apply_Damage_On_Timer_Base : public ScriptImpClass {
 * \ingroup JmgUtility
 */
 class JMG_Utility_Zone_Send_Custom_Exit : public ScriptImpClass {
-    int playerType;
-    int custom;
-    int param;
-    float delay;
-    int id;
-    bool triggerOnce;
-
-    void Created(GameObject *obj);
-
-    void Exited(GameObject *obj, GameObject *exiter);
+	int playerType;
+	int custom;
+	int param;
+	float delay;
+	int id;
+	bool triggerOnce;
+	void Created(GameObject *obj);
+	void Exited(GameObject *obj,GameObject *exiter);
 };
 
 /*!
@@ -6975,31 +6515,29 @@ class JMG_Utility_Zone_Send_Custom_Exit : public ScriptImpClass {
 * \ingroup JmgUtility
 */
 class JMG_Utility_Custom_Enable_Spawners_In_Range_Modular : public ScriptImpClass {
-    void Custom(GameObject *obj, int message, int param, GameObject *sender);
+	void Custom(GameObject *obj,int message,int param,GameObject *sender);
 };
 
 /*!
 * \brief Creates an explosion at the bone specified on the attached object
 * \Custom - Custom to trigger the explosion on
-* \Explosion - Explosion to create
+* \Explosion - Explosion to create 
 * \Bone - Bone to create the explosion at
 * \Owner - Who own's the explosion (-1 = sender, 0 = self, positive numbers = id of object)
 * \author jgray
 * \ingroup JmgUtility
 */
 class JMG_Utility_Custom_Create_Explosion_At_Bone : public ScriptImpClass {
-    char explosion[256];
-    char bone[32];
-    int owner;
-    int custom;
-
-    void Created(GameObject *obj);
-
-    void Custom(GameObject *obj, int message, int param, GameObject *sender);
+	char explosion[256];
+	char bone[32];
+	int owner;
+	int custom;
+	void Created(GameObject *obj);
+	void Custom(GameObject *obj,int message,int param,GameObject *sender);
 };
 
 /*!
-* \brief Sends a custom when a custom is recieved, ignore time makes it unable to send another custom until timer expires
+* \brief Sends a custom when a custom is recieved, ignore time makes it unable to send another custom until timer expires 
 * \Custom - Custom to trigger on
 * \ID - ID to send the custom to, 0 sends to self, -1 sends to sender
 * \SendCustom - Custom message to send
@@ -7012,19 +6550,17 @@ class JMG_Utility_Custom_Create_Explosion_At_Bone : public ScriptImpClass {
 * \ingroup JmgUtility
 */
 class JMG_Utility_Custom_Send_Custom_Repeat_Ignore_Time : public ScriptImpClass {
-    int custom;
-    int sendCustom;
-    int params;
-    float delay;
-    int id;
-    time_t lastTriggerTime;
-    int ignoreTime;
-    bool enable;
-    int enableCustom;
-
-    void Created(GameObject *obj);
-
-    void Custom(GameObject *obj, int message, int param, GameObject *sender);
+	int custom;
+	int sendCustom;
+	int params;
+	float delay;
+	int id;
+	time_t lastTriggerTime;
+	int ignoreTime;
+	bool enable;
+	int enableCustom;
+	void Created(GameObject *obj);
+	void Custom(GameObject *obj,int message,int param,GameObject *sender);
 };
 
 /*!
@@ -7042,21 +6578,18 @@ class JMG_Utility_Custom_Send_Custom_Repeat_Ignore_Time : public ScriptImpClass 
 * \ingroup JmgUtility
 */
 class JMG_Utility_Damage_Send_Custom : public ScriptImpClass {
-    int custom;
-    int params;
-    float delay;
-    int id;
-    int senderId;
-    bool enable;
-    int enableCustom;
-    bool repeat;
-    float minDamage;
-
-    void Created(GameObject *obj);
-
-    void Damaged(GameObject *obj, GameObject *damager, float damage);
-
-    void Custom(GameObject *obj, int message, int param, GameObject *sender);
+	int custom;
+	int params;
+	float delay;
+	int id;
+	int senderId;
+	bool enable;
+	int enableCustom;
+	bool repeat;
+	float minDamage;
+	void Created(GameObject *obj);
+	void Damaged(GameObject *obj,GameObject *damager,float damage);
+	void Custom(GameObject *obj,int message,int param,GameObject *sender);
 };
 
 /*!
@@ -7073,20 +6606,18 @@ class JMG_Utility_Damage_Send_Custom : public ScriptImpClass {
 * \ingroup JmgUtility
 */
 class JMG_Utility_Send_Custom_When_Player_Inside_Of_Range : public ScriptImpClass {
-    int sleepTime;
-    int sleeping;
-    bool triggerOnce;
-    bool enabled;
-    float distance;
-    float delay;
-    float maxRange;
-    int id;
-    int param;
-    int custom;
-
-    void Created(GameObject *obj);
-
-    void Timer_Expired(GameObject *obj, int number);
+	int sleepTime;
+	int sleeping;
+	bool triggerOnce;
+	bool enabled;
+	float distance;
+	float delay;
+	float maxRange;
+	int id;
+	int param;
+	int custom;
+	void Created(GameObject *obj);
+	void Timer_Expired(GameObject *obj,int number);
 };
 
 /*!
@@ -7102,7 +6633,7 @@ class JMG_Utility_Send_Custom_When_Player_Inside_Of_Range : public ScriptImpClas
 * \ingroup JmgUtility
 */
 class JMG_Utility_Custom_Enable_Spawners_In_Range_ModPlayer : public ScriptImpClass {
-    void Custom(GameObject *obj, int message, int param, GameObject *sender);
+	void Custom(GameObject *obj,int message,int param,GameObject *sender);
 };
 
 /*!
@@ -7111,29 +6642,26 @@ class JMG_Utility_Custom_Enable_Spawners_In_Range_ModPlayer : public ScriptImpCl
 * \ingroup JmgUtility
 */
 class JMG_Utility_Spawn_With_Last_Selected_Gun_Control : public ScriptImpClass {
-    void Created(GameObject *obj);
-
-    void Destroyed(GameObject *obj);
-
-    void Detach(GameObject *obj);
-
+	void Created(GameObject *obj);
+	void Destroyed(GameObject *obj);
+	void Detach(GameObject *obj);
 public:
-    struct StringNode {
-        char preset[128];
-
-        StringNode(const char *preset) {
-            sprintf(this->preset, "%s", preset);
-        }
-    };
-
-    static bool controllerPlaced;
-    static char playerWeapons[128][256];
-    static char playerNames[128][256];
-    static SList<StringNode> ignoredWeapons;
-
-    JMG_Utility_Spawn_With_Last_Selected_Gun_Control() {
-        ignoredWeapons.Remove_All();
-    }
+	struct StringNode
+	{
+		char preset[128];
+		StringNode(const char *preset)
+		{
+			sprintf(this->preset,"%s",preset);
+		}
+	};
+	static bool controllerPlaced;
+	static char playerWeapons[128][256];
+	static char playerNames[128][256];
+	static SList<StringNode> ignoredWeapons;
+	JMG_Utility_Spawn_With_Last_Selected_Gun_Control()
+	{
+		ignoredWeapons.Remove_All();
+	}
 };
 
 /*!
@@ -7144,35 +6672,30 @@ public:
 * \ingroup JmgUtility
 */
 class JMG_Utility_Spawn_With_Last_Selected_Gun_Player : public ScriptImpClass {
-    int playerId;
-
-    void Created(GameObject *obj);
-
-    void Timer_Expired(GameObject *obj, int number);
-
-    void Destroyed(GameObject *obj);
-
-    void InitialSetup(GameObject *obj);
-
-    void GrantPlayersWeapon(GameObject *obj);
-
+	int playerId;
+	void Created(GameObject *obj);
+	void Timer_Expired(GameObject *obj,int number);
+	void Destroyed(GameObject *obj);
+	void InitialSetup(GameObject *obj);
+	void GrantPlayersWeapon(GameObject *obj);
 public:
-    JMG_Utility_Spawn_With_Last_Selected_Gun_Player() {
-        playerId = 0;
-    }
+	JMG_Utility_Spawn_With_Last_Selected_Gun_Player()
+	{
+		playerId = 0;
+	}
 };
 
 /*!
 * \brief Gives a weapon to the player without need of a powerup
 * \WeaponName - Name of the weapon to give
 * \GrantWeapon - Should the weapon be given or just rounds for the weapon
-* \GrantRounds - How many rounds to give (-1 for infintie)
+* \GrantRounds - How many rounds to give (-1 for infintie) 
 * \GrantClips - Should rounds be put in your "backpack"
 * \author jgray
 * \ingroup JmgUtility
 */
 class JMG_Utility_Created_Give_Weapon : public ScriptImpClass {
-    void Created(GameObject *obj);
+	void Created(GameObject *obj);
 };
 
 /*!
@@ -7186,21 +6709,18 @@ class JMG_Utility_Created_Give_Weapon : public ScriptImpClass {
 * \ingroup JmgUtility
 */
 class JMG_Utility_Credit_Trickle_To_Ammount : public ScriptImpClass {
-    int team;
-    float credits;
-    int custom;
-    float trickleCap;
-    float rate;
-
-    void Created(GameObject *obj);
-
-    void Timer_Expired(GameObject *obj, int number);
-
-    void Custom(GameObject *obj, int message, int param, GameObject *sender);
+	int team;
+	float credits;
+	int custom;
+	float trickleCap;
+	float rate;
+	void Created(GameObject *obj);
+	void Timer_Expired(GameObject *obj,int number);
+	void Custom(GameObject *obj,int message,int param,GameObject *sender);
 };
 
 /*!
-* \brief Damages all objects on a team when a custom is received
+* \brief Damages all objects on a team when a custom is received 
 * \Custom - Custom to trigger on
 * \Team - Required team, 2 for any
 * \Damage - Amount of damage to apply
@@ -7212,17 +6732,15 @@ class JMG_Utility_Credit_Trickle_To_Ammount : public ScriptImpClass {
 * \ingroup JmgUtility
 */
 class JMG_Utility_Custom_Damage_Objects_On_Team : public ScriptImpClass {
-    bool triggerOnce;
-    int team;
-    int custom;
-    char warhead[255];
-    int theDamager;
-    float damage;
-    Vector3 soldierVehicleOther;
-
-    void Created(GameObject *obj);
-
-    void Custom(GameObject *obj, int message, int param, GameObject *sender);
+	bool triggerOnce;
+	int team;
+	int custom;
+	char warhead[255];
+	int theDamager;
+	float damage;
+	Vector3 soldierVehicleOther;
+	void Created(GameObject *obj);
+	void Custom(GameObject *obj,int message,int param,GameObject *sender);
 };
 
 /*!
@@ -7239,18 +6757,16 @@ class JMG_Utility_Custom_Damage_Objects_On_Team : public ScriptImpClass {
 * \ingroup JmgUtility
 */
 class JMG_Utility_Custom_Set_Animation : public ScriptImpClass {
-    int objectId;
-    int custom;
-    char animation[32];
-    bool looping;
-    float startFrame;
-    float endFrame;
-    bool blended;
-    bool triggerOnce;
-
-    void Created(GameObject *obj);
-
-    void Custom(GameObject *obj, int message, int param, GameObject *sender);
+	int objectId;
+	int custom;
+	char animation[32];
+	bool looping;
+	float startFrame;
+	float endFrame;
+	bool blended;
+	bool triggerOnce;
+	void Created(GameObject *obj);
+	void Custom(GameObject *obj,int message,int param,GameObject *sender);
 };
 
 /*!
@@ -7262,7 +6778,7 @@ class JMG_Utility_Custom_Set_Animation : public ScriptImpClass {
 * \ingroup JmgUtility
 */
 class JMG_Utility_Objective_System_Objective_Marker_Update_Custom : public ScriptImpClass {
-    void Custom(GameObject *obj, int message, int param, GameObject *sender);
+	void Custom(GameObject *obj,int message,int param,GameObject *sender);
 };
 
 /*!
@@ -7270,10 +6786,10 @@ class JMG_Utility_Objective_System_Objective_Marker_Update_Custom : public Scrip
 * \author jgray
 * \ingroup JmgUtility
 */
-class JMG_Utility_Send_Custom_On_Deaths_Reporter_Zone : public ScriptImpClass {
-    void Entered(GameObject *obj, GameObject *enterer);
-
-    char *formatReminderString(const char *format, ...);
+class JMG_Utility_Send_Custom_On_Deaths_Reporter_Zone : public ScriptImpClass
+{
+	void Entered(GameObject *obj,GameObject *enterer);
+	char *formatReminderString(const char *format,...);
 };
 
 /*!
@@ -7282,8 +6798,9 @@ class JMG_Utility_Send_Custom_On_Deaths_Reporter_Zone : public ScriptImpClass {
 * \author jgray
 * \ingroup JmgUtility
 */
-class JMG_Utility_Killed_Give_Money : public ScriptImpClass {
-    void Killed(GameObject *obj, GameObject *killer);
+class JMG_Utility_Killed_Give_Money : public ScriptImpClass
+{
+	void Killed(GameObject *obj,GameObject *killer);
 };
 
 /*!
@@ -7293,8 +6810,9 @@ class JMG_Utility_Killed_Give_Money : public ScriptImpClass {
 * \author jgray
 * \ingroup JmgUtility
 */
-class JMG_Utility_Created_Set_Damage_And_Death_Points : public ScriptImpClass {
-    void Created(GameObject *obj);
+class JMG_Utility_Created_Set_Damage_And_Death_Points : public ScriptImpClass
+{
+	void Created(GameObject *obj);
 };
 
 
@@ -7305,30 +6823,25 @@ class JMG_Utility_Created_Set_Damage_And_Death_Points : public ScriptImpClass {
 * \ingroup JmgUtility
 */
 class JMG_Utility_Detect_AFK_Controller : public ScriptImpClass {
-    bool isMoving[128];
-    bool isTurning[128];
-    bool isFiring[128];
-    bool isMovingTarget[128];
-    Vector3 lastTargetPos[128];
-    float facing[128];
-    int afkTime[128];
-    int afkThreshold;
-
-    void Created(GameObject *obj);
-
-    void Timer_Expired(GameObject *obj, int number);
-
-    void Destroyed(GameObject *obj);
-
-    void Detach(GameObject *obj);
-
+	bool isMoving[128];
+	bool isTurning[128];
+	bool isFiring[128];
+	bool isMovingTarget[128];
+	Vector3 lastTargetPos[128];
+	float facing[128];
+	int afkTime[128];
+	int afkThreshold;
+	void Created(GameObject *obj);
+	void Timer_Expired(GameObject *obj,int number);
+	void Destroyed(GameObject *obj);
+	void Detach(GameObject *obj);
 public:
-    static bool controllerPlaced;
-    static bool isAFK[128];
-
-    JMG_Utility_Detect_AFK_Controller() {
-        controllerPlaced = false;
-    }
+	static bool controllerPlaced;
+	static bool isAFK[128];
+	JMG_Utility_Detect_AFK_Controller()
+	{
+		controllerPlaced = false;
+	}
 };
 
 /*!
@@ -7342,17 +6855,14 @@ public:
 * \ingroup JmgUtility
 */
 class JMG_Utility_Credit_Trickle_When_Not_AFK : public ScriptImpClass {
-    int team;
-    float credits;
-    int custom;
-    float rate;
-    float trickleCap;
-
-    void Created(GameObject *obj);
-
-    void Timer_Expired(GameObject *obj, int number);
-
-    void Custom(GameObject *obj, int message, int param, GameObject *sender);
+	int team;
+	float credits;
+	int custom;
+	float rate;
+	float trickleCap;
+	void Created(GameObject *obj);
+	void Timer_Expired(GameObject *obj,int number);
+	void Custom(GameObject *obj,int message,int param,GameObject *sender);
 };
 
 /*!
@@ -7362,7 +6872,7 @@ class JMG_Utility_Credit_Trickle_When_Not_AFK : public ScriptImpClass {
 * \ingroup JmgUtility
 */
 class JMG_Utility_Killed_Create_Object : public ScriptImpClass {
-    void Killed(GameObject *obj, GameObject *killer);
+	void Killed(GameObject *obj,GameObject *killer);
 };
 
 /*!
@@ -7372,7 +6882,7 @@ class JMG_Utility_Killed_Create_Object : public ScriptImpClass {
 * \ingroup JmgUtility
 */
 class JMG_Utility_Damaged_Create_Object_When_Shield_Zero : public ScriptImpClass {
-    void Damaged(GameObject *obj, GameObject *damager, float damage);
+	void Damaged(GameObject *obj,GameObject *damager,float damage);
 };
 
 /*!
@@ -7411,68 +6921,58 @@ class JMG_Utility_Damaged_Create_Object_When_Shield_Zero : public ScriptImpClass
 */
 class JMG_Utility_Basic_Spawner_In_Radius : public ScriptImpClass {
 public:
-    struct SpawnObjectNode {
-        int groupId;
-        ReferencerClass obj;
-
-        SpawnObjectNode(GameObject *obj, int spawnGroupId) {
-            this->obj = obj;
-            this->groupId = spawnGroupId;
-        }
-    };
-
-    static SList<SpawnObjectNode> spawnObjectNodeList;
+	struct SpawnObjectNode
+	{
+		int groupId;
+		ReferencerClass obj;
+		SpawnObjectNode(GameObject *obj,int spawnGroupId)
+		{
+			this->obj = obj;
+			this->groupId = spawnGroupId;
+		}
+	};
+	static SList<SpawnObjectNode> spawnObjectNodeList;
 private:
-    bool enabled;
-    float minDistanceBetweenObjects;
-    int spawnGroupId;
-    int scriptId;
-    int spawnedObjects;
-    enum SpawnFailureTypes {
-        SPAWN_BLOCKED, SUCCESS, LIMIT_REACHED, SPAWN_CODE_ERROR
-    };
-    Vector3 spawnLocation;
-    int spawnAtATime;
-    int spawnLimit;
-    float minRadius;
-    float maxRadius;
-    float xMultiplier;
-    float yMultiplier;
-    float addHeight;
-    float rate;
-    float randomRate;
-    char preset[128];
-    int spawnCount;
-    bool collisionCheck;
-    int retryAttempts;
-    float initialSpawnHeight;
-    int changeSpawnCapCustom;
-    bool pointMustBeInPathfind;
-    bool manualFacing;
-    bool ignoreRayCastFailure;
-    Vector3 faceLocation;
-    float faceDirection;
-    int enableDisableCustom;
-    int initialSpawn;
-    Vector3 raycastRange;
-    int attachScriptsGroupId;
-    float playersAddToSpawnAtATime;
-
-    void Created(GameObject *obj);
-
-    void Timer_Expired(GameObject *obj, int number);
-
-    void Custom(GameObject *obj, int message, int param, GameObject *sender);
-
-    SpawnFailureTypes AttemptSpawn(GameObject *obj);
-
-    bool CheckIfObjectIsNearAnotherObject(Vector3 pos);
-
-    void SetFacing(GameObject *obj, float facing);
-
-    void Initial_Spawn(GameObject *obj);
-
-    int GetPlayerLimitModifier();
+	bool enabled;
+	float minDistanceBetweenObjects;
+	int spawnGroupId;
+	int scriptId;
+	int spawnedObjects;
+	enum SpawnFailureTypes{SPAWN_BLOCKED, SUCCESS, LIMIT_REACHED, SPAWN_CODE_ERROR};
+	Vector3 spawnLocation;
+	int spawnAtATime;
+	int spawnLimit;
+	float minRadius;
+	float maxRadius;
+	float xMultiplier;
+	float yMultiplier;
+	float addHeight;
+	float rate;
+	float randomRate;
+	char preset[128];
+	int spawnCount;
+	bool collisionCheck;
+	int retryAttempts;
+	float initialSpawnHeight;
+	int changeSpawnCapCustom;
+	bool pointMustBeInPathfind;
+	bool manualFacing;
+	bool ignoreRayCastFailure;
+	Vector3 faceLocation;
+	float faceDirection;
+	int enableDisableCustom;
+	int initialSpawn;
+	Vector3 raycastRange;
+	int attachScriptsGroupId;
+	float playersAddToSpawnAtATime;
+	void Created(GameObject *obj);
+	void Timer_Expired(GameObject *obj,int number);
+	void Custom(GameObject *obj,int message,int param,GameObject *sender);
+	SpawnFailureTypes AttemptSpawn(GameObject *obj);
+	bool CheckIfObjectIsNearAnotherObject(Vector3 pos);
+	void SetFacing(GameObject *obj,float facing);
+	void Initial_Spawn(GameObject *obj);
+	int GetPlayerLimitModifier();
 };
 
 /*!
@@ -7484,21 +6984,18 @@ private:
 * \author jgray
 * \ingroup JmgUtility
 */
-class JMG_Utility_Basic_Spawner_In_Radius_Attached : public ScriptImpClass {
-    bool sentCreateMessage;
-    bool sentDeathMessage;
-
-    void Created(GameObject *obj);
-
-    void Destroyed(GameObject *obj);
-
-    void AddSpawnedObjectToGroup(GameObject *spawned);
-
+class JMG_Utility_Basic_Spawner_In_Radius_Attached: public ScriptImpClass {
+	bool sentCreateMessage;
+	bool sentDeathMessage;
+	void Created(GameObject *obj);
+	void Destroyed(GameObject *obj);
+	void AddSpawnedObjectToGroup(GameObject *spawned);
 public:
-    JMG_Utility_Basic_Spawner_In_Radius_Attached() {
-        sentCreateMessage = false;
-        sentDeathMessage = false;
-    }
+	JMG_Utility_Basic_Spawner_In_Radius_Attached()
+	{
+		sentCreateMessage = false;
+		sentDeathMessage = false;
+	}
 };
 
 /*!
@@ -7512,16 +7009,14 @@ public:
 * \ingroup JmgUtility
 */
 class JMG_Utility_Flying_Vehicle_Crash_Apply_Damage : public ScriptImpClass {
-    bool subtractMinSpeed;
-    char explosionPreset[128];
-    char collisionSound[128];
-    bool allowCrash;
-    float minCollisionSpeed;
-    float maxCollisionSpeed;
-
-    void Created(GameObject *obj);
-
-    void Timer_Expired(GameObject *obj, int number);
+	bool subtractMinSpeed;
+	char explosionPreset[128];
+	char collisionSound[128];
+	bool allowCrash;
+	float minCollisionSpeed;
+	float maxCollisionSpeed;
+	void Created(GameObject *obj);
+	void Timer_Expired(GameObject *obj,int number);
 };
 
 /*!
@@ -7542,29 +7037,24 @@ class JMG_Utility_Flying_Vehicle_Crash_Apply_Damage : public ScriptImpClass {
 * \ingroup JmgUtility
 */
 class JMG_Utility_Enemy_Seen_Send_Custom : public ScriptImpClass {
-    int lastEnemyId;
-    int seenTime;
-    int enemyPresetId;
-    int id;
-    int visibleMessage;
-    int notVisibleMessage;
-    int visibleParam;
-    int notVisibleParam;
-    int maxNotSeenTime;
-    bool repeatSendSeenCustom;
-    Vector3 carTankBike;
-    Vector3 flyingTurretBoat;
-    Vector3 submarineInfantryUnused;
-
-    void Created(GameObject *obj);
-
-    void Timer_Expired(GameObject *obj, int number);
-
-    void Enemy_Seen(GameObject *obj, GameObject *seen);
-
-    float GetPriority(GameObject *seen);
-
-    void SendCustom(GameObject *obj, int custom, int param);
+	int lastEnemyId;
+	int seenTime;
+	int enemyPresetId;
+	int id;
+	int visibleMessage;
+	int notVisibleMessage;
+	int visibleParam;
+	int notVisibleParam;
+	int maxNotSeenTime;
+	bool repeatSendSeenCustom;
+	Vector3 carTankBike;
+	Vector3 flyingTurretBoat;
+	Vector3 submarineInfantryUnused;
+	void Created(GameObject *obj);
+	void Timer_Expired(GameObject *obj,int number);
+	void Enemy_Seen(GameObject *obj,GameObject *seen);
+	float GetPriority(GameObject *seen);
+	void SendCustom(GameObject *obj,int custom,int param);
 };
 
 /*!
@@ -7579,12 +7069,10 @@ class JMG_Utility_Enemy_Seen_Send_Custom : public ScriptImpClass {
 * \ingroup JmgUtility
 */
 class JMG_Utility_Custom_Send_Custom_If_Script_Attached : public ScriptImpClass {
-    char script[128];
-    int recieveMessage;
-
-    void Created(GameObject *obj);
-
-    void Custom(GameObject *obj, int message, int param, GameObject *sender);
+	char script[128];
+	int recieveMessage;
+	void Created(GameObject *obj);
+	void Custom(GameObject *obj,int message,int param,GameObject *sender);
 };
 
 /*!
@@ -7599,12 +7087,10 @@ class JMG_Utility_Custom_Send_Custom_If_Script_Attached : public ScriptImpClass 
 * \ingroup JmgUtility
 */
 class JMG_Utility_Custom_Send_Custom_If_Script_Not_Attached : public ScriptImpClass {
-    char script[128];
-    int recieveMessage;
-
-    void Created(GameObject *obj);
-
-    void Custom(GameObject *obj, int message, int param, GameObject *sender);
+	char script[128];
+	int recieveMessage;
+	void Created(GameObject *obj);
+	void Custom(GameObject *obj,int message,int param,GameObject *sender);
 };
 
 /*!
@@ -7612,10 +7098,9 @@ class JMG_Utility_Custom_Send_Custom_If_Script_Not_Attached : public ScriptImpCl
 * \author jgray
 * \ingroup JmgUtility
 */
-class JMG_Utility_Basic_Spawner_In_Radius_Controller : public ScriptImpClass {
-    void Destroyed(GameObject *obj);
-
-    void Detach(GameObject *obj);
+class JMG_Utility_Basic_Spawner_In_Radius_Controller: public ScriptImpClass {
+	void Destroyed(GameObject *obj);
+	void Detach(GameObject *obj);
 };
 
 /*!
@@ -7626,12 +7111,10 @@ class JMG_Utility_Basic_Spawner_In_Radius_Controller : public ScriptImpClass {
 * \ingroup JmgUtility
 */
 class JMG_Utility_Custom_Set_Engine : public ScriptImpClass {
-    int custom;
-    int enable;
-
-    void Created(GameObject *obj);
-
-    void Custom(GameObject *obj, int message, int param, GameObject *sender);
+	int custom;
+	int enable;
+	void Created(GameObject *obj);
+	void Custom(GameObject *obj,int message,int param,GameObject *sender);
 };
 
 /*!
@@ -7649,19 +7132,17 @@ class JMG_Utility_Custom_Set_Engine : public ScriptImpClass {
 * \ingroup JmgUtility
 */
 class JMG_Utility_Send_Custom_Player_Count_Matches_Preset_Count : public ScriptImpClass {
-    int presetId;
-    int id;
-    int custom;
-    int paramx;
-    float delay;
-    float rate;
-    int minPlayers;
-    int maxPlayers;
-    bool repeat;
-
-    void Created(GameObject *obj);
-
-    void Timer_Expired(GameObject *obj, int number);
+	int presetId;
+	int id;
+	int custom;
+	int paramx;
+	float delay;
+	float rate;
+	int minPlayers;
+	int maxPlayers;
+	bool repeat;
+	void Created(GameObject *obj);
+	void Timer_Expired(GameObject *obj,int number);
 };
 
 
@@ -7673,12 +7154,10 @@ class JMG_Utility_Send_Custom_Player_Count_Matches_Preset_Count : public ScriptI
 * \ingroup JmgUtility
 */
 class JMG_Utility_Custom_Set_Position : public ScriptImpClass {
-    int custom;
-    Vector3 position;
-
-    void Created(GameObject *obj);
-
-    void Custom(GameObject *obj, int message, int param, GameObject *sender);
+	int custom;
+	Vector3 position;
+	void Created(GameObject *obj);
+	void Custom(GameObject *obj,int message,int param,GameObject *sender);
 };
 
 /*!
@@ -7689,26 +7168,23 @@ class JMG_Utility_Custom_Set_Position : public ScriptImpClass {
 * \Param - param to send (-1 sends the param that was received)
 * \Delay - delay to wait before sending
 * \RandomDelay - Random amount of delay that can be added to the delay time
-* \CancelCustom - If this custom is caught the pending custom will be canceled
+* \CancelCustom - If this custom is caught the pending custom will be canceled 
 * \author jgray
 * \ingroup JmgUtility
 */
 class JMG_Utility_Custom_Delay_Send_Custom : public ScriptImpClass {
-    int watchMessage;
-    int id;
-    int Param;
-    ReferencerClass lastSender;
-    int sendMessage;
-    int lastParam;
-    float delay;
-    float randomDelay;
-    int cancelCustom;
-
-    void Created(GameObject *obj);
-
-    void Custom(GameObject *obj, int message, int param, GameObject *sender);
-
-    void Timer_Expired(GameObject *obj, int number);
+	int watchMessage;
+	int id;
+	int Param;
+	ReferencerClass lastSender;
+	int sendMessage;
+	int lastParam;
+	float delay;
+	float randomDelay;
+	int cancelCustom;
+	void Created(GameObject *obj);
+	void Custom(GameObject *obj,int message,int param,GameObject *sender);
+	void Timer_Expired(GameObject *obj,int number);
 };
 
 /*!
@@ -7722,22 +7198,18 @@ class JMG_Utility_Custom_Delay_Send_Custom : public ScriptImpClass {
 * \ingroup JmgUtility
 */
 class JMG_Utility_Scale_HP_By_Player_Count : public ScriptImpClass {
-    int lastPlayerCount;
-    int maxPlayerCount;
-    float originalHealth;
-    float originalArmor;
-    float healthMultiplier;
-    float armorMultiplier;
-    int updateScaleCustom;
-    bool repeat;
-
-    void Created(GameObject *obj);
-
-    void Timer_Expired(GameObject *obj, int number);
-
-    void Custom(GameObject *obj, int message, int param, GameObject *sender);
-
-    void RescaleHP(GameObject *obj);
+	int lastPlayerCount;
+	int maxPlayerCount;
+	float originalHealth;
+	float originalArmor;
+	float healthMultiplier;
+	float armorMultiplier;
+	int updateScaleCustom;
+	bool repeat;
+	void Created(GameObject *obj);
+	void Timer_Expired(GameObject *obj,int number);
+	void Custom(GameObject *obj,int message,int param,GameObject *sender);
+	void RescaleHP(GameObject *obj);
 };
 
 /*!
@@ -7751,15 +7223,13 @@ class JMG_Utility_Scale_HP_By_Player_Count : public ScriptImpClass {
 * \ingroup JmgUtility
 */
 class JMG_Utility_Custom_Send_Custom_To_All_Objects : public ScriptImpClass {
-    int recieveMessage;
-    int team;
-    int custom;
-    int Param;
-    float delay;
-
-    void Created(GameObject *obj);
-
-    void Custom(GameObject *obj, int message, int param, GameObject *sender);
+	int recieveMessage;
+	int team;
+	int custom;
+	int Param;
+	float delay;
+	void Created(GameObject *obj);
+	void Custom(GameObject *obj,int message,int param,GameObject *sender);
 };
 
 /*!
@@ -7768,7 +7238,7 @@ class JMG_Utility_Custom_Send_Custom_To_All_Objects : public ScriptImpClass {
 * \ingroup JmgUtility
 */
 class JMG_Utility_Enemy_Seen_Send_Custom_Ignore : public ScriptImpClass {
-    void Created(GameObject *obj);
+	void Created(GameObject *obj);
 };
 
 /*!
@@ -7785,21 +7255,18 @@ class JMG_Utility_Enemy_Seen_Send_Custom_Ignore : public ScriptImpClass {
 * \ingroup JmgUtility
 */
 class JMG_Utility_In_Line_Of_Sight_Send_Custom : public ScriptImpClass {
-    int lastEnemyId;
-    int enemyPresetId;
-    int id;
-    int visibleMessage;
-    int notVisibleMessage;
-    int visibleParam;
-    int notVisibleParam;
-    bool enemyOnly;
-    float rate;
-
-    void Created(GameObject *obj);
-
-    void Timer_Expired(GameObject *obj, int number);
-
-    bool Test_Line_Of_Sight(GameObject *obj, GameObject *seen);
+	int lastEnemyId;
+	int enemyPresetId;
+	int id;
+	int visibleMessage;
+	int notVisibleMessage;
+	int visibleParam;
+	int notVisibleParam;
+	bool enemyOnly;
+	float rate;
+	void Created(GameObject *obj);
+	void Timer_Expired(GameObject *obj,int number);
+	bool Test_Line_Of_Sight(GameObject *obj,GameObject *seen);
 };
 
 /*!
@@ -7808,7 +7275,7 @@ class JMG_Utility_In_Line_Of_Sight_Send_Custom : public ScriptImpClass {
 * \ingroup JmgUtility
 */
 class JMG_Utility_In_Line_Of_Sight_Send_Custom_Ignore : public ScriptImpClass {
-    void Created(GameObject *obj);
+	void Created(GameObject *obj);
 };
 
 /*!
@@ -7818,11 +7285,9 @@ class JMG_Utility_In_Line_Of_Sight_Send_Custom_Ignore : public ScriptImpClass {
 * \ingroup JmgUtility
 */
 class JMG_Utility_Timer_Trigger_Enemy_Seen : public ScriptImpClass {
-    float rate;
-
-    void Created(GameObject *obj);
-
-    void Timer_Expired(GameObject *obj, int number);
+	float rate;
+	void Created(GameObject *obj);
+	void Timer_Expired(GameObject *obj,int number);
 };
 
 /*!
@@ -7835,18 +7300,14 @@ class JMG_Utility_Timer_Trigger_Enemy_Seen : public ScriptImpClass {
 * \ingroup JmgUtility
 */
 class JMG_Utility_Custom_Teleport_To_Random_Wander_Point : public ScriptImpClass {
-    bool retryOnFailure;
-    int custom;
-    float safeTeleportDistance;
-    int wanderPointGroup;
-
-    void Created(GameObject *obj);
-
-    void Custom(GameObject *obj, int message, int param, GameObject *sender);
-
-    bool Get_A_Defense_Point(Vector3 *position, float *facing);
-
-    bool Grab_Teleport_Spot(GameObject *enter, int attempts);
+	bool retryOnFailure;
+	int custom;
+	float safeTeleportDistance;
+	int wanderPointGroup;
+	void Created(GameObject *obj);
+	void Custom(GameObject *obj,int message,int param,GameObject *sender);
+	bool Get_A_Defense_Point(Vector3 *position,float *facing);
+	bool Grab_Teleport_Spot(GameObject *enter,int attempts);
 };
 
 /*!
@@ -7861,18 +7322,16 @@ class JMG_Utility_Custom_Teleport_To_Random_Wander_Point : public ScriptImpClass
 * \ingroup JmgUtility
 */
 class JMG_Utility_Send_Custom_If_Not_Moving_Enough : public ScriptImpClass {
-    int time;
-    int resetTime;
-    float distance;
-    int id;
-    int custom;
-    int Param;
-    float delay;
-    Vector3 lastPos;
-
-    void Created(GameObject *obj);
-
-    void Timer_Expired(GameObject *obj, int number);
+	int time;
+	int resetTime;
+	float distance;
+	int id;
+	int custom;
+	int Param;
+	float delay;
+	Vector3 lastPos;
+	void Created(GameObject *obj);
+	void Timer_Expired(GameObject *obj,int number);
 };
 
 
@@ -7895,180 +7354,179 @@ class JMG_Utility_Send_Custom_If_Not_Moving_Enough : public ScriptImpClass {
 */
 class JMG_Utility_AI_Skittish_Herd_Animal : public ScriptImpClass {
 public:
-    class HerdAnimalPositionSystem {
-    public:
-        int animalCount;
-
-        struct HerdPositionNode {
-            int id;
-            Vector3 pos;
-            bool alive;
-            struct HerdPositionNode *next;
-
-            HerdPositionNode(GameObject *obj) {
-                this->id = Commands->Get_ID(obj);
-                this->pos = Commands->Get_Position(obj);
-                this->alive = true;
-                next = NULL;
-            }
-        };
-
-        Vector3 herdRetreatLocation;
-        float herdRetreatTime;
-        time_t herdRetreatStart;
-    private:
-        Vector3 centerPos;
-        time_t lastPosCalcTime;
-        float minUpdateDelay;
-        bool hascalculatedPos;
-        HerdPositionNode *HerdPositionNodeList;
-    public:
-        HerdAnimalPositionSystem() {
-            herdRetreatLocation = Vector3(0.0f, 0.0f, 0.0f);
-            herdRetreatTime = 0.0f;
-            herdRetreatStart = clock();
-            minUpdateDelay = 10000.0f;
-            hascalculatedPos = false;
-            animalCount = 0;
-            centerPos = Vector3(0.0f, 0.0f, 0.0f);
-            lastPosCalcTime = clock();
-            HerdPositionNodeList = NULL;
-        }
-
-        HerdPositionNode *AddNode(GameObject *obj) {
-            int id = Commands->Get_ID(obj);
-            HerdPositionNode *Current = HerdPositionNodeList;
-            while (Current) {
-                if (Current->id == id) {
-                    animalCount--;
-                    return Current;
-                }
-                Current = Current->next;
-            }
-            animalCount++;
-            if (!HerdPositionNodeList)
-                return (HerdPositionNodeList = new HerdPositionNode(obj));
-            Current = HerdPositionNodeList;
-            while (Current) {
-                if (!Current->alive) {
-                    Current->id = Commands->Get_ID(obj);
-                    Current->pos = Commands->Get_Position(obj);
-                    Current->alive = true;
-                    return Current;
-                }
-                if (!Current->next) {
-                    Current->next = new HerdPositionNode(obj);
-                    return Current->next;
-                }
-                Current = Current->next;
-            }
-            return NULL;
-        }
-
-        HerdAnimalPositionSystem &operator-=(GameObject *obj) {
-            int id = Commands->Get_ID(obj);
-            HerdPositionNode *Current = HerdPositionNodeList;
-            while (Current) {
-                if (Current->id == id) {
-                    animalCount--;
-                    Current->alive = false;
-                    break;
-                }
-                Current = Current->next;
-            }
-            return *this;
-        }
-
-        Vector3
-        getCenterLocation(bool allowWander, int wanderPointGroup, float minUpdateHerdCenter, float maxUpdateHerdCenter);
-
-        bool checkRetreatSuccessful() {
-            HerdPositionNode *Current = HerdPositionNodeList;
-            int retreatedCount = 0;
-            while (Current) {
-                if (Current->alive && JmgUtility::SimpleDistance(Current->pos, herdRetreatLocation) < 2500)
-                    retreatedCount++;
-                Current = Current->next;
-            }
-            if (animalCount == retreatedCount)
-                return true;
-            return false;
-        }
-
-        bool checkRetreatCloseEnough() {
-            HerdPositionNode *Current = HerdPositionNodeList;
-            int retreatedCount = 0;
-            while (Current) {
-                if (Current->alive && JmgUtility::SimpleDistance(Current->pos, herdRetreatLocation) < 2500)
-                    retreatedCount++;
-                Current = Current->next;
-            }
-            if (animalCount * 0.75 <= retreatedCount)
-                return true;
-            return false;
-        }
-
-        void Empty_List() {
-            HerdPositionNode *temp = HerdPositionNodeList, *die;
-            while (temp) {
-                die = temp;
-                temp = temp->next;
-                delete die;
-            }
-            HerdPositionNodeList = NULL;
-        }
-    };
-
-    static HerdAnimalPositionSystem HerdAnimalPositionControl[128];
+	class HerdAnimalPositionSystem
+	{
+	public:
+		int animalCount;
+		struct HerdPositionNode
+		{
+			int id;
+			Vector3 pos;
+			bool alive;
+			struct HerdPositionNode *next;
+			HerdPositionNode(GameObject *obj)
+			{
+				this->id = Commands->Get_ID(obj);
+				this->pos = Commands->Get_Position(obj);
+				this->alive = true;
+				next = NULL;
+			}
+		};
+		Vector3 herdRetreatLocation;
+		float herdRetreatTime;
+		time_t herdRetreatStart;
+	private:
+		Vector3 centerPos;
+		time_t lastPosCalcTime;
+		float minUpdateDelay;
+		bool hascalculatedPos;
+		HerdPositionNode *HerdPositionNodeList;
+	public:
+		HerdAnimalPositionSystem()
+		{
+			herdRetreatLocation = Vector3(0.0f,0.0f,0.0f);
+			herdRetreatTime = 0.0f;
+			herdRetreatStart = clock();
+			minUpdateDelay = 10000.0f;
+			hascalculatedPos = false;
+			animalCount = 0;
+			centerPos = Vector3(0.0f,0.0f,0.0f);
+			lastPosCalcTime = clock();
+			HerdPositionNodeList = NULL;
+		}
+		HerdPositionNode *AddNode(GameObject *obj)
+		{
+			int id = Commands->Get_ID(obj);
+			HerdPositionNode *Current = HerdPositionNodeList;
+			while (Current)
+			{
+				if (Current->id == id)
+				{
+					animalCount--;
+					return Current;
+				}
+				Current = Current->next;
+			}
+			animalCount++;
+			if (!HerdPositionNodeList)
+				return (HerdPositionNodeList = new HerdPositionNode(obj));
+			Current = HerdPositionNodeList;
+			while (Current)
+			{
+				if (!Current->alive)
+				{
+					Current->id = Commands->Get_ID(obj);
+					Current->pos = Commands->Get_Position(obj);
+					Current->alive = true;
+					return Current;
+				}
+				if (!Current->next)
+				{
+					Current->next = new HerdPositionNode(obj);
+					return Current->next;
+				}
+				Current = Current->next;
+			}
+			return NULL;
+		}
+		HerdAnimalPositionSystem &operator -= (GameObject *obj)
+		{
+			int id = Commands->Get_ID(obj);
+			HerdPositionNode *Current = HerdPositionNodeList;
+			while (Current)
+			{
+				if (Current->id == id)
+				{
+					animalCount--;
+					Current->alive = false;
+					break;
+				}
+				Current = Current->next;
+			}
+			return *this;
+		}
+		Vector3 getCenterLocation(bool allowWander,int wanderPointGroup,float minUpdateHerdCenter,float maxUpdateHerdCenter);
+		bool checkRetreatSuccessful()
+		{
+			HerdPositionNode *Current = HerdPositionNodeList;
+			int retreatedCount = 0;
+			while (Current)
+			{
+				if (Current->alive && JmgUtility::SimpleDistance(Current->pos,herdRetreatLocation) < 2500)
+					retreatedCount++;
+				Current = Current->next;			
+			}
+			if (animalCount == retreatedCount)
+				return true;
+			return false;
+		}
+		bool checkRetreatCloseEnough()
+		{
+			HerdPositionNode *Current = HerdPositionNodeList;
+			int retreatedCount = 0;
+			while (Current)
+			{
+				if (Current->alive && JmgUtility::SimpleDistance(Current->pos,herdRetreatLocation) < 2500)
+					retreatedCount++;
+				Current = Current->next;			
+			}
+			if (animalCount*0.75 <= retreatedCount)
+				return true;
+			return false;
+		}
+		void Empty_List()
+		{
+			HerdPositionNode *temp = HerdPositionNodeList,*die;
+			while (temp)
+			{
+				die = temp;
+				temp = temp->next;
+				delete die;
+			}
+			HerdPositionNodeList = NULL;
+		}
+	};
+	static HerdAnimalPositionSystem HerdAnimalPositionControl[128];
 private:
-    int herdId;
-    HerdAnimalPositionSystem::HerdPositionNode *HerdPositionNode;
-    int wanderPointGroup;
-    char defaultWeapon[128];
-    float weaponRange;
-    float minRetreatRange;
-    float maxRetreatRange;
-    float minRetreatTime;
-    float maxRetreatTime;
-    float minUpdateHerdCenter;
-    float maxUpdateHerdCenter;
-    float wanderRadiusAroundHerdCenter;
-    float wanderRadiusAroundHerdCenterSq;
-    float minWanderFrequency;
-    float maxWanderFrequency;
-    float runTowardThreatChance;
-    float actionCrouched;
-
-    void Created(GameObject *obj);
-
-    void Enemy_Seen(GameObject *obj, GameObject *seen);
-
-    void Timer_Expired(GameObject *obj, int number);
-
-    void Damaged(GameObject *obj, GameObject *damager, float damage);
-
-    void Destroyed(GameObject *obj);
-
-    void GotoLocation(GameObject *obj, const Vector3 &pos, GameObject *Enemy, float speed = 0);
-
-    void setRetreatLocation(GameObject *obj, GameObject *enemy);
-
+	int herdId;
+	HerdAnimalPositionSystem::HerdPositionNode *HerdPositionNode;
+	int wanderPointGroup;
+	char defaultWeapon[128];
+	float weaponRange;
+	float minRetreatRange;
+	float maxRetreatRange;
+	float minRetreatTime;
+	float maxRetreatTime;
+	float minUpdateHerdCenter;
+	float maxUpdateHerdCenter;
+	float wanderRadiusAroundHerdCenter;
+	float wanderRadiusAroundHerdCenterSq;
+	float minWanderFrequency;
+	float maxWanderFrequency;
+	float runTowardThreatChance;
+	float actionCrouched;
+	void Created(GameObject *obj);
+	void Enemy_Seen(GameObject *obj,GameObject *seen);
+	void Timer_Expired(GameObject *obj,int number);
+	void Damaged(GameObject *obj,GameObject *damager,float damage);
+	void Destroyed(GameObject *obj);
+	void GotoLocation(GameObject *obj,const Vector3 &pos,GameObject *Enemy,float speed = 0);
+	void setRetreatLocation(GameObject *obj,GameObject *enemy);
 public:
-    JMG_Utility_AI_Skittish_Herd_Animal() {
-        herdId = 0;
-        HerdPositionNode = NULL;
-    }
-
-    static bool Get_A_Wander_Point(Vector3 *position, int wanderPointGroup);
+	JMG_Utility_AI_Skittish_Herd_Animal()
+	{
+		herdId = 0;
+		HerdPositionNode = NULL;
+	}
+	static bool Get_A_Wander_Point(Vector3 *position,int wanderPointGroup);
 };
-
 /*!
 * \brief Prevents JMG_Utility_AI_Skittish_Herd_Animal from seening the attached object
 * \author jgray
 * \ingroup JmgUtility
 */
 class JMG_Utility_AI_Skittish_Herd_Animal_Ignore : public ScriptImpClass {
-    void Created(GameObject *obj);
+	void Created(GameObject *obj);
 };
 
 /*!
@@ -8078,14 +7536,13 @@ class JMG_Utility_AI_Skittish_Herd_Animal_Ignore : public ScriptImpClass {
 */
 class JMG_Utility_AI_Skittish_Herd_Animal_Controller : public ScriptImpClass {
 public:
-    JMG_Utility_AI_Skittish_Herd_Animal_Controller() {
-        for (int x = 0; x < 128; x++)
-            JMG_Utility_AI_Skittish_Herd_Animal::HerdAnimalPositionControl[x] = JMG_Utility_AI_Skittish_Herd_Animal::HerdAnimalPositionSystem();
-    }
-
-    void Destroyed(GameObject *obj);
-
-    void Detach(GameObject *obj);
+	JMG_Utility_AI_Skittish_Herd_Animal_Controller()
+	{
+		for (int x = 0;x < 128;x++)
+			JMG_Utility_AI_Skittish_Herd_Animal::HerdAnimalPositionControl[x] = JMG_Utility_AI_Skittish_Herd_Animal::HerdAnimalPositionSystem();
+	}
+	void Destroyed(GameObject *obj);
+	void Detach(GameObject *obj);
 };
 
 /*!
@@ -8097,12 +7554,10 @@ public:
 * \ingroup JmgUtility
 */
 class JMG_Utility_Custom_Display_Dialog_Box : public ScriptImpClass {
-    int custom;
-    char *textMessage;
-
-    void Created(GameObject *obj);
-
-    void Custom(GameObject *obj, int message, int param, GameObject *sender);
+	int custom;
+	char *textMessage;
+	void Created(GameObject *obj);
+	void Custom(GameObject *obj,int message,int param,GameObject *sender);
 };
 
 /*!
@@ -8119,18 +7574,16 @@ class JMG_Utility_Custom_Display_Dialog_Box : public ScriptImpClass {
 * \ingroup JmgUtility
 */
 class JMG_Utility_Custom_Send_Custom_On_Preset_Count : public ScriptImpClass {
-    int recieveMessage;
-    int presetId;
-    int minCount;
-    int maxCount;
-    int id;
-    int custom;
-    int Param;
-    float delay;
-
-    void Created(GameObject *obj);
-
-    void Custom(GameObject *obj, int message, int param, GameObject *sender);
+	int recieveMessage;
+	int presetId;
+	int minCount;
+	int maxCount;
+	int id;
+	int custom;
+	int Param;
+	float delay;
+	void Created(GameObject *obj);
+	void Custom(GameObject *obj,int message,int param,GameObject *sender);
 };
 
 /*!
@@ -8147,18 +7600,16 @@ class JMG_Utility_Custom_Send_Custom_On_Preset_Count : public ScriptImpClass {
 * \ingroup JmgUtility
 */
 class JMG_Utility_Custom_Send_Custom_On_Script_Count : public ScriptImpClass {
-    int recieveMessage;
-    char script[128];
-    int minCount;
-    int maxCount;
-    int id;
-    int custom;
-    int Param;
-    float delay;
-
-    void Created(GameObject *obj);
-
-    void Custom(GameObject *obj, int message, int param, GameObject *sender);
+	int recieveMessage;
+	char script[128];
+	int minCount;
+	int maxCount;
+	int id;
+	int custom;
+	int Param;
+	float delay;
+	void Created(GameObject *obj);
+	void Custom(GameObject *obj,int message,int param,GameObject *sender);
 };
 
 
@@ -8173,16 +7624,15 @@ class JMG_Utility_Custom_Send_Custom_On_Script_Count : public ScriptImpClass {
 * \ingroup JmgUtility
 */
 class JMG_Utility_Poke_Send_Custom_From_Poker : public ScriptImpClass {
-    void Created(GameObject *obj);
-
-    void Poked(GameObject *obj, GameObject *poker);
+	void Created(GameObject *obj);
+	void Poked(GameObject *obj, GameObject *poker);
 };
 
 /*!
 * \brief Scales the given score as players join/leave the match (if no players are in game the score is not updated from the last player count)
 * \GrantCustom - Custom to trigger granting the score
 * \Score - Score to give on custom
-* \ScoreMultiplier - Amount to multiply the score by per player
+* \ScoreMultiplier - Amount to multiply the score by per player 
 * \EntireTeam - Give the score to the whole team 0 no 1 yes
 * \MaxPlayerCount - Max player count allows you to specify a maximum amount of players the script should account for, any above it will be ignored.
 * \Repeat - Should the script check multiple times for player count changes 1 - yes, 0 - no.
@@ -8193,25 +7643,21 @@ class JMG_Utility_Poke_Send_Custom_From_Poker : public ScriptImpClass {
 * \ingroup JmgUtility
 */
 class JMG_Utility_Custom_Grant_Scaled_Score : public ScriptImpClass {
-    int lastPlayerCount;
-    int maxPlayerCount;
-    int grantCustom;
-    float score;
-    float scoreMultiplier;
-    int updateScaleCustom;
-    bool repeat;
-    bool grantToSender;
-    float theScore;
-    bool entireTeam;
-    int stopUpdateCustom;
-
-    void Created(GameObject *obj);
-
-    void Timer_Expired(GameObject *obj, int number);
-
-    void Custom(GameObject *obj, int message, int param, GameObject *sender);
-
-    void RescaleScore(GameObject *obj);
+	int lastPlayerCount;
+	int maxPlayerCount;
+	int grantCustom;
+	float score;
+	float scoreMultiplier;
+	int updateScaleCustom;
+	bool repeat;
+	bool grantToSender;
+	float theScore;
+	bool entireTeam;
+	int stopUpdateCustom;
+	void Created(GameObject *obj);
+	void Timer_Expired(GameObject *obj,int number);
+	void Custom(GameObject *obj,int message,int param,GameObject *sender);
+	void RescaleScore(GameObject *obj);
 };
 
 /*!
@@ -8222,12 +7668,10 @@ class JMG_Utility_Custom_Grant_Scaled_Score : public ScriptImpClass {
 * \ingroup JmgUtility
 */
 class JMG_Utility_Custom_Set_Infantry_Height : public ScriptImpClass {
-    int custom;
-    float height;
-
-    void Created(GameObject *obj);
-
-    void Custom(GameObject *obj, int message, int param, GameObject *sender);
+	int custom;
+	float height;
+	void Created(GameObject *obj);
+	void Custom(GameObject *obj,int message,int param,GameObject *sender);
 };
 
 /*!
@@ -8238,12 +7682,10 @@ class JMG_Utility_Custom_Set_Infantry_Height : public ScriptImpClass {
 * \ingroup JmgUtility
 */
 class JMG_Utility_Custom_Set_Infantry_Width : public ScriptImpClass {
-    int custom;
-    float width;
-
-    void Created(GameObject *obj);
-
-    void Custom(GameObject *obj, int message, int param, GameObject *sender);
+	int custom;
+	float width;
+	void Created(GameObject *obj);
+	void Custom(GameObject *obj,int message,int param,GameObject *sender);
 };
 
 /*!
@@ -8254,12 +7696,10 @@ class JMG_Utility_Custom_Set_Infantry_Width : public ScriptImpClass {
 * \ingroup JmgUtility
 */
 class JMG_Utility_Custom_Set_Weapon_Hold_Sytle : public ScriptImpClass {
-    int custom;
-    int style;
-
-    void Created(GameObject *obj);
-
-    void Custom(GameObject *obj, int message, int param, GameObject *sender);
+	int custom;
+	int style;
+	void Created(GameObject *obj);
+	void Custom(GameObject *obj,int message,int param,GameObject *sender);
 };
 
 /*!
@@ -8270,171 +7710,167 @@ class JMG_Utility_Custom_Set_Weapon_Hold_Sytle : public ScriptImpClass {
 * \ingroup JmgUtility
 */
 class JMG_Utility_Custom_Set_Human_Anim_Override : public ScriptImpClass {
-    int custom;
-    bool enable;
-
-    void Created(GameObject *obj);
-
-    void Custom(GameObject *obj, int message, int param, GameObject *sender);
+	int custom;
+	bool enable;
+	void Created(GameObject *obj);
+	void Custom(GameObject *obj,int message,int param,GameObject *sender);
 };
 
-/*!
+/*! 
 * \brief Script must be placed on the map in order to control the advanced swimming scripts
 * \author jgray
 * \ingroup JmgUtility
 */
 class JMG_Utility_Swimming_Infantry_Advanced_Controller : public ScriptImpClass {
 public:
-    struct WeaponNode {
-        char weaponName[128];
-        unsigned int weaponId;
-        float sortOrder;
-        int holdStyle;
-        float speed;
-        WeaponNode *next;
-        WeaponNode *prev;
-
-        WeaponNode(const char *weaponName, unsigned int weaponId, float sortOrder, int holdStyle, float speed,
-                   WeaponNode *prev, WeaponNode *next) {
-            sprintf(this->weaponName, "%s", weaponName);
-            this->weaponId = weaponId;
-            this->sortOrder = sortOrder;
-            this->holdStyle = holdStyle;
-            this->speed = speed;
-            this->prev = prev;
-            this->next = next;
-        }
-    };
-
-    static WeaponNode *weaponNodeGroups[128];
-    static WeaponNode *weaponNodeGroupsEnd[128];
-
-    static WeaponNode *
-    addNode(int groupId, const char *weaponName, unsigned int weaponId, float sortOrder, int holdStyle, float speed) {
-        if (!weaponNodeGroups[groupId])
-            return weaponNodeGroups[groupId] = weaponNodeGroupsEnd[groupId] = new WeaponNode(weaponName, weaponId,
-                                                                                             sortOrder, holdStyle,
-                                                                                             speed, NULL, NULL);
-        if (sortOrder < weaponNodeGroups[groupId]->sortOrder)
-            return weaponNodeGroups[groupId] = weaponNodeGroups[groupId]->prev = new WeaponNode(weaponName, weaponId,
-                                                                                                sortOrder, holdStyle,
-                                                                                                speed, NULL,
-                                                                                                weaponNodeGroups[groupId]);
-        WeaponNode *current = weaponNodeGroups[groupId], *prev = NULL;
-        while (current) {
-            if (current->weaponId == weaponId) {
-                current->holdStyle = holdStyle;
-                current->sortOrder = sortOrder;
-                current->speed = speed;
-                return current;
-            }
-            if (prev && prev->sortOrder <= sortOrder && current->sortOrder > sortOrder)
-                return prev->next = current->prev = new WeaponNode(weaponName, weaponId, sortOrder, holdStyle, speed,
-                                                                   prev, current);
-            if (!current->next)
-                return current->next = weaponNodeGroupsEnd[groupId] = new WeaponNode(weaponName, weaponId, sortOrder,
-                                                                                     holdStyle, speed, current, NULL);
-            prev = current;
-            current = current->next;
-        }
-        return NULL;
-    };
-
-    static WeaponNode *getNode(int groupId, const char *weaponName) {
-        WeaponNode *current = weaponNodeGroups[groupId];
-        while (current) {
-            if (!_stricmp(weaponName, current->weaponName))
-                return current;
-            current = current->next;
-        }
-        return NULL;
-    };
-
-    static WeaponNode *getWeapon(int groupId, unsigned int weaponId) {
-        WeaponNode *current = weaponNodeGroups[groupId];
-        while (current) {
-            if (weaponId == current->weaponId)
-                return current;
-            current = current->next;
-        }
-        return NULL;
-    };
-
-    static WeaponNode *getNext(GameObject *obj, int groupId, WeaponNode *current) {
-        if (current)
-            current = current->next;
-        if (!current)
-            current = weaponNodeGroups[groupId];
-        for (int x = 0; x < 2; x++) {
-            while (current) {
-                if (Has_Weapon(obj, current->weaponName))
-                    return current;
-                current = current->next;
-            }
-            current = weaponNodeGroups[groupId];
-        }
-        return NULL;
-    };
-
-    static WeaponNode *getPrev(GameObject *obj, int groupId, WeaponNode *current) {
-        if (current)
-            current = current->prev;
-        if (!current)
-            current = weaponNodeGroupsEnd[groupId];
-        for (int x = 0; x < 2; x++) {
-            while (current) {
-                if (Has_Weapon(obj, current->weaponName))
-                    return current;
-                current = current->prev;
-            }
-            current = weaponNodeGroupsEnd[groupId];
-        }
-        return NULL;
-    };
-
-    static void Empty_List() {
-        for (int x = 0; x < 128; x++) {
-            WeaponNode *temp = weaponNodeGroups[x], *die;
-            weaponNodeGroups[x] = NULL;
-            weaponNodeGroupsEnd[x] = NULL;
-            while (temp) {
-                die = temp;
-                temp = temp->next;
-                delete die;
-            }
-        }
-    }
-
+	struct WeaponNode
+	{
+		char weaponName[128];
+		unsigned int weaponId;
+		float sortOrder;
+		int holdStyle;
+		float speed;
+		WeaponNode *next;
+		WeaponNode *prev;
+		WeaponNode(const char *weaponName,unsigned int weaponId,float sortOrder,int holdStyle,float speed,WeaponNode *prev,WeaponNode *next)
+		{
+			sprintf(this->weaponName,"%s",weaponName);
+			this->weaponId = weaponId;
+			this->sortOrder = sortOrder;
+			this->holdStyle = holdStyle;
+			this->speed = speed;
+			this->prev = prev;
+			this->next = next;
+		}
+	};
+	static WeaponNode *weaponNodeGroups[128];
+	static WeaponNode *weaponNodeGroupsEnd[128];
+	static WeaponNode *addNode(int groupId,const char *weaponName,unsigned int weaponId,float sortOrder,int holdStyle,float speed)
+	{
+		if (!weaponNodeGroups[groupId])
+			return weaponNodeGroups[groupId] = weaponNodeGroupsEnd[groupId] = new WeaponNode(weaponName,weaponId,sortOrder,holdStyle,speed,NULL,NULL);
+		if (sortOrder < weaponNodeGroups[groupId]->sortOrder)
+			return weaponNodeGroups[groupId] = weaponNodeGroups[groupId]->prev = new WeaponNode(weaponName,weaponId,sortOrder,holdStyle,speed,NULL,weaponNodeGroups[groupId]);
+		WeaponNode *current = weaponNodeGroups[groupId],*prev = NULL;
+		while (current)
+		{
+			if (current->weaponId == weaponId)
+			{
+				current->holdStyle = holdStyle;
+				current->sortOrder = sortOrder;
+				current->speed = speed;
+				return current;
+			}
+			if (prev && prev->sortOrder <= sortOrder && current->sortOrder > sortOrder)
+				return prev->next = current->prev = new WeaponNode(weaponName,weaponId,sortOrder,holdStyle,speed,prev,current);
+			if (!current->next)
+				return current->next = weaponNodeGroupsEnd[groupId] = new WeaponNode(weaponName,weaponId,sortOrder,holdStyle,speed,current,NULL);
+			prev = current;
+			current = current->next;
+		}
+		return NULL;
+	};
+	static WeaponNode *getNode(int groupId,const char *weaponName)
+	{
+		WeaponNode *current = weaponNodeGroups[groupId];
+		while (current)
+		{
+			if (!_stricmp(weaponName,current->weaponName))
+				return current;
+			current = current->next;
+		}
+		return NULL;
+	};
+	static WeaponNode *getWeapon(int groupId,unsigned int weaponId)
+	{
+		WeaponNode *current = weaponNodeGroups[groupId];
+		while (current)
+		{
+			if (weaponId == current->weaponId)
+				return current;
+			current = current->next;
+		}
+		return NULL;
+	};
+	static WeaponNode *getNext(GameObject *obj,int groupId,WeaponNode *current)
+	{
+		if (current)
+			current = current->next;
+		if (!current)
+			current = weaponNodeGroups[groupId];
+		for (int x = 0;x < 2;x++)
+		{
+			while (current)
+			{
+				if (Has_Weapon(obj,current->weaponName))
+					return current;
+				current = current->next;
+			}
+			current = weaponNodeGroups[groupId];
+		}
+		return NULL;
+	};
+	static WeaponNode *getPrev(GameObject *obj,int groupId,WeaponNode *current)
+	{
+		if (current)
+			current = current->prev;
+		if (!current)
+			current = weaponNodeGroupsEnd[groupId];
+		for (int x = 0;x < 2;x++)
+		{
+			while (current)
+			{
+				if (Has_Weapon(obj,current->weaponName))
+					return current;
+				current = current->prev;
+			}
+			current = weaponNodeGroupsEnd[groupId];
+		}
+		return NULL;
+	};
+	static void Empty_List()
+	{
+		for (int x = 0;x < 128;x++)
+		{
+			WeaponNode *temp = weaponNodeGroups[x],*die;
+			weaponNodeGroups[x] = NULL;
+			weaponNodeGroupsEnd[x] = NULL;
+			while (temp)
+			{
+				die = temp;
+				temp = temp->next;
+				delete die;
+			}
+		}
+	}
 private:
-    void Destroyed(GameObject *obj);
-
-    void Detach(GameObject *obj);
-
+	void Destroyed(GameObject *obj);
+	void Detach(GameObject *obj);
 public:
-    static bool exists;
-
-    JMG_Utility_Swimming_Infantry_Advanced_Controller() {
-        exists = true;
-        for (int x = 0; x < 128; x++)
-            weaponNodeGroups[x] = NULL;
-    }
+	static bool exists;
+	JMG_Utility_Swimming_Infantry_Advanced_Controller()
+	{
+		exists = true;
+		for (int x = 0;x < 128;x++)
+			weaponNodeGroups[x] = NULL;
+	}
 };
 
-/*!
-* \brief This script allows a soldier to swim when in a swimming zone.
-* \ If using my swimming animations make sure there is a plane for infantry
-* \ to stand on 1.466 meters below the water surface. The underwater[playerId] can be accessed from anywhere, allowing you to disable
-* \ screen fading when underwater from other scripts.
+/*! 
+* \brief This script allows a soldier to swim when in a swimming zone. 
+* \ If using my swimming animations make sure there is a plane for infantry 
+* \ to stand on 1.466 meters below the water surface. The underwater[playerId] can be accessed from anywhere, allowing you to disable  
+* \ screen fading when underwater from other scripts. 
 * \WeaponsGroupID - ID to use to look up weapons specified by the weapons group controller
 * \WeaponPreset - Weapon to lock the player to while swimming, make sure its type launcher to make use of my animations, only used if ForceDefinedWeapons is on
 * \ForceDefinedWeapons - If 1 the player won't be able to select weapons that haven't been defined for the weapons group.
 * \DefaultHoldStyle - Default animation set used for weapons that haven't been defined. 0 = A, 1 = A, 2 = C, 3 = D, 4 = E, 5 = F, 6 = A, 7 = A, 8 = B, 9 = A, 10 = J, 11 = K, 12 = L, 13 = M
-* \DefaultSwimSpeed - Default swim speed for weapons that haven't overridden the swim speed.
-* \DrownTime - Time it takes before you start taking damage when crouched under water for long periods of time
-* \StarDrownSequence - How long before you start taking damage to start fading the screen red and the heart beat sound
-* \GaspForBreath - This sound is played when you surface from under water after long periods of time
-* \PantingSoundEmitterModel - This 3d object is attached to the player and should be a looped sound effect, it exists while getting close to drowning
-* \HeartBeatSoundEmitterModel - This 3d object is attached to the player and should be a looped sound effect, it exists while catching your breath
+* \DefaultSwimSpeed - Default swim speed for weapons that haven't overridden the swim speed. 
+* \DrownTime - Time it takes before you start taking damage when crouched under water for long periods of time 
+* \StarDrownSequence - How long before you start taking damage to start fading the screen red and the heart beat sound 
+* \GaspForBreath - This sound is played when you surface from under water after long periods of time 
+* \PantingSoundEmitterModel - This 3d object is attached to the player and should be a looped sound effect, it exists while getting close to drowning 
+* \HeartBeatSoundEmitterModel - This 3d object is attached to the player and should be a looped sound effect, it exists while catching your breath 
 * \DrownDamageRate - Damage applied 10 times a second while drowning
 * \CatchBreathRate - Rate at which a character catches its breath when out of the water, 0.1 would recover 1 second of air every second
 * \WaterDamageAmount - Amount of damage to apply to the character while swimming, is applied 10 tiems a second, default is 0
@@ -8452,86 +7888,73 @@ public:
 * \ingroup JmgUtility
 */
 class JMG_Utility_Swimming_Infantry_Advanced : public ScriptImpClass {
-    int heartBeatSoundId;
-    int pantSoundId;
-    char enterWeapon[256];
-    int playerId;
-    bool startedFadeRed;
-    float drownTime;
-    bool underwater;
-    int waterZoneCount;
-    int lastWaterZoneId;
-    time_t lastDisplayTime;
-    float defaultSpeed;
-    int waterDamageDelayTime;
-    int waterDamageDelayTimeRecover;
-    int remainingWaterDamageDelay;
-    char originalSkin[128];
-    char originalArmor[128];
-    char originalModel[128];
-    int weaponGroupId;
-    unsigned int currentWeaponId;
-    int defaultHoldStyle;
-    float defaultSwimSpeedMultiplier;
-    float waterSpeedMultiplier;
-    char defaultWeaponPreset[128];
-    float defaultDrownTime;
-    float startDrownSequence;
-    float waterDamageAmount;
-    char waterDamageWarhead[128];
-    float drownDamageRate;
-    char swimmingSkin[128];
-    char swimmingArmor[128];
-    char swimmingModel[128];
-    float swimmingHeightScale;
-    float swimmingWidthScale;
-    float originalHeightScale;
-    float originalWidthScale;
-    int enterWaterMessageStringId;
-    Vector3 waterEnterMessageColorRGB;
-    char heartBeatSoundEmitterModel[16];
-    char pantingSoundEmitterModel[16];
-    char gaspForBreath[128];
-    float catchBreathRate;
-    bool forceDefinedWeapons;
-    int weaponSwitchForward;
-    JMG_Utility_Swimming_Infantry_Advanced_Controller::WeaponNode *currentWeapon;
-
-    void Created(GameObject *obj);
-
-    void Timer_Expired(GameObject *obj, int number);
-
-    void Custom(GameObject *obj, int message, int param, GameObject *sender);
-
-    void Killed(GameObject *obj, GameObject *killer);
-
-    void Destroyed(GameObject *obj);
-
-    void Detach(GameObject *obj);
-
-    void CreateSoundEmitter(GameObject *obj, const char *model, int *soundId);
-
-    void DestroySoundEmitter(int *soundId);
-
-    void HideSoundEmitter(int *soundId);
-
-    void SwitchWeapon(GameObject *obj);
-
-    void UpdateWeaponSwimming(GameObject *obj, const WeaponDefinitionClass *weaponDef);
-
-    void GetWeaponId(const WeaponDefinitionClass *weaponDef);
-
-    int GetWeaponPosition(GameObject *obj, int weaponId);
-
+	int heartBeatSoundId;
+	int pantSoundId;
+	char enterWeapon[256];
+	int playerId;
+	bool startedFadeRed;
+	float drownTime;
+	bool underwater;
+	int waterZoneCount;
+	int lastWaterZoneId;
+	time_t lastDisplayTime;
+	float defaultSpeed;
+	int waterDamageDelayTime;
+	int waterDamageDelayTimeRecover;
+	int remainingWaterDamageDelay;
+	char originalSkin[128];
+	char originalArmor[128];
+	char originalModel[128];
+	int weaponGroupId;
+	unsigned int currentWeaponId;
+	int defaultHoldStyle;
+	float defaultSwimSpeedMultiplier;
+	float waterSpeedMultiplier;
+	char defaultWeaponPreset[128];
+	float defaultDrownTime;
+	float startDrownSequence;
+	float waterDamageAmount;
+	char waterDamageWarhead[128];
+	float drownDamageRate;
+	char swimmingSkin[128];
+	char swimmingArmor[128];
+	char swimmingModel[128];
+	float swimmingHeightScale;
+	float swimmingWidthScale;
+	float originalHeightScale;
+	float originalWidthScale;
+	int enterWaterMessageStringId;
+	Vector3 waterEnterMessageColorRGB;
+	char heartBeatSoundEmitterModel[16];
+	char pantingSoundEmitterModel[16];
+	char gaspForBreath[128];
+	float catchBreathRate;
+	bool forceDefinedWeapons;
+	int weaponSwitchForward;
+	JMG_Utility_Swimming_Infantry_Advanced_Controller::WeaponNode *currentWeapon;
+	void Created(GameObject *obj);
+	void Timer_Expired(GameObject *obj,int number);
+	void Custom(GameObject *obj,int message,int param,GameObject *sender);
+	void Killed(GameObject *obj,GameObject *killer);
+	void Destroyed(GameObject *obj);
+	void Detach(GameObject *obj);
+	void CreateSoundEmitter(GameObject *obj,const char *model,int *soundId);
+	void DestroySoundEmitter(int *soundId);
+	void HideSoundEmitter(int *soundId);
+	void SwitchWeapon(GameObject *obj);
+	void UpdateWeaponSwimming(GameObject *obj,const WeaponDefinitionClass *weaponDef);
+	void GetWeaponId(const WeaponDefinitionClass *weaponDef);
+	int GetWeaponPosition(GameObject *obj,int weaponId);
 public:
-    JMG_Utility_Swimming_Infantry_Advanced() {
-        weaponGroupId = 0;
-        currentWeaponId = 0;
-        currentWeapon = NULL;
-    }
+	JMG_Utility_Swimming_Infantry_Advanced()
+	{
+		weaponGroupId = 0;
+		currentWeaponId = 0;
+		currentWeapon = NULL;
+	}
 };
 
-/*!
+/*! 
 * \brief Adds all defined weapons of a specific hold style to the JMG_Utility_Swimming_Infantry_Advanced_Controller
 * \WeaponGroupID - Weapon Group to add them to (max of 127)
 * \HoldStyle - Hold style to add the weapons from (C4 = 0, UNUSED = 1, SHOLDER = 2, HIP = 3, LAUNCHER = 4, HANDGUN = 5, BEACON = 6, EMPTY_HANDS = 7, CHEST = 8, HANDS DOWN = 9)
@@ -8542,12 +7965,11 @@ public:
 * \ingroup JmgUtility
 */
 class JMG_Utility_Swimming_Infantry_Advanced_Add_All_Of_Style : public ScriptImpClass {
-    void Created(GameObject *obj);
-
-    void Timer_Expired(GameObject *obj, int number);
+	void Created(GameObject *obj);
+	void Timer_Expired(GameObject *obj,int number);
 };
 
-/*!
+/*! 
 * \brief Adds a weapon to JMG_Utility_Swimming_Infantry_Advanced_Controller
 * \WeaponGroupID - Weapon Group to add them to (max of 127)
 * \WeaponName - Name of the weapon definition to add
@@ -8558,9 +7980,8 @@ class JMG_Utility_Swimming_Infantry_Advanced_Add_All_Of_Style : public ScriptImp
 * \ingroup JmgUtility
 */
 class JMG_Utility_Swimming_Infantry_Advanced_Add_Weapon : public ScriptImpClass {
-    void Created(GameObject *obj);
-
-    void Timer_Expired(GameObject *obj, int number);
+	void Created(GameObject *obj);
+	void Timer_Expired(GameObject *obj,int number);
 };
 
 /*!
@@ -8603,18 +8024,16 @@ class JMG_Utility_Swimming_Infantry_Advanced_Add_Weapon : public ScriptImpClass 
 * \ingroup JmgUtility
 */
 class JMG_Utility_Custom_Send_Cycled_Customs : public ScriptImpClass {
-    int recieveMessage;
-    int id;
-    int custom[10];
-    int Param[10];
-    float delay[10];
-    float randomDelay;
-    float randomChance;
-    int cycle;
-
-    void Created(GameObject *obj);
-
-    void Custom(GameObject *obj, int message, int param, GameObject *sender);
+	int recieveMessage;
+	int id;
+	int custom[10];
+	int Param[10];
+	float delay[10];
+	float randomDelay;
+	float randomChance;
+	int cycle;
+	void Created(GameObject *obj);
+	void Custom(GameObject *obj,int message,int param,GameObject *sender);
 };
 
 /*!
@@ -8627,11 +8046,11 @@ class JMG_Utility_Custom_Send_Cycled_Customs : public ScriptImpClass {
 * \ingroup JmgUtility
 */
 class JMG_Utility_Killed_Send_Custom_From_Killer : public ScriptImpClass {
-    void Killed(GameObject *obj, GameObject *killer);
+	void Killed(GameObject *obj,GameObject *killer);
 };
 
 /*!
-* \brief This script makes for a rather cruddy emulation of sound_heard on a dedicated server. The script
+* \brief This script makes for a rather cruddy emulation of sound_heard on a dedicated server. The script  
 * \ must be attached to a soldier which can emulate sounds and only notifies to scripts on other objects.
 * \DefaultCrouchMoveSoundID - ID of the footstep sound for crouched movement (I used a dirt sound)
 * \DefaultWalkMoveSoundID - ID of the footstep sound for walk movement (I used a dirt sound)
@@ -8641,47 +8060,42 @@ class JMG_Utility_Killed_Send_Custom_From_Killer : public ScriptImpClass {
 * \ingroup JmgUtility
 */
 class JMG_Utility_Emulate_Sound_Heard_On_FDS : public ScriptImpClass {
-    class WeaponNode {
-    public:
-        enum FireWeaponReturn {
-            NONE, INFANTRY_FIRE, VEHICLE_FIRE
-        };
-        bool infiniteBullets;
-        char weaponName[256];
-        int totalBullets;
-
-        int GetWeaponBullets(GameObject *obj) {
-            return infiniteBullets ? Get_Current_Bullets(obj) : Get_Current_Total_Bullets(obj);
-        }
-
-        WeaponNode(GameObject *obj) {
-            sprintf(weaponName, "%s", Get_Current_Weapon(obj));
-            infiniteBullets = Get_Current_Total_Bullets(obj) == -1 ? true : false;
-            totalBullets = GetWeaponBullets(obj);
-        }
-
-        WeaponNode() {
-            sprintf(weaponName, "");
-            infiniteBullets = false;
-            totalBullets = 0;
-        }
-    };
-
-    float updateRate;
-    int crouchSoundId;
-    int walkSoundId;
-    int runSoundId;
-    WeaponNode currentWeapon;
-    WeaponNode vehicleWeapon;
-
-    void Created(GameObject *obj);
-
-    void Timer_Expired(GameObject *obj, int number);
-
-    WeaponNode::FireWeaponReturn FiredWeapon(GameObject *obj);
+	class WeaponNode
+	{
+	public:
+		enum FireWeaponReturn{NONE,INFANTRY_FIRE,VEHICLE_FIRE};
+		bool infiniteBullets;
+		char weaponName[256];
+		int totalBullets;
+		int GetWeaponBullets(GameObject *obj)
+		{
+			return infiniteBullets ? Get_Current_Bullets(obj) : Get_Current_Total_Bullets(obj);
+		}
+		WeaponNode(GameObject *obj)
+		{
+			sprintf(weaponName,"%s",Get_Current_Weapon(obj));
+			infiniteBullets = Get_Current_Total_Bullets(obj) == -1 ? true : false;
+			totalBullets = GetWeaponBullets(obj);
+		}
+		WeaponNode()
+		{
+			sprintf(weaponName,"");
+			infiniteBullets = false;
+			totalBullets = 0;
+		}
+	};
+	float updateRate;
+	int crouchSoundId;
+	int walkSoundId;
+	int runSoundId;
+	WeaponNode currentWeapon;
+	WeaponNode vehicleWeapon;
+	void Created(GameObject *obj);
+	void Timer_Expired(GameObject *obj,int number);
+	WeaponNode::FireWeaponReturn FiredWeapon(GameObject *obj);
 };
 
-/*!
+/*! 
 * \brief Sends a custom when the specified team holds the zone with more objects than all the other teams combind (only checks smart game objects and neutral is ignored).
 * \Team - Team to check for
 * \ID - ID to send the custom
@@ -8698,30 +8112,25 @@ class JMG_Utility_Emulate_Sound_Heard_On_FDS : public ScriptImpClass {
 * \ingroup JmgUtility
 */
 class JMG_Utility_Send_Custom_When_Team_Dominates_Zone : public ScriptImpClass {
-    enum sBool {
-        sNULL = -1, sFALSE, sTRUE
-    };
-    int team;
-    sBool teamHoldingZone;
-    bool enabled;
-    int enableCustom;
-    float rate;
-    int id;
-    int captureCustom;
-    int captureParam;
-    int lostCustom;
-    int lostParam;
-    float delay;
-    bool sendCustomEveryTick;
-
-    void Created(GameObject *obj);
-
-    void Timer_Expired(GameObject *obj, int number);
-
-    void Custom(GameObject *obj, int message, int param, GameObject *sender);
+	enum sBool{sNULL=-1,sFALSE,sTRUE};
+	int team;
+	sBool teamHoldingZone;
+	bool enabled;
+	int enableCustom;
+	float rate;
+	int id;
+	int captureCustom;
+	int captureParam;
+	int lostCustom;
+	int lostParam;
+	float delay;
+	bool sendCustomEveryTick;
+	void Created(GameObject *obj);
+	void Timer_Expired(GameObject *obj,int number);
+	void Custom(GameObject *obj,int message,int param,GameObject *sender);
 };
 
-/*!
+/*! 
 * \brief Sends a custom when the specified team is in the zone (only checks smart game objects and neutral is ignored).
 * \Team - Team to check for
 * \ID - ID to send the custom to once the team controls the zone
@@ -8738,27 +8147,22 @@ class JMG_Utility_Send_Custom_When_Team_Dominates_Zone : public ScriptImpClass {
 * \ingroup JmgUtility
 */
 class JMG_Utility_Send_Custom_When_Team_Zone : public ScriptImpClass {
-    enum sBool {
-        sNULL = -1, sFALSE, sTRUE
-    };
-    int team;
-    sBool teamInZone;
-    bool enabled;
-    int enableCustom;
-    float rate;
-    int id;
-    int inCustom;
-    int inParam;
-    float delay;
-    int outCustom;
-    int outParam;
-    bool sendCustomEveryTick;
-
-    void Created(GameObject *obj);
-
-    void Timer_Expired(GameObject *obj, int number);
-
-    void Custom(GameObject *obj, int message, int param, GameObject *sender);
+	enum sBool{sNULL=-1,sFALSE,sTRUE};
+	int team;
+	sBool teamInZone;
+	bool enabled;
+	int enableCustom;
+	float rate;
+	int id;
+	int inCustom;
+	int inParam;
+	float delay;
+	int outCustom;
+	int outParam;
+	bool sendCustomEveryTick;
+	void Created(GameObject *obj);
+	void Timer_Expired(GameObject *obj,int number);
+	void Custom(GameObject *obj,int message,int param,GameObject *sender);
 };
 
 /*!
@@ -8767,14 +8171,13 @@ class JMG_Utility_Send_Custom_When_Team_Zone : public ScriptImpClass {
 * \ If an object with JMG_Utility_HUD_Count_Down is destroyed all currently placed JMG_Utility_HUD_Count_Down_Visible_Countdown will be removed.
 * \CharPos - Character in the countdown string which this object represents SSMMHH 012345.
 * \BaseModelName - Model name that will be swapped as the counting happens, this model name will have a number appended to the end
-* \ IE: If the model name is number the new model name will be number#, where pound will be the current number to be displayed.
+* \ IE: If the model name is number the new model name will be number#, where pound will be the current number to be displayed. 
 * \author jgray
 * \ingroup JmgUtility
 */
 class JMG_Utility_HUD_Count_Down_Visible_Countdown : public ScriptImpClass {
-    void Created(GameObject *obj);
-
-    void Timer_Expired(GameObject *obj, int number);
+	void Created(GameObject *obj);
+	void Timer_Expired(GameObject *obj,int number);
 };
 
 /*!
@@ -8792,22 +8195,20 @@ class JMG_Utility_HUD_Count_Down_Visible_Countdown : public ScriptImpClass {
 * \ingroup JmgUtility
 */
 class JMG_Utility_Custom_Send_Custom_On_Secondary_Count : public ScriptImpClass {
-    int triggerCustom;
-    int countCustom;
-    int count;
-    int id;
-    int sendCustom;
-    int Param;
-    float delay;
-    int resetCustom;
-    bool onceMatchedContinue;
-
-    void Created(GameObject *obj);
-
-    void Custom(GameObject *obj, int message, int param, GameObject *sender);
+	int triggerCustom;
+	int countCustom;
+	int count;
+	int id;
+	int sendCustom;
+	int Param;
+	float delay;
+	int resetCustom;
+	bool onceMatchedContinue;
+	void Created(GameObject *obj);
+	void Custom(GameObject *obj,int message,int param,GameObject *sender);
 };
 
-/*!
+/*! 
 * \brief Sends a custom when any team but the specified team is in the zone (only checks smart game objects and neutral is ignored).
 * \Team - Team to check for
 * \ID - ID to send the custom to once the team controls the zone
@@ -8824,57 +8225,52 @@ class JMG_Utility_Custom_Send_Custom_On_Secondary_Count : public ScriptImpClass 
 * \ingroup JmgUtility
 */
 class JMG_Utility_Send_Custom_When_Not_Team_Zone : public ScriptImpClass {
-    enum sBool {
-        sNULL = -1, sFALSE, sTRUE
-    };
-    int team;
-    sBool teamInZone;
-    bool enabled;
-    int enableCustom;
-    float rate;
-    int id;
-    int inCustom;
-    int inParam;
-    float delay;
-    int outCustom;
-    int outParam;
-    bool sendCustomEveryTick;
-
-    void Created(GameObject *obj);
-
-    void Timer_Expired(GameObject *obj, int number);
-
-    void Custom(GameObject *obj, int message, int param, GameObject *sender);
+	enum sBool{sNULL=-1,sFALSE,sTRUE};
+	int team;
+	sBool teamInZone;
+	bool enabled;
+	int enableCustom;
+	float rate;
+	int id;
+	int inCustom;
+	int inParam;
+	float delay;
+	int outCustom;
+	int outParam;
+	bool sendCustomEveryTick;
+	void Created(GameObject *obj);
+	void Timer_Expired(GameObject *obj,int number);
+	void Custom(GameObject *obj,int message,int param,GameObject *sender);
 };
 
-/*!
+/*! 
 * \brief The attached object will be ignored from checks by  JMG_Utility_Send_Custom_When_Team_Dominates_Zone
 * \author jgray
 * \ingroup JmgUtility
 */
 class JMG_Utility_Send_Custom_When_Team_Dominates_Zone_Ignore : public ScriptImpClass {
-    void Created(GameObject *obj);
+	void Created(GameObject *obj);
 };
 
-/*!
+/*! 
 * \brief The attached object will be ignored from checks by  JMG_Utility_Send_Custom_When_Team_Zone
 * \author jgray
 * \ingroup JmgUtility
 */
 class JMG_Utility_Send_Custom_When_Team_Zone_Ignore : public ScriptImpClass {
-    void Created(GameObject *obj);
+	void Created(GameObject *obj);
 };
 
-/*!
+/*! 
 * \brief The attached object will be ignored from checks by  JMG_Utility_Send_Custom_When_Not_Team_Zone
 * \author jgray
 * \ingroup JmgUtility
 */
 class JMG_Utility_Send_Custom_When_Not_Team_Zone_Ignore : public ScriptImpClass {
-    void Created(GameObject *obj);
+	void Created(GameObject *obj);
 };
 
-/*!
+/*! 
 * \brief Sends a custom when the object's armor hits zero and then again when it hits full
 * \ID - ID to send the custom to once the team controls the zone
 * \ArmorCustom - Custom to send once the armor is full
@@ -8886,17 +8282,15 @@ class JMG_Utility_Send_Custom_When_Not_Team_Zone_Ignore : public ScriptImpClass 
 * \ingroup JmgUtility
 */
 class JMG_Utility_Send_Custom_On_Armor : public ScriptImpClass {
-    bool hurt;
-    int id;
-    int armorCustom;
-    int armorParam;
-    int noArmorCustom;
-    int noArmorParam;
-    float delay;
-
-    void Created(GameObject *obj);
-
-    void Timer_Expired(GameObject *obj, int number);
+	bool hurt;
+	int id;
+	int armorCustom;
+	int armorParam;
+	int noArmorCustom;
+	int noArmorParam;
+	float delay;
+	void Created(GameObject *obj);
+	void Timer_Expired(GameObject *obj,int number);
 };
 
 /*!
@@ -8911,31 +8305,25 @@ class JMG_Utility_Send_Custom_On_Armor : public ScriptImpClass {
 * \ingroup JmgUtility
 */
 class JMG_Utility_Base_Defense_Simple : public ScriptImpClass {
-    int enemyId;
-    float maxDistance;
-    float maxDist;
-    float minDist;
-    int resetTime;
-    int userSetResetTime;
-    Vector3 carTankBike;
-    Vector3 flyingTurretBoat;
-    Vector3 submarineInfantryUnused;
-
-    void Created(GameObject *obj);
-
-    void Enemy_Seen(GameObject *obj, GameObject *seen);
-
-    void Timer_Expired(GameObject *obj, int number);
-
-    void Damaged(GameObject *obj, GameObject *damager, float damage);
-
-    float GetPriority(GameObject *seen);
-
-    void AttackTarget(GameObject *obj, int seenId, GameObject *seen);
+	int enemyId;
+	float maxDistance;
+	float maxDist;
+	float minDist;
+	int resetTime;
+	int userSetResetTime;
+	Vector3 carTankBike;
+	Vector3 flyingTurretBoat;
+	Vector3 submarineInfantryUnused;
+	void Created(GameObject *obj);
+	void Enemy_Seen(GameObject *obj,GameObject *seen);
+	void Timer_Expired(GameObject *obj,int number);
+	void Damaged(GameObject *obj,GameObject *damager,float damage);
+	float GetPriority(GameObject *seen);
+	void AttackTarget(GameObject *obj,int seenId,GameObject *seen);
 };
 
 /*!
-* \brief When one of the defined customs is caught it will be instantly sent, after sending a delay timer starts, any custom caught during this time won't be sent until the time runs out,
+* \brief When one of the defined customs is caught it will be instantly sent, after sending a delay timer starts, any custom caught during this time won't be sent until the time runs out, 
 * \ when the time runs out only the newest is sent. Also attempts to send from the sender, if the sender no longer exists it sends from itself.
 * \Custom[0-9] - Custom to watch for, if custom 0 is 0 then all customs are caught
 * \ID - ID to send to, 0 sends to self, -1 sends to sender
@@ -8945,24 +8333,20 @@ class JMG_Utility_Base_Defense_Simple : public ScriptImpClass {
 * \ingroup JmgUtility
 */
 class JMG_Utility_Custom_Send_Custom_Supress_Spam : public ScriptImpClass {
-    int catchCustom[10];
-    int id;
-    int lastCustom;
-    int lastParam;
-    int lastSentCustom;
-    int lastSentParam;
-    float spamDelay;
-    bool supressingSpam;
-    bool sendDuplicates;
-    int senderId;
-
-    void Created(GameObject *obj);
-
-    void Custom(GameObject *obj, int message, int param, GameObject *sender);
-
-    void Timer_Expired(GameObject *obj, int number);
-
-    bool SendCustom(GameObject *obj);
+	int catchCustom[10];
+	int id;
+	int lastCustom;
+	int lastParam;
+	int lastSentCustom;
+	int lastSentParam;
+	float spamDelay;
+	bool supressingSpam;
+	bool sendDuplicates;
+	int senderId;
+	void Created(GameObject *obj);
+	void Custom(GameObject *obj,int message,int param,GameObject *sender);
+	void Timer_Expired(GameObject *obj,int number);
+	bool SendCustom(GameObject *obj);
 };
 
 /*!
@@ -8980,20 +8364,18 @@ class JMG_Utility_Custom_Send_Custom_Supress_Spam : public ScriptImpClass {
 * \ingroup JmgUtility
 */
 class JMG_Utility_Send_Custom_When_Player_Between_Range : public ScriptImpClass {
-    int sleepTime;
-    int sleeping;
-    bool triggerOnce;
-    bool enabled;
-    float minDistance;
-    float maxDistance;
-    float delay;
-    int id;
-    int param;
-    int custom;
-
-    void Created(GameObject *obj);
-
-    void Timer_Expired(GameObject *obj, int number);
+	int sleepTime;
+	int sleeping;
+	bool triggerOnce;
+	bool enabled;
+	float minDistance;
+	float maxDistance;
+	float delay;
+	int id;
+	int param;
+	int custom;
+	void Created(GameObject *obj);
+	void Timer_Expired(GameObject *obj,int number);
 };
 
 /*!
@@ -9013,44 +8395,39 @@ The expected format of the file is always Tag Line Tag Line, never add blank lin
 * \ingroup JmgUtility
 */
 class JMG_Utility_Custom_Display_Briefing_PAMSG_Message_To_Player : public ScriptImpClass {
-    struct BriefingTextNode {
-        char Text[256];
-        float Delay;
-        BriefingTextNode *prev;
-        BriefingTextNode *next;
-
-        BriefingTextNode(const char *text) {
-            Delay = 0.0f;
-            sprintf(Text, "%s", text);
-            next = NULL;
-            prev = NULL;
-        }
-
-        BriefingTextNode(const char *text, float delay) {
-            Delay = delay;
-            sprintf(Text, "%s", text);
-            next = NULL;
-            prev = NULL;
-        }
-
-        BriefingTextNode() {
-            next = NULL;
-            prev = NULL;
-        }
-    };
-
-    BriefingTextNode *BriefingText;
-    BriefingTextNode *lastNode;
-
-    void Created(GameObject *obj);
-
-    void Custom(GameObject *obj, int message, int param, GameObject *sender);
-
-    void Destroyed(GameObject *obj);
-
-    void AddNewTextNode();
-
-    void RemoveTextNodes();
+	struct BriefingTextNode
+	{
+		char Text[256];
+		float Delay;
+		BriefingTextNode *prev;
+		BriefingTextNode *next;
+		BriefingTextNode(const char *text)
+		{
+			Delay = 0.0f;
+			sprintf(Text,"%s",text); 
+			next = NULL;
+			prev = NULL;
+		}
+		BriefingTextNode(const char *text,float delay)
+		{
+			Delay = delay;
+			sprintf(Text,"%s",text); 
+			next = NULL;
+			prev = NULL;
+		}
+		BriefingTextNode()
+		{
+			next = NULL;
+			prev = NULL;
+		}
+	};
+	BriefingTextNode *BriefingText;
+	BriefingTextNode *lastNode;
+	void Created(GameObject *obj);
+	void Custom(GameObject *obj,int message,int param,GameObject *sender);
+	void Destroyed(GameObject *obj);
+	void AddNewTextNode();
+	void RemoveTextNodes();
 };
 
 /*!
@@ -9063,7 +8440,7 @@ class JMG_Utility_Custom_Display_Briefing_PAMSG_Message_To_Player : public Scrip
 * \ingroup JmgUtility
 */
 class JMG_Utility_Send_Custom_On_Powerup_Pickup_Collector : public ScriptImpClass {
-    void Custom(GameObject *obj, int message, int param, GameObject *sender);
+  void Custom(GameObject *obj,int message,int param,GameObject *sender);
 };
 
 /*!
@@ -9078,16 +8455,14 @@ class JMG_Utility_Send_Custom_On_Powerup_Pickup_Collector : public ScriptImpClas
 * \ingroup JmgUtility
 */
 class JMG_Utility_Zone_Send_Custom_Enter_From_Enterer : public ScriptImpClass {
-    int playerType;
-    int custom;
-    int param;
-    float delay;
-    int id;
-    bool triggerOnce;
-
-    void Created(GameObject *obj);
-
-    void Entered(GameObject *obj, GameObject *enterer);
+	int playerType;
+	int custom;
+	int param;
+	float delay;
+	int id;
+	bool triggerOnce;
+	void Created(GameObject *obj);
+	void Entered(GameObject *obj,GameObject *enterer);
 };
 
 /*!
@@ -9095,14 +8470,14 @@ class JMG_Utility_Zone_Send_Custom_Enter_From_Enterer : public ScriptImpClass {
 * \TargetCustom - Custom provided by the 'spotter' object, param is the enemy's id, (recommend using JMG_Utility_Enemy_Seen_Send_Custom)
 * \MinDistance - Min distance at which a target can be before it won't be shot at
 * \MinAngle - Max angle the turret can aim (NOTE: Turret isn't actually used for this varrient of the script as it isn't using an actual weapon, turret will still try to aim at the location however).
-* \MaxAngle - Min angle the turret can aim
+* \MaxAngle - Min angle the turret can aim 
 * \UseLowAngleMaxDistance - Max distance the turret will try to aim at the low angle before switching the the high arc angle
 * \UseLowAngleTargetAboveHeight - Try to fire the lower angle when above you, this is useful for aircraft and soforth
 * \VehicleProjectilePreset - Vehicle preset that has projectile physics (Created at the FireSpot bone) NOTE: Make sure it is type "flying" so it syncs on the network right
 * \FireVelocity - Speed at which to launch the vehicle preset
 * \GravityScale - Gravity scale setting on the projectile vehicle preset (used for calculations)
 * \BaseMissAmount - How much can the script miss around the target by
-* \MissAmountPerMeter - Max amount of distance the script can aim around the object per meter of distance between the target and firer.
+* \MissAmountPerMeter - Max amount of distance the script can aim around the object per meter of distance between the target and firer. 
 * \  IE if 0.01 and the target is 150 meters away then the script can aim 1.5 meters infront of, to the left, etc of the target (Defaults to BaseMissAmount if its greater)
 * \ProjectedShotsChance - Chance that the shots will be projected, toggles between the modes every reload (0.0-1.0)
 * \FireRate - howmany in a second to fire
@@ -9118,46 +8493,41 @@ class JMG_Utility_Zone_Send_Custom_Enter_From_Enterer : public ScriptImpClass {
 * \ingroup JmgUtility
 */
 class JMG_Utility_AI_Lobbed_Vehicle_Projectile_Custom : public ScriptImpClass {
-    int targetCustom;
-    float minDistanceSquared;
-    float lowAngleMaxDistance;
-    bool useLowAngleWhenAboveMinDistance;
-    float useLowAngleTargetAboveHeight;
-    float reloadTime;
-    float fireDelay;
-    float fireVelocity;
-    float velocitySquared;
-    char fireSound[128];
-    char vehicleProjectilePreset[128];
-    char muzzleFlashExplosion[128];
-    char projectileExplosion[128];
-    char reloadSound[128];
-    float minAngle;
-    float maxAngle;
-    float gravityScale;
-    int clipCount;
-    int currentClipCount;
-    float missAmountPerMeter;
-    float baseMissAmount;
-    bool delayComplete;
-    bool reloadComplete;
-    int targetId;
-    int aimTurret;
-    int timeoutTime;
-    int refreshTime;
-    double lastAngle;
-    float projectedShotsChance;
-    bool projectShots;
-
-    void Created(GameObject *obj);
-
-    void Custom(GameObject *obj, int message, int param, GameObject *sender);
-
-    void Timer_Expired(GameObject *obj, int number);
-
-    bool CalculateAngle(double *returnAngle, double distance, double height, bool highAngle);
-
-    void FireProjectile(GameObject *obj, double zAngle, double aimAngle);
+	int targetCustom;
+	float minDistanceSquared;
+	float lowAngleMaxDistance;
+	bool useLowAngleWhenAboveMinDistance;
+	float useLowAngleTargetAboveHeight;
+	float reloadTime;
+	float fireDelay;
+	float fireVelocity;
+	float velocitySquared;
+	char fireSound[128];
+	char vehicleProjectilePreset[128];
+	char muzzleFlashExplosion[128];
+	char projectileExplosion[128];
+	char reloadSound[128];
+	float minAngle;
+	float maxAngle;
+	float gravityScale;
+	int clipCount;
+	int currentClipCount;
+	float missAmountPerMeter;
+	float baseMissAmount;
+	bool delayComplete;
+	bool reloadComplete;
+	int targetId;
+	int aimTurret;
+	int timeoutTime;
+	int refreshTime;
+	double lastAngle;
+	float projectedShotsChance;
+	bool projectShots;
+	void Created(GameObject *obj);
+	void Custom(GameObject *obj,int message,int param,GameObject *sender);
+	void Timer_Expired(GameObject *obj,int number);
+	bool CalculateAngle(double *returnAngle,double distance,double height,bool highAngle);
+	void FireProjectile(GameObject *obj,double zAngle,double aimAngle);
 };
 
 /*!
@@ -9172,16 +8542,14 @@ class JMG_Utility_AI_Lobbed_Vehicle_Projectile_Custom : public ScriptImpClass {
 * \ingroup JmgUtility
 */
 class JMG_Utility_Vehicle_Enter_Send_Custom_From_Enterer : public ScriptImpClass {
-    int id;
-    int custom;
-    int Param;
-    float delay;
-    bool triggerOnce;
-    int team;
-
-    void Created(GameObject *obj);
-
-    void Custom(GameObject *obj, int message, int param, GameObject *sender);
+	int id;
+	int custom;
+	int Param;
+	float delay;
+	bool triggerOnce;
+	int team;
+	void Created(GameObject *obj);
+	void Custom(GameObject *obj,int message,int param,GameObject *sender);
 };
 
 /*!
@@ -9197,13 +8565,11 @@ class JMG_Utility_Vehicle_Enter_Send_Custom_From_Enterer : public ScriptImpClass
 * \ingroup JmgUtility
 */
 class JMG_Utility_Custom_Send_Custom_On_Count_From_Sender : public ScriptImpClass {
-    int custom;
-    int resetCustom;
-    int count;
-
-    void Created(GameObject *obj);
-
-    void Custom(GameObject *obj, int message, int param, GameObject *sender);
+	int custom;
+	int resetCustom;
+	int count;
+	void Created(GameObject *obj);
+	void Custom(GameObject *obj,int message,int param,GameObject *sender);
 };
 
 /*!
@@ -9217,41 +8583,36 @@ class JMG_Utility_Custom_Send_Custom_On_Count_From_Sender : public ScriptImpClas
 * \ingroup JmgUtility
 */
 class JMG_Utility_Player_Seen_Send_Custom : public ScriptImpClass {
-    int id;
-    int custom;
-    int Param;
-    float delay;
-    bool triggerOnce;
-
-    void Created(GameObject *obj);
-
-    void Timer_Expired(GameObject *obj, int number);
+	int id;
+	int custom;
+	int Param;
+	float delay;
+	bool triggerOnce;
+	void Created(GameObject *obj);
+	void Timer_Expired(GameObject *obj,int number);
 };
-
 /*!
 * \brief Plays an animation on the object that enters the zone, the object is also attached to another object (on the "attach" bone) which can be animated to do relocations
 * \PresetName - Preset required to trigger the script
-* \Animation - Animation to play on the object that enters
+* \Animation - Animation to play on the object that enters 
 * \AttachedModel - Model to use for the object the enterer is attached to
 * \AttachedAnimation - Animation to play to relocate the entering object
 * \Custom - Custom to send to self on animation completion
-* \Param - Param to send to self on animation completion
+* \Param - Param to send to self on animation completion 
 * \author jgray
 * \ingroup JmgUtility
 */
 class JMG_Utility_Enter_Play_Animation_And_Relocate : public ScriptImpClass {
-    char animation[32];
-    char attachedModel[16];
-    char attachedAnimation[32];
-    char presetName[128];
-    float zoneRotation;
-    bool centerToZone;
-    int custom;
-    int customParam;
-
-    void Created(GameObject *obj);
-
-    void Entered(GameObject *obj, GameObject *enterer);
+	char animation[32];
+	char attachedModel[16];
+	char attachedAnimation[32];
+	char presetName[128];
+	float zoneRotation;
+	bool centerToZone;
+	int custom;
+	int customParam;
+	void Created(GameObject *obj);
+	void Entered(GameObject *obj,GameObject *enterer);
 };
 
 /*!
@@ -9260,14 +8621,11 @@ class JMG_Utility_Enter_Play_Animation_And_Relocate : public ScriptImpClass {
 * \ingroup JmgUtility
 */
 class JMG_Utility_Enter_Play_Animation_And_Relocate_Attached : public ScriptImpClass {
-    int holderId;
-    Vector3 offset;
-
-    void Created(GameObject *obj);
-
-    void Animation_Complete(GameObject *obj, const char *anim);
-
-    void Destroyed(GameObject *obj);
+	int holderId;
+	Vector3 offset;
+	void Created(GameObject *obj);
+	void Animation_Complete(GameObject *obj,const char *anim);
+	void Destroyed(GameObject *obj);
 };
 
 /*!
@@ -9280,11 +8638,9 @@ class JMG_Utility_Enter_Play_Animation_And_Relocate_Attached : public ScriptImpC
 * \ingroup JmgUtility
 */
 class JMG_Utility_Custom_Destroy_Closest_Object_To_Self : public ScriptImpClass {
-    int custom;
-
-    void Created(GameObject *obj);
-
-    void Custom(GameObject *obj, int message, int param, GameObject *sender);
+	int custom;
+	void Created(GameObject *obj);
+	void Custom(GameObject *obj,int message,int param,GameObject *sender);
 };
 
 /*!
@@ -9299,11 +8655,9 @@ class JMG_Utility_Custom_Destroy_Closest_Object_To_Self : public ScriptImpClass 
 * \ingroup JmgUtility
 */
 class JMG_Utility_Custom_Apply_Damage_Closest_Object_To_Self : public ScriptImpClass {
-    int custom;
-
-    void Created(GameObject *obj);
-
-    void Custom(GameObject *obj, int message, int param, GameObject *sender);
+	int custom;
+	void Created(GameObject *obj);
+	void Custom(GameObject *obj,int message,int param,GameObject *sender);
 };
 
 
@@ -9316,13 +8670,11 @@ class JMG_Utility_Custom_Apply_Damage_Closest_Object_To_Self : public ScriptImpC
 * \ingroup JmgUtility
 */
 class JMG_Utility_Custom_Restore_Building : public ScriptImpClass {
-    int id;
-    int custom;
-    bool triggerOnce;
-
-    void Created(GameObject *obj);
-
-    void Custom(GameObject *obj, int message, int param, GameObject *sender);
+	int id;
+	int custom;
+	bool triggerOnce;
+	void Created(GameObject *obj);
+	void Custom(GameObject *obj,int message,int param,GameObject *sender);
 };
 
 /*!
@@ -9337,165 +8689,178 @@ class JMG_Utility_Custom_Restore_Building : public ScriptImpClass {
 * \ingroup JmgUtility
 */
 class JMG_Utility_Timer_Custom_Random : public ScriptImpClass {
-    int id;
-    int message;
-    int param;
-    bool repeat;
-    float time;
-    float random;
-
-    void Created(GameObject *obj);
-
-    void Timer_Expired(GameObject *obj, int number);
+	int id;
+	int message;
+	int param;
+	bool repeat;
+	float time;
+	float random;
+	void Created(GameObject *obj);
+	void Timer_Expired(GameObject *obj,int number);
 };
 
-class DynamicAttachScript {
+class DynamicAttachScript
+{
 public:
-    class DynamicAttachScriptParams {
-    public:
-        struct DynamicAttachScriptParamNode {
-            int index;
-            char param[512];
-            struct DynamicAttachScriptParamNode *next;
-
-            DynamicAttachScriptParamNode(int index, const char *param) {
-                this->index = index;
-                sprintf(this->param, "%s", param);
-                next = NULL;
-            }
-        };
-
-    private:
-        DynamicAttachScriptParamNode *DynamicAttachScriptParamNodeList;
-    public:
-        int objectCount;
-
-        DynamicAttachScriptParams() {
-            objectCount = 0;
-            DynamicAttachScriptParamNodeList = NULL;
-        }
-
-        DynamicAttachScriptParamNode *AddOrUpdateParam(int index, const char *param) {
-            DynamicAttachScriptParamNode *current = DynamicAttachScriptParamNodeList;
-            if (!DynamicAttachScriptParamNodeList) {
-                objectCount++;
-                return (DynamicAttachScriptParamNodeList = new DynamicAttachScriptParamNode(index, param));
-            }
-            while (current) {
-                if (current->index == index) {
-                    sprintf(current->param, "%s", param);
-                    return current;
-                }
-                if (!current->next) {
-                    objectCount++;
-                    return (current->next = new DynamicAttachScriptParamNode(index, param));
-                }
-                current = current->next;
-            }
-            return NULL;
-        };
-
-        DynamicAttachScriptParamNode *FindParam(int index) {
-            DynamicAttachScriptParamNode *current = DynamicAttachScriptParamNodeList;
-            while (current) {
-                if (current->index == index)
-                    return current;
-                current = current->next;
-            }
-            return NULL;
-        };
-
-        void EmptyList() {
-            objectCount = 0;
-            DynamicAttachScriptParamNode *temp = DynamicAttachScriptParamNodeList, *die;
-            while (temp) {
-                die = temp;
-                temp = temp->next;
-                delete die;
-            }
-            DynamicAttachScriptParamNodeList = NULL;
-        }
-    };
-
-    struct DynamicAttachScriptNode {
-        int scriptId;
-        char scriptName[512];
-        DynamicAttachScriptParams dynamicAttachScriptParams;
-        struct DynamicAttachScriptNode *next;
-
-        DynamicAttachScriptNode(int scriptId, const char *scriptName) {
-            this->scriptId = scriptId;
-            sprintf(this->scriptName, "%s", scriptName);
-            next = NULL;
-        }
-    };
-
+	class DynamicAttachScriptParams
+	{
+	public:
+		struct DynamicAttachScriptParamNode
+		{
+			int index;
+			char param[512];
+			struct DynamicAttachScriptParamNode *next;
+			DynamicAttachScriptParamNode(int index,const char *param)
+			{
+				this->index = index;
+				sprintf(this->param,"%s",param);
+				next = NULL;
+			}
+		};
+	private:
+		DynamicAttachScriptParamNode *DynamicAttachScriptParamNodeList;
+	public:
+		int objectCount;
+		DynamicAttachScriptParams()
+		{
+			objectCount = 0;
+			DynamicAttachScriptParamNodeList = NULL;
+		}
+		DynamicAttachScriptParamNode *AddOrUpdateParam(int index,const char *param)
+		{
+			DynamicAttachScriptParamNode *current = DynamicAttachScriptParamNodeList;
+			if (!DynamicAttachScriptParamNodeList)
+			{
+				objectCount++;
+				return (DynamicAttachScriptParamNodeList = new DynamicAttachScriptParamNode(index,param));
+			}
+			while (current)
+			{
+				if (current->index == index)
+				{
+					sprintf(current->param,"%s",param);
+					return current;
+				}
+				if (!current->next)
+				{
+					objectCount++;
+					return (current->next = new DynamicAttachScriptParamNode(index,param));
+				}
+				current = current->next;
+			}
+			return NULL;
+		};
+		DynamicAttachScriptParamNode *FindParam(int index)
+		{
+			DynamicAttachScriptParamNode *current = DynamicAttachScriptParamNodeList;
+			while (current)
+			{
+				if (current->index == index)
+					return current;
+				current = current->next;
+			}
+			return NULL;
+		};
+		void EmptyList()
+		{
+			objectCount = 0;
+			DynamicAttachScriptParamNode *temp = DynamicAttachScriptParamNodeList,*die;
+			while (temp)
+			{
+				die = temp;
+				temp = temp->next;
+				delete die;
+			}
+			DynamicAttachScriptParamNodeList = NULL;
+		}
+	};
+	struct DynamicAttachScriptNode
+	{
+		int scriptId;
+		char scriptName[512];
+		DynamicAttachScriptParams dynamicAttachScriptParams;
+		struct DynamicAttachScriptNode *next;
+		DynamicAttachScriptNode(int scriptId,const char *scriptName)
+		{
+			this->scriptId = scriptId;
+			sprintf(this->scriptName,"%s",scriptName);
+			next = NULL;
+		}
+	};
 private:
-    DynamicAttachScriptNode *DynamicAttachScriptNodeList;
+	DynamicAttachScriptNode *DynamicAttachScriptNodeList;
 public:
-    DynamicAttachScript() {
-        DynamicAttachScriptNodeList = NULL;
-    }
-
-    DynamicAttachScriptNode *AddDynamicScript(int scriptId, const char *scriptName) {
-        DynamicAttachScriptNode *current = DynamicAttachScriptNodeList;
-        if (!DynamicAttachScriptNodeList) {
-            DynamicAttachScriptNodeList = new DynamicAttachScriptNode(scriptId, scriptName);
-            return DynamicAttachScriptNodeList;
-        }
-        while (current) {
-            if (current->scriptId == scriptId) {
-                char errorMsg[220];
-                sprintf(errorMsg, "msg JMG_Utility_Dynamic_Script_Add_Parameter ERROR: ScriptID %d already exists!",
-                        scriptId);
-                Console_Input(errorMsg);
-                return current;
-            }
-            if (!current->next) {
-                current->next = new DynamicAttachScriptNode(scriptId, scriptName);
-                return current->next;
-            }
-            current = current->next;
-        }
-        return NULL;
-    };
-
-    DynamicAttachScriptNode *FindDynamicScript(int scriptId) {
-        DynamicAttachScriptNode *current = DynamicAttachScriptNodeList;
-        while (current) {
-            if (current->scriptId == scriptId)
-                return current;
-            current = current->next;
-        }
-        char errorMsg[220];
-        sprintf(errorMsg, "msg JMG_Utility_Dynamic_Script_Add_Parameter ERROR: ScriptID %d doesn't exist!", scriptId);
-        Console_Input(errorMsg);
-        return NULL;
-    };
-
-    void AddParamToScript(int scriptId, int index, const char *param) {
-        DynamicAttachScriptNode *current = DynamicAttachScriptNodeList;
-        while (current) {
-            if (current->scriptId == scriptId) {
-                current->dynamicAttachScriptParams.AddOrUpdateParam(index, param);
-                return;
-            }
-        }
-        char errorMsg[220];
-        sprintf(errorMsg, "msg JMG_Utility_Dynamic_Script_Add_Parameter ERROR: ScriptID %d doesn't exist!", scriptId);
-        Console_Input(errorMsg);
-    }
-
-    void EmptyList() {
-        DynamicAttachScriptNode *temp = DynamicAttachScriptNodeList, *die;
-        while (temp) {
-            die = temp;
-            temp = temp->next;
-            die->dynamicAttachScriptParams.EmptyList();
-            delete die;
-        }
-        DynamicAttachScriptNodeList = NULL;
-    }
+	DynamicAttachScript()
+	{
+		DynamicAttachScriptNodeList = NULL;
+	}
+	DynamicAttachScriptNode *AddDynamicScript(int scriptId,const char *scriptName)
+	{
+		DynamicAttachScriptNode *current = DynamicAttachScriptNodeList;
+		if (!DynamicAttachScriptNodeList)
+		{
+			DynamicAttachScriptNodeList = new DynamicAttachScriptNode(scriptId,scriptName);
+			return DynamicAttachScriptNodeList;
+		}
+		while (current)
+		{
+			if (current->scriptId == scriptId)
+			{
+				char errorMsg[220];
+				sprintf(errorMsg,"msg JMG_Utility_Dynamic_Script_Add_Parameter ERROR: ScriptID %d already exists!",scriptId);
+				Console_Input(errorMsg);
+				return current;
+			}
+			if (!current->next)
+			{
+				current->next = new DynamicAttachScriptNode(scriptId,scriptName);
+				return current->next;
+			}
+			current = current->next;
+		}
+		return NULL;
+	};
+	DynamicAttachScriptNode *FindDynamicScript(int scriptId)
+	{
+		DynamicAttachScriptNode *current = DynamicAttachScriptNodeList;
+		while (current)
+		{
+			if (current->scriptId == scriptId)
+				return current;
+			current = current->next;
+		}
+		char errorMsg[220];
+		sprintf(errorMsg,"msg JMG_Utility_Dynamic_Script_Add_Parameter ERROR: ScriptID %d doesn't exist!",scriptId);
+		Console_Input(errorMsg);
+		return NULL;
+	};
+	void AddParamToScript(int scriptId,int index,const char *param)
+	{
+		DynamicAttachScriptNode *current = DynamicAttachScriptNodeList;
+		while (current)
+		{
+			if (current->scriptId == scriptId)
+			{
+				current->dynamicAttachScriptParams.AddOrUpdateParam(index,param);
+				return;
+			}
+		}
+		char errorMsg[220];
+		sprintf(errorMsg,"msg JMG_Utility_Dynamic_Script_Add_Parameter ERROR: ScriptID %d doesn't exist!",scriptId);
+		Console_Input(errorMsg);
+	}
+	void EmptyList()
+	{
+		DynamicAttachScriptNode *temp = DynamicAttachScriptNodeList,*die;
+		while (temp)
+		{
+			die = temp;
+			temp = temp->next;
+			die->dynamicAttachScriptParams.EmptyList();
+			delete die;
+		}
+		DynamicAttachScriptNodeList = NULL;
+	}
 };
 
 /*!
@@ -9504,10 +8869,9 @@ public:
 * \ingroup JmgUtility
 */
 class JMG_Utility_Dynamic_Script_Controller : public ScriptImpClass {
-    void Destroyed(GameObject *obj);
-
+	void Destroyed(GameObject *obj);
 public:
-    static DynamicAttachScript dynamicAttachScript;
+	static DynamicAttachScript dynamicAttachScript;
 };
 
 /*!
@@ -9518,7 +8882,7 @@ public:
 * \ingroup JmgUtility
 */
 class JMG_Utility_Dynamic_Script_Definition : public ScriptImpClass {
-    void Created(GameObject *obj);
+	void Created(GameObject *obj);
 };
 
 /*!
@@ -9531,9 +8895,8 @@ class JMG_Utility_Dynamic_Script_Definition : public ScriptImpClass {
 * \ingroup JmgUtility
 */
 class JMG_Utility_Dynamic_Script_Created_Add_Update_Parameter : public ScriptImpClass {
-    void Created(GameObject *obj);
-
-    void Timer_Expired(GameObject *obj, int number);
+	void Created(GameObject *obj);
+	void Timer_Expired(GameObject *obj,int number);
 };
 
 /*!
@@ -9547,11 +8910,9 @@ class JMG_Utility_Dynamic_Script_Created_Add_Update_Parameter : public ScriptImp
 * \ingroup JmgUtility
 */
 class JMG_Utility_Dynamic_Script_Custom_Add_Update_Parameter : public ScriptImpClass {
-    int custom;
-
-    void Created(GameObject *obj);
-
-    void Custom(GameObject *obj, int message, int param, GameObject *sender);
+	int custom;
+	void Created(GameObject *obj);
+	void Custom(GameObject *obj,int message,int param,GameObject *sender);
 };
 
 /*!
@@ -9562,11 +8923,9 @@ class JMG_Utility_Dynamic_Script_Custom_Add_Update_Parameter : public ScriptImpC
 * \ingroup JmgUtility
 */
 class JMG_Utility_Dynamic_Script_Custom_Attach : public ScriptImpClass {
-    int custom;
-
-    void Created(GameObject *obj);
-
-    void Custom(GameObject *obj, int message, int param, GameObject *sender);
+	int custom;
+	void Created(GameObject *obj);
+	void Custom(GameObject *obj,int message,int param,GameObject *sender);
 };
 
 /*!
@@ -9586,11 +8945,9 @@ class JMG_Utility_Dynamic_Script_Custom_Attach : public ScriptImpClass {
 * \ingroup JmgUtility
 */
 class JMG_Utility_Objective_System_Custom_Add_Objective_Send_Custom : public ScriptImpClass {
-    int custom;
-
-    void Created(GameObject *obj);
-
-    void Custom(GameObject *obj, int message, int param, GameObject *sender);
+	int custom;
+	void Created(GameObject *obj);
+	void Custom(GameObject *obj,int message,int param,GameObject *sender);
 };
 
 /*!
@@ -9606,17 +8963,15 @@ class JMG_Utility_Objective_System_Custom_Add_Objective_Send_Custom : public Scr
 * \ingroup JmgUtility
 */
 class JMG_Utility_Objective_System_Custom_Send_Custom_Status : public ScriptImpClass {
-    int objectiveId;
-    int status;
-    int recieveMessage;
-    int id;
-    int custom;
-    int Param;
-    float delay;
-
-    void Created(GameObject *obj);
-
-    void Custom(GameObject *obj, int message, int param, GameObject *sender);
+	int objectiveId;
+	int status;
+	int recieveMessage;
+	int id;
+	int custom;
+	int Param;
+	float delay;
+	void Created(GameObject *obj);
+	void Custom(GameObject *obj,int message,int param,GameObject *sender);
 };
 
 /*!
@@ -9631,16 +8986,14 @@ class JMG_Utility_Objective_System_Custom_Send_Custom_Status : public ScriptImpC
 * \ingroup JmgUtility
 */
 class JMG_Utility_Objective_System_Custom_Send_Custom_Does_Not_Exist : public ScriptImpClass {
-    int objectiveId;
-    int recieveMessage;
-    int id;
-    int custom;
-    int Param;
-    float delay;
-
-    void Created(GameObject *obj);
-
-    void Custom(GameObject *obj, int message, int param, GameObject *sender);
+	int objectiveId;
+	int recieveMessage;
+	int id;
+	int custom;
+	int Param;
+	float delay;
+	void Created(GameObject *obj);
+	void Custom(GameObject *obj,int message,int param,GameObject *sender);
 };
 
 /*!
@@ -9654,15 +9007,13 @@ class JMG_Utility_Objective_System_Custom_Send_Custom_Does_Not_Exist : public Sc
 * \ingroup JmgUtility
 */
 class JMG_Utility_Objective_System_Send_Random_Objective_As_Custom : public ScriptImpClass {
-    int objectiveId[10];
-    int recieveMessage;
-    int id;
-    int Param;
-    float delay;
-
-    void Created(GameObject *obj);
-
-    void Custom(GameObject *obj, int message, int param, GameObject *sender);
+	int objectiveId[10];
+	int recieveMessage;
+	int id;
+	int Param;
+	float delay;
+	void Created(GameObject *obj);
+	void Custom(GameObject *obj,int message,int param,GameObject *sender);
 };
 
 /*!
@@ -9678,101 +9029,106 @@ class JMG_Utility_Objective_System_Send_Random_Objective_As_Custom : public Scri
 * \ingroup JmgUtility
 */
 class JMG_Utility_Objective_System_Custom_Send_Custom_Not_Status : public ScriptImpClass {
-    int objectiveId;
-    int status;
-    int recieveMessage;
-    int id;
-    int custom;
-    int Param;
-    float delay;
-
-    void Created(GameObject *obj);
-
-    void Custom(GameObject *obj, int message, int param, GameObject *sender);
+	int objectiveId;
+	int status;
+	int recieveMessage;
+	int id;
+	int custom;
+	int Param;
+	float delay;
+	void Created(GameObject *obj);
+	void Custom(GameObject *obj,int message,int param,GameObject *sender);
 };
 
-class GlobalKeycardSystem {
+class GlobalKeycardSystem
+{
 private:
-    struct GlobalKeycardNode {
-        int keycardId;
-        int groupId;
-        struct GlobalKeycardNode *next;
-
-        GlobalKeycardNode(int keycardId, int groupId) {
-            this->keycardId = keycardId;
-            this->groupId = groupId;
-            this->next = NULL;
-        }
-    };
-
-    GlobalKeycardNode *globalKeycardNodeList;
-
-    void AddKeycardToPlayerObjects(int keycardId, int groupId);
-
-    void RemoveKeycardFromPlayerObjects(int keycardId, int groupId);
-
+	struct GlobalKeycardNode
+	{
+		int keycardId;
+		int groupId;
+		struct GlobalKeycardNode *next;
+		GlobalKeycardNode(int keycardId,int groupId)
+		{
+			this->keycardId = keycardId;
+			this->groupId = groupId;
+			this->next = NULL;
+		}
+	};
+	GlobalKeycardNode *globalKeycardNodeList;
+	void AddKeycardToPlayerObjects(int keycardId,int groupId);
+	void RemoveKeycardFromPlayerObjects(int keycardId,int groupId);
 public:
-    GlobalKeycardSystem() {
-        globalKeycardNodeList = NULL;
-    }
-
-    GlobalKeycardNode *AddKeycard(int keycardId, int groupId) {
-        GlobalKeycardNode *current = globalKeycardNodeList;
-        if (!globalKeycardNodeList) {
-            AddKeycardToPlayerObjects(keycardId, groupId);
-            return (globalKeycardNodeList = new GlobalKeycardNode(keycardId, groupId));
-        }
-        while (current) {
-            if (current->keycardId == keycardId && current->groupId == groupId)
-                return current;
-            if (!current->keycardId) {
-                AddKeycardToPlayerObjects(keycardId, groupId);
-                current->keycardId = keycardId;
-                return current;
-            }
-            if (!current->next) {
-                AddKeycardToPlayerObjects(keycardId, groupId);
-                current->next = new GlobalKeycardNode(keycardId, groupId);
-                return current;
-            }
-            current = current->next;
-        }
-        return NULL;
-    }
-
-    void RemoveKeycard(int keycardId, int groupId) {
-        if (!globalKeycardNodeList)
-            return;
-        GlobalKeycardNode *current = globalKeycardNodeList;
-        while (current) {
-            if (current->keycardId == keycardId && current->groupId == groupId) {
-                RemoveKeycardFromPlayerObjects(keycardId, groupId);
-                current->keycardId = 0;
-                break;
-            }
-            current = current->next;
-        }
-    }
-
-    void emptyList() {
-        GlobalKeycardNode *temp = globalKeycardNodeList, *die;
-        while (temp) {
-            RemoveKeycardFromPlayerObjects(temp->keycardId, temp->groupId);
-            die = temp;
-            temp = temp->next;
-            delete die;
-        }
-        globalKeycardNodeList = NULL;
-    }
-
-    void GrantKeycards(GameObject *obj, int groupId) {
-        GlobalKeycardNode *current = globalKeycardNodeList;
-        while (current) {
-            if (current->keycardId && current->groupId == groupId)
-                Commands->Grant_Key(obj, current->keycardId, true);
-            current = current->next;
-        }
-    }
+	GlobalKeycardSystem()
+	{
+		globalKeycardNodeList = NULL;
+	}
+	GlobalKeycardNode *AddKeycard(int keycardId,int groupId)
+	{
+		GlobalKeycardNode *current = globalKeycardNodeList;
+		if (!globalKeycardNodeList)
+		{
+			AddKeycardToPlayerObjects(keycardId,groupId);
+			return (globalKeycardNodeList = new GlobalKeycardNode(keycardId,groupId));
+		}
+		while (current)
+		{
+			if (current->keycardId == keycardId && current->groupId == groupId)
+				return current;
+			if (!current->keycardId)
+			{
+				AddKeycardToPlayerObjects(keycardId,groupId);
+				current->keycardId = keycardId;
+				return current;
+			}
+			if (!current->next)
+			{
+				AddKeycardToPlayerObjects(keycardId,groupId);
+				current->next = new GlobalKeycardNode(keycardId,groupId);
+				return current;
+			}
+			current = current->next;
+		}
+		return NULL;
+	}
+	void RemoveKeycard(int keycardId,int groupId)
+	{
+		if (!globalKeycardNodeList)
+			return;
+		GlobalKeycardNode *current = globalKeycardNodeList;
+		while (current)
+		{
+			if (current->keycardId == keycardId && current->groupId == groupId)
+			{
+				RemoveKeycardFromPlayerObjects(keycardId,groupId);
+				current->keycardId = 0;
+				break;
+			}
+			current = current->next;
+		}
+	}
+	void emptyList()
+	{
+		GlobalKeycardNode *temp = globalKeycardNodeList,*die;
+		while (temp)
+		{
+			RemoveKeycardFromPlayerObjects(temp->keycardId,temp->groupId);
+			die = temp;
+			temp = temp->next;
+			delete die;
+		}
+		globalKeycardNodeList = NULL;
+	}
+	void GrantKeycards(GameObject *obj,int groupId)
+	{
+		GlobalKeycardNode *current = globalKeycardNodeList;
+		while (current)
+		{
+			if (current->keycardId && current->groupId == groupId)
+				Commands->Grant_Key(obj,current->keycardId,true);
+			current = current->next;
+		}
+	}
 };
 
 /*!
@@ -9781,7 +9137,7 @@ public:
 * \ingroup JmgUtility
 */
 class JMG_Utility_Global_Keycard_System_Controller : public ScriptImpClass {
-    void Destroyed(GameObject *obj);
+	void Destroyed(GameObject *obj);
 };
 
 /*!
@@ -9792,7 +9148,7 @@ class JMG_Utility_Global_Keycard_System_Controller : public ScriptImpClass {
 * \ingroup JmgUtility
 */
 class JMG_Utility_Global_Keycard_System_Created_Add_Keycard : public ScriptImpClass {
-    void Created(GameObject *obj);
+	void Created(GameObject *obj);
 };
 
 /*!
@@ -9804,11 +9160,9 @@ class JMG_Utility_Global_Keycard_System_Created_Add_Keycard : public ScriptImpCl
 * \ingroup JmgUtility
 */
 class JMG_Utility_Global_Keycard_System_Custom_Add_Keycard : public ScriptImpClass {
-    int custom;
-
-    void Created(GameObject *obj);
-
-    void Custom(GameObject *obj, int message, int param, GameObject *sender);
+	int custom;
+	void Created(GameObject *obj);
+	void Custom(GameObject *obj,int message,int param,GameObject *sender);
 };
 
 /*!
@@ -9820,11 +9174,9 @@ class JMG_Utility_Global_Keycard_System_Custom_Add_Keycard : public ScriptImpCla
 * \ingroup JmgUtility
 */
 class JMG_Utility_Global_Keycard_System_Custom_Remove_Keycard : public ScriptImpClass {
-    int custom;
-
-    void Created(GameObject *obj);
-
-    void Custom(GameObject *obj, int message, int param, GameObject *sender);
+	int custom;
+	void Created(GameObject *obj);
+	void Custom(GameObject *obj,int message,int param,GameObject *sender);
 };
 
 /*!
@@ -9834,16 +9186,15 @@ class JMG_Utility_Global_Keycard_System_Custom_Remove_Keycard : public ScriptImp
 * \ingroup JmgUtility
 */
 class JMG_Utility_Global_Keycard_System_Soldier : public ScriptImpClass {
-    void Created(GameObject *obj);
-
+	void Created(GameObject *obj);
 public:
-    int groupId;
+	int groupId;
 };
 
 /*!
-* \brief Sends a custom when the zone becomes occupied by a player and then sends a custom again when its vacant
+* \brief Sends a custom when the zone becomes occupied by a player and then sends a custom again when its vacant 
 * \OccupiedID - ID of the object to send to, -1 sends to the player that triggered, 0 sends to itself
-* \OccupiedCustom - Custom to send when occupied
+* \OccupiedCustom - Custom to send when occupied 
 * \OccupiedParam - Param to send when occupied
 * \OccupiedDelay - Delay for the occupied custom
 * \VacantID - ID of the object to send to, -1 sends to the player that triggered, 0 sends to itself
@@ -9854,29 +9205,26 @@ public:
 * \ingroup JmgUtility
 */
 class JMG_Utility_Zone_Send_Custom_On_Player_Occupation_Change : public ScriptImpClass {
-    int occupiedId;
-    int occupiedCustom;
-    int occupiedParam;
-    float occupiedDelay;
-    int vacantId;
-    int vacantCustom;
-    int vacantParam;
-    float vacantDelay;
-    bool inZone[128];
-    int count;
-
-    void Created(GameObject *obj);
-
-    void Entered(GameObject *obj, GameObject *enterer);
-
+	int occupiedId;
+	int occupiedCustom;
+	int occupiedParam;
+	float occupiedDelay;
+	int vacantId;
+	int vacantCustom;
+	int vacantParam;
+	float vacantDelay;
+	bool inZone[128];
+	int count;
+	void Created(GameObject *obj);
+	void Entered(GameObject *obj,GameObject *enterer);
 public:
-    JMG_Utility_Zone_Send_Custom_On_Player_Occupation_Change() {
-        for (int x = 0; x < 128; x++)
-            inZone[x] = false;
-        count = 0;
-    }
-
-    void Exited(GameObject *obj, GameObject *exiter);
+	JMG_Utility_Zone_Send_Custom_On_Player_Occupation_Change()
+	{
+		for (int x = 0;x < 128;x++)
+			inZone[x] = false;
+		count = 0;
+	}
+	void Exited(GameObject *obj,GameObject *exiter);
 };
 
 /*!
@@ -9885,7 +9233,7 @@ public:
 * \ingroup JmgUtility
 */
 class JMG_Utility_Zone_Send_Custom_On_Player_Occupation_Change_Attached : public ScriptImpClass {
-    void Destroyed(GameObject *obj);
+	void Destroyed(GameObject *obj);
 };
 
 /*!
@@ -9895,118 +9243,119 @@ class JMG_Utility_Zone_Send_Custom_On_Player_Occupation_Change_Attached : public
 */
 class JMG_Utility_Silent_Countdown_Controller : public ScriptImpClass {
 public:
-    struct SendCustomOnSecondNode {
-        int triggerSecond;
-        int id;
-        int custom;
-        int param;
-        float delay;
-        struct SendCustomOnSecondNode *next;
-
-        SendCustomOnSecondNode(int triggerSecond, int id, int custom, int param, float delay) {
-            this->triggerSecond = triggerSecond;
-            this->id = id;
-            this->custom = custom;
-            this->param = param;
-            this->delay = delay;
-            this->next = NULL;
-        }
-    };
-
-    struct SendCustomIdNode {
-        int countdownId;
-        struct SendCustomOnSecondNode *nodes;
-        struct SendCustomIdNode *next;
-
-        SendCustomIdNode(int countdownId) {
-            this->countdownId = countdownId;
-            this->nodes = NULL;
-            this->next = NULL;
-        }
-
-        void Empty() {
-            SendCustomOnSecondNode *temp = nodes, *die;
-            while (temp) {
-                die = temp;
-                temp = temp->next;
-                delete die;
-            }
-            nodes = NULL;
-        }
-    };
-
-    static SendCustomIdNode *sendCustomIdNodeList;
-
-    static SendCustomIdNode *FindOrCreateCountdownId(int countdownId) {
-        SendCustomIdNode *current = sendCustomIdNodeList;
-        if (!sendCustomIdNodeList)
-            return (sendCustomIdNodeList = new SendCustomIdNode(countdownId));
-        while (current) {
-            if (current->countdownId == countdownId)
-                return current;
-            if (!current->next)
-                return (current->next = new SendCustomIdNode(countdownId));
-            current = current->next;
-        }
-        return NULL;
-    }
-
+	struct SendCustomOnSecondNode
+	{
+		int triggerSecond;
+		int id;
+		int custom;
+		int param;
+		float delay;
+		struct SendCustomOnSecondNode *next;
+		SendCustomOnSecondNode(int triggerSecond,int id,int custom,int param,float delay)
+		{
+			this->triggerSecond = triggerSecond;
+			this->id = id;
+			this->custom = custom;
+			this->param = param;
+			this->delay = delay;
+			this->next = NULL;
+		}
+	};
+	struct SendCustomIdNode
+	{
+		int countdownId;
+		struct SendCustomOnSecondNode *nodes;
+		struct SendCustomIdNode *next;
+		SendCustomIdNode(int countdownId)
+		{
+			this->countdownId = countdownId;
+			this->nodes = NULL;
+			this->next = NULL;
+		}
+		void Empty()
+		{
+			SendCustomOnSecondNode *temp = nodes,*die;
+			while (temp)
+			{
+				die = temp;
+				temp = temp->next;
+				delete die;
+			}
+			nodes = NULL;
+		}
+	};
+	static SendCustomIdNode *sendCustomIdNodeList;
+	static SendCustomIdNode *FindOrCreateCountdownId(int countdownId)
+	{
+		SendCustomIdNode *current = sendCustomIdNodeList;
+		if (!sendCustomIdNodeList)
+			return (sendCustomIdNodeList = new SendCustomIdNode(countdownId));
+		while (current)
+		{
+			if (current->countdownId == countdownId)
+				return current;
+			if (!current->next)
+				return (current->next = new SendCustomIdNode(countdownId));
+			current = current->next;
+		}
+		return NULL;
+	}
 private:
-    void Created(GameObject *obj);
-
-    void Destroyed(GameObject *obj);
-
+	void Created(GameObject *obj);
+	void Destroyed(GameObject *obj);
 public:
-    static bool controllerPlaced;
-
-    JMG_Utility_Silent_Countdown_Controller() {
-        controllerPlaced = false;
-    }
-
-    static void AddSecondNode(int countdownId, int triggerSecond, int id, int custom, int param, float delay) {
-        SendCustomIdNode *baseNode = FindOrCreateCountdownId(countdownId);
-        SendCustomOnSecondNode *current = baseNode->nodes;
-        if (!baseNode->nodes)
-            baseNode->nodes = new SendCustomOnSecondNode(triggerSecond, id, custom, param, delay);
-        while (current) {
-            if (triggerSecond == current->triggerSecond && id == current->id && custom == current->custom &&
-                param == current->param) {
-                Console_Input("msg ERROR: A custom for this trigger second already exists!");
-                return;
-            }
-            if (!current->next) {
-                current->next = new SendCustomOnSecondNode(triggerSecond, id, custom, param, delay);
-                return;
-            }
-            current = current->next;
-        }
-    }
-
-    static void NodeSendCustom(GameObject *obj, SendCustomIdNode *countdownNode, int second) {
-        if (!countdownNode)
-            return;
-        SendCustomOnSecondNode *current = countdownNode->nodes;
-        while (current) {
-            if (current->triggerSecond == second)
-                Commands->Send_Custom_Event(obj, Commands->Find_Object(current->id), current->custom, current->param,
-                                            current->delay);
-            current = current->next;
-        }
-    }
-
-    void EmptyList() {
-        controllerPlaced = false;
-        SendCustomIdNode *temp = sendCustomIdNodeList, *die;
-        while (temp) {
-            temp->Empty();
-            die = temp;
-            temp = temp->next;
-            delete die;
-        }
-        sendCustomIdNodeList = NULL;
-    }
+	static bool controllerPlaced;
+	JMG_Utility_Silent_Countdown_Controller()
+	{
+		controllerPlaced = false;
+	}
+	static void AddSecondNode(int countdownId,int triggerSecond,int id,int custom,int param,float delay)
+	{
+		SendCustomIdNode *baseNode = FindOrCreateCountdownId(countdownId);
+		SendCustomOnSecondNode *current = baseNode->nodes;
+		if (!baseNode->nodes)
+			baseNode->nodes = new SendCustomOnSecondNode(triggerSecond,id,custom,param,delay);
+		while (current)
+		{
+			if (triggerSecond == current->triggerSecond && id == current->id && custom == current->custom && param == current->param)
+			{
+				Console_Input("msg ERROR: A custom for this trigger second already exists!");
+				return;
+			}
+			if (!current->next)
+			{
+				current->next = new SendCustomOnSecondNode(triggerSecond,id,custom,param,delay);
+				return;
+			}
+			current = current->next;
+		}
+	}
+	static void NodeSendCustom(GameObject *obj,SendCustomIdNode *countdownNode,int second)
+	{
+		if (!countdownNode)
+			return;
+		SendCustomOnSecondNode *current = countdownNode->nodes;
+		while (current)
+		{
+			if (current->triggerSecond == second)
+				Commands->Send_Custom_Event(obj,Commands->Find_Object(current->id),current->custom,current->param,current->delay);
+			current = current->next;
+		}
+	}
+	void EmptyList()
+	{
+		controllerPlaced = false;
+		SendCustomIdNode *temp = sendCustomIdNodeList,*die;
+		while (temp)
+		{
+			temp->Empty();
+			die = temp;
+			temp = temp->next;
+			delete die;
+		}
+		sendCustomIdNodeList = NULL;
+	}
 };
-
 /*!
 * \brief Sends a custom when the time on JMG_Utility_Silent_Countdown matches the defined seconds on this script
 * \TimerID - The ID of the timer
@@ -10018,18 +9367,15 @@ public:
 * \ingroup JmgUtility
 */
 class JMG_Utility_Silent_Countdown_Timer : public ScriptImpClass {
-    bool paused;
-    int startCustom;
-    int pausedCustom;
-    int cancelCustom;
-    int time;
-    JMG_Utility_Silent_Countdown_Controller::SendCustomIdNode *sendCustomIdNode;
-
-    void Created(GameObject *obj);
-
-    void Timer_Expired(GameObject *obj, int number);
-
-    void Custom(GameObject *obj, int message, int param, GameObject *sender);
+	bool paused;
+	int startCustom;
+	int pausedCustom;
+	int cancelCustom;
+	int time;
+	JMG_Utility_Silent_Countdown_Controller::SendCustomIdNode *sendCustomIdNode;
+	void Created(GameObject *obj);
+	void Timer_Expired(GameObject *obj,int number);
+	void Custom(GameObject *obj,int message,int param,GameObject *sender);
 };
 
 /*!
@@ -10044,7 +9390,7 @@ class JMG_Utility_Silent_Countdown_Timer : public ScriptImpClass {
 * \ingroup JmgUtility
 */
 class JMG_Utility_Silent_Countdown_Send_Custom : public ScriptImpClass {
-    void Created(GameObject *obj);
+	void Created(GameObject *obj);
 };
 
 /*!
@@ -10060,26 +9406,20 @@ class JMG_Utility_Silent_Countdown_Send_Custom : public ScriptImpClass {
 * \ingroup JmgUtility
 */
 class JMG_Utility_Zone_Teleport_To_Random_WP_Boss : public ScriptImpClass {
-    bool faceBoss;
-    bool retryOnFailure;
-    int playerType;
-    float safeTeleportDistance;
-    int wanderPointGroup;
-    int changeGroupIDCustom;
-    bool aiOnly;
-
-    void Created(GameObject *obj);
-
-    void Entered(GameObject *obj, GameObject *enterer);
-
-    void Custom(GameObject *obj, int message, int param, GameObject *sender);
-
-    bool Get_A_Defense_Point(Vector3 *position, float *facing, GameObject *boss);
-
-    bool Grab_Teleport_Spot(GameObject *enter, int attempts);
-
+	bool faceBoss;
+	bool retryOnFailure;
+	int playerType;
+	float safeTeleportDistance;
+	int wanderPointGroup;
+	int changeGroupIDCustom;
+	bool aiOnly;
+	void Created(GameObject *obj);
+	void Entered(GameObject *obj,GameObject *enterer);
+	void Custom(GameObject *obj,int message,int param,GameObject *sender);
+	bool Get_A_Defense_Point(Vector3 *position,float *facing,GameObject *boss);
+	bool Grab_Teleport_Spot(GameObject *enter,int attempts);
 public:
-    static int BossObjectId;
+	static int BossObjectId;
 };
 
 /*!
@@ -10088,7 +9428,7 @@ public:
 * \ingroup JmgUtility
 */
 class JMG_Utility_Zone_Teleport_To_Random_WP_Boss_Object : public ScriptImpClass {
-    void Created(GameObject *obj);
+	void Created(GameObject *obj);
 };
 
 /*!
@@ -10099,11 +9439,9 @@ class JMG_Utility_Zone_Teleport_To_Random_WP_Boss_Object : public ScriptImpClass
 * \ingroup JmgUtility
 */
 class JMG_Utility_Custom_Set_Soldier_Speed : public ScriptImpClass {
-    int custom;
-
-    void Created(GameObject *obj);
-
-    void Custom(GameObject *obj, int message, int param, GameObject *sender);
+	int custom;
+	void Created(GameObject *obj);
+	void Custom(GameObject *obj,int message,int param,GameObject *sender);
 };
 
 /*!
@@ -10127,64 +9465,57 @@ class JMG_Utility_Custom_Set_Soldier_Speed : public ScriptImpClass {
 */
 class JMG_Utility_Control_Point_Controller : public ScriptImpClass {
 public:
-    struct ControlPointTeamData {
-        int teamId;
-        char teamName[128];
-        int playerType;
-        int radarBlipColor;
-        char pointModel[16];
-        char defaultAnimation[32];
-        float animationLength;
-        int defenseMultiplier;
-        int captureMultiplier;
-        int unoccupiedMultiplier;
-        char lostSound[128];
-        char captureSound[128];
-        char lockedModel[16];
-        char lockedAnim[32];
-        float lockedAnimLen;
-
-        ControlPointTeamData(int teamId, const char *teamName, int playerType, int radarBlipColor,
-                             const char *pointModel, const char *defaultAnimation, float animationLength,
-                             const char *captureSound, const char *lostSound, const char *lockedModel,
-                             const char *lockedAnim, float lockedAnimLen, int defenseMultiplier, int captureMultiplier,
-                             int unoccupiedMultiplier) {
-            this->teamId = teamId;
-            sprintf(this->teamName, "%s", teamName);
-            this->playerType = playerType;
-            this->radarBlipColor = radarBlipColor;
-            sprintf(this->pointModel, "%s", pointModel);
-            sprintf(this->defaultAnimation, "%s", defaultAnimation);
-            this->animationLength = animationLength;
-            this->defenseMultiplier = defenseMultiplier;
-            this->captureMultiplier = captureMultiplier;
-            this->unoccupiedMultiplier = unoccupiedMultiplier;
-            sprintf(this->captureSound, "%s", captureSound);
-            sprintf(this->lostSound, "%s", lostSound);
-            sprintf(this->lockedModel, "%s", lockedModel);
-            sprintf(this->lockedAnim, "%s", lockedAnim);
-            this->lockedAnimLen = lockedAnimLen;
-        }
-    };
-
-    static SList<ControlPointTeamData> controlPointTeamData;
-    static bool controllerPlaced;
+	struct ControlPointTeamData
+	{
+		int teamId;
+		char teamName[128];
+		int playerType;
+		int radarBlipColor;
+		char pointModel[16];
+		char defaultAnimation[32];
+		float animationLength;
+		int defenseMultiplier;
+		int captureMultiplier;
+		int unoccupiedMultiplier;
+		char lostSound[128];
+		char captureSound[128];
+		char lockedModel[16];
+		char lockedAnim[32];
+		float lockedAnimLen;
+		ControlPointTeamData(int teamId,const char *teamName,int playerType,int radarBlipColor,const char *pointModel,const char *defaultAnimation,float animationLength,const char *captureSound,const char *lostSound,const char *lockedModel,const char *lockedAnim,float lockedAnimLen,int defenseMultiplier,int captureMultiplier,int unoccupiedMultiplier)
+		{
+			this->teamId = teamId;
+			sprintf(this->teamName,"%s",teamName);
+			this->playerType = playerType;
+			this->radarBlipColor = radarBlipColor;
+			sprintf(this->pointModel,"%s",pointModel);
+			sprintf(this->defaultAnimation,"%s",defaultAnimation);
+			this->animationLength = animationLength;
+			this->defenseMultiplier = defenseMultiplier;
+			this->captureMultiplier = captureMultiplier;
+			this->unoccupiedMultiplier = unoccupiedMultiplier;
+			sprintf(this->captureSound,"%s",captureSound);
+			sprintf(this->lostSound,"%s",lostSound);
+			sprintf(this->lockedModel,"%s",lockedModel);
+			sprintf(this->lockedAnim,"%s",lockedAnim);
+			this->lockedAnimLen = lockedAnimLen;
+		}
+	};
+	static SList<ControlPointTeamData> controlPointTeamData;
+	static bool controllerPlaced;
 private:
-    void Created(GameObject *obj);
-
-    void Timer_Expired(GameObject *obj, int number);
-
-    void Destroyed(GameObject *obj);
-
+	void Created(GameObject *obj);
+	void Timer_Expired(GameObject *obj,int number);
+	void Destroyed(GameObject *obj);
 public:
-    JMG_Utility_Control_Point_Controller() {
-        controllerPlaced = true;
-        allSetupComplete = false;
-    }
-
-    static SList<GameObject> controlPoints;
-    static SList<GameObject> wanderPoints;
-    static bool allSetupComplete;
+	JMG_Utility_Control_Point_Controller()
+	{
+		controllerPlaced = true;
+		allSetupComplete = false;
+	}
+	static SList<GameObject> controlPoints;
+	static SList<GameObject> wanderPoints;
+	static bool allSetupComplete;
 };
 
 /*!
@@ -10208,7 +9539,7 @@ public:
 * \ingroup JmgUtility
 */
 class JMG_Utility_Control_Point_Team_Setting : public ScriptImpClass {
-    void Created(GameObject *obj);
+	void Created(GameObject *obj);
 };
 
 /*!
@@ -10229,102 +9560,80 @@ class JMG_Utility_Control_Point_Team_Setting : public ScriptImpClass {
 */
 class JMG_Utility_Control_Point : public ScriptImpClass {
 public:
-    struct ControlPointSettingOverride {
-        int teamId;
-        int id;
-        int captureCustom;
-        int lostCustom;
-        char pointModelOverride[16];
-        char animOverride[32];
-        float animationLength;
-        char lockedPointModelOverride[16];
-        char lockedAnimOverride[32];
-        float lockedAnimationLength;
-
-        ControlPointSettingOverride(int teamId, int id, int captureCustom, int lostCustom,
-                                    const char *pointModelOverride, const char *animOverride, float animationLength,
-                                    const char *lockedPointModelOverride, const char *lockedAnimOverride,
-                                    float lockedAnimationLength) {
-            this->teamId = teamId;
-            this->id = id;
-            this->captureCustom = captureCustom;
-            this->lostCustom = lostCustom;
-            sprintf(this->pointModelOverride, "%s", pointModelOverride);
-            sprintf(this->animOverride, "%s", animOverride);
-            this->animationLength = animationLength;
-            sprintf(this->lockedPointModelOverride, "%s", lockedPointModelOverride);
-            sprintf(this->lockedAnimOverride, "%s", lockedAnimOverride);
-            this->lockedAnimationLength = lockedAnimationLength;
-        }
-    };
-
-    SList<ControlPointSettingOverride> controlPointSettingOverride;
+	struct ControlPointSettingOverride
+	{
+		int teamId;
+		int id;
+		int captureCustom;
+		int lostCustom;
+		char pointModelOverride[16];
+		char animOverride[32];
+		float animationLength;
+		char lockedPointModelOverride[16];
+		char lockedAnimOverride[32];
+		float lockedAnimationLength;
+		ControlPointSettingOverride(int teamId,int id,int captureCustom,int lostCustom,const char *pointModelOverride,const char *animOverride,float animationLength,const char *lockedPointModelOverride,const char *lockedAnimOverride,float lockedAnimationLength)
+		{
+			this->teamId = teamId;
+			this->id = id;
+			this->captureCustom = captureCustom;
+			this->lostCustom = lostCustom;
+			sprintf(this->pointModelOverride,"%s",pointModelOverride);
+			sprintf(this->animOverride,"%s",animOverride);
+			this->animationLength = animationLength;
+			sprintf(this->lockedPointModelOverride,"%s",lockedPointModelOverride);
+			sprintf(this->lockedAnimOverride,"%s",lockedAnimOverride);
+			this->lockedAnimationLength = lockedAnimationLength;
+		}
+	};
+	SList<ControlPointSettingOverride> controlPointSettingOverride;
 private:
-    float captureScore;
-    float neutralizeScore;
-    int currerntCapturePoints;
-    int maxCapturePoints;
-    float currentFrame;
-    float controlDistance;
-    bool occupied;
-    bool specialLocked;
-    int lockCustom;
-    int radarBipType;
-    bool wasLocked;
-    Vector3 controlHeightMinMax;
-    int zoneId;
-    ControlPointSettingOverride *controllingTeamOverride;
-    ControlPointSettingOverride *lastTeamOverride;
-    JMG_Utility_Control_Point_Controller::ControlPointTeamData *controllingTeam;
-    JMG_Utility_Control_Point_Controller::ControlPointTeamData *neutralTeam;
-    JMG_Utility_Control_Point_Controller::ControlPointTeamData *lastTeam;
-
-    void Created(GameObject *obj);
-
-    void Custom(GameObject *obj, int message, int param, GameObject *sender);
-
-    void Timer_Expired(GameObject *obj, int number);
-
-    void Destroyed(GameObject *obj);
-
-    void SetAnimation(GameObject *obj, const char *anim, float length);
-
-    void AddUpCpPoints(GameObject *obj, JMG_Utility_Control_Point_Controller::ControlPointTeamData *unitTeamData,
-                       int multiplier);
-
-    void JMG_Utility_Control_Point::Final_CP_Calculation(GameObject *obj);
-
-    void LostControlPoint(GameObject *obj);
-
-    void CaptureControlPoint(GameObject *obj);
-
-    void GrantPointsToTeamMembersInRange(GameObject *obj, float points, bool matchTeam);
-
-    void UpdateTeamOverride(int teamId);
-
-    void UpdateTeam(int teamId);
-
-    void TriggerAssaultLinesUpdate();
-
-    void UpdateControllerWanderPoints();
-
+	float captureScore;
+	float neutralizeScore;
+	int currerntCapturePoints;
+	int maxCapturePoints;
+	float currentFrame;
+	float controlDistance;
+	bool occupied;
+	bool specialLocked;
+	int lockCustom;
+	int radarBipType;
+	bool wasLocked;
+	Vector3 controlHeightMinMax;
+	int zoneId;
+	ControlPointSettingOverride *controllingTeamOverride;
+	ControlPointSettingOverride *lastTeamOverride;
+	JMG_Utility_Control_Point_Controller::ControlPointTeamData *controllingTeam;
+	JMG_Utility_Control_Point_Controller::ControlPointTeamData *neutralTeam;
+	JMG_Utility_Control_Point_Controller::ControlPointTeamData *lastTeam;
+	void Created(GameObject *obj);
+	void Custom(GameObject *obj,int message,int param,GameObject *sender);
+	void Timer_Expired(GameObject *obj,int number);
+	void Destroyed(GameObject *obj);
+	void SetAnimation(GameObject *obj,const char *anim,float length);
+	void AddUpCpPoints(GameObject *obj,JMG_Utility_Control_Point_Controller::ControlPointTeamData *unitTeamData,int multiplier);
+	void JMG_Utility_Control_Point::Final_CP_Calculation(GameObject *obj);
+	void LostControlPoint(GameObject *obj);
+	void CaptureControlPoint(GameObject *obj);
+	void GrantPointsToTeamMembersInRange(GameObject *obj,float points,bool matchTeam);
+	void UpdateTeamOverride(int teamId);
+	void UpdateTeam(int teamId);
+	void TriggerAssaultLinesUpdate();
+	void UpdateControllerWanderPoints();
 public:
-    char controlPointName[128];
-    int cpGroupId;
-    bool locked;
-    bool captured;
-    bool setupComplete;
-    int controllingTeamId;
-
-    void ChangeModelAndTeam(GameObject *obj);
-
-    void UpdateAnimation(GameObject *obj);
-
-    SList<GameObject> controlPointWanderPoints;
-
-    JMG_Utility_Control_Point() {
-        setupComplete = false;
-    }
+	char controlPointName[128];
+	int cpGroupId;
+	bool locked;
+	bool captured;
+	bool setupComplete;
+	int controllingTeamId;
+	void ChangeModelAndTeam(GameObject *obj);
+	void UpdateAnimation(GameObject *obj);
+	SList<GameObject> controlPointWanderPoints;
+	JMG_Utility_Control_Point()
+	{
+		setupComplete = false;
+	}
 };
 
 /*!
@@ -10343,7 +9652,7 @@ public:
 * \ingroup JmgUtility
 */
 class JMG_Utility_Control_Point_Setting_Override : public ScriptImpClass {
-    void Created(GameObject *obj);
+	void Created(GameObject *obj);
 };
 
 /*!
@@ -10354,22 +9663,19 @@ class JMG_Utility_Control_Point_Setting_Override : public ScriptImpClass {
 * \ingroup JmgUtility
 */
 class JMG_Utility_Control_Point_Team_Member : public ScriptImpClass {
-    void Created(GameObject *obj);
-
-    void Timer_Expired(GameObject *obj, int number);
-
-    void Killed(GameObject *obj, GameObject *killer);
-
+	void Created(GameObject *obj);
+	void Timer_Expired(GameObject *obj,int number);
+	void Killed(GameObject *obj,GameObject *killer);
 public:
-    int teamId;
-    JMG_Utility_Control_Point_Controller::ControlPointTeamData *teamData;
-    bool setupComplete;
-    int multiplier;
-
-    JMG_Utility_Control_Point_Team_Member() {
-        teamData = NULL;
-        setupComplete = false;
-    }
+	int teamId;
+	JMG_Utility_Control_Point_Controller::ControlPointTeamData *teamData;
+	bool setupComplete;
+	int multiplier;
+	JMG_Utility_Control_Point_Team_Member()
+	{
+		teamData = NULL;
+		setupComplete = false;
+	}
 };
 
 /*!
@@ -10385,28 +9691,22 @@ public:
 * \ingroup JmgUtility
 */
 class JMG_Utility_Control_Point_Assault_Mode : public ScriptImpClass {
-    int id;
-    int advanceCustom;
-    int pushedBackCustom;
-    int controlAllCustom;
-    int lostAllCustom;
-
-    void Created(GameObject *obj);
-
-    void Timer_Expired(GameObject *obj, int number);
-
-    void Destroyed(GameObject *obj);
-
-    void SendCustom(GameObject *obj, int custom, int thisFrontLineGroup);
-
+	int id;
+	int advanceCustom;
+	int pushedBackCustom;
+	int controlAllCustom;
+	int lostAllCustom;
+	void Created(GameObject *obj);
+	void Timer_Expired(GameObject *obj,int number);
+	void Destroyed(GameObject *obj);
+	void SendCustom(GameObject* obj,int custom,int thisFrontLineGroup);
 public:
-    static int teamId;
-    static int frontLineGroup;
-    static int controllerId;
-    static int spawnGroup;
-    static int enemySpawnGroup;
-
-    void UpdateAssaultLine(GameObject *obj, bool initialSetup);
+	static int teamId;
+	static int frontLineGroup;
+	static int controllerId;
+	static int spawnGroup;
+	static int enemySpawnGroup;
+	void UpdateAssaultLine(GameObject *obj,bool initialSetup);
 };
 
 /*!
@@ -10419,30 +9719,24 @@ public:
 * \ingroup JmgUtility
 */
 class JMG_Utility_Control_Point_Wander_Point : public ScriptImpClass {
-    int spawnableGroupId;
-    int unspawnableGroupId;
-    JMG_Utility_Control_Point *cpScript;
-    Rp2SimplePositionSystem::SimplePositionNode *wanderPoint;
-
-    void Created(GameObject *obj);
-
-    void Timer_Expired(GameObject *obj, int number);
-
-    Rp2SimplePositionSystem::SimplePositionNode *AddAndReturnWanderpoint(GameObject *obj);
-
+	int spawnableGroupId;
+	int unspawnableGroupId;
+	JMG_Utility_Control_Point *cpScript;
+	Rp2SimplePositionSystem::SimplePositionNode *wanderPoint;
+	void Created(GameObject *obj);
+	void Timer_Expired(GameObject *obj,int number);
+	Rp2SimplePositionSystem::SimplePositionNode *AddAndReturnWanderpoint(GameObject *obj);
 public:
-    JMG_Utility_Control_Point_Wander_Point() {
-        cpScript = NULL;
-    }
-
-    int teamId;
-    int controlPointId;
-
-    void ControlPointChanged();
-
-    void UpdateWanderpointSettings();
+	JMG_Utility_Control_Point_Wander_Point()
+	{
+		cpScript = NULL;
+	}
+	int teamId;
+	int controlPointId;
+	void ControlPointChanged();
+	void UpdateWanderpointSettings();
 };
-
+	
 /*!
 * \brief Allows the player to select their spawn location before entering the map much like Mutant Assault in ECW.
 * \SpawnPreset - Preset the player becomes after spawning
@@ -10458,32 +9752,26 @@ public:
 * \ingroup JmgUtility
 */
 class JMG_Utility_Control_Point_Select_Spawn_System : public ScriptImpClass {
-    int stringId;
-    int teamId;
-    int controlPointId;
-    int ungroupedControlPointId;
-    int selectedCpId;
-    int groupChangeCustom;
-    int ungroupedChangeCustom;
-    int spawnCustom;
-    float safeTeleportDistance;
-    int lastSpawnGroup;
-    int maxSpawnTime;
-    int spawnTime;
-    float maxWanderRange;
-    float startFadeRange;
-
-    void Created(GameObject *obj);
-
-    void Timer_Expired(GameObject *obj, int number);
-
-    void Custom(GameObject *obj, int message, int param, GameObject *sender);
-
-    int SelectCpToSpawnFrom(GameObject *obj, int cpId, bool assaultLines);
-
-    bool MoveToControlledWanderPointForCp(GameObject *obj, int cpId);
-
-    void DisplaySpawnTime(GameObject *obj);
+	int stringId;
+	int teamId;
+	int controlPointId;
+	int ungroupedControlPointId;
+	int selectedCpId;
+	int groupChangeCustom;
+	int ungroupedChangeCustom;
+	int spawnCustom;
+	float safeTeleportDistance;
+	int lastSpawnGroup;
+	int maxSpawnTime;
+	int spawnTime;
+	float maxWanderRange;
+	float startFadeRange;
+	void Created(GameObject *obj);
+	void Timer_Expired(GameObject *obj,int number);
+	void Custom(GameObject *obj,int message,int param,GameObject *sender);
+	int SelectCpToSpawnFrom(GameObject *obj,int cpId,bool assaultLines);
+	bool MoveToControlledWanderPointForCp(GameObject *obj,int cpId);
+	void DisplaySpawnTime(GameObject *obj);
 };
 
 /*!
@@ -10500,18 +9788,16 @@ class JMG_Utility_Control_Point_Select_Spawn_System : public ScriptImpClass {
 * \ingroup JmgUtility
 */
 class JMG_Utility_Custom_And_Param_Send_Custom : public ScriptImpClass {
-    int recieveMessage;
-    int recieveParam;
-    int id;
-    int custom;
-    int Param;
-    float delay;
-    float randomDelay;
-    float randomChance;
-
-    void Created(GameObject *obj);
-
-    void Custom(GameObject *obj, int message, int param, GameObject *sender);
+	int recieveMessage;
+	int recieveParam;
+	int id;
+	int custom;
+	int Param;
+	float delay;
+	float randomDelay;
+	float randomChance;
+	void Created(GameObject *obj);
+	void Custom(GameObject *obj,int message,int param,GameObject *sender);
 };
 
 /*!
@@ -10520,7 +9806,7 @@ class JMG_Utility_Custom_And_Param_Send_Custom : public ScriptImpClass {
 * \ingroup JmgUtility
 */
 class JMG_Utility_Create_Move_To_Nearest_Pathfind : public ScriptImpClass {
-    void Created(GameObject *obj);
+	void Created(GameObject *obj);
 };
 
 /*!
@@ -10535,15 +9821,13 @@ class JMG_Utility_Create_Move_To_Nearest_Pathfind : public ScriptImpClass {
 * \ingroup JmgUtility
 */
 class JMG_Utility_Attach_Script_To_Object_With_Weapon : public ScriptImpClass {
-    char weaponName[128];
-    char *params;
-    char script[128];
-    float rate;
-    int playerType;
-
-    void Created(GameObject *obj);
-
-    void Timer_Expired(GameObject *obj, int number);
+	char weaponName[128];
+	char *params;
+	char script[128];
+	float rate;
+	int playerType;
+	void Created(GameObject *obj);
+	void Timer_Expired(GameObject *obj,int number);
 };
 
 /*!
@@ -10558,7 +9842,7 @@ class JMG_Utility_Attach_Script_To_Object_With_Weapon : public ScriptImpClass {
 * \ingroup JmgUtility
 */
 class JMG_Utility_Drop_Object_On_Death_And_Attach_Script : public ScriptImpClass {
-    void Killed(GameObject *obj, GameObject *killer);
+	void Killed(GameObject *obj,GameObject *killer);
 };
 
 /*!
@@ -10567,18 +9851,15 @@ class JMG_Utility_Drop_Object_On_Death_And_Attach_Script : public ScriptImpClass
 * \ingroup JmgUtility
 */
 class JMG_SinglePlayer_M04_Modifier : public ScriptImpClass {
-    bool setupComplete;
-
-    void Created(GameObject *obj);
-
-    void Timer_Expired(GameObject *obj, int number);
-
-public:
-    void Register_Auto_Save_Variables();
-
-    JMG_SinglePlayer_M04_Modifier() {
-        setupComplete = false;
-    }
+	bool setupComplete;
+	void Created(GameObject *obj);
+	void Timer_Expired(GameObject *obj,int number);
+public: 
+	void Register_Auto_Save_Variables();
+	JMG_SinglePlayer_M04_Modifier()
+	{
+		setupComplete = false;
+	}
 };
 
 /*!
@@ -10591,41 +9872,36 @@ public:
 * \ingroup JmgUtility
 */
 class JMG_Utility_Custom_Send_Delayed_Ordered_Customs : public ScriptImpClass {
-    struct TimedOrderedCustom {
-    public:
-        int senderId;
-        int custom;
-        int param;
-        float time;
-
-        TimedOrderedCustom(int senderid, int custom, int param, float time) {
-            this->senderId = senderId;
-            this->custom = custom;
-            this->param = param;
-            this->time = time;
-        }
-    };
-
-    SList<TimedOrderedCustom> timedOrderedCustom;
-    int id;
-    int customs[10];
-    float times[10];
-    bool delay;
-
-    void Created(GameObject *obj);
-
-    void Timer_Expired(GameObject *obj, int number);
-
-    void Custom(GameObject *obj, int message, int param, GameObject *sender);
-
-    void Destroyed(GameObject *obj);
-
-    void Detach(GameObject *obj);
-
+	struct TimedOrderedCustom
+	{
+	public:
+		int senderId;
+		int custom;
+		int param;
+		float time;
+		TimedOrderedCustom(int senderid,int custom,int param,float time)
+		{
+			this->senderId = senderId;
+			this->custom = custom;
+			this->param = param;
+			this->time = time;
+		}
+	};
+	SList<TimedOrderedCustom> timedOrderedCustom;
+	int id;
+	int customs[10];
+	float times[10];
+	bool delay;
+	void Created(GameObject *obj);
+	void Timer_Expired(GameObject *obj,int number);
+	void Custom(GameObject *obj,int message,int param,GameObject *sender);
+	void Destroyed(GameObject *obj);
+	void Detach(GameObject *obj);
 public:
-    JMG_Utility_Custom_Send_Delayed_Ordered_Customs() {
-        timedOrderedCustom.Remove_All();
-    }
+	JMG_Utility_Custom_Send_Delayed_Ordered_Customs()
+	{
+		timedOrderedCustom.Remove_All();
+	}
 };
 
 /*!
@@ -10640,16 +9916,14 @@ public:
 * \ingroup JmgUtility
 */
 class JMG_Utility_Custom_Send_Custom_If_Model : public ScriptImpClass {
-    int recieveMessage;
-    int id;
-    int custom;
-    int Param;
-    float delay;
-    char model[16];
-
-    void Created(GameObject *obj);
-
-    void Custom(GameObject *obj, int message, int param, GameObject *sender);
+	int recieveMessage;
+	int id;
+	int custom;
+	int Param;
+	float delay;
+	char model[16];
+	void Created(GameObject *obj);
+	void Custom(GameObject *obj,int message,int param,GameObject *sender);
 };
 
 /*!
@@ -10661,9 +9935,8 @@ class JMG_Utility_Custom_Send_Custom_If_Model : public ScriptImpClass {
 * \ingroup JmgUtility
 */
 class JMG_Utility_Poke_Grant_Weapon_Destroy_Self : public ScriptImpClass {
-    void Created(GameObject *obj);
-
-    void Poked(GameObject *obj, GameObject *poker);
+	void Created(GameObject *obj);
+	void Poked(GameObject *obj, GameObject *poker);
 };
 
 /*!
@@ -10674,19 +9947,17 @@ class JMG_Utility_Poke_Grant_Weapon_Destroy_Self : public ScriptImpClass {
 * \author jgray
 * \ingroup JmgUtility
 */
-class JMG_Utility_Killed_Drop_Object_If_Weapon_Present : public ScriptImpClass {
-    bool dropped;
-
-    void Killed(GameObject *obj, GameObject *killer);
-
-    void Destroyed(GameObject *obj);
-
-    void Detach(GameObject *obj);
-
+class JMG_Utility_Killed_Drop_Object_If_Weapon_Present : public ScriptImpClass
+{
+	bool dropped;
+	void Killed(GameObject *obj,GameObject *killer);
+	void Destroyed(GameObject *obj);
+	void Detach(GameObject *obj);
 public:
-    JMG_Utility_Killed_Drop_Object_If_Weapon_Present() {
-        dropped = false;
-    }
+	JMG_Utility_Killed_Drop_Object_If_Weapon_Present()
+	{
+		dropped = false;
+	}
 };
 
 /*!
@@ -10704,19 +9975,17 @@ public:
 * \ingroup JmgUtility
 */
 class JMG_Utility_Poke_Send_Custom_If_Has_Weapon : public ScriptImpClass {
-    int id;
-    int playerType;
-    int custom;
-    int param;
-    float delay;
-    int triggerOnce;
-    char weapon[256];
-    int removeWeapon;
-    int mustBeHeld;
-
-    void Created(GameObject *obj);
-
-    void Poked(GameObject *obj, GameObject *poker);
+	int id;
+	int playerType;
+	int custom;
+	int param;
+	float delay;
+	int triggerOnce;
+	char weapon[256];
+	int removeWeapon;
+	int mustBeHeld;
+	void Created(GameObject *obj);
+	void Poked(GameObject *obj, GameObject *poker);
 };
 
 /*!
@@ -10735,20 +10004,18 @@ class JMG_Utility_Poke_Send_Custom_If_Has_Weapon : public ScriptImpClass {
 * \ingroup JmgUtility
 */
 class JMG_Utility_Send_Custom_If_Weapon_Held_In_Range : public ScriptImpClass {
-    int id;
-    int playerType;
-    int custom;
-    int param;
-    float delay;
-    int triggerOnce;
-    char weapon[256];
-    int removeWeapon;
-    int mustBeHeld;
-    float range;
-
-    void Created(GameObject *obj);
-
-    void Timer_Expired(GameObject *obj, int number);
+	int id;
+	int playerType;
+	int custom;
+	int param;
+	float delay;
+	int triggerOnce;
+	char weapon[256];
+	int removeWeapon;
+	int mustBeHeld;
+	float range;
+	void Created(GameObject *obj);
+	void Timer_Expired(GameObject *obj,int number);
 };
 
 /*!
@@ -10759,12 +10026,10 @@ class JMG_Utility_Send_Custom_If_Weapon_Held_In_Range : public ScriptImpClass {
 * \ingroup JmgUtility
 */
 class JMG_Utility_Custom_Refect_Custom_If_Model : public ScriptImpClass {
-    int sendFromSelf;
-    char model[16];
-
-    void Created(GameObject *obj);
-
-    void Custom(GameObject *obj, int message, int param, GameObject *sender);
+	int sendFromSelf;
+	char model[16];
+	void Created(GameObject *obj);
+	void Custom(GameObject *obj,int message,int param,GameObject *sender);
 };
 
 /*!
@@ -10775,12 +10040,10 @@ class JMG_Utility_Custom_Refect_Custom_If_Model : public ScriptImpClass {
 * \ingroup JmgUtility
 */
 class JMG_Utility_Custom_Set_Team : public ScriptImpClass {
-    int custom;
-    int team;
-
-    void Created(GameObject *obj);
-
-    void Custom(GameObject *obj, int message, int param, GameObject *sender);
+	int custom;
+	int team;
+	void Created(GameObject *obj);
+	void Custom(GameObject *obj,int message,int param,GameObject *sender);
 };
 
 /*!
@@ -10792,15 +10055,12 @@ class JMG_Utility_Custom_Set_Team : public ScriptImpClass {
 * \ingroup JmgUtility
 */
 class JMG_Utility_Custom_Create_Object_At_Random_Wander_Point : public ScriptImpClass {
-    int custom;
-    char preset[128];
-    int wanderPointGroup;
-
-    void Created(GameObject *obj);
-
-    void Custom(GameObject *obj, int message, int param, GameObject *sender);
-
-    bool Get_A_Defense_Point(Vector3 *position, float *facing);
+	int custom;
+	char preset[128];
+	int wanderPointGroup;
+	void Created(GameObject *obj);
+	void Custom(GameObject *obj,int message,int param,GameObject *sender);
+	bool Get_A_Defense_Point(Vector3 *position,float *facing);
 };
 
 /*!
@@ -10815,22 +10075,17 @@ class JMG_Utility_Custom_Create_Object_At_Random_Wander_Point : public ScriptImp
 * \ingroup JmgUtility
 */
 class JMG_Utility_Zone_Teleport_To_Non_Visible_Wander_Point : public ScriptImpClass {
-    bool retryOnFailure;
-    int playerType;
-    float safeTeleportDistance;
-    int wanderPointGroup;
-    int changeGroupIDCustom;
-    bool aiOnly;
-
-    void Created(GameObject *obj);
-
-    void Entered(GameObject *obj, GameObject *enterer);
-
-    void Custom(GameObject *obj, int message, int param, GameObject *sender);
-
-    bool Get_A_Defense_Point(Vector3 *position, float *facing);
-
-    bool Grab_Teleport_Spot(GameObject *enter, int attempts);
+	bool retryOnFailure;
+	int playerType;
+	float safeTeleportDistance;
+	int wanderPointGroup;
+	int changeGroupIDCustom;
+	bool aiOnly;
+	void Created(GameObject *obj);
+	void Entered(GameObject *obj,GameObject *enterer);
+	void Custom(GameObject *obj,int message,int param,GameObject *sender);
+	bool Get_A_Defense_Point(Vector3 *position,float *facing);
+	bool Grab_Teleport_Spot(GameObject *enter,int attempts);
 };
 
 /*!
@@ -10839,14 +10094,11 @@ class JMG_Utility_Zone_Teleport_To_Non_Visible_Wander_Point : public ScriptImpCl
 * \ingroup JmgUtility
 */
 class JMG_Utility_Zone_Teleport_To_Non_Visible_Wander_Point_Attach : public ScriptImpClass {
-    float safeTeleportDistance;
-    int wanderPointGroup;
-
-    void Created(GameObject *obj);
-
-    void Timer_Expired(GameObject *obj, int number);
-
-    bool Get_A_Defense_Point(Vector3 *position, float *facing);
+	float safeTeleportDistance;
+	int wanderPointGroup;
+	void Created(GameObject *obj);
+	void Timer_Expired(GameObject *obj,int number);
+	bool Get_A_Defense_Point(Vector3 *position,float *facing);
 };
 
 /*!
@@ -10867,14 +10119,11 @@ class JMG_Utility_Zone_Teleport_To_Non_Visible_Wander_Point_Attach : public Scri
 * \ingroup JmgUtility
 */
 class JMG_Utility_Security_System_Random_NumberPad_Control : public ScriptImpClass {
-    int buttonIds[12];
-
-    void Created(GameObject *obj);
-
-    void Destroyed(GameObject *obj);
-
+	int buttonIds[12];
+	void Created(GameObject *obj);
+	void Destroyed(GameObject *obj);
 public:
-    char combination[25];
+	char combination[25];
 };
 
 /*!
@@ -10898,53 +10147,45 @@ public:
 * \ingroup JmgUtility
 */
 class JMG_Utility_Custom_Combination_Lock : public ScriptImpClass {
-    char inputCode[128];
-    unsigned int depth;
-    int failCount;
-    bool enabled;
-    int inputCustom;
-    int inputEnter;
-    int inputClear;
-    int enableCustom;
-    char combination[25];
-    int successCustom;
-    int failureSaftey;
-    int maxFailures;
-    int partialFailCustom;
-    int failureCustom;
-    bool disableOnFailure;
-    bool disableOnSuccess;
-    int id;
-    char soundNameBase[128];
-
-    void Created(GameObject *obj);
-
-    void Custom(GameObject *obj, int message, int param, GameObject *sender);
-
-    void Send_Custom(GameObject *obj, int custom, int param);
-
-    void Enable(bool enableLock);
-
-    void ClearUserEntry();
+	char inputCode[128];
+	unsigned int depth;
+	int failCount;
+	bool enabled;
+	int inputCustom;
+	int inputEnter;
+	int inputClear;
+	int enableCustom;
+	char combination[25];
+	int successCustom;
+	int failureSaftey;
+	int maxFailures;
+	int partialFailCustom;
+	int failureCustom;
+	bool disableOnFailure;
+	bool disableOnSuccess;
+	int id;
+	char soundNameBase[128];
+	void Created(GameObject *obj);
+	void Custom(GameObject *obj,int message,int param,GameObject *sender);
+	void Send_Custom(GameObject *obj,int custom,int param);
+	void Enable(bool enableLock);
+	void ClearUserEntry();
 };
-
 /*!
 * \brief Used for pressing keys on the combination lock, script is attached by the code
 * \author jgray
 * \ingroup JmgUtility
 */
 class JMG_Utility_Custom_Combination_Lock_Key : public ScriptImpClass {
-    int id;
-    int message;
-    int param;
-    bool useAltAnimation;
-    char animation[32];
-    char animation2[32];
-    char soundName[128];
-
-    void Created(GameObject *obj);
-
-    void Poked(GameObject *obj, GameObject *poker);
+	int id;
+	int message;
+	int param;
+	bool useAltAnimation;
+	char animation[32];
+	char animation2[32];
+	char soundName[128];
+	void Created(GameObject *obj);
+	void Poked(GameObject *obj,GameObject *poker);
 };
 
 /*!
@@ -10955,37 +10196,32 @@ class JMG_Utility_Custom_Combination_Lock_Key : public ScriptImpClass {
 * \ingroup JmgUtility
 */
 class JMG_Utility_Security_System_Sync_String_Random_NumberPad_Control : public ScriptImpClass {
-    char delim;
-    int stringId;
-
-    void Created(GameObject *obj);
-
-    void Timer_Expired(GameObject *obj, int number);
+	char delim;
+	int stringId;
+	void Created(GameObject *obj);
+	void Timer_Expired(GameObject *obj,int number);
 };
 
 /*!
-* \brief Starts a looping animation on a sub object when a client joins a game
+* \brief Starts a looping animation on a sub object when a client joins a game 
 * \SubObject - Subobject to play on
 * \Animation - Animation to play
 * \author jgray
 * \ingroup JmgUtility
 */
 class JMG_Utility_Created_Animate_SubObject_On_Join : public ScriptImpClass {
-    char animation[32];
-    char subobject[16];
-    bool animating[128];
-
-    void Created(GameObject *obj);
-
-    void Timer_Expired(GameObject *obj, int number);
-
-    void TriggerAnimationForThePlayer(GameObject *obj, int playerId);
+	char animation[32];
+	char subobject[16];
+	bool animating[128];
+	void Created(GameObject *obj);
+	void Timer_Expired(GameObject *obj,int number);
+	void TriggerAnimationForThePlayer(GameObject *obj,int playerId);
 };
 
 /*!
 * \brief When a specified custom is received it plays an animation, when the animation complete it sends a custom, if applied to a soldier damage animations and other animations are disabled.
 * \ReceivedCustom - Message needed to trigger the script
-* \Animation - Animation to play
+* \Animation - Animation to play 
 * \StartFrame - First frame of the animation
 * \EndFrame - Last frame of the animation
 * \ID - Id of the object to send the custom to, 0 sends to itself
@@ -10996,30 +10232,27 @@ class JMG_Utility_Created_Animate_SubObject_On_Join : public ScriptImpClass {
 * \ingroup JmgUtility
 */
 class JMG_Utility_Custom_Play_Animation_Send_Custom_When_Complete : public ScriptImpClass {
-    int receivedCustom;
-    int id;
-    int custom;
-    int Param;
-    float delay;
-    char animation[32];
-    float startFrame;
-    float endFrame;
-
-    void Created(GameObject *obj);
-
-    void Custom(GameObject *obj, int message, int param, GameObject *sender);
-
-    void Animation_Complete(GameObject *obj, const char *anim);
+	int receivedCustom;
+	int id;
+	int custom;
+	int Param;
+	float delay;
+	char animation[32];
+	float startFrame;
+	float endFrame;
+	void Created(GameObject *obj);
+	void Custom(GameObject *obj,int message,int param,GameObject *sender);
+	void Animation_Complete(GameObject *obj,const char *anim);
 };
 
 /*!
 * \brief Plays a looped animation on the attached infantry, disables all animations
-* \Animation - Animation to play
+* \Animation - Animation to play 
 * \author jgray
 * \ingroup JmgUtility
 */
 class JMG_Utility_Created_Play_Locked_Infantry_Animation : public ScriptImpClass {
-    void Created(GameObject *obj);
+	void Created(GameObject *obj);
 };
 
 /*!
@@ -11033,15 +10266,13 @@ class JMG_Utility_Created_Play_Locked_Infantry_Animation : public ScriptImpClass
 * \ingroup JmgUtility
 */
 class JMG_Utility_Custom_Send_Custom_To_Preset : public ScriptImpClass {
-    int receivedCustom;
-    char preset[128];
-    int custom;
-    int Param;
-    float delay;
-
-    void Created(GameObject *obj);
-
-    void Custom(GameObject *obj, int message, int param, GameObject *sender);
+	int receivedCustom;
+	char preset[128];
+	int custom;
+	int Param;
+	float delay;
+	void Created(GameObject *obj);
+	void Custom(GameObject *obj,int message,int param,GameObject *sender);
 };
 
 
@@ -11053,16 +10284,13 @@ class JMG_Utility_Custom_Send_Custom_To_Preset : public ScriptImpClass {
 * \ingroup JmgUtility
 */
 class JMG_Utility_Custom_Talk : public ScriptImpClass {
-    int custom;
-    int soundId;
-    int stringId;
-    char soundName[128];
-
-    void Created(GameObject *obj);
-
-    void Custom(GameObject *obj, int message, int param, GameObject *sender);
-
-    void Killed(GameObject *obj, GameObject *killer);
+	int custom;
+	int soundId;
+	int stringId;
+	char soundName[128];
+	void Created(GameObject *obj);
+	void Custom(GameObject *obj,int message,int param,GameObject *sender);
+	void Killed(GameObject *obj,GameObject *killer);
 };
 
 /*!
@@ -11078,32 +10306,29 @@ class JMG_Utility_Custom_Talk : public ScriptImpClass {
 * \ingroup JmgUtility
 */
 class JMG_Utility_Zone_Send_Custom_Enter_Preset : public ScriptImpClass {
-    char preset[128];
-    int playerType;
-    int custom;
-    int param;
-    float delay;
-    int id;
-    bool triggerOnce;
-
-    void Created(GameObject *obj);
-
-    void Entered(GameObject *obj, GameObject *enterer);
+	char preset[128];
+	int playerType;
+	int custom;
+	int param;
+	float delay;
+	int id;
+	bool triggerOnce;
+	void Created(GameObject *obj);
+	void Entered(GameObject *obj,GameObject *enterer);
 };
 
 /*!
 * \brief Controller is required for the global armor system for all objects on the map that have the object script
-* \DefaultMaxArmor - Default max armor when the object spawns into the game
-* \DefaultArmor - Default armor when the object spawns into the game
+* \DefaultMaxArmor - Default max armor when the object spawns into the game 
+* \DefaultArmor - Default armor when the object spawns into the game 
 * \author jgray
 * \ingroup JmgUtility
 */
 class JMG_Utility_Global_Armor_Controller : public ScriptImpClass {
-    void Created(GameObject *obj);
-
+	void Created(GameObject *obj);
 public:
-    static float maxArmor;
-    static float armor;
+	static float maxArmor;
+	static float armor;
 };
 
 /*!
@@ -11116,14 +10341,12 @@ public:
 * \ingroup JmgUtility
 */
 class JMG_Utility_Global_Armor_Custom : public ScriptImpClass {
-    int custom;
-    float maxArmor;
-    float armor;
-    bool updateAllObjects;
-
-    void Created(GameObject *obj);
-
-    void Custom(GameObject *obj, int message, int param, GameObject *sender);
+	int custom;
+	float maxArmor;
+	float armor;
+	bool updateAllObjects;
+	void Created(GameObject *obj);
+	void Custom(GameObject *obj,int message,int param,GameObject *sender);
 };
 
 /*!
@@ -11132,22 +10355,21 @@ class JMG_Utility_Global_Armor_Custom : public ScriptImpClass {
 * \ingroup JmgUtility
 */
 class JMG_Utility_Global_Armor_Object : public ScriptImpClass {
-    void Created(GameObject *obj);
+	void Created(GameObject *obj);
 };
 
 /*!
 * \brief Controller is required for the global health system for all objects on the map that have the object script
-* \DefaultMaxHealth - Default max health when the object spawns into the game
-* \DefaultHealth - Default health when the object spawns into the game
+* \DefaultMaxHealth - Default max health when the object spawns into the game 
+* \DefaultHealth - Default health when the object spawns into the game 
 * \author jgray
 * \ingroup JmgUtility
 */
 class JMG_Utility_Global_Health_Controller : public ScriptImpClass {
-    void Created(GameObject *obj);
-
+	void Created(GameObject *obj);
 public:
-    static float maxHealth;
-    static float health;
+	static float maxHealth;
+	static float health;
 };
 
 /*!
@@ -11160,14 +10382,12 @@ public:
 * \ingroup JmgUtility
 */
 class JMG_Utility_Global_Health_Custom : public ScriptImpClass {
-    int custom;
-    float maxHealth;
-    float health;
-    bool updateAllObjects;
-
-    void Created(GameObject *obj);
-
-    void Custom(GameObject *obj, int message, int param, GameObject *sender);
+	int custom;
+	float maxHealth;
+	float health;
+	bool updateAllObjects;
+	void Created(GameObject *obj);
+	void Custom(GameObject *obj,int message,int param,GameObject *sender);
 };
 
 /*!
@@ -11176,7 +10396,7 @@ class JMG_Utility_Global_Health_Custom : public ScriptImpClass {
 * \ingroup JmgUtility
 */
 class JMG_Utility_Global_Health_Object : public ScriptImpClass {
-    void Created(GameObject *obj);
+	void Created(GameObject *obj);
 };
 
 /*!
@@ -11184,21 +10404,19 @@ class JMG_Utility_Global_Health_Object : public ScriptImpClass {
 * \Custom - Custom needed to trigger the update
 * \ExplosionPreset - Explosion(s) to create
 * \Count - How many explosions to make
-* \MaxDistance - Maximum distance from the attached object to create explosons
+* \MaxDistance - Maximum distance from the attached object to create explosons 
 * \KillerID - Who gets the kill, -1 = sender, 0 = attached, everything else is a lookup ID
 * \author jgray
 * \ingroup JmgUtility
 */
 class JMG_Utility_Custom_Create_Random_Explosions : public ScriptImpClass {
-    int custom;
-    int count;
-    float distance;
-    int killerId;
-    char explosionPreset[256];
-
-    void Created(GameObject *obj);
-
-    void Custom(GameObject *obj, int message, int param, GameObject *sender);
+	int custom;
+	int count;
+	float distance;
+	int killerId;
+	char explosionPreset[256];
+	void Created(GameObject *obj);
+	void Custom(GameObject *obj,int message,int param,GameObject *sender);
 };
 
 /*!
@@ -11211,14 +10429,12 @@ class JMG_Utility_Custom_Create_Random_Explosions : public ScriptImpClass {
 * \ingroup JmgUtility
 */
 class JMG_Utility_Custom_Enable_Spawners_Incrementally_In_Range : public ScriptImpClass {
-    int currentId;
-    int custom;
-    int endId;
-    bool enable;
-
-    void Created(GameObject *obj);
-
-    void Custom(GameObject *obj, int message, int param, GameObject *sender);
+	int currentId;
+	int custom;
+	int endId;
+	bool enable;
+	void Created(GameObject *obj);
+	void Custom(GameObject *obj,int message,int param,GameObject *sender);
 };
 
 /*!
@@ -11231,28 +10447,22 @@ class JMG_Utility_Custom_Enable_Spawners_Incrementally_In_Range : public ScriptI
 * \ingroup JmgUtility
 */
 class JMG_Utility_Control_Point_Team_Target_Wander_Point : public ScriptImpClass {
-    int targetGroupId;
-    int nonTargetGroupId;
-    JMG_Utility_Control_Point *cpScript;
-    Rp2SimplePositionSystem::SimplePositionNode *wanderPoint;
-
-    void Created(GameObject *obj);
-
-    void Timer_Expired(GameObject *obj, int number);
-
-    Rp2SimplePositionSystem::SimplePositionNode *AddAndReturnWanderpoint(GameObject *obj);
-
+	int targetGroupId;
+	int nonTargetGroupId;
+	JMG_Utility_Control_Point *cpScript;
+	Rp2SimplePositionSystem::SimplePositionNode *wanderPoint;
+	void Created(GameObject *obj);
+	void Timer_Expired(GameObject *obj,int number);
+	Rp2SimplePositionSystem::SimplePositionNode *AddAndReturnWanderpoint(GameObject *obj);
 public:
-    JMG_Utility_Control_Point_Team_Target_Wander_Point() {
-        cpScript = NULL;
-    }
-
-    int teamId;
-    int controlPointId;
-
-    void ControlPointChanged();
-
-    void UpdateWanderpointSettings();
+	JMG_Utility_Control_Point_Team_Target_Wander_Point()
+	{
+		cpScript = NULL;
+	}
+	int teamId;
+	int controlPointId;
+	void ControlPointChanged();
+	void UpdateWanderpointSettings();
 };
 
 
@@ -11279,100 +10489,83 @@ public:
 * \ingroup JmgUtility
 */
 class JMG_Utility_AI_Control_Point : public ScriptImpClass {
-    enum aiState {
-        IDLE, CONTROL_POINT_ATTACK, CONTROL_POINT_DEFENSE, ATTACKING_TARGET, CHECKING_LOCATION, ACTION_BADPATH
-    };
-
-    struct LastAction {
-        int targetId;
-        Vector3 location;
-        float speed;
-        float distance;
-        bool attack;
-        bool overrideLocation;
-
-        LastAction() {
-        }
-
-        LastAction(int targetId, Vector3 location, float speed, float distance, bool attack, bool overrideLocation) {
-            this->targetId = targetId;
-            this->location = location;
-            this->speed = speed;
-            this->distance = distance;
-            this->attack = attack;
-            this->overrideLocation = overrideLocation;
-        }
-    };
-
-    struct ValidLastLocation {
-        bool valid;
-        Vector3 location;
-
-        ValidLastLocation(bool valid) {
-            this->valid = valid;
-        }
-
-        ValidLastLocation(int enemyId);
-    };
-
-    LastAction lastAction;
-    aiState state;
-    Rp2SimplePositionSystem::SimplePositionNode *lastWanderPoint;
-    int targetId;
-    int lastSeenTime;
-    float weaponRange;
-    float weaponEffectiveRange;
-    float attackArriveDistance;
-    int stuckTime;
-    int reverseTime;
-    Vector3 lastPosition;
-    bool moveBackward;
-    float captureDistanceSquared;
-    float defendDistanceSquared;
-    bool allowCaptureAttackDistract;
-
-    int captureCpGroupId;
-    float captureCpChance;
-    float captureSpeed;
-    float captureDistance;
-    int defendCpGroupId;
-    float defendSpeed;
-    float defendDistance;
-    float closeDefendDistanceSquared;
-    float chooseFarDefendChance;
-    float attackSpeed;
-    float attackDistance;
-    float randomAttackDistance;
-    float attackDistractFromCaptureChance;
-    float chanceToInvestigateLastSeenLocation;
-    bool attackCheckBlocked;
-    int canSeeStealth;
-    bool shutdownEngineOnArrival;
-
-    void Created(GameObject *obj);
-
-    void Enemy_Seen(GameObject *obj, GameObject *seen);
-
-    void Timer_Expired(GameObject *obj, int number);
-
-    void Action_Complete(GameObject *obj, int action_id, ActionCompleteReason reason);
-
-    void Damaged(GameObject *obj, GameObject *damager, float damage);
-
-    void Attack_Move(GameObject *obj, GameObject *target, Vector3 location, float speed, float distance, bool attack,
-                     bool overrideLocation);
-
-    void SelectNextMission(GameObject *obj, ValidLastLocation goNearLastWanderPoint);
-
-    void Stuck_Check(GameObject *obj, Vector3 targetPos);
-
-    bool Choose_Target(GameObject *obj, GameObject *target);
-
-    Rp2SimplePositionSystem::SimplePositionNode *Get_Capture_Point();
-
-    Rp2SimplePositionSystem::SimplePositionNode *Get_Defense_Point(GameObject *obj);
-
-    void TriggerAttack(GameObject *obj, GameObject *target);
+	enum aiState{IDLE,CONTROL_POINT_ATTACK,CONTROL_POINT_DEFENSE,ATTACKING_TARGET,CHECKING_LOCATION,ACTION_BADPATH};
+	struct LastAction
+	{
+		int targetId;
+		Vector3 location;
+		float speed;
+		float distance;
+		bool attack;
+		bool overrideLocation;
+		LastAction()
+		{
+		}
+		LastAction(int targetId,Vector3 location,float speed,float distance,bool attack,bool overrideLocation)
+		{
+			this->targetId = targetId;
+			this->location = location;
+			this->speed = speed;
+			this->distance = distance;
+			this->attack = attack;
+			this->overrideLocation = overrideLocation;
+		}
+	};
+	struct ValidLastLocation
+	{
+		bool valid;
+		Vector3 location;
+		ValidLastLocation(bool valid)
+		{
+			this->valid = valid;
+		}
+		ValidLastLocation(int enemyId);
+	};
+	LastAction lastAction;
+	aiState state;
+	Rp2SimplePositionSystem::SimplePositionNode *lastWanderPoint;
+	int targetId;
+	int lastSeenTime;
+	float weaponRange;
+	float weaponEffectiveRange;
+	float attackArriveDistance;
+	int stuckTime;
+	int reverseTime;
+	Vector3 lastPosition;
+	bool moveBackward;
+	float captureDistanceSquared;
+	float defendDistanceSquared;
+	bool allowCaptureAttackDistract;
+	
+	int captureCpGroupId;
+	float captureCpChance;
+	float captureSpeed;
+	float captureDistance;
+	int defendCpGroupId;
+	float defendSpeed;
+	float defendDistance;
+	float closeDefendDistanceSquared;
+	float chooseFarDefendChance;
+	float attackSpeed;
+	float attackDistance;
+	float randomAttackDistance;
+	float attackDistractFromCaptureChance;
+	float chanceToInvestigateLastSeenLocation;
+	bool attackCheckBlocked;
+	int canSeeStealth;
+	bool shutdownEngineOnArrival;
+	void Created(GameObject *obj);
+	void Enemy_Seen(GameObject *obj,GameObject *seen);
+	void Timer_Expired(GameObject *obj,int number);
+	void Action_Complete(GameObject *obj,int action_id,ActionCompleteReason reason);
+	void Damaged(GameObject *obj,GameObject *damager,float damage);
+	void Attack_Move(GameObject *obj,GameObject *target,Vector3 location,float speed,float distance,bool attack,bool overrideLocation);
+	void SelectNextMission(GameObject *obj,ValidLastLocation goNearLastWanderPoint);
+	void Stuck_Check(GameObject *obj,Vector3 targetPos);
+	bool Choose_Target(GameObject *obj,GameObject *target);
+	Rp2SimplePositionSystem::SimplePositionNode *Get_Capture_Point();
+	Rp2SimplePositionSystem::SimplePositionNode *Get_Defense_Point(GameObject *obj);
+	void TriggerAttack(GameObject *obj,GameObject *target);
 };
 
 
@@ -11382,10 +10575,10 @@ class JMG_Utility_AI_Control_Point : public ScriptImpClass {
 * \author jgray
 * \ingroup JmgUtility
 */
-class JMG_Utility_Objective_System_Set_Infantry_Attach_Bone : public ScriptImpClass {
-    void Created(GameObject *obj);
-
-    void Timer_Expired(GameObject *obj, int number);
+class JMG_Utility_Objective_System_Set_Infantry_Attach_Bone : public ScriptImpClass
+{
+	void Created(GameObject *obj);
+	void Timer_Expired(GameObject *obj,int number);
 };
 
 /*!
@@ -11406,11 +10599,9 @@ class JMG_Utility_Objective_System_Set_Infantry_Attach_Bone : public ScriptImpCl
 * \ingroup JmgUtility
 */
 class JMG_Utility_Security_System_Fixed_NumberPad_Control : public ScriptImpClass {
-    int buttonIds[12];
-
-    void Created(GameObject *obj);
-
-    void Destroyed(GameObject *obj);
+	int buttonIds[12];
+	void Created(GameObject *obj);
+	void Destroyed(GameObject *obj);
 };
 
 /*!
@@ -11423,29 +10614,25 @@ class JMG_Utility_Security_System_Fixed_NumberPad_Control : public ScriptImpClas
 * \ingroup JmgUtility
 */
 class JMG_Utility_Custom_Teleport_Sender_Wanderpoint : public ScriptImpClass {
-    int customMsg;
-    bool retryOnFailure;
-    float safeTeleportDistance;
-    int wanderPointGroup;
-
-    void Created(GameObject *obj);
-
-    void Custom(GameObject *obj, int message, int param, GameObject *sender);
-
-    bool Get_A_Defense_Point(Vector3 *position, float *facing);
-
-    bool Grab_Teleport_Spot(GameObject *enter, int attempts);
+	int customMsg;
+	bool retryOnFailure;
+	float safeTeleportDistance;
+	int wanderPointGroup;
+	void Created(GameObject *obj);
+	void Custom(GameObject *obj,int message,int param,GameObject *sender);
+	bool Get_A_Defense_Point(Vector3 *position,float *facing);
+	bool Grab_Teleport_Spot(GameObject *enter,int attempts);
 };
 
 /*!
 * \brief Sets a random model on create
 * \BaseName - Base model name in the random set to assign
-* \FinalModelNumber - Latest number in the string of models, used to select the random model range 0-value (IE: BaseModel#)
+* \FinalModelNumber - Latest number in the string of models, used to select the random model range 0-value (IE: BaseModel#) 
 * \author jgray
 * \ingroup JmgUtility
 */
 class JMG_Utility_Create_Set_Random_Model : public ScriptImpClass {
-    void Created(GameObject *obj);
+	void Created(GameObject *obj);
 };
 
 /*!
@@ -11455,11 +10642,9 @@ class JMG_Utility_Create_Set_Random_Model : public ScriptImpClass {
 * \ingroup JmgUtility
 */
 class JMG_Utility_Custom_Destroy_Sender : public ScriptImpClass {
-    int custom;
-
-    void Created(GameObject *obj);
-
-    void Custom(GameObject *obj, int message, int param, GameObject *sender);
+	int custom;
+	void Created(GameObject *obj);
+	void Custom(GameObject *obj,int message,int param,GameObject *sender);
 };
 
 /*!
@@ -11471,13 +10656,11 @@ class JMG_Utility_Custom_Destroy_Sender : public ScriptImpClass {
 * \ingroup JmgUtility
 */
 class JMG_Utility_Custom_Grant_Weapon_Destroy_Sender : public ScriptImpClass {
-    int custom;
-    char weapon[128];
-    char fullAmmoString[128];
-
-    void Created(GameObject *obj);
-
-    void Custom(GameObject *obj, int message, int param, GameObject *sender);
+	int custom;
+	char weapon[128];
+	char fullAmmoString[128];
+	void Created(GameObject *obj);
+	void Custom(GameObject *obj,int message,int param,GameObject *sender);
 };
 
 
@@ -11492,75 +10675,62 @@ class JMG_Utility_Custom_Grant_Weapon_Destroy_Sender : public ScriptImpClass {
 * \ingroup JmgUtility
 */
 class JMG_Utility_Remove_Script_While_Has_Weapon : public ScriptImpClass {
-    char weaponName[128];
-    char *params;
-    char script[128];
-    float rate;
-
-    void Created(GameObject *obj);
-
-    void Timer_Expired(GameObject *obj, int number);
+	char weaponName[128];
+	char *params;
+	char script[128];
+	float rate;
+	void Created(GameObject *obj);
+	void Timer_Expired(GameObject *obj,int number);
 };
 
-/*!
+/*! 
 * \brief This script allows a AI soldier to swim when in a swimming zone. Attached by JMG_Utility_Swimming_Infantry
 * \author jgray
 * \ingroup JmgUtility
 */
 class JMG_Utility_Swimming_Infantry_AI : public ScriptImpClass {
-    int heartBeatSoundId;
-    int pantSoundId;
-    char enterWeapon[256];
-    bool startedFadeRed;
-    float drownTime;
-    bool underwater;
-    int waterZoneCount;
-    int lastWaterZoneId;
-    float defaultSpeed;
-    int waterDamageDelayTime;
-    int waterDamageDelayTimeRecover;
-    int remainingWaterDamageDelay;
-    char originalSkin[128];
-    char originalArmor[128];
-    char originalModel[128];
-    bool isUnderwater;
-
-    void Created(GameObject *obj);
-
-    void Timer_Expired(GameObject *obj, int number);
-
-    void Custom(GameObject *obj, int message, int param, GameObject *sender);
-
-    void Killed(GameObject *obj, GameObject *killer);
-
-    void Destroyed(GameObject *obj);
-
-    void Detach(GameObject *obj);
-
-    void CreateSoundEmitter(GameObject *obj, const char *model, int *soundId);
-
-    void DestroySoundEmitter(int *soundId);
-
-    void HideSoundEmitter(int *soundId);
+	int heartBeatSoundId;
+	int pantSoundId;
+	char enterWeapon[256];
+	bool startedFadeRed;
+	float drownTime;
+	bool underwater;
+	int waterZoneCount;
+	int lastWaterZoneId;
+	float defaultSpeed;
+	int waterDamageDelayTime;
+	int waterDamageDelayTimeRecover;
+	int remainingWaterDamageDelay;
+	char originalSkin[128];
+	char originalArmor[128];
+	char originalModel[128];
+	bool isUnderwater;
+	void Created(GameObject *obj);
+	void Timer_Expired(GameObject *obj,int number);
+	void Custom(GameObject *obj,int message,int param,GameObject *sender);
+	void Killed(GameObject *obj,GameObject *killer);
+	void Destroyed(GameObject *obj);
+	void Detach(GameObject *obj);
+	void CreateSoundEmitter(GameObject *obj,const char *model,int *soundId);
+	void DestroySoundEmitter(int *soundId);
+	void HideSoundEmitter(int *soundId);
 };
 
-/*!
+/*! 
 * \brief Refunds the damage if the warhead is a match
 * \WarheadName - Warhead to refund the damage from
 * \author jgray
 * \ingroup JmgUtility
 */
 class JMG_Utility_Damaged_Refund_Damage : public ScriptImpClass {
-    WarheadType warhead;
-
-    void Created(GameObject *obj);
-
-    void Damaged(GameObject *obj, GameObject *damager, float damage);
-
+	WarheadType warhead;
+	void Created(GameObject *obj);
+	void Damaged(GameObject *obj,GameObject *damager,float damage);
 public:
-    JMG_Utility_Damaged_Refund_Damage() {
-        warhead = NULL;
-    }
+	JMG_Utility_Damaged_Refund_Damage()
+	{
+		warhead = NULL;
+	}
 };
 
 /*!
@@ -11569,19 +10739,17 @@ public:
 * \author jgray
 * \ingroup JmgUtility
 */
-class JMG_Utility_Turret_Spawn_Global_Flag_Controller : public ScriptImpClass {
-    int custom;
-
-    void Created(GameObject *obj);
-
-    void Custom(GameObject *obj, int message, int param, GameObject *sender);
-
+class JMG_Utility_Turret_Spawn_Global_Flag_Controller : public ScriptImpClass
+{
+	int custom;
+	void Created(GameObject *obj);
+	void Custom(GameObject *obj,int message,int param,GameObject *sender);
 public:
-    JMG_Utility_Turret_Spawn_Global_Flag_Controller() {
-        AllowAttach = true;
-    }
-
-    static bool AllowAttach;
+	JMG_Utility_Turret_Spawn_Global_Flag_Controller()
+	{
+		AllowAttach = true;
+	}
+	static bool AllowAttach;
 };
 
 /*!
@@ -11591,19 +10759,15 @@ public:
 * \author jgray
 * \ingroup JmgUtility
 */
-class JMG_Utility_Turret_Spawn_Global_Flag : public ScriptImpClass {
-    int turretId;
-    bool hasDriver;
-
-    void Created(GameObject *obj);
-
-    void Custom(GameObject *obj, int message, int param, GameObject *sender);
-
-    void Killed(GameObject *obj, GameObject *killer);
-
-    void Destroyed(GameObject *obj);
-
-    void Detach(GameObject *obj);
+class JMG_Utility_Turret_Spawn_Global_Flag : public ScriptImpClass
+{
+  int turretId;
+  bool hasDriver;
+  void Created(GameObject *obj);
+  void Custom(GameObject *obj,int message,int param,GameObject *sender);
+  void Killed(GameObject *obj,GameObject *killer);
+  void Destroyed(GameObject *obj);
+  void Detach(GameObject *obj);
 };
 
 /*!
@@ -11615,16 +10779,13 @@ class JMG_Utility_Turret_Spawn_Global_Flag : public ScriptImpClass {
 * \ingroup JmgUtility
 */
 class JMG_Utility_Timer_Death_If_Not_Damaged_Over_Peroid : public ScriptImpClass {
-    char warhead[128];
-    float giveDamage;
-    int time;
-    int originalTime;
-
-    void Created(GameObject *obj);
-
-    void Timer_Expired(GameObject *obj, int number);
-
-    void Damaged(GameObject *obj, GameObject *damager, float damage);
+	char warhead[128];
+	float giveDamage;
+	int time;
+	int originalTime;
+	void Created(GameObject *obj);
+	void Timer_Expired(GameObject *obj,int number);
+	void Damaged(GameObject *obj,GameObject *damager,float damage);
 };
 
 /*!
@@ -11633,15 +10794,15 @@ class JMG_Utility_Timer_Death_If_Not_Damaged_Over_Peroid : public ScriptImpClass
 * \author jgray
 * \ingroup JmgUtility
 */
-class JMG_Utility_Global_Attach_Script_On_Flag_Controller : public ScriptImpClass {
-    void Created(GameObject *obj);
-
+class JMG_Utility_Global_Attach_Script_On_Flag_Controller : public ScriptImpClass
+{
+	void Created(GameObject *obj);
 public:
-    JMG_Utility_Global_Attach_Script_On_Flag_Controller() {
-        globalFlag = -1;
-    }
-
-    static int globalFlag;
+	JMG_Utility_Global_Attach_Script_On_Flag_Controller()
+	{
+		globalFlag = -1;
+	}
+	static int globalFlag;
 };
 
 /*!
@@ -11651,13 +10812,12 @@ public:
 * \author jgray
 * \ingroup JmgUtility
 */
-class JMG_Utility_Global_Attach_Script_On_Flag_Custom : public ScriptImpClass {
-    int custom;
-    int globalFlag;
-
-    void Created(GameObject *obj);
-
-    void Custom(GameObject *obj, int message, int param, GameObject *sender);
+class JMG_Utility_Global_Attach_Script_On_Flag_Custom : public ScriptImpClass
+{
+	int custom;
+	int globalFlag;
+	void Created(GameObject *obj);
+	void Custom(GameObject *obj,int message,int param,GameObject *sender);
 };
 
 /*!
@@ -11670,7 +10830,7 @@ class JMG_Utility_Global_Attach_Script_On_Flag_Custom : public ScriptImpClass {
 * \ingroup JmgUtility
 */
 class JMG_Utility_Global_Attach_Script_On_Flag : public ScriptImpClass {
-    void Created(GameObject *obj);
+	void Created(GameObject *obj);
 };
 
 /*!
@@ -11679,15 +10839,14 @@ class JMG_Utility_Global_Attach_Script_On_Flag : public ScriptImpClass {
 * \author jgray
 * \ingroup JmgUtility
 */
-class JMG_Utility_Custom_Attach_Script_To_Presets : public ScriptImpClass {
-    int custom;
-    char *params;
-    char script[128];
-    char preset[128];
-
-    void Created(GameObject *obj);
-
-    void Custom(GameObject *obj, int message, int param, GameObject *sender);
+class JMG_Utility_Custom_Attach_Script_To_Presets : public ScriptImpClass
+{
+	int custom;
+	char *params;
+	char script[128];
+	char preset[128];
+	void Created(GameObject *obj);
+	void Custom(GameObject *obj,int message,int param,GameObject *sender);
 };
 
 /*!
@@ -11700,14 +10859,12 @@ class JMG_Utility_Custom_Attach_Script_To_Presets : public ScriptImpClass {
 * \ingroup JmgUtility
 */
 class JMG_Utility_Custom_Send_Custom_On_Player_Count_Animation : public ScriptImpClass {
-    char animation[32];
-    float maxFrame;
-    int controllerId;
-    float lastCalculation;
-
-    void Created(GameObject *obj);
-
-    void Timer_Expired(GameObject *obj, int number);
+	char animation[32];
+	float maxFrame;
+	int controllerId;
+	float lastCalculation;
+	void Created(GameObject *obj);
+	void Timer_Expired(GameObject *obj,int number);
 };
 
 /*!
@@ -11716,7 +10873,7 @@ class JMG_Utility_Custom_Send_Custom_On_Player_Count_Animation : public ScriptIm
 * \ingroup JmgUtility
 */
 class JMG_Utility_Created_Destroy_If_Not_In_Pathfind : public ScriptImpClass {
-    void Created(GameObject *obj);
+	void Created(GameObject *obj);
 };
 
 /*!
@@ -11727,14 +10884,12 @@ class JMG_Utility_Created_Destroy_If_Not_In_Pathfind : public ScriptImpClass {
 * \ingroup JmgUtility
 */
 class JMG_Utility_Teleport_If_Not_Moving_To_Location : public ScriptImpClass {
-    int originalTime;
-    int time;
-    Vector3 location;
-    Vector3 lastSpot;
-
-    void Created(GameObject *obj);
-
-    void Timer_Expired(GameObject *obj, int number);
+	int originalTime;
+	int time;
+	Vector3 location;
+	Vector3 lastSpot;
+	void Created(GameObject *obj);
+	void Timer_Expired(GameObject *obj,int number);
 };
 
 /*!
@@ -11743,15 +10898,15 @@ class JMG_Utility_Teleport_If_Not_Moving_To_Location : public ScriptImpClass {
 * \author jgray
 * \ingroup JmgUtility
 */
-class JMG_Utility_Global_Set_Random_Model_Controller : public ScriptImpClass {
-    void Created(GameObject *obj);
-
+class JMG_Utility_Global_Set_Random_Model_Controller : public ScriptImpClass
+{
+	void Created(GameObject *obj);
 public:
-    JMG_Utility_Global_Set_Random_Model_Controller() {
-        sprintf(extension, "");
-    }
-
-    static char extension[16];
+	JMG_Utility_Global_Set_Random_Model_Controller()
+	{
+		sprintf(extension,"");
+	}
+	static char extension[16];
 };
 
 /*!
@@ -11761,111 +10916,95 @@ public:
 * \author jgray
 * \ingroup JmgUtility
 */
-class JMG_Utility_Global_Set_Random_Model_Custom : public ScriptImpClass {
-    int custom;
-    char extension[16];
-
-    void Created(GameObject *obj);
-
-    void Custom(GameObject *obj, int message, int param, GameObject *sender);
+class JMG_Utility_Global_Set_Random_Model_Custom : public ScriptImpClass
+{
+	int custom;
+	char extension[16];
+	void Created(GameObject *obj);
+	void Custom(GameObject *obj,int message,int param,GameObject *sender);
 };
 
 /*!
 * \brief Sets a random model on create, makes use of the global extension
 * \BaseName - Base model name in the random set to assign
-* \FinalModelNumber - Latest number in the string of models, used to select the random model range 0-value (IE: BaseModel#Extension)
+* \FinalModelNumber - Latest number in the string of models, used to select the random model range 0-value (IE: BaseModel#Extension) 
 * \author jgray
 * \ingroup JmgUtility
 */
 class JMG_Utility_Global_Set_Random_Model : public ScriptImpClass {
-    int randomValue;
-    char baseName[16];
-
-    void Created(GameObject *obj);
-
+	int randomValue;
+	char baseName[16];
+	void Created(GameObject *obj);
 public:
-    void UpdateModel(GameObject *obj);
+	void UpdateModel(GameObject *obj);
 };
 
-/*!
+/*! 
 * \brief This script allows an AI soldier to swim when in a swimming zone.  Attached by JMG_Utility_Swimming_Infantry_Advanced_AI
 * \author jgray
 * \ingroup JmgUtility
 */
 class JMG_Utility_Swimming_Infantry_Advanced_AI : public ScriptImpClass {
-    int heartBeatSoundId;
-    int pantSoundId;
-    char enterWeapon[256];
-    bool startedFadeRed;
-    float drownTime;
-    bool underwater;
-    int waterZoneCount;
-    int lastWaterZoneId;
-    float defaultSpeed;
-    int waterDamageDelayTime;
-    int waterDamageDelayTimeRecover;
-    int remainingWaterDamageDelay;
-    char originalSkin[128];
-    char originalArmor[128];
-    char originalModel[128];
-    int weaponGroupId;
-    unsigned int currentWeaponId;
-    int defaultHoldStyle;
-    float defaultSwimSpeedMultiplier;
-    float waterSpeedMultiplier;
-    char defaultWeaponPreset[128];
-    float defaultDrownTime;
-    float startDrownSequence;
-    float waterDamageAmount;
-    char waterDamageWarhead[128];
-    float drownDamageRate;
-    char swimmingSkin[128];
-    char swimmingArmor[128];
-    char swimmingModel[128];
-    float swimmingHeightScale;
-    float swimmingWidthScale;
-    float originalHeightScale;
-    float originalWidthScale;
-    char heartBeatSoundEmitterModel[16];
-    char pantingSoundEmitterModel[16];
-    char gaspForBreath[128];
-    float catchBreathRate;
-    bool forceDefinedWeapons;
-    int weaponSwitchForward;
-    JMG_Utility_Swimming_Infantry_Advanced_Controller::WeaponNode *currentWeapon;
-
-    void Created(GameObject *obj);
-
-    void Timer_Expired(GameObject *obj, int number);
-
-    void Custom(GameObject *obj, int message, int param, GameObject *sender);
-
-    void Killed(GameObject *obj, GameObject *killer);
-
-    void Destroyed(GameObject *obj);
-
-    void Detach(GameObject *obj);
-
-    void CreateSoundEmitter(GameObject *obj, const char *model, int *soundId);
-
-    void DestroySoundEmitter(int *soundId);
-
-    void HideSoundEmitter(int *soundId);
-
-    void SwitchWeapon(GameObject *obj);
-
-    void UpdateWeaponSwimming(GameObject *obj, const WeaponDefinitionClass *weaponDef);
-
-    void GetWeaponId(const WeaponDefinitionClass *weaponDef);
-
-    int GetWeaponPosition(GameObject *obj, int weaponId);
-
+	int heartBeatSoundId;
+	int pantSoundId;
+	char enterWeapon[256];
+	bool startedFadeRed;
+	float drownTime;
+	bool underwater;
+	int waterZoneCount;
+	int lastWaterZoneId;
+	float defaultSpeed;
+	int waterDamageDelayTime;
+	int waterDamageDelayTimeRecover;
+	int remainingWaterDamageDelay;
+	char originalSkin[128];
+	char originalArmor[128];
+	char originalModel[128];
+	int weaponGroupId;
+	unsigned int currentWeaponId;
+	int defaultHoldStyle;
+	float defaultSwimSpeedMultiplier;
+	float waterSpeedMultiplier;
+	char defaultWeaponPreset[128];
+	float defaultDrownTime;
+	float startDrownSequence;
+	float waterDamageAmount;
+	char waterDamageWarhead[128];
+	float drownDamageRate;
+	char swimmingSkin[128];
+	char swimmingArmor[128];
+	char swimmingModel[128];
+	float swimmingHeightScale;
+	float swimmingWidthScale;
+	float originalHeightScale;
+	float originalWidthScale;
+	char heartBeatSoundEmitterModel[16];
+	char pantingSoundEmitterModel[16];
+	char gaspForBreath[128];
+	float catchBreathRate;
+	bool forceDefinedWeapons;
+	int weaponSwitchForward;
+	JMG_Utility_Swimming_Infantry_Advanced_Controller::WeaponNode *currentWeapon;
+	void Created(GameObject *obj);
+	void Timer_Expired(GameObject *obj,int number);
+	void Custom(GameObject *obj,int message,int param,GameObject *sender);
+	void Killed(GameObject *obj,GameObject *killer);
+	void Destroyed(GameObject *obj);
+	void Detach(GameObject *obj);
+	void CreateSoundEmitter(GameObject *obj,const char *model,int *soundId);
+	void DestroySoundEmitter(int *soundId);
+	void HideSoundEmitter(int *soundId);
+	void SwitchWeapon(GameObject *obj);
+	void UpdateWeaponSwimming(GameObject *obj,const WeaponDefinitionClass *weaponDef);
+	void GetWeaponId(const WeaponDefinitionClass *weaponDef);
+	int GetWeaponPosition(GameObject *obj,int weaponId);
 public:
-    JMG_Utility_Swimming_Infantry_Advanced_AI() {
-        weaponGroupId = 0;
-        currentWeaponId = 0;
-        currentWeapon = NULL;
-    }
+	JMG_Utility_Swimming_Infantry_Advanced_AI()
+	{
+		weaponGroupId = 0;
+		currentWeaponId = 0;
+		currentWeapon = NULL;
+	}
 };
 
 /*!
@@ -11874,15 +11013,15 @@ public:
 * \author jgray
 * \ingroup JmgUtility
 */
-class JMG_Utility_Global_Custom_Send_Custom_Flag_Controller : public ScriptImpClass {
-    void Created(GameObject *obj);
-
+class JMG_Utility_Global_Custom_Send_Custom_Flag_Controller : public ScriptImpClass
+{
+	void Created(GameObject *obj);
 public:
-    JMG_Utility_Global_Custom_Send_Custom_Flag_Controller() {
-        globalFlag = -1;
-    }
-
-    static int globalFlag;
+	JMG_Utility_Global_Custom_Send_Custom_Flag_Controller()
+	{
+		globalFlag = -1;
+	}
+	static int globalFlag;
 };
 
 /*!
@@ -11892,13 +11031,12 @@ public:
 * \author jgray
 * \ingroup JmgUtility
 */
-class JMG_Utility_Global_Custom_Send_Custom_Flag_Custom : public ScriptImpClass {
-    int custom;
-    int globalFlag;
-
-    void Created(GameObject *obj);
-
-    void Custom(GameObject *obj, int message, int param, GameObject *sender);
+class JMG_Utility_Global_Custom_Send_Custom_Flag_Custom : public ScriptImpClass
+{
+	int custom;
+	int globalFlag;
+	void Created(GameObject *obj);
+	void Custom(GameObject *obj,int message,int param,GameObject *sender);
 };
 
 /*!
@@ -11914,21 +11052,19 @@ class JMG_Utility_Global_Custom_Send_Custom_Flag_Custom : public ScriptImpClass 
 * \author jgray
 * \ingroup JmgUtility
 */
-class JMG_Utility_Global_Custom_Send_Custom_Flag : public ScriptImpClass {
-    int globalFlag;
-    int recieveMessage;
-    int id;
-    int custom;
-    int Param;
-    float delay;
-    float randomDelay;
-    float randomChance;
-
-    void Created(GameObject *obj);
-
-    void Custom(GameObject *obj, int message, int param, GameObject *sender);
+class JMG_Utility_Global_Custom_Send_Custom_Flag : public ScriptImpClass
+{
+	int globalFlag;
+	int recieveMessage;
+	int id;
+	int custom;
+	int Param;
+	float delay;
+	float randomDelay;
+	float randomChance;
+	void Created(GameObject *obj);
+	void Custom(GameObject *obj,int message,int param,GameObject *sender);
 };
-
 /*!
 * \brief AI that will attempt to go to a location as long as a player is near it
 * \GotoObjectId - Object that the AI will chase around the map, overrides location
@@ -11948,105 +11084,89 @@ class JMG_Utility_Global_Custom_Send_Custom_Flag : public ScriptImpClass {
 * \ingroup JmgUtility
 */
 class JMG_Utility_AI_Goto_Location_While_Player_Nearby : public ScriptImpClass {
-    struct JMGVehicleAmmo {
-        bool allowError;
-        float range;
-        float speed;
-
-        JMGVehicleAmmo() {
-            allowError = false;
-            range = 0.0f;
-            speed = 400.0f;
-        }
-    };
-
-    Vector3 gotoLocation;
-    int gotoObjectId;
-    float maxPlayerDistance;
-    JMGVehicleAmmo primary;
-    JMGVehicleAmmo secondary;
-    JMGVehicleAction currentAction;
-    JMGVehicleAction lastAction;
-    bool overrideFireMode;
-    bool overridePrimary;
-    int lastSeenCount;
-    int reverseTime;
-    int stuckCount;
-    int useAmmo;
-    int doNotUsePathfind;
-    float lastHealth;
-    float minDistanceSquared;
-    bool moving;
-    bool attacking;
-    int badDestAttempt;
-    Vector3 lastPos;
-    Vector3 homepos;
-    int myteam;
-    bool inRange;
-    bool drivingBackward;
-    float minAttackRange;
-    float definedWeaponError;
-    int forceFire;
-    float vtolHover;
-    int vsSoldier;
-    int vsAircraft;
-    int vsVehicle;
-    float overrideSpeed;
-    int playerType;
-
-    void Created(GameObject *obj);
-
-    void Action_Complete(GameObject *obj, int action, ActionCompleteReason reason);
-
-    void Enemy_Seen(GameObject *obj, GameObject *seen);
-
-    void Damaged(GameObject *obj, GameObject *damager, float damage);
-
-    void Timer_Expired(GameObject *obj, int number);
-
-    void RunAttack(GameObject *obj, GameObject *target);
-
-    int GetThreatRating(GameObject *obj);
-
-    GameObject *GetAttackObject(GameObject *obj);
-
-    GameObject *SelectTarget(GameObject *obj, GameObject *target);
-
-    GameObject *SetTarget(GameObject *target);
-
-    GameObject *GetClosest(GameObject *obj, GameObject *new_target, GameObject *old_target);
-
-    int SelectAmmo(GameObject *target);
-
-    void StuckCheck(GameObject *obj);
-
-    void AttackMove(GameObject *obj, GameObject *target, bool gotoObject, Vector3 targetLocation, int fireMode,
-                    float weaponError, bool forceUpdate, float arriveDistance);
-
-    JMGVehicleAmmo DefineAmmo(const AmmoDefinitionClass *ammo);
+	struct JMGVehicleAmmo
+	{
+		bool allowError;
+		float range;
+		float speed;
+		JMGVehicleAmmo()
+		{
+			allowError = false;
+			range = 0.0f;
+			speed = 400.0f;
+		}
+	};
+	Vector3 gotoLocation;
+	int gotoObjectId;
+	float maxPlayerDistance;
+	JMGVehicleAmmo primary;
+	JMGVehicleAmmo secondary;
+	JMGVehicleAction currentAction;
+	JMGVehicleAction lastAction;
+	bool overrideFireMode;
+	bool overridePrimary;
+	int lastSeenCount;
+	int reverseTime;
+	int stuckCount;
+	int useAmmo;
+	int doNotUsePathfind;
+	float lastHealth;
+	float minDistanceSquared;
+	bool moving;
+	bool attacking;
+	int badDestAttempt;
+	Vector3 lastPos;
+	Vector3 homepos;
+	int myteam;
+	bool inRange;
+	bool drivingBackward;
+	float minAttackRange;
+	float definedWeaponError;
+	int forceFire;
+	float vtolHover;
+	int vsSoldier;
+	int vsAircraft;
+	int vsVehicle;
+	float overrideSpeed;
+	int playerType;
+	void Created(GameObject *obj);
+	void Action_Complete(GameObject *obj,int action,ActionCompleteReason reason);
+	void Enemy_Seen(GameObject *obj,GameObject *seen);
+	void Damaged(GameObject *obj,GameObject *damager,float damage);
+	void Timer_Expired(GameObject *obj,int number);
+	void RunAttack(GameObject *obj,GameObject *target);
+	int GetThreatRating(GameObject * obj);
+	GameObject *GetAttackObject(GameObject * obj);
+	GameObject *SelectTarget(GameObject *obj,GameObject *target);
+	GameObject *SetTarget(GameObject *target);
+	GameObject *GetClosest(GameObject *obj,GameObject *new_target,GameObject *old_target);
+	int SelectAmmo(GameObject *target);
+	void StuckCheck(GameObject *obj);
+	void AttackMove(GameObject *obj,GameObject *target,bool gotoObject,Vector3 targetLocation,int fireMode,float weaponError,bool forceUpdate,float arriveDistance);
+	JMGVehicleAmmo DefineAmmo(const AmmoDefinitionClass *ammo);
 };
-
 /*!
 * \brief Any object this is attached to will not be shot at by JMG_Utility_AI_Goto_Location_While_Player_Nearby
 * \author jgray
 * \ingroup JmgUtility
 */
-class JMG_Utility_AI_Goto_Location_While_Player_Nearby_Ignored : public ScriptImpClass {
-    void Created(GameObject *obj);
+class JMG_Utility_AI_Goto_Location_While_Player_Nearby_Ignored : public ScriptImpClass
+{
+	void Created(GameObject *obj);
 };
 
 /*!
 * \brief Creates a powerup at the objects origin when it is killed, then turns the powerup into the parent object and steals its animation, basically it turns the powerup into the parent's corpse
 * \PowerupName - Powerup to create
 * \RequiredWeaponPreset - Weapon that is needed to do the drop, if blank drops anyways drops
-* \Chance - Chance that the drop will occur
+* \Chance - Chance that the drop will occur 
 * \author jgray
 * \ingroup JmgUtility
 */
-class JMG_Utility_Killed_Drop_Powerup_Become_Corpse : public ScriptImpClass {
-    void Killed(GameObject *obj, GameObject *killer);
-
-    void Timer_Expired(GameObject *obj, int number);
+class JMG_Utility_Killed_Drop_Powerup_Become_Corpse : public ScriptImpClass
+{
+	void Killed(GameObject *obj,GameObject *killer);
+	void Timer_Expired(GameObject *obj,int number);
 };
 
 /*!
@@ -12064,18 +11184,16 @@ class JMG_Utility_Killed_Drop_Powerup_Become_Corpse : public ScriptImpClass {
 * \ingroup JmgUtility
 */
 class JMG_Utility_Objective_System_Objectives_Complete_Send_Custom : public ScriptImpClass {
-    int id;
-    int custom;
-    int Param;
-    float delay;
-    float randomDelay;
-    int objectiveIds[128];
-    int objectiveCount;
-    bool repeat;
-
-    void Created(GameObject *obj);
-
-    void Timer_Expired(GameObject *obj, int number);
+	int id;
+	int custom;
+	int Param;
+	float delay;
+	float randomDelay;
+	int objectiveIds[128];
+	int objectiveCount;
+	bool repeat;
+	void Created(GameObject *obj);
+	void Timer_Expired(GameObject *obj,int number);
 };
 
 /*!
@@ -12088,13 +11206,11 @@ class JMG_Utility_Objective_System_Objectives_Complete_Send_Custom : public Scri
 * \ingroup JmgUtility
 */
 class JMG_Utility_Damage_Update_Animation_Frame : public ScriptImpClass {
-    char animation[32];
-    float maxFrame;
-    float lastCalculation;
-
-    void Created(GameObject *obj);
-
-    void Damaged(GameObject *obj, GameObject *damager, float damage);
+	char animation[32];
+	float maxFrame;
+	float lastCalculation;
+	void Created(GameObject *obj);
+	void Damaged(GameObject *obj,GameObject *damager,float damage);
 };
 
 /*!
@@ -12106,9 +11222,8 @@ class JMG_Utility_Damage_Update_Animation_Frame : public ScriptImpClass {
 * \ingroup JmgUtility
 */
 class JMG_Utility_Security_System_Sync_Model_Random_NumberPad_Control : public ScriptImpClass {
-    void Created(GameObject *obj);
-
-    void Timer_Expired(GameObject *obj, int number);
+	void Created(GameObject *obj);
+	void Timer_Expired(GameObject *obj,int number);
 };
 
 /*!
@@ -12142,107 +11257,87 @@ class JMG_Utility_Security_System_Sync_Model_Random_NumberPad_Control : public S
 * \ingroup JmgUtility
 */
 class JMG_Utility_AI_Goto_Target_Script : public ScriptImpClass {
-    enum aiState {
-        IDLE, HUNTING_STAR, ATTACKING_TARGET, RETURNING_HOME, WANDERING_GROUP, ACTION_BADPATH
-    };
-
-    struct LastAction {
-        int targetId;
-        Vector3 location;
-        float speed;
-        float distance;
-        bool attack;
-        bool overrideLocation;
-
-        LastAction() {
-        }
-
-        LastAction(int targetId, Vector3 location, float speed, float distance, bool attack, bool overrideLocation) {
-            this->targetId = targetId;
-            this->location = location;
-            this->speed = speed;
-            this->distance = distance;
-            this->attack = attack;
-            this->overrideLocation = overrideLocation;
-        }
-
-        bool operator==(LastAction l) {
-            return (targetId == l.targetId && JmgUtility::SimpleDistance(location, l.location) <= 0.0f &&
-                    speed == l.speed && distance == l.distance && attack == l.attack &&
-                    overrideLocation == l.overrideLocation);
-        }
-    };
-
-    struct ValidLastLocation {
-        bool valid;
-        Vector3 location;
-
-        ValidLastLocation(bool valid) {
-            this->valid = valid;
-        }
-
-        ValidLastLocation(int enemyId);
-    };
-
-    LastAction lastAction;
-    aiState state;
-    Vector3 homeLocation;
-    float maxSightFromHomeLocation;
-    bool huntStealth;
-    int targetId;
-    int lastSeenTime;
-    float weaponRange;
-    float weaponEffectiveRange;
-    int huntingEnemyId;
-    int removeIgnoreTime;
-    int ignoreEnemyId;
-    float huntSearchDistance;
-    float huntArriveDistance;
-    float attackArriveDistance;
-    int stuckTime;
-    int reverseTime;
-    Vector3 lastPosition;
-    bool moveBackward;
-    float wanderDistanceOverride;
-    int wanderingAiGroupId;
-    float wanderSpeed;
-    float huntSpeed;
-    float attackSpeed;
-    float returnHomeSpeed;
-    int changeWanderGroupCustom;
-    int changeWanderSpeedCustom;
-    int changeHuntDistanceCustom;
-    int changeReturnHomeSpeedCustom;
-    int changeHuntSpeedCustom;
-    int changeMaxSightFromHomeLocationCustom;
-    int changeAttackSpeedCustom;
-
-    void Created(GameObject *obj);
-
-    void Enemy_Seen(GameObject *obj, GameObject *seen);
-
-    void Timer_Expired(GameObject *obj, int number);
-
-    void Custom(GameObject *obj, int message, int param, GameObject *sender);
-
-    void Action_Complete(GameObject *obj, int action_id, ActionCompleteReason reason);
-
-    void Damaged(GameObject *obj, GameObject *damager, float damage);
-
-    void Attack_Move(GameObject *obj, GameObject *target, Vector3 location, float speed, float distance, bool attack,
-                     bool overrideLocation);
-
-    GameObject *findClosestStar(GameObject *obj);
-
-    void Return_Home(GameObject *obj, ValidLastLocation goNearLastWanderPoint);
-
-    void Stuck_Check(GameObject *obj, Vector3 targetPos);
-
-    void Cant_Get_To_target(GameObject *obj);
-
-    bool GetRandomPosition(Vector3 *position);
-
-    bool Choose_Target(GameObject *obj, GameObject *target);
+	enum aiState{IDLE,HUNTING_STAR,ATTACKING_TARGET,RETURNING_HOME,WANDERING_GROUP,ACTION_BADPATH};
+	struct LastAction
+	{
+		int targetId;
+		Vector3 location;
+		float speed;
+		float distance;
+		bool attack;
+		bool overrideLocation;
+		LastAction()
+		{
+		}
+		LastAction(int targetId,Vector3 location,float speed,float distance,bool attack,bool overrideLocation)
+		{
+			this->targetId = targetId;
+			this->location = location;
+			this->speed = speed;
+			this->distance = distance;
+			this->attack = attack;
+			this->overrideLocation = overrideLocation;
+		}
+		bool operator == (LastAction l)
+		{
+			return (targetId == l.targetId && JmgUtility::SimpleDistance(location,l.location) <= 0.0f && speed == l.speed && distance == l.distance && attack == l.attack && overrideLocation == l.overrideLocation);
+		}
+	};
+	struct ValidLastLocation
+	{
+		bool valid;
+		Vector3 location;
+		ValidLastLocation(bool valid)
+		{
+			this->valid = valid;
+		}
+		ValidLastLocation(int enemyId);
+	};
+	LastAction lastAction;
+	aiState state;
+	Vector3 homeLocation;
+	float maxSightFromHomeLocation;
+	bool huntStealth;
+	int targetId;
+	int lastSeenTime;
+	float weaponRange;
+	float weaponEffectiveRange;
+	int huntingEnemyId;
+	int removeIgnoreTime;
+	int ignoreEnemyId;
+	float huntSearchDistance;
+	float huntArriveDistance;
+	float attackArriveDistance;
+	int stuckTime;
+	int reverseTime;
+	Vector3 lastPosition;
+	bool moveBackward;
+	float wanderDistanceOverride;
+	int wanderingAiGroupId;
+	float wanderSpeed;
+	float huntSpeed;
+	float attackSpeed;
+	float returnHomeSpeed;
+	int changeWanderGroupCustom;
+	int changeWanderSpeedCustom;
+	int changeHuntDistanceCustom;
+	int changeReturnHomeSpeedCustom;
+	int changeHuntSpeedCustom;
+	int changeMaxSightFromHomeLocationCustom;
+	int changeAttackSpeedCustom;
+	void Created(GameObject *obj);
+	void Enemy_Seen(GameObject *obj,GameObject *seen);
+	void Timer_Expired(GameObject *obj,int number);
+	void Custom(GameObject *obj,int message,int param,GameObject *sender);
+	void Action_Complete(GameObject *obj,int action_id,ActionCompleteReason reason);
+	void Damaged(GameObject *obj,GameObject *damager,float damage);
+	void Attack_Move(GameObject *obj,GameObject *target,Vector3 location,float speed,float distance,bool attack,bool overrideLocation);
+	GameObject *findClosestStar(GameObject *obj);
+	void Return_Home(GameObject *obj,ValidLastLocation goNearLastWanderPoint);
+	void Stuck_Check(GameObject *obj,Vector3 targetPos);
+	void Cant_Get_To_target(GameObject *obj);
+	bool GetRandomPosition(Vector3 *position);
+	bool Choose_Target(GameObject *obj,GameObject *target);
 };
 
 /*!
@@ -12251,7 +11346,7 @@ class JMG_Utility_AI_Goto_Target_Script : public ScriptImpClass {
 * \ingroup JmgUtility
 */
 class JMG_Utility_AI_Goto_Target_Script_Ignore_Object : public ScriptImpClass {
-    void Created(GameObject *obj);
+	void Created(GameObject *obj);
 };
 
 /*!
@@ -12260,7 +11355,7 @@ class JMG_Utility_AI_Goto_Target_Script_Ignore_Object : public ScriptImpClass {
 * \ingroup JmgUtility
 */
 class JMG_Utility_AI_Goto_Target_Script_Target : public ScriptImpClass {
-    void Created(GameObject *obj);
+	void Created(GameObject *obj);
 };
 
 /*!
@@ -12279,20 +11374,18 @@ class JMG_Utility_AI_Goto_Target_Script_Target : public ScriptImpClass {
 * \ingroup JmgUtility
 */
 class JMG_Utility_Custom_Send_Custom_If_Script_Count : public ScriptImpClass {
-    int maxCount;
-    float playerAddMaxCount;
-    char script[256];
-    int recieveMessage;
-    int id;
-    int custom;
-    int Param;
-    float delay;
-    float randomDelay;
-    float randomChance;
-
-    void Created(GameObject *obj);
-
-    void Custom(GameObject *obj, int message, int param, GameObject *sender);
+	int maxCount;
+	float playerAddMaxCount;
+	char script[256];
+	int recieveMessage;
+	int id;
+	int custom;
+	int Param;
+	float delay;
+	float randomDelay;
+	float randomChance;
+	void Created(GameObject *obj);
+	void Custom(GameObject *obj,int message,int param,GameObject *sender);
 };
 
 /*!
@@ -12305,7 +11398,7 @@ class JMG_Utility_Custom_Send_Custom_If_Script_Count : public ScriptImpClass {
 * \ingroup JmgUtility
 */
 class JMG_Utility_Created_Trigger_Create_Vehicle : public ScriptImpClass {
-    void Created(GameObject *obj);
+	void Created(GameObject *obj);
 };
 
 /*!
@@ -12320,17 +11413,16 @@ class JMG_Utility_Created_Trigger_Create_Vehicle : public ScriptImpClass {
 * \author jgray
 * \ingroup JmgUtility
 */
-class JMG_Utility_Custom_Remove_And_Attach_Script : public ScriptImpClass {
-    int custom;
-    bool repeat;
-    bool requiresRemoveScript;
-    char *params;
-    char *attachScript;
-    char *removeScript;
-
-    void Created(GameObject *obj);
-
-    void Custom(GameObject *obj, int message, int param, GameObject *sender);
+class JMG_Utility_Custom_Remove_And_Attach_Script : public ScriptImpClass
+{
+	int custom;
+	bool repeat;
+	bool requiresRemoveScript;
+	char *params;
+	char *attachScript;
+	char *removeScript;
+	void Created(GameObject *obj);
+	void Custom(GameObject *obj,int message,int param,GameObject *sender);
 };
 
 /*!
@@ -12339,7 +11431,7 @@ class JMG_Utility_Custom_Remove_And_Attach_Script : public ScriptImpClass {
 * \ingroup JmgUtility
 */
 class JMG_Utility_AI_Guardian_Aircraft_Ignored : public ScriptImpClass {
-    void Created(GameObject *obj);
+	void Created(GameObject *obj);
 };
 
 /*!
@@ -12348,7 +11440,7 @@ class JMG_Utility_AI_Guardian_Aircraft_Ignored : public ScriptImpClass {
 * \ingroup JmgUtility
 */
 class JMG_Utility_AI_Guardian_Infantry_Ignored : public ScriptImpClass {
-    void Created(GameObject *obj);
+	void Created(GameObject *obj);
 };
 
 /*!
@@ -12357,7 +11449,7 @@ class JMG_Utility_AI_Guardian_Infantry_Ignored : public ScriptImpClass {
 * \ingroup JmgUtility
 */
 class JMG_Utility_AI_Guardian_Vehicle_Ignored : public ScriptImpClass {
-    void Created(GameObject *obj);
+	void Created(GameObject *obj);
 };
 
 /*!
@@ -12366,7 +11458,7 @@ class JMG_Utility_AI_Guardian_Vehicle_Ignored : public ScriptImpClass {
 * \ingroup JmgUtility
 */
 class JMG_Utility_AI_Guardian_Generic_Ignored : public ScriptImpClass {
-    void Created(GameObject *obj);
+	void Created(GameObject *obj);
 };
 
 /*!
@@ -12376,14 +11468,13 @@ class JMG_Utility_AI_Guardian_Generic_Ignored : public ScriptImpClass {
 * \ingroup JmgUtility
 */
 class JMG_Utility_Objective_System_Objective_Marker : public ScriptImpClass {
-    void Created(GameObject *obj);
-
+	void Created(GameObject *obj);
 public:
-    JMG_Utility_Objective_System_Objective_Marker() {
-        objectiveId = -1;
-    }
-
-    int objectiveId;
+	JMG_Utility_Objective_System_Objective_Marker()
+	{
+		objectiveId = -1;
+	}
+	int objectiveId;
 };
 
 /*!
@@ -12397,14 +11488,12 @@ public:
 * \ingroup JmgUtility
 */
 class JMG_Utility_Remove_Script_If_Doesnt_Have_Weapon : public ScriptImpClass {
-    char weaponName[128];
-    char *params;
-    char script[128];
-    float rate;
-
-    void Created(GameObject *obj);
-
-    void Timer_Expired(GameObject *obj, int number);
+	char weaponName[128];
+	char *params;
+	char script[128];
+	float rate;
+	void Created(GameObject *obj);
+	void Timer_Expired(GameObject *obj,int number);
 };
 
 /*!
@@ -12414,9 +11503,8 @@ class JMG_Utility_Remove_Script_If_Doesnt_Have_Weapon : public ScriptImpClass {
 * \ingroup JmgUtility
 */
 class JMG_Utility_Spawn_With_Last_Selected_Gun_Ignore : public ScriptImpClass {
-    void Created(GameObject *obj);
-
-    void Timer_Expired(GameObject *obj, int number);
+	void Created(GameObject *obj);
+	void Timer_Expired(GameObject *obj,int number);
 };
 
 /*!
@@ -12433,9 +11521,8 @@ class JMG_Utility_Spawn_With_Last_Selected_Gun_Ignore : public ScriptImpClass {
 * \ingroup JmgUtility
 */
 class JMG_Utility_Objective_System_Override_Visible_Settings : public ScriptImpClass {
-    void Created(GameObject *obj);
-
-    void Timer_Expired(GameObject *obj, int number);
+	void Created(GameObject *obj);
+	void Timer_Expired(GameObject *obj,int number);
 };
 
 /*!
@@ -12448,13 +11535,12 @@ class JMG_Utility_Objective_System_Override_Visible_Settings : public ScriptImpC
 * \author jgray
 * \ingroup JmgUtility
 */
-class JMG_Utility_Custom_Create_Object_At_Bone : public ScriptImpClass {
-    int custom;
-    bool repeat;
-
-    void Created(GameObject *obj);
-
-    void Custom(GameObject *obj, int message, int param, GameObject *sender);
+class JMG_Utility_Custom_Create_Object_At_Bone : public ScriptImpClass
+{
+	int custom;
+	bool repeat;
+	void Created(GameObject *obj);
+	void Custom(GameObject *obj,int message,int param,GameObject *sender);
 };
 
 /*!
@@ -12467,7 +11553,7 @@ class JMG_Utility_Custom_Create_Object_At_Bone : public ScriptImpClass {
 * \ingroup JmgUtility
 */
 class JMG_Utility_Killed_Send_Custom_When_Killed_By_Nothing : public ScriptImpClass {
-    void Killed(GameObject *obj, GameObject *killer);
+	void Killed(GameObject *obj,GameObject *killer);
 };
 
 /*!
@@ -12478,14 +11564,12 @@ class JMG_Utility_Killed_Send_Custom_When_Killed_By_Nothing : public ScriptImpCl
 * \author jgray
 * \ingroup JmgUtility
 */
-class JMG_Utility_Custom_Drop_Corpse : public ScriptImpClass {
-    int custom;
-    bool repeat;
-    char powerupName[128];
-
-    void Created(GameObject *obj);
-
-    void Custom(GameObject *obj, int message, int param, GameObject *sender);
-
-    void Timer_Expired(GameObject *obj, int number);
+class JMG_Utility_Custom_Drop_Corpse : public ScriptImpClass
+{
+	int custom;
+	bool repeat;
+	char powerupName[128];
+	void Created(GameObject *obj);
+	void Custom(GameObject *obj,int message,int param,GameObject *sender);
+	void Timer_Expired(GameObject *obj,int number);
 };

@@ -12,55 +12,68 @@
 #include "general.h"
 #include "ScriptableGameObj.h"
 
-ReferencerClass::~ReferencerClass() {
-    *this = 0;
+ReferencerClass::~ReferencerClass()
+{
+   *this = 0;
 }
 
 
-void ReferencerClass::On_Post_Load() {
-    if (ReferenceTarget) {
-        ScriptableGameObj * tempObject = ReferenceTarget->ReferenceData;
-        ReferenceTarget = 0;
 
-        *this = tempObject;
-    }
+void ReferencerClass::On_Post_Load()
+{
+   if (ReferenceTarget)
+   {
+      ScriptableGameObj* tempObject = ReferenceTarget->ReferenceData;
+      ReferenceTarget = 0;
+
+      *this = tempObject;
+   }
 }
 
 
-ReferencerClass &ReferencerClass::operator=
-        (const ReferencerClass &referencer) {
-    *this = referencer.Get_Ptr();
-    return *this;
+
+ReferencerClass& ReferencerClass::operator =
+   (const ReferencerClass& referencer)
+{
+   *this = referencer.Get_Ptr();
+   return *this;
 }
 
 
-ReferencerClass &ReferencerClass::operator=
-        (ScriptableGameObj *object) {
-    if (ReferenceTarget)
-        if (ReferenceTarget->ReferencerListHead == this) {
-            ReferenceTarget->ReferencerListHead = this->TargetReferencerListNext;
-            ReferenceTarget = 0;
-            TargetReferencerListNext = 0;
-        } else
-            for (ReferencerClass *referencer = ReferenceTarget->ReferencerListHead; referencer; referencer = referencer->TargetReferencerListNext)
-                if (referencer->TargetReferencerListNext == this) {
-                    referencer->TargetReferencerListNext = this->TargetReferencerListNext;
 
-                    ReferenceTarget = 0;
-                    TargetReferencerListNext = 0;
+ReferencerClass& ReferencerClass::operator =
+   (ScriptableGameObj* object)
+{
+   if (ReferenceTarget)
+      if (ReferenceTarget->ReferencerListHead == this)
+      {
+         ReferenceTarget->ReferencerListHead = this->TargetReferencerListNext;
+         ReferenceTarget = 0;
+         TargetReferencerListNext   = 0;
+      }
+      else
+         for (ReferencerClass* referencer = ReferenceTarget->ReferencerListHead; referencer; referencer = referencer->TargetReferencerListNext)
+            if (referencer->TargetReferencerListNext == this)
+            {
+               referencer->TargetReferencerListNext = this->TargetReferencerListNext;
 
-                    break;
-                }
+               ReferenceTarget = 0;
+               TargetReferencerListNext   = 0;
 
-    if (object) {
-        ReferenceTarget = object;
-        TargetReferencerListNext = object->ReferencerListHead;
-        object->ReferencerListHead = this;
-    }
+               break;
+            }
 
-    return *this;
+   if (object)
+   {
+      ReferenceTarget  = object;
+      TargetReferencerListNext    = object->ReferencerListHead;
+      object->ReferencerListHead = this;
+   }
+
+   return *this;
 }
 
-ReferencerClass::operator ScriptableGameObj *() const {
-    return Get_Ptr();
+ReferencerClass::operator ScriptableGameObj* () const
+{
+   return Get_Ptr();
 }

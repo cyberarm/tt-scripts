@@ -11,54 +11,43 @@
 */
 #ifndef TT_INCLUDE_PHYSICALGAMEOBJDEF_H
 #define TT_INCLUDE_PHYSICALGAMEOBJDEF_H
-
 #include "DamageableGameObjDef.h"
-
-typedef enum {
-    TEAM_VISIBILITY_ALL,
-    TEAM_VISIBILITY_FRIENDLY,
-    TEAM_VISIBILITY_ENEMY
+typedef enum
+{
+	TEAM_VISIBILITY_ALL,
+	TEAM_VISIBILITY_FRIENDLY,
+	TEAM_VISIBILITY_ENEMY
 } TeamVisibilitySetting;
-
-class PhysicalGameObjDef : public DamageableGameObjDef {
+class PhysicalGameObjDef : public DamageableGameObjDef
+{
 public:
-    PhysicalGameObjDef(void);
-
-    virtual bool Save(ChunkSaveClass &csave);
-
-    virtual bool Load(ChunkLoadClass &cload);
-
-    virtual bool Is_Valid_Config(StringClass &message);
-
-    int Get_Phys_Def_ID(void) const { return PhysDefID; }
-
-    int Get_Orator_Type(void) const { return OratorType; }
-
-    StringClass Get_Animation() const { return Animation; }
-
-    bool Ignore_For_Tracking() const { return IgnoreForTracking; }
-
+	PhysicalGameObjDef( void );
+	virtual bool								Save( ChunkSaveClass &csave );
+	virtual bool								Load( ChunkLoadClass &cload );
+	virtual bool								Is_Valid_Config (StringClass &message);
+	int		Get_Phys_Def_ID( void ) const	{ return PhysDefID; }
+	int		Get_Orator_Type( void ) const	{ return OratorType; }
+	StringClass Get_Animation() const {return Animation;}
+	bool Ignore_For_Tracking() const {return IgnoreForTracking;}
 #ifdef DDBEDIT
-    virtual void                        Dump (FileClass &file);
+	virtual void                        Dump (FileClass &file);
 #endif
-    DECLARE_EDITABLE(PhysicalGameObjDef, DamageableGameObjDef);
+	DECLARE_EDITABLE( PhysicalGameObjDef, DamageableGameObjDef );
 protected:
-    int Type;
-    int RadarBlipType;
-    float BullseyeOffsetZ;
-    StringClass Animation;
-    int PhysDefID;
-    int KilledExplosion;
-    bool DefaultHibernationEnable;
-    bool AllowInnateConversations;
-    int OratorType;
-    bool UseCreationEffect;
-    char TeamVisibility;
-    bool IgnoreForTracking;
-
-    friend class PhysicalGameObj;
-
-    friend class PresetDump;
+	int											Type;					
+	int											RadarBlipType;
+	float										BullseyeOffsetZ;
+	StringClass									Animation;
+	int											PhysDefID;
+	int											KilledExplosion;
+	bool										DefaultHibernationEnable;
+	bool										AllowInnateConversations;
+	int											OratorType;
+	bool										UseCreationEffect;
+	char                                        TeamVisibility;
+	bool                                        IgnoreForTracking;
+	friend	class								PhysicalGameObj;
+	friend class PresetDump;
 };
 
 #endif

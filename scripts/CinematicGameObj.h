@@ -13,55 +13,31 @@
 #define TT_INCLUDE_CINEMATICGAMEOBJ_H
 
 #include "ArmedGameObj.h"
-
 class AudibleSoundClass;
-
 class CinematicGameObjDef;
-
 class CinematicGameObj : public ArmedGameObj {
 private:
-    AudibleSoundClass *Sound;
+	AudibleSoundClass *Sound;
 public:
-    const PersistFactoryClass &Get_Factory() const;
-
-    CinematicGameObj();
-
-    ~CinematicGameObj();
-
-    void Init();
-
-    void Init(const CinematicGameObjDef &);
-
-    void Cinematic_Init();
-
-    SCRIPTS_API const CinematicGameObjDef
-    &
-
-    Get_Definition(void) const;
-
-    bool Save(ChunkSaveClass &csave);
-
-    bool Load(ChunkLoadClass &cload);
-
-    void On_Post_Load();
-
-    void Set_Sound(int, char const *);
-
-    void Think();
-
-    void Post_Think();
-
-    void Completely_Damaged(const OffenseObjectClass &offense);
-
-    float Get_Animation_Length();
-
-    void Export_Rare(BitStreamClass &BitStream);
-
-    void Import_Rare(BitStreamClass &BitStream);
-
-    bool Takes_Explosion_Damage() { return false; }
-
-    CinematicGameObj *As_CinematicGameObj() { return this; }
+	const PersistFactoryClass &Get_Factory() const;
+	CinematicGameObj();
+	~CinematicGameObj();
+	void Init();
+	void Init(const CinematicGameObjDef &);
+	void Cinematic_Init();
+	SCRIPTS_API const CinematicGameObjDef & Get_Definition( void ) const ;
+	bool Save(ChunkSaveClass &csave);
+	bool Load(ChunkLoadClass &cload);
+	void On_Post_Load();
+	void Set_Sound(int, char const *);
+	void Think();
+	void Post_Think();
+	void Completely_Damaged(const OffenseObjectClass &offense);
+	float Get_Animation_Length();
+	void Export_Rare(BitStreamClass &BitStream);
+	void Import_Rare(BitStreamClass &BitStream);
+	bool Takes_Explosion_Damage() {return false;}
+	CinematicGameObj * As_CinematicGameObj() {return this;}
 };
 
 #endif

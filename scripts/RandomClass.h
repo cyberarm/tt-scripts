@@ -11,29 +11,27 @@
 */
 #ifndef TT_INCLUDE_RANDOMCLASS_H
 #define TT_INCLUDE_RANDOMCLASS_H
-
-class RandomClass {
-public:
-    RandomClass(unsigned seed = 0);
-
-    operator int(void) {
-        return (operator()());
-    }
-
-    int operator()(void);
-
-    int operator()(int minval, int maxval);
-
-    enum {
-        SIGNIFICANT_BITS = 15
-    };
-protected:
-    unsigned long Seed;
-    enum {
-        MULT_CONSTANT = 0x41C64E6D,
-        ADD_CONSTANT = 0x00003039,
-        THROW_AWAY_BITS = 10
-    };
+class RandomClass
+{
+	public:
+		RandomClass(unsigned seed=0);
+		operator int(void)
+		{
+			return(operator()());
+		}
+		int operator() (void);
+		int operator() (int minval, int maxval);
+		enum
+		{
+			SIGNIFICANT_BITS=15
+		};
+	protected:
+		unsigned long Seed;
+		enum
+		{
+			MULT_CONSTANT=0x41C64E6D,
+			ADD_CONSTANT=0x00003039,
+			THROW_AWAY_BITS=10
+		};
 };
-
 #endif

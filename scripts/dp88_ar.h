@@ -73,30 +73,27 @@
 *   The ID of the camouflage variant to use for this map
 */
 
-class dp88_AR_GameController : public dp88_Camo_Controller {
+class dp88_AR_GameController : public dp88_Camo_Controller
+{
 public:
-    // Events
-    void Created(GameObject *obj);
+  // Events
+  void Created( GameObject *obj );
+  void Custom( GameObject *obj, int type, int param, GameObject *sender );
+  void Timer_Expired( GameObject *obj, int number );
+  void Destroyed( GameObject *obj );
 
-    void Custom(GameObject *obj, int type, int param, GameObject *sender);
-
-    void Timer_Expired(GameObject *obj, int number);
-
-    void Destroyed(GameObject *obj);
-
-    dp88_AR_GameController();
-
-    ~dp88_AR_GameController();
+  dp88_AR_GameController();
+  ~dp88_AR_GameController();
 
 protected:
-    bool created;
+  bool created;
 
-    short team0_countryID;    // Country ID for Soviets
-    short team1_countryID;    // Country ID for Allies
+  short team0_countryID;    // Country ID for Soviets
+  short team1_countryID;    // Country ID for Allies
 
 public:
-    // Mirage Tank
-    char *mirageTank_disguisePresets[3];
+  // Mirage Tank
+  char* mirageTank_disguisePresets[3];
 };
 
 // -------------------------------------------------------------------------------------------------
@@ -104,25 +101,23 @@ public:
 /*!
 * \deprecated - Early AR development script, keeping it temporarily for terror drone code
 */
-class dp88_AR_Vehicle : public ScriptImpClass {
-    // Variables
-    int pilotID;                        // Pilots GameObject ID
-    int attackingTerrorDroneID;            // ID of any Terror Drones attacking this vehicle
-    bool dead;                            // Set to true when we die
+class dp88_AR_Vehicle : public ScriptImpClass
+{
+  // Variables
+  int pilotID;						// Pilots GameObject ID
+  int attackingTerrorDroneID;			// ID of any Terror Drones attacking this vehicle
+  bool dead;							// Set to true when we die
 
-    // Events
-    void Custom(GameObject *obj, int type, int param, GameObject *sender);
-
-    void Created(GameObject *obj);
-
-    void Timer_Expired(GameObject *obj, int number);
-
-    void Killed(GameObject *obj, GameObject *killer);
-
-    void Damaged(GameObject *obj, GameObject *damager, float amount);
-
-    void Animation_Complete(GameObject *obj, const char *animation_name);
+  // Events
+  void Custom(GameObject *obj,int type,int param,GameObject *sender);
+  void Created(GameObject *obj);
+  void Timer_Expired( GameObject *obj,int number );
+  void Killed(GameObject *obj, GameObject *killer);
+  void Damaged(GameObject *obj, GameObject *damager, float amount);
+  void Animation_Complete ( GameObject *obj, const char *animation_name );
 };
+
+
 
 
 /*------------------------
@@ -132,54 +127,52 @@ Deployable Infantry script
   kind at the players location.
 --------------------------*/
 
-class dp88_AR_Deployable_Infantry : public JFW_Key_Hook_Base {
+class dp88_AR_Deployable_Infantry : public JFW_Key_Hook_Base
+{
 public:
-    // Events
-    void Created(GameObject *obj);
+	// Events
+	void Created( GameObject *obj );
+	void Killed( GameObject *obj, GameObject *killer );
+	void Destroyed ( GameObject* obj );
+	void KeyHook();
+	void Custom( GameObject *obj, int type, int param, GameObject *sender );
+	void Timer_Expired( GameObject *obj,int number );		// TEMPORARY
 
-    void Killed(GameObject *obj, GameObject *killer);
+	// Get armour type to set for the given veterancy level
+	const char* GetArmourType ( int vetLevel );
 
-    void Destroyed(GameObject *obj);
-
-    void KeyHook();
-
-    void Custom(GameObject *obj, int type, int param, GameObject *sender);
-
-    void Timer_Expired(GameObject *obj, int number);        // TEMPORARY
-
-    // Get armour type to set for the given veterancy level
-    const char *GetArmourType(int vetLevel);
-
-    // Get weapon powerup to grant for the given veterancy level
-    const char *GetWeaponPowerup(int vetLevel);
+	// Get weapon powerup to grant for the given veterancy level
+	 const char* GetWeaponPowerup ( int vetLevel );
 
 protected:
-    void Deploy(GameObject *obj);
+  void Deploy(GameObject* obj);
 
-    void Undeploy(GameObject *obj);
+  void Undeploy(GameObject* obj);
 
-    // Variables
-    int objectID;
-    bool deployed;
-    char *undeployedWeapon;
-    int deployedObjectId;
+	// Variables
+	int objectID;
+	bool deployed;
+	char* undeployedWeapon;
+	int deployedObjectId;
 
-    int cannotDeployStringId;
-    int cannotDeploySoundId;
-    time_t lastDeploy;    // Timestamp of last deploy keyhook event (prevent constant spamming)
+	int cannotDeployStringId;
+	int cannotDeploySoundId;
+	time_t lastDeploy;	// Timestamp of last deploy keyhook event (prevent constant spamming)
 
-    /* Current veterancy level */
-    int currentVetLevel;
+	/* Current veterancy level */
+	int currentVetLevel;
 
-    /* Flags to mark which veterancy levels have deployed weapon powerups */
-    bool hasRookieWeaponPowerup, hasVeteranWeaponPowerup, hasEliteWeaponPowerup;
+	/* Flags to mark which veterancy levels have deployed weapon powerups */
+	bool hasRookieWeaponPowerup, hasVeteranWeaponPowerup, hasEliteWeaponPowerup;
 
-    /* Original values for Skin & Armour types */
-    char undeployedSkinType[128], undeployedArmourType[128];
+	/* Original values for Skin & Armour types */
+	char undeployedSkinType[128], undeployedArmourType[128];
 
-    /*! Cached value of SoldierGameObj::Can_Drive_Vehicles() prior to deploying */
-    bool m_bCanDrive;
+  /*! Cached value of SoldierGameObj::Can_Drive_Vehicles() prior to deploying */
+  bool m_bCanDrive;
 };
+
+
 
 
 /*------------------------
@@ -187,33 +180,27 @@ Chrono Legionnaire
 --------------------------*/
 
 class dp88_AR_CLEG : public ScriptImpClass {
-    bool phasing;
-    bool phasingBack;
-    int zPosDropObj;
-    short timeRemaining;
-    int dropObjID;
+	bool phasing;
+	bool phasingBack;
+	int zPosDropObj;
+	short timeRemaining;
+	int dropObjID;
 
-    void Created(GameObject *obj);
-
-    void Damaged(GameObject *obj, GameObject *damager, float amount);
-
-    void Killed(GameObject *obj, GameObject *killer);
-
-    void Timer_Expired(GameObject *obj, int number);
+	void Created(GameObject *obj);
+	void Damaged(GameObject *obj, GameObject *damager, float amount);
+	void Killed(GameObject *obj, GameObject *killer);
+	void Timer_Expired( GameObject *obj,int number );
 };
 
 class dp88_AR_CLEG_target : public ScriptImpClass {
-    void Created(GameObject *obj);
+	void Created(GameObject *obj);
+	void Damaged(GameObject *obj, GameObject *damager, float amount);
+	void Killed(GameObject *obj, GameObject *killer);
+	void Timer_Expired( GameObject *obj,int number );
 
-    void Damaged(GameObject *obj, GameObject *damager, float amount);
-
-    void Killed(GameObject *obj, GameObject *killer);
-
-    void Timer_Expired(GameObject *obj, int number);
-
-    int currentResistance;
-    int lastResistanceCheck;
-    int effectObjectId;
+	int currentResistance;
+	int lastResistanceCheck;
+	int effectObjectId;
 };
 
 
@@ -283,78 +270,72 @@ class dp88_AR_CLEG_target : public ScriptImpClass {
 class dp88_Ore_Miner : public JFW_Key_Hook_Base   // Inherit from keyhook base for chrono miner
 {
 protected:
-    int m_aiState;          //!< Current AI state
+  int m_aiState;          //!< Current AI state
 
-    int m_oreMined;         //!< Current number of mined ore loads onboard
-    int m_oreValue;         //!< Cumulative value of all ore loads onboard
+  int m_oreMined;         //!< Current number of mined ore loads onboard
+  int m_oreValue;         //!< Cumulative value of all ore loads onboard
 
-    int m_oreFieldId;       //!< ID of the ore field we are currently mining ore from
-    int m_oreFieldRand;     //!< Used to prevent glitching by entering/exiting an ore field rapidly. 0 = not in ore field
+  int m_oreFieldId;       //!< ID of the ore field we are currently mining ore from
+  int m_oreFieldRand;     //!< Used to prevent glitching by entering/exiting an ore field rapidly. 0 = not in ore field
 
-    /*! \name Cached Script Parameters */
-    /*! @{ */
-    bool m_bUseAI;          //!< Is AI enabled?
-    int m_oreCapacity;      //!< Maximum number of mined ore units onboard
-    float m_oreMiningTime;  //!< Time required to mine one ore unit
-    float m_oreDumpTime;    //!< Time required to dump ore at a refinery
-    const char *m_resourceName; //!< Resource name for strings>
+  /*! \name Cached Script Parameters */
+  /*! @{ */
+  bool m_bUseAI;          //!< Is AI enabled?
+  int m_oreCapacity;      //!< Maximum number of mined ore units onboard
+  float m_oreMiningTime;  //!< Time required to mine one ore unit
+  float m_oreDumpTime;    //!< Time required to dump ore at a refinery
+  const char* m_resourceName; //!< Resource name for strings>
 
-    const char *m_animations[3];
-    const char *m_animSounds[3];
-    /*! @} */
+  const char* m_animations[3];
+  const char* m_animSounds[3];
+  /*! @} */
 
 public:
-    // Default event handlers for the AI miners
-    virtual void Created(GameObject *obj);
-
-    virtual void Custom(GameObject *obj, int type, int param, GameObject *sender);
-
-    virtual void Action_Complete(GameObject *obj, int action_id, ActionCompleteReason complete_reason);
-
-    virtual void KeyHook() {};
+  // Default event handlers for the AI miners
+  virtual void Created ( GameObject *obj );
+  virtual void Custom ( GameObject *obj, int type, int param, GameObject *sender );
+  virtual void Action_Complete( GameObject *obj, int action_id, ActionCompleteReason complete_reason );
+  virtual	void KeyHook() {};
 
 protected:
-    // These functions implement standard drive to ore field, harvest some ore, return to refinery,
-    // dock and unload ore functionlity for an AI miner. They can be overloaded to provide custom
-    // functionality in derived classes.
-    virtual void DriveToOreField(GameObject *obj);
+  // These functions implement standard drive to ore field, harvest some ore, return to refinery,
+  // dock and unload ore functionlity for an AI miner. They can be overloaded to provide custom
+  // functionality in derived classes.
+  virtual void DriveToOreField ( GameObject *obj );
+  virtual void EnteredOreField ( GameObject *obj, GameObject* oreField );
+  virtual void ExitedOreField ( GameObject *obj, GameObject* oreField );
+  virtual void ReturnToRefinery ( GameObject *obj );
+  virtual void DockAtRefinery ( GameObject *obj );
+  virtual void DockedAtRefinery ( GameObject *obj );
+  virtual void UndockedFromRefinery ( GameObject *obj );
 
-    virtual void EnteredOreField(GameObject *obj, GameObject *oreField);
+  // AI states for the miner
+  enum MINER_AISTATES
+  {
+    MINER_AISTATE_IDLE,
+    MINER_AISTATE_SEARCH_FOR_ORE,
+    MINER_AISTATE_DRIVE_TO_ORE,
+    MINER_AISTATE_COLLECTING_ORE,
+    MINER_AISTATE_RETURN_TO_REFINERY,
+    MINER_AISTATE_DOCK_AT_REFINERY,
+    MINER_AISTATE_UNLOADING_ORE
+  };
 
-    virtual void ExitedOreField(GameObject *obj, GameObject *oreField);
+  enum MINER_ACTIONIDS
+  {
+    MINER_ACTIONID_DRIVE_TO_ORE,
+    MINER_ACTIONID_RETURN_TO_REFINERY,
+    MINER_ACTIONID_DOCK_AT_REFINERY
+  };
 
-    virtual void ReturnToRefinery(GameObject *obj);
+  enum MINER_ANIMID
+  {
+    MINER_ANIM_IDLE,
+    MINER_ANIM_MINING,
+    MINER_ANIM_DUMPING
+  };
 
-    virtual void DockAtRefinery(GameObject *obj);
-
-    virtual void DockedAtRefinery(GameObject *obj);
-
-    virtual void UndockedFromRefinery(GameObject *obj);
-
-    // AI states for the miner
-    enum MINER_AISTATES {
-        MINER_AISTATE_IDLE,
-        MINER_AISTATE_SEARCH_FOR_ORE,
-        MINER_AISTATE_DRIVE_TO_ORE,
-        MINER_AISTATE_COLLECTING_ORE,
-        MINER_AISTATE_RETURN_TO_REFINERY,
-        MINER_AISTATE_DOCK_AT_REFINERY,
-        MINER_AISTATE_UNLOADING_ORE
-    };
-
-    enum MINER_ACTIONIDS {
-        MINER_ACTIONID_DRIVE_TO_ORE,
-        MINER_ACTIONID_RETURN_TO_REFINERY,
-        MINER_ACTIONID_DOCK_AT_REFINERY
-    };
-
-    enum MINER_ANIMID {
-        MINER_ANIM_IDLE,
-        MINER_ANIM_MINING,
-        MINER_ANIM_DUMPING
-    };
-
-    void UpdateAnimation(GameObject *pObj, MINER_ANIMID animId);
+  void UpdateAnimation ( GameObject* pObj, MINER_ANIMID animId );
 };
 
 // -------------------------------------------------------------------------------------------------
@@ -366,34 +347,30 @@ protected:
 *
 * \todo Write Documentation
 */
-class dp88_AR_Chrono_Miner : public dp88_Ore_Miner {
+class dp88_AR_Chrono_Miner : public dp88_Ore_Miner
+{
 protected:
-    int objectId;     //!< ID of the object we are running on, since Keyhook() does not include the GameObject...
-    int driverId;     //!< ID of our current driver, or NULL
+  int objectId;     //!< ID of the object we are running on, since Keyhook() does not include the GameObject...
+  int driverId;     //!< ID of our current driver, or NULL
 
 public:
-    void Created(GameObject *obj);
-
-    void Damaged(GameObject *obj, GameObject *damager, float amount);
-
-    void Custom(GameObject *obj, int type, int param, GameObject *sender);
-
-    void KeyHook();
+  void Created ( GameObject *obj );
+  void Damaged ( GameObject *obj, GameObject *damager, float amount );
+  void Custom ( GameObject *obj, int type, int param, GameObject *sender );
+  void KeyHook();
 
 private:
-    void ReturnToRefinery(GameObject *obj);
+  void ReturnToRefinery ( GameObject *obj );
+  bool Start_Chronoshift( GameObject *obj );
+  void Do_Chronoshift( GameObject *obj, int target_zone_id );
+  void Complete_Chronoshift( GameObject *obj );
 
-    bool Start_Chronoshift(GameObject *obj);
+  bool CanChronoshiftToLocation ( GameObject* obj, Vector3& location );
 
-    void Do_Chronoshift(GameObject *obj, int target_zone_id);
-
-    void Complete_Chronoshift(GameObject *obj);
-
-    bool CanChronoshiftToLocation(GameObject *obj, Vector3 &location);
-
-    enum CMINER_AISTATES {
-        CMINER_AISTATE_CHRONOSHIFTING = MINER_AISTATE_UNLOADING_ORE + 1
-    };
+  enum CMINER_AISTATES
+  {
+    CMINER_AISTATE_CHRONOSHIFTING = MINER_AISTATE_UNLOADING_ORE+1
+  };
 };
 
 // -------------------------------------------------------------------------------------------------
@@ -405,13 +382,14 @@ private:
 *
 * \todo Write Documentation
 */
-class dp88_AR_Chrono_Miner_Chronozone : public ScriptImpClass {
-    void Created(GameObject *obj);
+class dp88_AR_Chrono_Miner_Chronozone : public ScriptImpClass
+{
+  void Created( GameObject *obj );
 
 public:
-    // Set by dp88_AR_Chrono_Miner when it is shifting to this zone, used
-    // to prevent multiple miners trying to shift to the same place
-    int chronominer_id;
+  // Set by dp88_AR_Chrono_Miner when it is shifting to this zone, used
+  // to prevent multiple miners trying to shift to the same place
+  int chronominer_id;
 };
 
 // -------------------------------------------------------------------------------------------------
@@ -464,127 +442,112 @@ public:
 * \param AI_Ignore
 *   The name of the resource field (defaults to ore if none is specified)
 */
-class dp88_Ore_Field : public ScriptImpClass {
+class dp88_Ore_Field : public ScriptImpClass
+{
 public:
-    dp88_Ore_Field() : m_pZoneObserver(NULL) {}
+  dp88_Ore_Field() : m_pZoneObserver(NULL) {}
+  void Created ( GameObject* pObj );
+  void Detach ( GameObject* pObj );
+  void Entered ( GameObject* pZoneObj, GameObject* pEnterer );
+  void Exited ( GameObject* pZoneObj, GameObject* pExiter );
 
-    void Created(GameObject *pObj);
+  /*!
+  * Add one or more units of ore to this field, if there is additional capacity available
+  *
+  * \param[in] nUnits
+  *   Number of ore units to be added
+  */
+  void AddOre ( unsigned int nUnits );
 
-    void Detach(GameObject *pObj);
+  /*!
+  * Attempt to remove one or more units of ore from this field, if they are available
+  *
+  * \param[in] nUnits
+  *   Number of ore units to try and remove
+  *
+  * \return Number of units actually removed, which will be <= nUnits
+  */
+  unsigned int RemoveOre ( unsigned int nUnits = 1 );
 
-    void Entered(GameObject *pZoneObj, GameObject *pEnterer);
+  /*!
+  * Check the number of ore units currently available in this field
+  *
+  * \return Number of ore units available in this field, or 0 if this field has infinite capacity
+  */
+  unsigned int NumOreUnits() { return m_nOreUnits; }
 
-    void Exited(GameObject *pZoneObj, GameObject *pExiter);
+  /*! Get the value of the ore in this field */
+  unsigned int GetOreValue() { return m_oreValue; }
 
-    /*!
-    * Add one or more units of ore to this field, if there is additional capacity available
-    *
-    * \param[in] nUnits
-    *   Number of ore units to be added
-    */
-    void AddOre(unsigned int nUnits);
+  /*! Check if this ore field is infinite */
+  bool IsInfinite() { return m_oreCapacity == 0; }
 
-    /*!
-    * Attempt to remove one or more units of ore from this field, if they are available
-    *
-    * \param[in] nUnits
-    *   Number of ore units to try and remove
-    *
-    * \return Number of units actually removed, which will be <= nUnits
-    */
-    unsigned int RemoveOre(unsigned int nUnits = 1);
-
-    /*!
-    * Check the number of ore units currently available in this field
-    *
-    * \return Number of ore units available in this field, or 0 if this field has infinite capacity
-    */
-    unsigned int NumOreUnits() { return m_nOreUnits; }
-
-    /*! Get the value of the ore in this field */
-    unsigned int GetOreValue() { return m_oreValue; }
-
-    /*! Check if this ore field is infinite */
-    bool IsInfinite() { return m_oreCapacity == 0; }
-
-    /*! Check if the AI miners can use this field */
-    bool IsSuitableForAI() { return !m_bAiIgnore; }
+  /*! Check if the AI miners can use this field */
+  bool IsSuitableForAI() { return !m_bAiIgnore; }
 
 
 protected:
-    void UpdateAnimationFrame();
-
-    void UpdateAnimationFrame(GameObject *pObj);
-
-
-    unsigned int m_myObjId;     //!< My own GameObject ID, used by the zone observer callbacks
-    unsigned int m_nOreUnits;
-    int m_minerZoneId;
-
-    /*! \name Cached Script Parameters */
-    /*! @{ */
-    unsigned int m_oreValue;
-    unsigned int m_oreCapacity;
-
-    const char *m_strAnimation;
-    unsigned int m_nAnimationFullFrame;
-    unsigned int m_nAnimationEmptyFrame;
-
-    Vector3 m_zoneSizeFull;
-    float m_zoneStepX;
-    float m_zoneStepY;
-
-    bool m_bAiIgnore;
-    /*! @} */
+  void UpdateAnimationFrame();
+  void UpdateAnimationFrame( GameObject* pObj );
 
 
-    /*! Class to observe the script zone - don't need an extra script for this */
-    class dp88_Ore_Field_Observer : public GameObjObserverClass {
-    public:
-        dp88_Ore_Field_Observer(dp88_Ore_Field *pParent) { m_pParent = pParent; }
+  unsigned int m_myObjId;     //!< My own GameObject ID, used by the zone observer callbacks
+  unsigned int m_nOreUnits;
+  int m_minerZoneId;
 
-    protected:
-        dp88_Ore_Field *m_pParent;
+  /*! \name Cached Script Parameters */
+  /*! @{ */
+  unsigned int m_oreValue;
+  unsigned int m_oreCapacity;
 
-        // These are observer events we actually use
-        void Entered(GameObject *pObj, GameObject *pEnterer) { m_pParent->Entered(pObj, pEnterer); }
+  const char* m_strAnimation;
+  unsigned int m_nAnimationFullFrame;
+  unsigned int m_nAnimationEmptyFrame;
 
-        void Exited(GameObject *pObj, GameObject *pExiter) { m_pParent->Exited(pObj, pExiter); }
+  Vector3 m_zoneSizeFull;
+  float m_zoneStepX;
+  float m_zoneStepY;
 
-    private:
-        // These are observer events we don't use but have to provide an implementation for to compile
-        void Attach(GameObject *pObj) {};
-
-        void Detach(GameObject *pObj) {};
-
-        void Animation_Complete(GameObject *pObj, const char *animation_name) {};
-
-        void Created(GameObject *pObj) {};
-
-        void Destroyed(GameObject *pObj) {};
-
-        void Killed(GameObject *pObj, GameObject *pKiller) {};
-
-        void Damaged(GameObject *pObj, GameObject *pDamager, float amount) {};
-
-        void Custom(GameObject *pObj, int type, int param, GameObject *pSender) {};
-
-        void Sound_Heard(GameObject *pObj, const CombatSound &sound) {};
-
-        void Enemy_Seen(GameObject *pObj, GameObject *pEnemy) {};
-
-        void Action_Complete(GameObject *pObj, int action_id, ActionCompleteReason complete_reason) {};
-
-        void Timer_Expired(GameObject *pObj, int number) {};
-
-        void Poked(GameObject *pObj, GameObject *pPoker) {};
+  bool m_bAiIgnore;
+  /*! @} */
 
 
-        // We also need to provide an implementation for Get_Name to compile
-        const char *Get_Name() { return "dp88_Ore_Field_Observer"; }
-    };
+  /*! Class to observe the script zone - don't need an extra script for this */
+  class dp88_Ore_Field_Observer : public GameObjObserverClass
+  {
+  public:
+    dp88_Ore_Field_Observer(dp88_Ore_Field* pParent)
+      { m_pParent = pParent; }
 
-    dp88_Ore_Field_Observer *m_pZoneObserver;
+  protected:
+    dp88_Ore_Field* m_pParent;
+
+    // These are observer events we actually use
+    void Entered( GameObject* pObj, GameObject* pEnterer )  { m_pParent->Entered(pObj, pEnterer); }
+    void Exited( GameObject* pObj, GameObject* pExiter )    { m_pParent->Exited(pObj, pExiter); }
+
+  private:
+    // These are observer events we don't use but have to provide an implementation for to compile
+    void Attach ( GameObject* pObj ) {};
+    void Detach ( GameObject* pObj ) {};
+    void Animation_Complete ( GameObject *pObj, const char *animation_name ) {};
+    void Created(GameObject* pObj) {};
+    void Destroyed(GameObject* pObj) {};
+    void Killed(GameObject* pObj,GameObject* pKiller) {};
+    void Damaged(GameObject* pObj,GameObject* pDamager,float amount) {};
+    void Custom(GameObject* pObj,int type,int param,GameObject* pSender) {};
+    void Sound_Heard(GameObject* pObj,const CombatSound & sound) {};
+    void Enemy_Seen(GameObject* pObj,GameObject* pEnemy) {};
+    void Action_Complete(GameObject* pObj,int action_id,ActionCompleteReason complete_reason) {};
+    void Timer_Expired(GameObject* pObj,int number) {};
+    void Poked(GameObject* pObj,GameObject* pPoker) {};
+
+
+    // We also need to provide an implementation for Get_Name to compile
+    const char* Get_Name() { return "dp88_Ore_Field_Observer"; }
+  };
+
+  dp88_Ore_Field_Observer* m_pZoneObserver;
 };
 
 // -------------------------------------------------------------------------------------------------
@@ -611,23 +574,22 @@ protected:
 *   An animation to be played when ore extraction is taking place - the ore will be created once the
 *   animation is completed
 */
-class dp88_Ore_Extractor : public ScriptImpClass {
+class dp88_Ore_Extractor : public ScriptImpClass
+{
 public:
-    void Created(GameObject *pObj);
-
-    void Timer_Expired(GameObject *pObj, int number);
-
-    void Animation_Complete(GameObject *pObj, const char *animationName);
+  void Created ( GameObject* pObj );
+  void Timer_Expired ( GameObject* pObj, int number );
+  void Animation_Complete ( GameObject* pObj, const char* animationName );
 
 protected:
-    int m_oreFieldId;
+  int m_oreFieldId;
 
-    /*! \name Cached Script Parameters */
-    /*! @{ */
-    unsigned int m_nOreUnits;
-    unsigned int m_interval;
-    const char *m_strAnimation;
-    /*! @} */
+  /*! \name Cached Script Parameters */
+  /*! @{ */
+  unsigned int m_nOreUnits;
+  unsigned int m_interval;
+  const char* m_strAnimation;
+  /*! @} */
 };
 
 // -------------------------------------------------------------------------------------------------
@@ -638,9 +600,10 @@ protected:
 *
 * \todo Write Documentation
 */
-class dp88_Ore_Dump_Zone : public ScriptImpClass {
+class dp88_Ore_Dump_Zone : public ScriptImpClass
+{
 public:
-    void Entered(GameObject *obj, GameObject *enterer);
+  void Entered( GameObject *obj, GameObject *enterer );
 };
 
 // -------------------------------------------------------------------------------------------------
@@ -655,10 +618,10 @@ public:
 *
 * \see dp88_Aircraft_LandingZone_Aircraft
 */
-class dp88_Aircraft_LandingZone : public ScriptImpClass {
-    void Entered(GameObject *obj, GameObject *enterer);
-
-    void Exited(GameObject *obj, GameObject *exiter);
+class dp88_Aircraft_LandingZone : public ScriptImpClass
+{
+  void Entered( GameObject *obj, GameObject *enterer );
+  void Exited ( GameObject *obj, GameObject *exiter );
 };
 
 // -------------------------------------------------------------------------------------------------
@@ -698,16 +661,15 @@ class dp88_Aircraft_LandingZone : public ScriptImpClass {
 *   warhead named "Death" to be defined in the armor.ini file and for that warhead to be capable of
 *   inflicting damage upon both the vehicle and pilot.
 */
-class dp88_Aircraft_LandingZone_Aircraft : public ScriptImpClass {
-    void Created(GameObject *obj);
-
-    void Killed(GameObject *obj, GameObject *killed);
-
-    void Custom(GameObject *obj, int type, int param, GameObject *sender);
+class dp88_Aircraft_LandingZone_Aircraft : public ScriptImpClass
+{
+  void Created ( GameObject *obj );
+  void Killed ( GameObject *obj, GameObject* killed );
+  void Custom ( GameObject *obj, int type, int param, GameObject *sender );
 
 private:
-    int driverID;
-    unsigned int landingZoneCount;  // Since we may be in more than one at a time
+  int driverID;
+  unsigned int landingZoneCount;  // Since we may be in more than one at a time
 };
 
 // -------------------------------------------------------------------------------------------------
@@ -790,41 +752,35 @@ Terror Drone Script
 * \param animFrameDisabled2
 *   Last frame of the animation to play when the console is disabled
 */
-class dp88_RemoteControlConsole : public ScriptImpClass {
-    void Created(GameObject *obj);
+class dp88_RemoteControlConsole : public ScriptImpClass
+{
+  void Created( GameObject *obj );
+  void Detach ( GameObject* obj );
+  void Poked ( GameObject *obj, GameObject *poker );
+  void Custom( GameObject *obj, int type, int param, GameObject *sender );
+  void Timer_Expired( GameObject *obj, int number );
+  void SetEnabled ( GameObject* obj, bool state );
 
-    void Detach(GameObject *obj);
+  int vehicleID;
+  int pilotID;
+  Collision_Group_Type m_pilotCachedCollisionGroup;
+  int m_pilotDummyID;
+  Vector3 pilotDummyPos;
+  bool m_bEnabled;
+  int m_nChargeTime;
+  
+  void HandleDriverEnter(GameObject* obj, GameObject* pilot, GameObject* vehicle);
+  void HandleDriverExit(GameObject* obj, GameObject* pilot, GameObject* vehicle);
 
-    void Poked(GameObject *obj, GameObject *poker);
+  void CreateDummy ( GameObject* pilot, Vector3 position, float facing );
+  void DestroyDummy();
 
-    void Custom(GameObject *obj, int type, int param, GameObject *sender);
-
-    void Timer_Expired(GameObject *obj, int number);
-
-    void SetEnabled(GameObject *obj, bool state);
-
-    int vehicleID;
-    int pilotID;
-    Collision_Group_Type m_pilotCachedCollisionGroup;
-    int m_pilotDummyID;
-    Vector3 pilotDummyPos;
-    bool m_bEnabled;
-    int m_nChargeTime;
-
-    void HandleDriverEnter(GameObject *obj, GameObject *pilot, GameObject *vehicle);
-
-    void HandleDriverExit(GameObject *obj, GameObject *pilot, GameObject *vehicle);
-
-    void CreateDummy(GameObject *pilot, Vector3 position, float facing);
-
-    void DestroyDummy();
-
-    void UpdateAnimation(GameObject *obj);
+  void UpdateAnimation(GameObject* obj);
 
 protected:
-    LoopedAnimationController *m_pLoopedAnimCtrl;
+  LoopedAnimationController* m_pLoopedAnimCtrl;
 public:
-    dp88_RemoteControlConsole() : m_pLoopedAnimCtrl(0) {}
+  dp88_RemoteControlConsole() : m_pLoopedAnimCtrl(0) {}
 };
 
 // -------------------------------------------------------------------------------------------------
@@ -833,16 +789,16 @@ public:
 Remote Control Vehicle script
 --------------------------*/
 
-class dp88_RemoteControlVehicle : public ScriptImpClass {
-    void Created(GameObject *obj);
+class dp88_RemoteControlVehicle : public ScriptImpClass
+{
+	void Created( GameObject *obj );
+	void Custom( GameObject *obj, int type, int param, GameObject *sender );
+	void Killed( GameObject *obj, GameObject *killer );
 
-    void Custom(GameObject *obj, int type, int param, GameObject *sender);
-
-    void Killed(GameObject *obj, GameObject *killer);
-
-    int consoleID;
-    int pilotID;
+	int consoleID;
+	int pilotID;
 };
+
 
 
 /*------------------------
@@ -851,21 +807,18 @@ Demo Truck Scripts
 
 class dp88_AR_DemoTruck : public ScriptImpClass {
 
-    // Events
-    void Created(GameObject *obj);
+	// Events
+	void Created( GameObject *obj );
+	void Custom( GameObject *obj, int type, int param, GameObject *sender );
+	void Killed( GameObject *obj, GameObject *killer );
+	void Damaged ( GameObject *obj, GameObject *damager, float amount );
 
-    void Custom(GameObject *obj, int type, int param, GameObject *sender);
+	// Custom functions
+	void dp88_AR_DemoTruck::Detonate( GameObject *obj );
 
-    void Killed(GameObject *obj, GameObject *killer);
-
-    void Damaged(GameObject *obj, GameObject *damager, float amount);
-
-    // Custom functions
-    void dp88_AR_DemoTruck::Detonate(GameObject *obj);
-
-    // Variables
-    int pilotID;
-    bool canDetonate;
+	// Variables
+	int pilotID;
+	bool canDetonate;
 };
 
 // -------------------------------------------------------------------------------------------------
@@ -878,11 +831,10 @@ class dp88_AR_DemoTruck : public ScriptImpClass {
 * A paradrop console script for AR, this is currently in active development and subject to change.
 */
 class dp88_AR_paradrop_Console : public ScriptImpClass {
-    void Created(GameObject *obj);
+	void Created( GameObject *obj );
+	void Poked ( GameObject *obj, GameObject *poker );
 
-    void Poked(GameObject *obj, GameObject *poker);
-
-    int last_triggered;
+	int last_triggered;
 };
 
 // -------------------------------------------------------------------------------------------------
@@ -919,27 +871,24 @@ class dp88_AR_paradrop_Console : public ScriptImpClass {
 * \param Animation_Looped
 *   Whether to loop the falling animation
 */
-class dp88_AR_Paradrop : public ScriptImpClass {
+class dp88_AR_Paradrop : public ScriptImpClass
+{
 public:
-    dp88_AR_Paradrop() : m_pAnimController(0) {};
+  dp88_AR_Paradrop() : m_pAnimController(0) {};
 protected:
-    void Created(GameObject *pObj);
+  void Created( GameObject* pObj );
+  void Damaged( GameObject* pObj, GameObject* pDamager, float amount );
+  void Killed( GameObject* pObj, GameObject* pKilled );
+  void Timer_Expired ( GameObject* pObj, int number );
+  void Detach(GameObject* obj);
 
-    void Damaged(GameObject *pObj, GameObject *pDamager, float amount);
+  void Landed ( GameObject* pObj );
 
-    void Killed(GameObject *pObj, GameObject *pKilled);
+  unsigned int earth_warhead;       //!< ID of the "Earth" warhead
+  int m_nParachuteModel;            //!< ID of the spawned parachute model, if any
+  float m_fallRate;                 //!< Falling speed at last check
 
-    void Timer_Expired(GameObject *pObj, int number);
-
-    void Detach(GameObject *obj);
-
-    void Landed(GameObject *pObj);
-
-    unsigned int earth_warhead;       //!< ID of the "Earth" warhead
-    int m_nParachuteModel;            //!< ID of the spawned parachute model, if any
-    float m_fallRate;                 //!< Falling speed at last check
-
-    LoopedAnimationController *m_pAnimController;
+  LoopedAnimationController* m_pAnimController;
 };
 
 // -------------------------------------------------------------------------------------------------
@@ -1025,109 +974,98 @@ protected:
 *   introduce a 0.1 second delay for each level of assisting tower depth to ensure the charging
 *   shot arrives before it fires its own attacking (or chain charging) shot.
 */
-class dp88_AR_Prism_Tower : public dp88_AI_ChargedTurret {
-    /* -----
-    Static variables
-    ----- */
+class dp88_AR_Prism_Tower : public dp88_AI_ChargedTurret
+{
+  /* -----
+  Static variables
+  ----- */
 
-    static const int MAX_TOWERS = 20;
-    static int prismTowerCount;
-    static int prismTowerIds[MAX_TOWERS];
-    static dp88_AR_Prism_Tower *prismTowerScripts[MAX_TOWERS];
+  static const int MAX_TOWERS = 20;
+  static int prismTowerCount;
+  static int prismTowerIds[MAX_TOWERS];
+  static dp88_AR_Prism_Tower* prismTowerScripts[MAX_TOWERS];
 
-    /* -----
-    Static functions
-    ----- */
-    static void registerTower(int towerId, dp88_AR_Prism_Tower *script);
+  /* -----
+  Static functions
+  ----- */
+  static void registerTower(int towerId, dp88_AR_Prism_Tower* script);
+  static void deregisterTower(int towerId);
+  static void clearTowerMap(int idx);
+  static void calculateTowerMap();
+  static bool calculateTowerMapPathSearch(int* sortedConnections, int numConnections, int tower1, int tower2);
+  
+  /*!
+  * Checks if tower1 can assist tower2 by checking they are in range of each other and that there is
+  * a clear line of sight between the towers
+  */
+  static bool CanAssistTower(GameObject* tower1, GameObject* tower2, int maxRange);
 
-    static void deregisterTower(int towerId);
+  /* -----
+  Variables
+  ----- */
 
-    static void clearTowerMap(int idx);
+  // Is our current target a tower we are charging?
+  bool isAssistingTower;
 
-    static void calculateTowerMap();
-
-    static bool calculateTowerMapPathSearch(int *sortedConnections, int numConnections, int tower1, int tower2);
-
-    /*!
-    * Checks if tower1 can assist tower2 by checking they are in range of each other and that there is
-    * a clear line of sight between the towers
-    */
-    static bool CanAssistTower(GameObject *tower1, GameObject *tower2, int maxRange);
-
-    /* -----
-    Variables
-    ----- */
-
-    // Is our current target a tower we are charging?
-    bool isAssistingTower;
-
-    // Towers adjacent to us in the tower map
-    int adjacentTowerCount;
-    int *adjacentTowers;
+  // Towers adjacent to us in the tower map
+  int adjacentTowerCount;
+  int* adjacentTowers;
 
 
-    /* -----
-    Events
-    ----- */
+  /* -----
+  Events
+  ----- */
 
-    void Created(GameObject *obj);
+  void Created ( GameObject *obj );
+  void Damaged ( GameObject *obj, GameObject *damager, float amount );
+  void Killed ( GameObject *obj, GameObject *killer );
+  void Destroyed ( GameObject *obj );
+  void Custom ( GameObject *obj, int type, int param, GameObject *sender );
+  void Timer_Expired ( GameObject *obj, int number );
 
-    void Damaged(GameObject *obj, GameObject *damager, float amount);
+  /* -----
+  Functions
+  ----- */
 
-    void Killed(GameObject *obj, GameObject *killer);
+  // Override priority calculation with our own taking into account
+  // the fact that the target might be a tower we are charging
+  virtual float getPriority( GameObject *obj, GameObject *target );
 
-    void Destroyed(GameObject *obj);
+  /*!
+  * Overrides the team check mechanism to return true if the specified target is the tower we are
+  * currently charging, otherwise the base class target validation logic will cancel the 'attack'
+  */
+  virtual bool checkTeam( GameObject *obj, GameObject *target );
 
-    void Custom(GameObject *obj, int type, int param, GameObject *sender);
+  // Customised attack functionality
+  virtual void attackTarget ( GameObject* obj, GameObject* target, bool primary );
+  virtual void attackLocation ( GameObject* obj, Vector3 location, bool primary );
+  virtual void stopAttacking ( GameObject* obj );
 
-    void Timer_Expired(GameObject *obj, int number);
+  /* Functions to start and stop charging of another tower */
+  void StartAssisting(GameObject* obj, GameObject* tower, float priority);
+  void StopAssisting(GameObject* obj);
+  
+  /*!
+  * Get the position to aim at when charging another prism tower, this uses the height of the
+  * other towers muzzle bone and the X,Y components of its position to aim at the right place
+  *
+  * \param[in] pTargetTower
+  *   Pointer to the GameObject of the tower to get an assist aiming point for
+  *   
+  */
+  static Vector3 GetAssistAimPoint(GameObject* pTargetTower);
 
-    /* -----
-    Functions
-    ----- */
+  /*!
+  * Send assistance requests to all neighbouring prism towers, except the one we are currently
+  * assisting, if any
+  */
+  void SendAssistanceRequests(GameObject* obj);
 
-    // Override priority calculation with our own taking into account
-    // the fact that the target might be a tower we are charging
-    virtual float getPriority(GameObject *obj, GameObject *target);
-
-    /*!
-    * Overrides the team check mechanism to return true if the specified target is the tower we are
-    * currently charging, otherwise the base class target validation logic will cancel the 'attack'
-    */
-    virtual bool checkTeam(GameObject *obj, GameObject *target);
-
-    // Customised attack functionality
-    virtual void attackTarget(GameObject *obj, GameObject *target, bool primary);
-
-    virtual void attackLocation(GameObject *obj, Vector3 location, bool primary);
-
-    virtual void stopAttacking(GameObject *obj);
-
-    /* Functions to start and stop charging of another tower */
-    void StartAssisting(GameObject *obj, GameObject *tower, float priority);
-
-    void StopAssisting(GameObject *obj);
-
-    /*!
-    * Get the position to aim at when charging another prism tower, this uses the height of the
-    * other towers muzzle bone and the X,Y components of its position to aim at the right place
-    *
-    * \param[in] pTargetTower
-    *   Pointer to the GameObject of the tower to get an assist aiming point for
-    *
-    */
-    static Vector3 GetAssistAimPoint(GameObject *pTargetTower);
-
-    /*!
-    * Send assistance requests to all neighbouring prism towers, except the one we are currently
-    * assisting, if any
-    */
-    void SendAssistanceRequests(GameObject *obj);
-
-    /*!
-    * Send end assistance notifications to all neighnouring prism towers
-    */
-    void SendEndAssistanceNotifications(GameObject *obj);
+  /*!
+  * Send end assistance notifications to all neighnouring prism towers
+  */
+  void SendEndAssistanceNotifications(GameObject* obj);
 };
 
 // -------------------------------------------------------------------------------------------------
@@ -1160,18 +1098,16 @@ class dp88_AR_Prism_Tower : public dp88_AI_ChargedTurret {
 *   consist of many parts, but you should always ensure the same object is designated as the parent
 *   to avoid conflicts between the scripts.
 */
-class dp88_linkHealth : public ScriptImpClass {
-    void Created(GameObject *obj);
+class dp88_linkHealth : public ScriptImpClass
+{
+  void Created ( GameObject *obj );
+  void Timer_Expired ( GameObject *obj, int number );
+  void Killed ( GameObject *obj, GameObject *killer );
+  void equaliseHealth( GameObject* obj );
 
-    void Timer_Expired(GameObject *obj, int number);
-
-    void Killed(GameObject *obj, GameObject *killer);
-
-    void equaliseHealth(GameObject *obj);
-
-    int parentObjID;
-    float lastHealth;
-    float lastArmour;
+  int parentObjID;
+  float lastHealth;
+  float lastArmour;
 };
 
 // -------------------------------------------------------------------------------------------------

@@ -10,24 +10,17 @@
 	Only the source code to the module(s) containing the licenced code has to be released.
 */
 #pragma once
-
 class JFW_User_Controllable_Base_Defence : public ScriptImpClass {
-    unsigned int id1;
-    unsigned int id2;
-    unsigned int id3;
-    unsigned int objtype;
-    bool player;
-
-    void Created(GameObject *obj);
-
-    void Custom(GameObject *obj, int type, int param, GameObject *sender);
-
-    void Enemy_Seen(GameObject *obj, GameObject *enemy);
-
-    void Timer_Expired(GameObject *obj, int number);
-
-public:
-    void Register_Auto_Save_Variables();
+	unsigned int id1;
+	unsigned int id2;
+	unsigned int id3;
+	unsigned int objtype;
+	bool player;
+	void Created(GameObject *obj);
+	void Custom(GameObject *obj,int type,int param,GameObject *sender);
+	void Enemy_Seen(GameObject *obj,GameObject *enemy);
+	void Timer_Expired(GameObject *obj,int number);
+	public: void Register_Auto_Save_Variables();
 };
 
 /*!
@@ -47,19 +40,14 @@ public:
 *   action will be triggered when the Enemy_Seen function fires.
 */
 class JFW_Base_Defence : public ScriptImpClass {
-    unsigned int id1;
-    unsigned int id2;
-    unsigned int id3;
-    unsigned int objtype;
-
-    void Created(GameObject *obj);
-
-    void Enemy_Seen(GameObject *obj, GameObject *enemy);
-
-    void Timer_Expired(GameObject *obj, int number);
-
-public:
-    void Register_Auto_Save_Variables();
+	unsigned int id1;
+	unsigned int id2;
+	unsigned int id3;
+	unsigned int objtype;
+	void Created(GameObject *obj);
+	void Enemy_Seen(GameObject *obj,GameObject *enemy);
+	void Timer_Expired(GameObject *obj,int number);
+	public: void Register_Auto_Save_Variables();
 };
 
 /*!
@@ -76,19 +64,14 @@ public:
 * \todo Document script parameters
 */
 class JFW_Base_Defence_No_Aircraft : public ScriptImpClass {
-    unsigned int id1;
-    unsigned int id2;
-    unsigned int id3;
-    unsigned int objtype;
-
-    void Created(GameObject *obj);
-
-    void Enemy_Seen(GameObject *obj, GameObject *enemy);
-
-    void Timer_Expired(GameObject *obj, int number);
-
-public:
-    void Register_Auto_Save_Variables();
+	unsigned int id1;
+	unsigned int id2;
+	unsigned int id3;
+	unsigned int objtype;
+	void Created(GameObject *obj);
+	void Enemy_Seen(GameObject *obj,GameObject *enemy);
+	void Timer_Expired(GameObject *obj,int number);
+	public: void Register_Auto_Save_Variables();
 };
 
 /*!
@@ -105,19 +88,14 @@ public:
 * \todo Document script parameters
 */
 class JFW_Base_Defence_Aircraft_Only : public ScriptImpClass {
-    unsigned int id1;
-    unsigned int id2;
-    unsigned int id3;
-    unsigned int objtype;
-
-    void Created(GameObject *obj);
-
-    void Enemy_Seen(GameObject *obj, GameObject *enemy);
-
-    void Timer_Expired(GameObject *obj, int number);
-
-public:
-    void Register_Auto_Save_Variables();
+	unsigned int id1;
+	unsigned int id2;
+	unsigned int id3;
+	unsigned int objtype;
+	void Created(GameObject *obj);
+	void Enemy_Seen(GameObject *obj,GameObject *enemy);
+	void Timer_Expired(GameObject *obj,int number);
+	public: void Register_Auto_Save_Variables();
 };
 
 /*!
@@ -130,20 +108,15 @@ public:
 * \todo Document script parameters
 */
 class JFW_Base_Defence_Secondary : public ScriptImpClass {
-    unsigned int id1;
-    unsigned int id2;
-    unsigned int id3;
-    unsigned int objtype;
-    bool primary;
-
-    void Created(GameObject *obj);
-
-    void Enemy_Seen(GameObject *obj, GameObject *enemy);
-
-    void Timer_Expired(GameObject *obj, int number);
-
-public:
-    void Register_Auto_Save_Variables();
+	unsigned int id1;
+	unsigned int id2;
+	unsigned int id3;
+	unsigned int objtype;
+	bool primary;
+	void Created(GameObject *obj);
+	void Enemy_Seen(GameObject *obj,GameObject *enemy);
+	void Timer_Expired(GameObject *obj,int number);
+	public: void Register_Auto_Save_Variables();
 };
 
 /*!
@@ -159,20 +132,15 @@ public:
 * \todo Document script parameters
 */
 class JFW_Base_Defence_No_Aircraft_Secondary : public ScriptImpClass {
-    unsigned int id1;
-    unsigned int id2;
-    unsigned int id3;
-    unsigned int objtype;
-    bool primary;
-
-    void Created(GameObject *obj);
-
-    void Enemy_Seen(GameObject *obj, GameObject *enemy);
-
-    void Timer_Expired(GameObject *obj, int number);
-
-public:
-    void Register_Auto_Save_Variables();
+	unsigned int id1;
+	unsigned int id2;
+	unsigned int id3;
+	unsigned int objtype;
+	bool primary;
+	void Created(GameObject *obj);
+	void Enemy_Seen(GameObject *obj,GameObject *enemy);
+	void Timer_Expired(GameObject *obj,int number);
+	public: void Register_Auto_Save_Variables();
 };
 
 /*!
@@ -188,20 +156,15 @@ public:
 * \todo Document script parameters
 */
 class JFW_Base_Defence_Aircraft_Only_Secondary : public ScriptImpClass {
-    unsigned int id1;
-    unsigned int id2;
-    unsigned int id3;
-    unsigned int objtype;
-    bool primary;
-
-    void Created(GameObject *obj);
-
-    void Enemy_Seen(GameObject *obj, GameObject *enemy);
-
-    void Timer_Expired(GameObject *obj, int number);
-
-public:
-    void Register_Auto_Save_Variables();
+	unsigned int id1;
+	unsigned int id2;
+	unsigned int id3;
+	unsigned int objtype;
+	bool primary;
+	void Created(GameObject *obj);
+	void Enemy_Seen(GameObject *obj,GameObject *enemy);
+	void Timer_Expired(GameObject *obj,int number);
+	public: void Register_Auto_Save_Variables();
 };
 
 /*!
@@ -215,17 +178,12 @@ public:
 * \todo Document script parameters
 */
 class JFW_Base_Defence_Animated : public ScriptImpClass {
-    bool popup;
-    bool attack;
-
-    void Created(GameObject *obj);
-
-    void Enemy_Seen(GameObject *obj, GameObject *enemy);
-
-    void Timer_Expired(GameObject *obj, int number);
-
-public:
-    void Register_Auto_Save_Variables();
+	bool popup;
+	bool attack;
+	void Created(GameObject *obj);
+	void Enemy_Seen(GameObject *obj,GameObject *enemy);
+	void Timer_Expired(GameObject *obj,int number);
+	public: void Register_Auto_Save_Variables();
 };
 
 /*!
@@ -239,17 +197,12 @@ public:
 * \todo Document script parameters
 */
 class JFW_Base_Defence_Animated_No_Aircraft : public ScriptImpClass {
-    bool popup;
-    bool attack;
-
-    void Created(GameObject *obj);
-
-    void Enemy_Seen(GameObject *obj, GameObject *enemy);
-
-    void Timer_Expired(GameObject *obj, int number);
-
-public:
-    void Register_Auto_Save_Variables();
+	bool popup;
+	bool attack;
+	void Created(GameObject *obj);
+	void Enemy_Seen(GameObject *obj,GameObject *enemy);
+	void Timer_Expired(GameObject *obj,int number);
+	public: void Register_Auto_Save_Variables();
 };
 
 /*!
@@ -262,17 +215,12 @@ public:
 * \todo Document script parameters
 */
 class JFW_Base_Defence_Animated_Aircraft_Only : public ScriptImpClass {
-    bool popup;
-    bool attack;
-
-    void Created(GameObject *obj);
-
-    void Enemy_Seen(GameObject *obj, GameObject *enemy);
-
-    void Timer_Expired(GameObject *obj, int number);
-
-public:
-    void Register_Auto_Save_Variables();
+	bool popup;
+	bool attack;
+	void Created(GameObject *obj);
+	void Enemy_Seen(GameObject *obj,GameObject *enemy);
+	void Timer_Expired(GameObject *obj,int number);
+	public: void Register_Auto_Save_Variables();
 };
 
 /*!
@@ -285,18 +233,13 @@ public:
 * \todo Document script parameters
 */
 class JFW_Base_Defence_Animated_Secondary : public ScriptImpClass {
-    bool popup;
-    bool attack;
-    bool primary;
-
-    void Created(GameObject *obj);
-
-    void Enemy_Seen(GameObject *obj, GameObject *enemy);
-
-    void Timer_Expired(GameObject *obj, int number);
-
-public:
-    void Register_Auto_Save_Variables();
+	bool popup;
+	bool attack;
+	bool primary;
+	void Created(GameObject *obj);
+	void Enemy_Seen(GameObject *obj,GameObject *enemy);
+	void Timer_Expired(GameObject *obj,int number);
+	public: void Register_Auto_Save_Variables();
 };
 
 /*!
@@ -309,18 +252,13 @@ public:
 * \todo Document script parameters
 */
 class JFW_Base_Defence_Animated_No_Aircraft_Secondary : public ScriptImpClass {
-    bool popup;
-    bool attack;
-    bool primary;
-
-    void Created(GameObject *obj);
-
-    void Enemy_Seen(GameObject *obj, GameObject *enemy);
-
-    void Timer_Expired(GameObject *obj, int number);
-
-public:
-    void Register_Auto_Save_Variables();
+	bool popup;
+	bool attack;
+	bool primary;
+	void Created(GameObject *obj);
+	void Enemy_Seen(GameObject *obj,GameObject *enemy);
+	void Timer_Expired(GameObject *obj,int number);
+	public: void Register_Auto_Save_Variables();
 };
 
 /*!
@@ -333,18 +271,13 @@ public:
 * \todo Document script parameters
 */
 class JFW_Base_Defence_Animated_Aircraft_Only_Secondary : public ScriptImpClass {
-    bool popup;
-    bool attack;
-    bool primary;
-
-    void Created(GameObject *obj);
-
-    void Enemy_Seen(GameObject *obj, GameObject *enemy);
-
-    void Timer_Expired(GameObject *obj, int number);
-
-public:
-    void Register_Auto_Save_Variables();
+	bool popup;
+	bool attack;
+	bool primary;
+	void Created(GameObject *obj);
+	void Enemy_Seen(GameObject *obj,GameObject *enemy);
+	void Timer_Expired(GameObject *obj,int number);
+	public: void Register_Auto_Save_Variables();
 };
 
 /*!
@@ -357,19 +290,14 @@ public:
 * \todo Document script parameters
 */
 class JFW_Base_Defence_No_VTOL : public ScriptImpClass {
-    unsigned int id1;
-    unsigned int id2;
-    unsigned int id3;
-    unsigned int objtype;
-
-    void Created(GameObject *obj);
-
-    void Enemy_Seen(GameObject *obj, GameObject *enemy);
-
-    void Timer_Expired(GameObject *obj, int number);
-
-public:
-    void Register_Auto_Save_Variables();
+	unsigned int id1;
+	unsigned int id2;
+	unsigned int id3;
+	unsigned int objtype;
+	void Created(GameObject *obj);
+	void Enemy_Seen(GameObject *obj,GameObject *enemy);
+	void Timer_Expired(GameObject *obj,int number);
+	public: void Register_Auto_Save_Variables();
 };
 
 /*!
@@ -381,7 +309,7 @@ public:
 * \todo Document script parameters
 */
 class JFW_Base_Defence_No_VTOL_No_Stealth : public JFW_Base_Defence_No_VTOL {
-    void Enemy_Seen(GameObject *obj, GameObject *enemy);
+	void Enemy_Seen(GameObject *obj,GameObject *enemy);
 };
 
 /*!
@@ -394,19 +322,14 @@ class JFW_Base_Defence_No_VTOL_No_Stealth : public JFW_Base_Defence_No_VTOL {
 * \todo Document script parameters
 */
 class JFW_Base_Defence_VTOL_Only : public ScriptImpClass {
-    unsigned int id1;
-    unsigned int id2;
-    unsigned int id3;
-    unsigned int objtype;
-
-    void Created(GameObject *obj);
-
-    void Enemy_Seen(GameObject *obj, GameObject *enemy);
-
-    void Timer_Expired(GameObject *obj, int number);
-
-public:
-    void Register_Auto_Save_Variables();
+	unsigned int id1;
+	unsigned int id2;
+	unsigned int id3;
+	unsigned int objtype;
+	void Created(GameObject *obj);
+	void Enemy_Seen(GameObject *obj,GameObject *enemy);
+	void Timer_Expired(GameObject *obj,int number);
+	public: void Register_Auto_Save_Variables();
 };
 
 /*!
@@ -419,20 +342,15 @@ public:
 * \todo Document script parameters
 */
 class JFW_Base_Defence_No_VTOL_Secondary : public ScriptImpClass {
-    unsigned int id1;
-    unsigned int id2;
-    unsigned int id3;
-    unsigned int objtype;
-    bool primary;
-
-    void Created(GameObject *obj);
-
-    void Enemy_Seen(GameObject *obj, GameObject *enemy);
-
-    void Timer_Expired(GameObject *obj, int number);
-
-public:
-    void Register_Auto_Save_Variables();
+	unsigned int id1;
+	unsigned int id2;
+	unsigned int id3;
+	unsigned int objtype;
+	bool primary;
+	void Created(GameObject *obj);
+	void Enemy_Seen(GameObject *obj,GameObject *enemy);
+	void Timer_Expired(GameObject *obj,int number);
+	public: void Register_Auto_Save_Variables();
 };
 
 /*!
@@ -445,20 +363,15 @@ public:
 * \todo Document script parameters
 */
 class JFW_Base_Defence_VTOL_Only_Secondary : public ScriptImpClass {
-    unsigned int id1;
-    unsigned int id2;
-    unsigned int id3;
-    unsigned int objtype;
-    bool primary;
-
-    void Created(GameObject *obj);
-
-    void Enemy_Seen(GameObject *obj, GameObject *enemy);
-
-    void Timer_Expired(GameObject *obj, int number);
-
-public:
-    void Register_Auto_Save_Variables();
+	unsigned int id1;
+	unsigned int id2;
+	unsigned int id3;
+	unsigned int objtype;
+	bool primary;
+	void Created(GameObject *obj);
+	void Enemy_Seen(GameObject *obj,GameObject *enemy);
+	void Timer_Expired(GameObject *obj,int number);
+	public: void Register_Auto_Save_Variables();
 };
 
 /*!
@@ -471,17 +384,12 @@ public:
 * \todo Document script parameters
 */
 class JFW_Base_Defence_Animated_No_VTOL : public ScriptImpClass {
-    bool popup;
-    bool attack;
-
-    void Created(GameObject *obj);
-
-    void Enemy_Seen(GameObject *obj, GameObject *enemy);
-
-    void Timer_Expired(GameObject *obj, int number);
-
-public:
-    void Register_Auto_Save_Variables();
+	bool popup;
+	bool attack;
+	void Created(GameObject *obj);
+	void Enemy_Seen(GameObject *obj,GameObject *enemy);
+	void Timer_Expired(GameObject *obj,int number);
+	public: void Register_Auto_Save_Variables();
 };
 
 /*!
@@ -494,17 +402,12 @@ public:
 * \todo Document script parameters
 */
 class JFW_Base_Defence_Animated_VTOL_Only : public ScriptImpClass {
-    bool popup;
-    bool attack;
-
-    void Created(GameObject *obj);
-
-    void Enemy_Seen(GameObject *obj, GameObject *enemy);
-
-    void Timer_Expired(GameObject *obj, int number);
-
-public:
-    void Register_Auto_Save_Variables();
+	bool popup;
+	bool attack;
+	void Created(GameObject *obj);
+	void Enemy_Seen(GameObject *obj,GameObject *enemy);
+	void Timer_Expired(GameObject *obj,int number);
+	public: void Register_Auto_Save_Variables();
 };
 
 /*!
@@ -518,18 +421,13 @@ public:
 * \todo Document script parameters
 */
 class JFW_Base_Defence_Animated_No_VTOL_Secondary : public ScriptImpClass {
-    bool popup;
-    bool attack;
-    bool primary;
-
-    void Created(GameObject *obj);
-
-    void Enemy_Seen(GameObject *obj, GameObject *enemy);
-
-    void Timer_Expired(GameObject *obj, int number);
-
-public:
-    void Register_Auto_Save_Variables();
+	bool popup;
+	bool attack;
+	bool primary;
+	void Created(GameObject *obj);
+	void Enemy_Seen(GameObject *obj,GameObject *enemy);
+	void Timer_Expired(GameObject *obj,int number);
+	public: void Register_Auto_Save_Variables();
 };
 
 /*!
@@ -543,426 +441,281 @@ public:
 * \todo Document script parameters
 */
 class JFW_Base_Defence_Animated_VTOL_Only_Secondary : public ScriptImpClass {
-    bool popup;
-    bool attack;
-    bool primary;
-
-    void Created(GameObject *obj);
-
-    void Enemy_Seen(GameObject *obj, GameObject *enemy);
-
-    void Timer_Expired(GameObject *obj, int number);
-
-public:
-    void Register_Auto_Save_Variables();
+	bool popup;
+	bool attack;
+	bool primary;
+	void Created(GameObject *obj);
+	void Enemy_Seen(GameObject *obj,GameObject *enemy);
+	void Timer_Expired(GameObject *obj,int number);
+	public: void Register_Auto_Save_Variables();
 };
 
 class JFW_Base_Defence_Animated_Sound : public ScriptImpClass {
-    bool popup;
-    bool attack;
-
-    void Created(GameObject *obj);
-
-    void Enemy_Seen(GameObject *obj, GameObject *enemy);
-
-    void Timer_Expired(GameObject *obj, int number);
-
-public:
-    void Register_Auto_Save_Variables();
+	bool popup;
+	bool attack;
+	void Created(GameObject *obj);
+	void Enemy_Seen(GameObject *obj,GameObject *enemy);
+	void Timer_Expired(GameObject *obj,int number);
+	public: void Register_Auto_Save_Variables();
 };
 
 class JFW_Base_Defence_Animated_Sound_No_Aircraft : public ScriptImpClass {
-    bool popup;
-    bool attack;
-
-    void Created(GameObject *obj);
-
-    void Enemy_Seen(GameObject *obj, GameObject *enemy);
-
-    void Timer_Expired(GameObject *obj, int number);
-
-public:
-    void Register_Auto_Save_Variables();
+	bool popup;
+	bool attack;
+	void Created(GameObject *obj);
+	void Enemy_Seen(GameObject *obj,GameObject *enemy);
+	void Timer_Expired(GameObject *obj,int number);
+	public: void Register_Auto_Save_Variables();
 };
 
 class JFW_Base_Defence_Animated_Sound_Aircraft_Only : public ScriptImpClass {
-    bool popup;
-    bool attack;
-
-    void Created(GameObject *obj);
-
-    void Enemy_Seen(GameObject *obj, GameObject *enemy);
-
-    void Timer_Expired(GameObject *obj, int number);
-
-public:
-    void Register_Auto_Save_Variables();
+	bool popup;
+	bool attack;
+	void Created(GameObject *obj);
+	void Enemy_Seen(GameObject *obj,GameObject *enemy);
+	void Timer_Expired(GameObject *obj,int number);
+	public: void Register_Auto_Save_Variables();
 };
 
 class JFW_Base_Defence_Animated_Sound_Secondary : public ScriptImpClass {
-    bool popup;
-    bool attack;
-    bool primary;
-
-    void Created(GameObject *obj);
-
-    void Enemy_Seen(GameObject *obj, GameObject *enemy);
-
-    void Timer_Expired(GameObject *obj, int number);
-
-public:
-    void Register_Auto_Save_Variables();
+	bool popup;
+	bool attack;
+	bool primary;
+	void Created(GameObject *obj);
+	void Enemy_Seen(GameObject *obj,GameObject *enemy);
+	void Timer_Expired(GameObject *obj,int number);
+	public: void Register_Auto_Save_Variables();
 };
 
 class JFW_Base_Defence_Animated_Sound_No_Aircraft_Secondary : public ScriptImpClass {
-    bool popup;
-    bool attack;
-    bool primary;
-
-    void Created(GameObject *obj);
-
-    void Enemy_Seen(GameObject *obj, GameObject *enemy);
-
-    void Timer_Expired(GameObject *obj, int number);
-
-public:
-    void Register_Auto_Save_Variables();
+	bool popup;
+	bool attack;
+	bool primary;
+	void Created(GameObject *obj);
+	void Enemy_Seen(GameObject *obj,GameObject *enemy);
+	void Timer_Expired(GameObject *obj,int number);
+	public: void Register_Auto_Save_Variables();
 };
 
 class JFW_Base_Defence_Animated_Sound_Aircraft_Only_Secondary : public ScriptImpClass {
-    bool popup;
-    bool attack;
-    bool primary;
-
-    void Created(GameObject *obj);
-
-    void Enemy_Seen(GameObject *obj, GameObject *enemy);
-
-    void Timer_Expired(GameObject *obj, int number);
-
-public:
-    void Register_Auto_Save_Variables();
+	bool popup;
+	bool attack;
+	bool primary;
+	void Created(GameObject *obj);
+	void Enemy_Seen(GameObject *obj,GameObject *enemy);
+	void Timer_Expired(GameObject *obj,int number);
+	public: void Register_Auto_Save_Variables();
 };
 
 class JFW_Base_Defence_Animated_Sound_No_VTOL : public ScriptImpClass {
-    bool popup;
-    bool attack;
-
-    void Created(GameObject *obj);
-
-    void Enemy_Seen(GameObject *obj, GameObject *enemy);
-
-    void Timer_Expired(GameObject *obj, int number);
-
-public:
-    void Register_Auto_Save_Variables();
+	bool popup;
+	bool attack;
+	void Created(GameObject *obj);
+	void Enemy_Seen(GameObject *obj,GameObject *enemy);
+	void Timer_Expired(GameObject *obj,int number);
+	public: void Register_Auto_Save_Variables();
 };
 
 class JFW_Base_Defence_Animated_Sound_VTOL_Only : public ScriptImpClass {
-    bool popup;
-    bool attack;
-
-    void Created(GameObject *obj);
-
-    void Enemy_Seen(GameObject *obj, GameObject *enemy);
-
-    void Timer_Expired(GameObject *obj, int number);
-
-public:
-    void Register_Auto_Save_Variables();
+	bool popup;
+	bool attack;
+	void Created(GameObject *obj);
+	void Enemy_Seen(GameObject *obj,GameObject *enemy);
+	void Timer_Expired(GameObject *obj,int number);
+	public: void Register_Auto_Save_Variables();
 };
 
 class JFW_Base_Defence_Animated_Sound_No_VTOL_Secondary : public ScriptImpClass {
-    bool popup;
-    bool attack;
-    bool primary;
-
-    void Created(GameObject *obj);
-
-    void Enemy_Seen(GameObject *obj, GameObject *enemy);
-
-    void Timer_Expired(GameObject *obj, int number);
-
-public:
-    void Register_Auto_Save_Variables();
+	bool popup;
+	bool attack;
+	bool primary;
+	void Created(GameObject *obj);
+	void Enemy_Seen(GameObject *obj,GameObject *enemy);
+	void Timer_Expired(GameObject *obj,int number);
+	public: void Register_Auto_Save_Variables();
 };
 
 class JFW_Base_Defence_Animated_Sound_VTOL_Only_Secondary : public ScriptImpClass {
-    bool popup;
-    bool attack;
-    bool primary;
-
-    void Created(GameObject *obj);
-
-    void Enemy_Seen(GameObject *obj, GameObject *enemy);
-
-    void Timer_Expired(GameObject *obj, int number);
-
-public:
-    void Register_Auto_Save_Variables();
+	bool popup;
+	bool attack;
+	bool primary;
+	void Created(GameObject *obj);
+	void Enemy_Seen(GameObject *obj,GameObject *enemy);
+	void Timer_Expired(GameObject *obj,int number);
+	public: void Register_Auto_Save_Variables();
 };
 
 class JFW_Base_Defence_Swap : public ScriptImpClass {
-    unsigned int id1;
-    unsigned int id2;
-    unsigned int id3;
-    unsigned int objtype;
-    bool primary;
-
-    void Created(GameObject *obj);
-
-    void Custom(GameObject *obj, int type, int param, GameObject *sender);
-
-    void Enemy_Seen(GameObject *obj, GameObject *enemy);
-
-    void Timer_Expired(GameObject *obj, int number);
-
-public:
-    void Register_Auto_Save_Variables();
+	unsigned int id1;
+	unsigned int id2;
+	unsigned int id3;
+	unsigned int objtype;
+	bool primary;
+	void Created(GameObject *obj);
+	void Custom(GameObject *obj,int type,int param,GameObject *sender);
+	void Enemy_Seen(GameObject *obj,GameObject *enemy);
+	void Timer_Expired(GameObject *obj,int number);
+	public: void Register_Auto_Save_Variables();
 };
 
 class JFW_Base_Defence_No_Aircraft_Swap : public ScriptImpClass {
-    unsigned int id1;
-    unsigned int id2;
-    unsigned int id3;
-    unsigned int objtype;
-    bool primary;
-
-    void Created(GameObject *obj);
-
-    void Custom(GameObject *obj, int type, int param, GameObject *sender);
-
-    void Enemy_Seen(GameObject *obj, GameObject *enemy);
-
-    void Timer_Expired(GameObject *obj, int number);
-
-public:
-    void Register_Auto_Save_Variables();
+	unsigned int id1;
+	unsigned int id2;
+	unsigned int id3;
+	unsigned int objtype;
+	bool primary;
+	void Created(GameObject *obj);
+	void Custom(GameObject *obj,int type,int param,GameObject *sender);
+	void Enemy_Seen(GameObject *obj,GameObject *enemy);
+	void Timer_Expired(GameObject *obj,int number);
+	public: void Register_Auto_Save_Variables();
 };
 
 class JFW_Base_Defence_Aircraft_Only_Swap : public ScriptImpClass {
-    unsigned int id1;
-    unsigned int id2;
-    unsigned int id3;
-    unsigned int objtype;
-    bool primary;
-
-    void Created(GameObject *obj);
-
-    void Custom(GameObject *obj, int type, int param, GameObject *sender);
-
-    void Enemy_Seen(GameObject *obj, GameObject *enemy);
-
-    void Timer_Expired(GameObject *obj, int number);
-
-public:
-    void Register_Auto_Save_Variables();
+	unsigned int id1;
+	unsigned int id2;
+	unsigned int id3;
+	unsigned int objtype;
+	bool primary;
+	void Created(GameObject *obj);
+	void Custom(GameObject *obj,int type,int param,GameObject *sender);
+	void Enemy_Seen(GameObject *obj,GameObject *enemy);
+	void Timer_Expired(GameObject *obj,int number);
+	public: void Register_Auto_Save_Variables();
 };
 
 class JFW_Base_Defence_Animated_Swap : public ScriptImpClass {
-    bool popup;
-    bool attack;
-    bool primary;
-
-    void Created(GameObject *obj);
-
-    void Custom(GameObject *obj, int type, int param, GameObject *sender);
-
-    void Enemy_Seen(GameObject *obj, GameObject *enemy);
-
-    void Timer_Expired(GameObject *obj, int number);
-
-public:
-    void Register_Auto_Save_Variables();
+	bool popup;
+	bool attack;
+	bool primary;
+	void Created(GameObject *obj);
+	void Custom(GameObject *obj,int type,int param,GameObject *sender);
+	void Enemy_Seen(GameObject *obj,GameObject *enemy);
+	void Timer_Expired(GameObject *obj,int number);
+	public: void Register_Auto_Save_Variables();
 };
 
 class JFW_Base_Defence_Animated_No_Aircraft_Swap : public ScriptImpClass {
-    bool popup;
-    bool attack;
-    bool primary;
-
-    void Created(GameObject *obj);
-
-    void Custom(GameObject *obj, int type, int param, GameObject *sender);
-
-    void Enemy_Seen(GameObject *obj, GameObject *enemy);
-
-    void Timer_Expired(GameObject *obj, int number);
-
-public:
-    void Register_Auto_Save_Variables();
+	bool popup;
+	bool attack;
+	bool primary;
+	void Created(GameObject *obj);
+	void Custom(GameObject *obj,int type,int param,GameObject *sender);
+	void Enemy_Seen(GameObject *obj,GameObject *enemy);
+	void Timer_Expired(GameObject *obj,int number);
+	public: void Register_Auto_Save_Variables();
 };
 
 class JFW_Base_Defence_Animated_Aircraft_Only_Swap : public ScriptImpClass {
-    bool popup;
-    bool attack;
-    bool primary;
-
-    void Created(GameObject *obj);
-
-    void Custom(GameObject *obj, int type, int param, GameObject *sender);
-
-    void Enemy_Seen(GameObject *obj, GameObject *enemy);
-
-    void Timer_Expired(GameObject *obj, int number);
-
-public:
-    void Register_Auto_Save_Variables();
+	bool popup;
+	bool attack;
+	bool primary;
+	void Created(GameObject *obj);
+	void Custom(GameObject *obj,int type,int param,GameObject *sender);
+	void Enemy_Seen(GameObject *obj,GameObject *enemy);
+	void Timer_Expired(GameObject *obj,int number);
+	public: void Register_Auto_Save_Variables();
 };
 
 class JFW_Base_Defence_No_VTOL_Swap : public ScriptImpClass {
-    unsigned int id1;
-    unsigned int id2;
-    unsigned int id3;
-    unsigned int objtype;
-    bool primary;
-
-    void Created(GameObject *obj);
-
-    void Custom(GameObject *obj, int type, int param, GameObject *sender);
-
-    void Enemy_Seen(GameObject *obj, GameObject *enemy);
-
-    void Timer_Expired(GameObject *obj, int number);
-
-public:
-    void Register_Auto_Save_Variables();
+	unsigned int id1;
+	unsigned int id2;
+	unsigned int id3;
+	unsigned int objtype;
+	bool primary;
+	void Created(GameObject *obj);
+	void Custom(GameObject *obj,int type,int param,GameObject *sender);
+	void Enemy_Seen(GameObject *obj,GameObject *enemy);
+	void Timer_Expired(GameObject *obj,int number);
+	public: void Register_Auto_Save_Variables();
 };
 
 class JFW_Base_Defence_VTOL_Only_Swap : public ScriptImpClass {
-    unsigned int id1;
-    unsigned int id2;
-    unsigned int id3;
-    unsigned int objtype;
-    bool primary;
-
-    void Created(GameObject *obj);
-
-    void Custom(GameObject *obj, int type, int param, GameObject *sender);
-
-    void Enemy_Seen(GameObject *obj, GameObject *enemy);
-
-    void Timer_Expired(GameObject *obj, int number);
-
-public:
-    void Register_Auto_Save_Variables();
+	unsigned int id1;
+	unsigned int id2;
+	unsigned int id3;
+	unsigned int objtype;
+	bool primary;
+	void Created(GameObject *obj);
+	void Custom(GameObject *obj,int type,int param,GameObject *sender);
+	void Enemy_Seen(GameObject *obj,GameObject *enemy);
+	void Timer_Expired(GameObject *obj,int number);
+	public: void Register_Auto_Save_Variables();
 };
 
 class JFW_Base_Defence_Animated_No_VTOL_Swap : public ScriptImpClass {
-    bool popup;
-    bool attack;
-    bool primary;
-
-    void Created(GameObject *obj);
-
-    void Custom(GameObject *obj, int type, int param, GameObject *sender);
-
-    void Enemy_Seen(GameObject *obj, GameObject *enemy);
-
-    void Timer_Expired(GameObject *obj, int number);
-
-public:
-    void Register_Auto_Save_Variables();
+	bool popup;
+	bool attack;
+	bool primary;
+	void Created(GameObject *obj);
+	void Custom(GameObject *obj,int type,int param,GameObject *sender);
+	void Enemy_Seen(GameObject *obj,GameObject *enemy);
+	void Timer_Expired(GameObject *obj,int number);
+	public: void Register_Auto_Save_Variables();
 };
 
 class JFW_Base_Defence_Animated_VTOL_Only_Swap : public ScriptImpClass {
-    bool popup;
-    bool attack;
-    bool primary;
-
-    void Created(GameObject *obj);
-
-    void Custom(GameObject *obj, int type, int param, GameObject *sender);
-
-    void Enemy_Seen(GameObject *obj, GameObject *enemy);
-
-    void Timer_Expired(GameObject *obj, int number);
-
-public:
-    void Register_Auto_Save_Variables();
+	bool popup;
+	bool attack;
+	bool primary;
+	void Created(GameObject *obj);
+	void Custom(GameObject *obj,int type,int param,GameObject *sender);
+	void Enemy_Seen(GameObject *obj,GameObject *enemy);
+	void Timer_Expired(GameObject *obj,int number);
+	public: void Register_Auto_Save_Variables();
 };
 
 class JFW_Base_Defence_Animated_Sound_Swap : public ScriptImpClass {
-    bool popup;
-    bool attack;
-    bool primary;
-
-    void Created(GameObject *obj);
-
-    void Custom(GameObject *obj, int type, int param, GameObject *sender);
-
-    void Enemy_Seen(GameObject *obj, GameObject *enemy);
-
-    void Timer_Expired(GameObject *obj, int number);
-
-public:
-    void Register_Auto_Save_Variables();
+	bool popup;
+	bool attack;
+	bool primary;
+	void Created(GameObject *obj);
+	void Custom(GameObject *obj,int type,int param,GameObject *sender);
+	void Enemy_Seen(GameObject *obj,GameObject *enemy);
+	void Timer_Expired(GameObject *obj,int number);
+	public: void Register_Auto_Save_Variables();
 };
 
 class JFW_Base_Defence_Animated_Sound_No_Aircraft_Swap : public ScriptImpClass {
-    bool popup;
-    bool attack;
-    bool primary;
-
-    void Created(GameObject *obj);
-
-    void Custom(GameObject *obj, int type, int param, GameObject *sender);
-
-    void Enemy_Seen(GameObject *obj, GameObject *enemy);
-
-    void Timer_Expired(GameObject *obj, int number);
-
-public:
-    void Register_Auto_Save_Variables();
+	bool popup;
+	bool attack;
+	bool primary;
+	void Created(GameObject *obj);
+	void Custom(GameObject *obj,int type,int param,GameObject *sender);
+	void Enemy_Seen(GameObject *obj,GameObject *enemy);
+	void Timer_Expired(GameObject *obj,int number);
+	public: void Register_Auto_Save_Variables();
 };
 
 class JFW_Base_Defence_Animated_Sound_Aircraft_Only_Swap : public ScriptImpClass {
-    bool popup;
-    bool attack;
-    bool primary;
-
-    void Created(GameObject *obj);
-
-    void Custom(GameObject *obj, int type, int param, GameObject *sender);
-
-    void Enemy_Seen(GameObject *obj, GameObject *enemy);
-
-    void Timer_Expired(GameObject *obj, int number);
-
-public:
-    void Register_Auto_Save_Variables();
+	bool popup;
+	bool attack;
+	bool primary;
+	void Created(GameObject *obj);
+	void Custom(GameObject *obj,int type,int param,GameObject *sender);
+	void Enemy_Seen(GameObject *obj,GameObject *enemy);
+	void Timer_Expired(GameObject *obj,int number);
+	public: void Register_Auto_Save_Variables();
 };
 
 class JFW_Base_Defence_Animated_Sound_No_VTOL_Swap : public ScriptImpClass {
-    bool popup;
-    bool attack;
-    bool primary;
-
-    void Created(GameObject *obj);
-
-    void Custom(GameObject *obj, int type, int param, GameObject *sender);
-
-    void Enemy_Seen(GameObject *obj, GameObject *enemy);
-
-    void Timer_Expired(GameObject *obj, int number);
-
-public:
-    void Register_Auto_Save_Variables();
+	bool popup;
+	bool attack;
+	bool primary;
+	void Created(GameObject *obj);
+	void Custom(GameObject *obj,int type,int param,GameObject *sender);
+	void Enemy_Seen(GameObject *obj,GameObject *enemy);
+	void Timer_Expired(GameObject *obj,int number);
+	public: void Register_Auto_Save_Variables();
 };
 
 class JFW_Base_Defence_Animated_Sound_VTOL_Only_Swap : public ScriptImpClass {
-    bool popup;
-    bool attack;
-    bool primary;
-
-    void Created(GameObject *obj);
-
-    void Custom(GameObject *obj, int type, int param, GameObject *sender);
-
-    void Enemy_Seen(GameObject *obj, GameObject *enemy);
-
-    void Timer_Expired(GameObject *obj, int number);
-
-public:
-    void Register_Auto_Save_Variables();
+	bool popup;
+	bool attack;
+	bool primary;
+	void Created(GameObject *obj);
+	void Custom(GameObject *obj,int type,int param,GameObject *sender);
+	void Enemy_Seen(GameObject *obj,GameObject *enemy);
+	void Timer_Expired(GameObject *obj,int number);
+	public: void Register_Auto_Save_Variables();
 };

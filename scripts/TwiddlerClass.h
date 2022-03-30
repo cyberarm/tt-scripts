@@ -11,46 +11,30 @@
 */
 #ifndef TT_INCLUDE_TWIDDLERCLASS_H
 #define TT_INCLUDE_TWIDDLERCLASS_H
-
 #include "Definition.h"
-
 class TwiddlerClass : public DefinitionClass {
 public:
-    TwiddlerClass();
-
-    ~TwiddlerClass();
-
-    virtual DefinitionClass *Twiddle() const;
-
-    PersistClass *Create() const;
-
-    const PersistFactoryClass &Get_Factory() const;
-
-    const DynamicVectorClass<int> &Get_Definition_List() { return m_DefinitionList; }
-
-    bool Save(ChunkSaveClass &csave);
-
-    bool Load(ChunkLoadClass &cload);
-
-    bool Save_Variables(ChunkSaveClass &csave);
-
-    bool Load_Variables(ChunkLoadClass &cload);
-
-    uint32 Get_Class_ID() const { return 57344; }
-
-    virtual uint32 Get_Indirect_Class_ID() const { return m_IndirectClassID; }
-
-    virtual void Set_Indirect_Class_ID(uint32 class_id) { m_IndirectClassID = class_id; }
-
+	TwiddlerClass();
+	~TwiddlerClass();
+	virtual DefinitionClass *Twiddle() const;
+	PersistClass *Create() const;
+	const PersistFactoryClass &Get_Factory() const;
+	const DynamicVectorClass<int>& Get_Definition_List() { return m_DefinitionList; }
+	bool Save(ChunkSaveClass &csave);
+	bool Load(ChunkLoadClass &cload);
+	bool Save_Variables(ChunkSaveClass &csave);
+	bool Load_Variables(ChunkLoadClass &cload);
+	uint32 Get_Class_ID() const {return 57344;}
+	virtual uint32 Get_Indirect_Class_ID() const {return m_IndirectClassID;}
+	virtual void Set_Indirect_Class_ID(uint32 class_id) {m_IndirectClassID = class_id;}
 #ifdef DDBEDIT
-    virtual void                        Dump (FileClass &file);
+	virtual void                        Dump (FileClass &file);
 #endif
-    DECLARE_EDITABLE(TwiddlerClass, DefinitionClass);
+	DECLARE_EDITABLE( TwiddlerClass, DefinitionClass );
 private:
-    uint32 m_IndirectClassID;
-    DynamicVectorClass<int> m_DefinitionList;
-
-    friend class PresetDump;
+	uint32 m_IndirectClassID;
+	DynamicVectorClass<int> m_DefinitionList;
+	friend class PresetDump;
 };
 
 #endif

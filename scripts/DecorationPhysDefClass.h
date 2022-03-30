@@ -15,32 +15,23 @@
 #include "DynamicPhysDefClass.h"
 
 
-class DecorationPhysDefClass : public DynamicPhysDefClass {
+class DecorationPhysDefClass : public DynamicPhysDefClass
+{
 public:
-    DecorationPhysDefClass(void);
-
-    virtual uint32 Get_Class_ID(void) const;
-
-    virtual PersistClass *Create(void) const;
-
-    virtual const char *Get_Type_Name(void) { return "DecorationPhysDef"; }
-
-    virtual bool Is_Type(const char *);
-
-    virtual const PersistFactoryClass &Get_Factory(void) const;
-
-    virtual bool Save(ChunkSaveClass &csave);
-
-    virtual bool Load(ChunkLoadClass &cload);
-
+	DecorationPhysDefClass(void);
+	virtual uint32								Get_Class_ID (void) const;
+	virtual PersistClass *					Create(void) const;
+	virtual const char *						Get_Type_Name (void)			{ return "DecorationPhysDef"; }
+	virtual bool								Is_Type(const char *);
+	virtual const PersistFactoryClass &	Get_Factory (void) const;
+	virtual bool								Save(ChunkSaveClass &csave);
+	virtual bool								Load(ChunkLoadClass &cload);
 #ifdef DDBEDIT
-    virtual void                        Dump (FileClass &file);
+	virtual void                        Dump (FileClass &file);
 #endif
-    DECLARE_EDITABLE(DecorationPhysDefClass, DynamicPhysDefClass);
+	DECLARE_EDITABLE(DecorationPhysDefClass,DynamicPhysDefClass);
 protected:
-    friend class StaticPhysClass;
-
-    friend class PresetDump;
+	friend class StaticPhysClass;
+	friend class PresetDump;
 };
-
 #endif

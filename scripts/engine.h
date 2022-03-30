@@ -10,7 +10,6 @@
 	Only the source code to the module(s) containing the licenced code has to be released.
 */
 #pragma once
-
 #include "engine_common.h"
 #include "engine_vector.h"
 #include "engine_threading.h"
@@ -28,10 +27,7 @@
 #include "engine_tdb.h"
 #include "engine_dmg.h"
 #include "engine_phys.h"
-
 #ifndef TT
-
 #include "engine_script.h"
 #include "engine_tt.h"
-
 #endif

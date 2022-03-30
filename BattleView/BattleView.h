@@ -15,34 +15,64 @@
 
 #define BATTLEVIEW_PLUGIN_VERSION 0.0f
 
+struct BattleViewPlayer
+{
+    int player_id;
+    int entity_id;
+    const char* username;
+};
+
+struct BattleViewEntity
+{
+    int id;
+    int team;
+    const char* name;
+    // Vector3 position;
+    const char* type;
+    int health;
+    const char* icon; // Handle on BattleView Frontend?
+    const char* character_name;
+    const char* vehicle_name;
+};
+
 class BattleViewPlugin : public Plugin
 {
-    StringClass m_battleview_ini_key = "BattleView";
-    StringClass m_battleview_ini_mode_key = "mode";
-    int m_battleview_mode;
+    // Settings
+    int m_config_mode;
+    bool m_config_bots_as_players;
+
+    // Think Limiter
+    int m_think_interval;
+    int m_think_counter;
+
+    // TODO: Why angry?
+    // VectorClass<BattleViewPlayer> m_battleview_players;
+    // VectorClass<BattleViewEntity> m_battleview_entities;
 
 public:
     BattleViewPlugin();
 
-    ~BattleViewPlugin() override;
+    virtual ~BattleViewPlugin();
 
-    void OnLoadGlobalINISettings(INIClass* ssgm_ini) override;
+    void HandleINIConfiguration(INIClass* ssgm, bool is_map);
 
-    void OnFreeData() override;
+    virtual void OnLoadGlobalINISettings(INIClass* ssgm_ini);
 
-    void OnLoadMapINISettings(INIClass* ssgm_ini) override;
+    virtual void OnFreeData();
 
-    void OnFreeMapData() override;
+    virtual void OnLoadMapINISettings(INIClass* ssgm_ini);
 
-    bool OnChat(int player_id, TextMessageEnum type, const wchar_t* message, int receiver_id) override;
+    virtual void OnFreeMapData();
 
-    void OnLoadLevel() override;
+    virtual bool OnChat(int player_id, TextMessageEnum type, const wchar_t* message, int receiver_id);
 
-    void OnGameOver() override;
+    virtual void OnLoadLevel();
 
-    void OnPlayerJoin(int player_id, const char* player_name) override;
+    virtual void OnGameOver();
 
-    void OnPlayerLeave(int player_id) override;
+    virtual void OnPlayerJoin(int player_id, const char* player_name);
 
-    void OnThink() override;
+    virtual void OnPlayerLeave(int player_id);
+
+    virtual void OnThink();
 };

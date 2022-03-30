@@ -11,33 +11,24 @@
 */
 #ifndef TT_INCLUDE_DEFENSEOBJECTDEFCLASS_H
 #define TT_INCLUDE_DEFENSEOBJECTDEFCLASS_H
-
 #include "DataSafe.h"
-
 class ChunkSaveClass;
-
 class ChunkLoadClass;
-
-typedef safe_unsigned_int SafeArmorType;
-
+typedef	safe_unsigned_int	SafeArmorType;
 class DefenseObjectDefClass {
 public:
-    DefenseObjectDefClass(void);
-
-    ~DefenseObjectDefClass(void);
-
-    bool Save(ChunkSaveClass &csave);
-
-    bool Load(ChunkLoadClass &cload);
-
-    safe_float Health; // 0000
-    safe_float HealthMax; // 0004
-    SafeArmorType Skin; // 0008
-    safe_float ShieldStrength; // 000C
-    safe_float ShieldStrengthMax; // 0010
-    SafeArmorType ShieldType; // 0014
-    safe_float DamagePoints; // 0018
-    safe_float DeathPoints; // 001C
+	DefenseObjectDefClass(void);
+	~DefenseObjectDefClass(void);
+	bool Save(ChunkSaveClass &csave);
+	bool Load(ChunkLoadClass &cload);
+	safe_float Health; // 0000
+	safe_float HealthMax; // 0004
+	SafeArmorType Skin; // 0008
+	safe_float ShieldStrength; // 000C
+	safe_float ShieldStrengthMax; // 0010
+	SafeArmorType ShieldType; // 0014
+	safe_float DamagePoints; // 0018
+	safe_float DeathPoints; // 001C
 }; // 0020
 
 #endif

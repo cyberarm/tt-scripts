@@ -14,43 +14,39 @@
 #pragma warning(disable: 4073) //warning C4073: initializers put in library initialization area - That's EXACTLY why I put that pragma in...
 #pragma init_seg(lib) // Move this files static initializers up a level
 #pragma warning(default: 4073)
-
 #include "SysTimeClass.h"
-
-extern "C" DECLSPEC_IMPORT DWORD
-
-WINAPI timeGetTime(void);
-
+extern "C" DECLSPEC_IMPORT DWORD WINAPI timeGetTime(void);
 #if (TDBEDIT) || (DDBEDIT) || (W3DVIEWER)
 bool SysTimeClass::_is_init;
 SysTimeClass SysTimeClass::SystemTime;
 #else
-
-REF_DEF3(bool, SysTimeClass::_is_init,
-
-0x0081C644, 0x0081B824, 0x0085A544);
-REF_DEF3(SysTimeClass, SysTimeClass::SystemTime,
-0x0083F450, 0x0083E638, 0x008851B0);
+REF_DEF3(bool, SysTimeClass::_is_init, 0x0081C644, 0x0081B824, 0x0085A544);
+REF_DEF3(SysTimeClass, SysTimeClass::SystemTime, 0x0083F450, 0x0083E638, 0x008851B0);
 #endif
+uint32 SysTimeClass::Get()
+{
 
-uint32 SysTimeClass::Get() {
+   if (!_is_init)
+   {
+      _is_init = true;
+      this->Reset();
+   }
 
-    if (!_is_init) {
-        _is_init = true;
-        this->Reset();
-    }
-
-    unsigned int u = timeGetTime();
-    if (u <= uTimeInit) {
-        return uTimeInitNeg + u;
-    } else {
-        return u - uTimeInit;
-    }
+   unsigned int u = timeGetTime();
+   if (u <= uTimeInit)
+   {
+       return uTimeInitNeg + u;
+   }
+   else
+   {
+       return u - uTimeInit;
+   }
 }
 
 
-void SysTimeClass::Reset() {
-    this->uTimeInit = timeGetTime();
-    this->uTimeInitNeg = (uint32) - (sint32)
-    this->uTimeInit;
+
+void SysTimeClass::Reset()
+{
+   this->uTimeInit = timeGetTime();
+   this->uTimeInitNeg = (uint32)-(sint32)this->uTimeInit;
 }

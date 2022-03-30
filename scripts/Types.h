@@ -16,32 +16,32 @@
 
 #if defined(_MSC_VER)    // Microsoft Visual Studio
 
-typedef unsigned __int64 uint64;
-typedef   signed __int64 sint64;
-typedef unsigned __int32 uint32;
-typedef   signed __int32 sint32;
-typedef unsigned __int16 uint16;
-typedef   signed __int16 sint16;
-typedef unsigned __int8  uint8;
-typedef   signed __int8  sint8;
+   typedef unsigned __int64 uint64;
+   typedef   signed __int64 sint64;
+   typedef unsigned __int32 uint32;
+   typedef   signed __int32 sint32;
+   typedef unsigned __int16 uint16;
+   typedef   signed __int16 sint16;
+   typedef unsigned __int8  uint8;
+   typedef   signed __int8  sint8;
 
 #elif defined(__GNUC__)  // GNU C++
 
-typedef unsigned long long uint64;
-typedef   signed long long sint64;
-typedef unsigned int       uint32;
-typedef   signed int       sint32;
-typedef unsigned short     uint16;
-typedef   signed short     sint16;
-typedef unsigned char      uint8;
-typedef   signed char      sint8;
+   typedef unsigned long long uint64;
+   typedef   signed long long sint64;
+   typedef unsigned int       uint32;
+   typedef   signed int       sint32;
+   typedef unsigned short     uint16;
+   typedef   signed short     sint16;
+   typedef unsigned char      uint8;
+   typedef   signed char      sint8;
 
 #else
 #   error Unknown compiler. Please specify fixed-size integer types in 'Types.h'.
 #endif
 
 
-typedef uint8 byte;
+typedef uint8  byte;
 
 // we compile 32 bit only
 typedef sint32 sint;

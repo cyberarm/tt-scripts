@@ -11,33 +11,24 @@
 */
 #ifndef TT_INCLUDE__SUPERWEAPONGAMEOBJDEF_H
 #define TT_INCLUDE__SUPERWEAPONGAMEOBJDEF_H
-
 #include "BuildingGameObjDef.h"
-
-class SuperweaponGameObjDef : public BuildingGameObjDef {
+class SuperweaponGameObjDef : public BuildingGameObjDef
+{
 public:
-    SuperweaponGameObjDef(void);
-
-    ~SuperweaponGameObjDef(void);
-
-    uint32 Get_Class_ID(void) const;
-
-    PersistClass *Create(void) const;
-
-    bool Save(ChunkSaveClass &csave);
-
-    bool Load(ChunkLoadClass &cload);
-
-    const PersistFactoryClass &Get_Factory(void) const;
-
+	SuperweaponGameObjDef (void);
+	~SuperweaponGameObjDef (void);
+	uint32								Get_Class_ID (void) const;
+	PersistClass *						Create (void) const;
+	bool									Save (ChunkSaveClass &csave);
+	bool									Load (ChunkLoadClass &cload);
+	const PersistFactoryClass &	Get_Factory (void) const;
 #ifdef DDBEDIT
-    virtual void                        Dump (FileClass &file);
+	virtual void                        Dump (FileClass &file);
 #endif
-    DECLARE_EDITABLE (SuperweaponGameObjDef, BuildingGameObjDef);
+	DECLARE_EDITABLE (SuperweaponGameObjDef, BuildingGameObjDef);
 protected:
-    void Load_Variables(ChunkLoadClass &cload);
-
-    friend class PresetDump;
+	void					Load_Variables (ChunkLoadClass &cload);
+	friend class PresetDump;
 };
 
 #endif

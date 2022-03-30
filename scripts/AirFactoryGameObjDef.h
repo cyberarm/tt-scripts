@@ -11,42 +11,31 @@
 */
 #ifndef TT_INCLUDE__AIRFACTORYGAMEOBJDEF_H
 #define TT_INCLUDE__AIRFACTORYGAMEOBJDEF_H
-
 #include "BuildingGameObjDef.h"
-
-class AirFactoryGameObjDef : public BuildingGameObjDef {
+class AirFactoryGameObjDef : public BuildingGameObjDef
+{
 public:
-    AirFactoryGameObjDef(void);
-
-    ~AirFactoryGameObjDef(void);
-
-    uint32 Get_Class_ID(void) const;
-
-    PersistClass *Create(void) const;
-
-    bool Save(ChunkSaveClass &csave);
-
-    bool Load(ChunkLoadClass &cload);
-
-    const PersistFactoryClass &Get_Factory(void) const;
-
+	AirFactoryGameObjDef (void);
+	~AirFactoryGameObjDef (void);
+	uint32								Get_Class_ID (void) const;
+	PersistClass *						Create (void) const;
+	bool									Save (ChunkSaveClass &csave);
+	bool									Load (ChunkLoadClass &cload);
+	const PersistFactoryClass &	Get_Factory (void) const;
 #ifdef DDBEDIT
-    virtual void                        Dump (FileClass &file);
+	virtual void                        Dump (FileClass &file);
 #endif
-    DECLARE_EDITABLE (AirFactoryGameObjDef, BuildingGameObjDef);
+	DECLARE_EDITABLE (AirFactoryGameObjDef, BuildingGameObjDef);
 protected:
-    void Load_Variables(ChunkLoadClass &cload);
-
-    int LandingPosDefId;
-    float LandingPosDistance;
-    int DropCinematicDefId;
-    int CinematicSlotIndex;
-    float CinematicTimer;
-    bool DefaultEngineEnable;
-
-    friend class AirFactoryGameObj;
-
-    friend class PresetDump;
+	void					Load_Variables (ChunkLoadClass &cload);
+	int LandingPosDefId;
+	float LandingPosDistance;
+	int DropCinematicDefId;
+	int CinematicSlotIndex;
+	float CinematicTimer;
+	bool DefaultEngineEnable;
+	friend class AirFactoryGameObj;
+	friend class PresetDump;
 };
 
 #endif

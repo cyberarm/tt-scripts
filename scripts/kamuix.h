@@ -10,94 +10,80 @@
 	Only the source code to the module(s) containing the licenced code has to be released.
 */
 #pragma once
-
 class Kamuix_PAMSG_Zone : public ScriptImpClass {
-    void Entered(GameObject *obj, GameObject *enterer);
+	void Entered(GameObject *obj,GameObject *enterer);
 };
-
 class Kamuix_AdminMessage_Zone : public ScriptImpClass {
-    void Entered(GameObject *obj, GameObject *enterer);
+	void Entered(GameObject *obj,GameObject *enterer);
 };
-
 class Kamuix_Send_FDS_MSG_Zone : public ScriptImpClass {
-    void Entered(GameObject *obj, GameObject *enterer);
+	void Entered(GameObject *obj,GameObject *enterer);
 };
-
 class Kamuix_Team_Change_Zone : public ScriptImpClass {
-    void Entered(GameObject *obj, GameObject *enterer);
+	void Entered(GameObject *obj,GameObject *enterer);
 };
-
 class Kamuix_Announce_Preset_Buy : public ScriptImpClass {
-    void Entered(GameObject *obj, GameObject *enterer);
+	void Entered(GameObject *obj,GameObject *enterer);
 };
 
 class Kamuix_Death_Announce : public ScriptImpClass {
-    void Killed(GameObject *obj, GameObject *killer);
+	void Killed(GameObject *obj,GameObject *killer);
 };
 
 class Kamuix_Death_Team_Win : public ScriptImpClass {
-    void Killed(GameObject *obj, GameObject *killer);
+	void Killed(GameObject *obj,GameObject *killer);
 };
 
 class Kamuix_Damaged_Send_MsgFds : public ScriptImpClass {
-    void Damaged(GameObject *obj, GameObject *damager, float amount);
+	void Damaged(GameObject *obj,GameObject *damager,float amount);
 };
 
 class Kamuix_Death_Send_MsgFds : public ScriptImpClass {
-    void Killed(GameObject *obj, GameObject *killer);
+	void Killed(GameObject *obj,GameObject *killer);
 };
-
 class Kamuix_Kill_Change : public ScriptImpClass {
-    void Killed(GameObject *obj, GameObject *killer);
+	void Killed(GameObject *obj,GameObject *killer);
 };
 
 class Kamuix_Player_Announce_Zone : public ScriptImpClass {
-    void Entered(GameObject *obj, GameObject *enterer);
+	void Entered(GameObject *obj,GameObject *enterer);
 };
 
 class Kamuix_Ban_Zone : public ScriptImpClass {
-    void Entered(GameObject *obj, GameObject *enterer);
+	void Entered(GameObject *obj,GameObject *enterer);
 };
 
 class Kamuix_Kick_Zone : public ScriptImpClass {
-    void Entered(GameObject *obj, GameObject *enterer);
+	void Entered(GameObject *obj,GameObject *enterer);
 };
-
 class Zone_Kamuix_Destroy_Object : public ScriptImpClass {
-    void Entered(GameObject *obj, GameObject *enterer);
+	void Entered(GameObject *obj,GameObject *enterer);
 };
 
 //class Kamuix_Crash_Player_Zone : public ScriptImpClass {
-//void Entered(GameObject *obj,GameObject *enterer);
+	//void Entered(GameObject *obj,GameObject *enterer);
 //};
 class Kamuix_Set_Type : public ScriptImpClass {
-    void Created(GameObject *obj);
+	void Created(GameObject *obj);
 };
-
 class Kamuix_Revive_Building_Zone : public ScriptImpClass {
-    void Entered(GameObject *obj, GameObject *enterer);
+	void Entered(GameObject *obj,GameObject *enterer);
 };
-
 class Kamuix_Set_Building_Health_Zone : public ScriptImpClass {
-    void Entered(GameObject *obj, GameObject *enterer);
+	void Entered(GameObject *obj,GameObject *enterer);
 };
-
 class Kamuix_Rebuild_Structure_Zone : public ScriptImpClass {
-    void Entered(GameObject *obj, GameObject *enterer);
+	void Entered(GameObject *obj,GameObject *enterer);
 };
-
 class Kamuix_Death_Destroy_Building : public ScriptImpClass {
-    void Killed(GameObject *obj, GameObject *killer);
+	void Killed(GameObject *obj,GameObject *killer);
 };
-
 class Kamuix_Control_Spawner : public ScriptImpClass {
-    void Killed(GameObject *obj, GameObject *killer);
+	void Killed(GameObject *obj,GameObject *killer);
 };
-
 class Kamuix_Zone_Destroy_Building : public ScriptImpClass {
-    void Entered(GameObject *obj, GameObject *enterer);
+	void Entered(GameObject *obj,GameObject *enterer);
 };
-
 class Kamuix_Set_Model : public ScriptImpClass {
-    void Created(GameObject *obj);
+	void Created(GameObject *obj);
 };

@@ -11,65 +11,51 @@
 */
 #ifndef TT_INCLUDE_SCRIPTZONEGAMEOBJDEF_H
 #define TT_INCLUDE_SCRIPTZONEGAMEOBJDEF_H
-
 #include "ScriptableGameObjDef.h"
-
-namespace ZoneConstants {
-    enum ZoneType {
-        TYPE_DEFAULT = 0,
-        TYPE_CTF,
-        TYPE_VEHICLE_CONSTRUCTION,
-        TYPE_VEHICLE_REPAIR,
-        TYPE_TIBERIUM_FIELD,
-        TYPE_BEACON,
-        TYPE_GDI_TIB_FIELD,
-        TYPE_NOD_TIB_FIELD,
-        TYPE_NAVAL_SPAWN,
-    };
+namespace ZoneConstants
+{
+	enum ZoneType {
+		TYPE_DEFAULT = 0,
+		TYPE_CTF,
+		TYPE_VEHICLE_CONSTRUCTION,
+		TYPE_VEHICLE_REPAIR,
+		TYPE_TIBERIUM_FIELD,
+		TYPE_BEACON,
+		TYPE_GDI_TIB_FIELD,
+		TYPE_NOD_TIB_FIELD,
+		TYPE_NAVAL_SPAWN,
+	};
 };
-
 class ScriptZoneGameObjDef : public ScriptableGameObjDef {
 public:
-    ScriptZoneGameObjDef();
-
-    ~ScriptZoneGameObjDef() {};
-
-    const PersistFactoryClass &Get_Factory() const;
-
-    bool Save(ChunkSaveClass &csave);
-
-    bool Load(ChunkLoadClass &cload);
-
-    uint32 Get_Class_ID() const;
-
-    PersistClass *Create() const;
-
-    bool Is_Valid_Config(StringClass &oError) { return true; }
-
-    const Vector3 &Get_Color() const { return Color; }
-
-    ZoneConstants::ZoneType Get_Type() const { return ZoneType; }
-
-    int Get_Preset_ID() const { return PresetID; }
-
+	ScriptZoneGameObjDef();
+	~ScriptZoneGameObjDef() {};
+	const PersistFactoryClass &Get_Factory() const;
+	bool Save(ChunkSaveClass &csave);
+	bool Load(ChunkLoadClass &cload);
+	uint32 Get_Class_ID() const;
+	PersistClass *Create() const;
+	bool Is_Valid_Config(StringClass& oError) {return true;}
+	const Vector3 &Get_Color() const {return Color;}
+	ZoneConstants::ZoneType Get_Type() const {return ZoneType;}
+	int Get_Preset_ID() const {return PresetID;}
 #ifdef DDBEDIT
-    virtual void                        Dump (FileClass &file);
+	virtual void                        Dump (FileClass &file);
 #endif
-    DECLARE_EDITABLE (ScriptZoneGameObjDef, ScriptableGameObjDef);
+	DECLARE_EDITABLE (ScriptZoneGameObjDef, ScriptableGameObjDef);
 protected:
-    ZoneConstants::ZoneType ZoneType;
-    Vector3 Color;
-    bool unk;
-    bool CheckStarsOnly;
-    bool IsEnvironmentZone;
-    bool CheckC4;
-    int PresetID;
+	ZoneConstants::ZoneType ZoneType;
+	Vector3 Color;
+	bool unk;
+	bool CheckStarsOnly;
+	bool IsEnvironmentZone;
+	bool CheckC4;
+	int PresetID;
 
-    StringClass ModelName;
+	StringClass ModelName;
 
-    friend class ScriptZoneGameObj;
-
-    friend class PresetDump;
+	friend class ScriptZoneGameObj;
+	friend class PresetDump;
 };
 
 #endif

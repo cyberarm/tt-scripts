@@ -13,15 +13,15 @@
 #define TT_INCLUDE__POSTLOADABLECLASS_H
 
 class SCRIPTS_API PostLoadableClass
-        {
-                public:
-                PostLoadableClass(void) : IsPostLoadRegistered(false)                        {}
-                virtual ~PostLoadableClass(void)                                                    {}
-                virtual void On_Post_Load (void)                            {}
-                bool Is_Post_Load_Registered(void) const                { return IsPostLoadRegistered; }
-                void Set_Post_Load_Registered(bool onoff)    { IsPostLoadRegistered = onoff; }
-                private:
-                bool IsPostLoadRegistered;
-        }; // 0008
+{
+public:
+	PostLoadableClass(void) : IsPostLoadRegistered(false)						{ }
+	virtual ~PostLoadableClass(void)													{ }
+	virtual void						On_Post_Load (void)							{ }
+	bool									Is_Post_Load_Registered(void) const				{ return IsPostLoadRegistered; }
+	void									Set_Post_Load_Registered(bool onoff)	{ IsPostLoadRegistered = onoff; }
+private:
+	bool									IsPostLoadRegistered;
+}; // 0008
 
 #endif

@@ -11,52 +11,38 @@
 */
 #ifndef TT_INCLUDE_GMSOLDIER_H
 #define TT_INCLUDE_GMSOLDIER_H
-
 class SSGM_Soldier : public ScriptImpClass {
 public:
-    unsigned int RefillTime;
-
-    void Created(GameObject *obj);
-
-    void Destroyed(GameObject *obj);
-
-    void Detach(GameObject *obj);
-
-    void Damaged(GameObject *obj, GameObject *damager, float amount);
-
-    void Killed(GameObject *obj, GameObject *killer);
-
-    void Custom(GameObject *obj, int message, int param, GameObject *sender);
-
-    void Register_Auto_Save_Variables();
-
-    void Timer_Expired(GameObject *obj, int number);
-
-    int kills;
+	unsigned int RefillTime;
+	void Created(GameObject *obj);
+	void Destroyed(GameObject *obj);
+	void Detach(GameObject *obj);
+	void Damaged(GameObject *obj,GameObject *damager,float amount);
+	void Killed(GameObject *obj,GameObject *killer);
+	void Custom(GameObject *obj, int message, int param, GameObject *sender);
+	void Register_Auto_Save_Variables();
+	void Timer_Expired(GameObject *obj, int number);
+	int kills;
 };
 
 class SSGM_Log_Key : public JFW_Key_Hook_Base {
-    void Created(GameObject *obj);
-
-    void KeyHook();
+	void Created(GameObject *obj);
+	void KeyHook();
 };
 
 class SSGM_C4_Key : public JFW_Key_Hook_Base {
-    void Created(GameObject *obj);
-
-    void KeyHook();
+	void Created(GameObject *obj);
+	void KeyHook();
 };
 
 class SSGM_Bind_Key : public JFW_Key_Hook_Base {
-    void Created(GameObject *obj);
-
-    void KeyHook();
+	void Created(GameObject *obj);
+	void KeyHook();
 };
 
 class SSGM_BL_Key : public JFW_Key_Hook_Base {
-    void Created(GameObject *obj);
-
-    void KeyHook();
+	void Created(GameObject *obj);
+	void KeyHook();
 };
 
 #endif

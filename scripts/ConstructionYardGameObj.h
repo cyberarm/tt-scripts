@@ -15,40 +15,25 @@
 #include "BuildingGameObj.h"
 
 class ConstructionYardGameObjDef;
-
-class ConstructionYardGameObj : public BuildingGameObj {
+class ConstructionYardGameObj : public BuildingGameObj
+{
 public:
-    ConstructionYardGameObj(void);
-
-    ~ConstructionYardGameObj(void);
-
-    virtual void Init(void);
-
-    void Init(const ConstructionYardGameObjDef &definition);
-
-    SCRIPTS_API const ConstructionYardGameObjDef
-    &
-
-    Get_Definition(void) const;
-
-    ConstructionYardGameObj *As_ConstructionYardGameObj(void) { return this; }
-
-    bool Save(ChunkSaveClass &csave);
-
-    bool Load(ChunkLoadClass &cload);
-
-    const PersistFactoryClass &Get_Factory(void) const;
-
-    void Think(void);
-
-    void Set_Spy(bool b) { IsSpy = b; }
-
+	ConstructionYardGameObj (void);
+	~ConstructionYardGameObj (void);
+	virtual	void					Init( void );
+	void								Init (const ConstructionYardGameObjDef & definition);
+	SCRIPTS_API const ConstructionYardGameObjDef &	Get_Definition (void) const;
+	ConstructionYardGameObj *				As_ConstructionYardGameObj (void)	{ return this; }
+	bool									Save (ChunkSaveClass &csave);
+	bool									Load (ChunkLoadClass &cload);
+	const	PersistFactoryClass &	Get_Factory (void) const;
+	void					Think (void);
+	void Set_Spy(bool b) {IsSpy = b;}
 private:
-    float RepairTime;
-    float VehicleRepairTime;
-    bool IsSpy;
-
-    void Load_Variables(ChunkLoadClass &cload);
+	float RepairTime;
+	float VehicleRepairTime;
+	bool IsSpy;
+	void					Load_Variables (ChunkLoadClass &cload);	
 };
 
 

@@ -15,27 +15,25 @@ Only the source code to the module(s) containing the licenced code has to be rel
 #include "cNetEvent.h"
 
 
-class cPurchaseResponseEvent : public cNetEvent {
+class cPurchaseResponseEvent : public cNetEvent
+{
 
 private:
 
-    sint32 clientId;        // 1716
-    sint32 reply;           // 1720
+   sint32 clientId;        // 1716
+   sint32 reply;           // 1720
 
 
 public:
 
-    cPurchaseResponseEvent();
+   cPurchaseResponseEvent();
 
-    virtual unsigned int Get_Network_Class_ID() const;
+   virtual unsigned int Get_Network_Class_ID () const;
+   virtual void   Import_Creation      (BitStreamClass& oStream);
+   virtual void   Export_Creation      (BitStreamClass& oStream);
+   virtual void   Act                  ();
 
-    virtual void Import_Creation(BitStreamClass &oStream);
-
-    virtual void Export_Creation(BitStreamClass &oStream);
-
-    virtual void Act();
-
-    void Init(sint32 reply, sint32 clientId);
+   void Init (sint32 reply, sint32 clientId);
 
 };
 

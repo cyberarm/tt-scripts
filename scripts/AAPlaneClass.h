@@ -13,10 +13,12 @@
 
 #include "vector3.h"
 
-class AAPlaneClass {
+class AAPlaneClass
+{
 public:
 
-    enum AxisEnum {
+    enum AxisEnum
+    {
         XNORMAL = 0,
         YNORMAL = 1,
         ZNORMAL = 2
@@ -24,26 +26,30 @@ public:
 
     AAPlaneClass() {}
 
-    AAPlaneClass(AxisEnum normal, float dist) :
-            Normal(normal),
-            Dist(dist) {}
+    AAPlaneClass(AxisEnum normal,float dist) :
+        Normal(normal),
+        Dist(dist)
+    {}
 
-    void Set(AxisEnum normal, float dist) {
+    void Set(AxisEnum normal, float dist)
+    {
         Normal = normal;
         Dist = dist;
     }
 
-    void Get_Normal(Vector3 *normal) const {
-        normal->Set(0, 0, 0);
+    void Get_Normal(Vector3* normal) const
+    {
+        normal->Set(0,0,0);
         (*normal)[Normal] = 1.0f;
     }
 
-    inline bool In_Front(const Vector3 &point) const {
+    inline bool In_Front(const Vector3& point) const
+    {
         return Dist > point[Normal];
     }
 
 public:
 
-    AxisEnum Normal;
-    float Dist;
+    AxisEnum    Normal;
+    float       Dist;
 };

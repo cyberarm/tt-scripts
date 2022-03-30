@@ -19,64 +19,44 @@
 #include "RepairBayGameObjDef.h"
 #include "OBBoxClass.h"
 #include "SimpleGameObj.h"
-
-class RepairBayGameObj : public BuildingGameObj {
+class RepairBayGameObj : public BuildingGameObj
+{
 public:
-    RepairBayGameObj(void);
-
-    ~RepairBayGameObj(void);
-
-    virtual void Init(void);
-
-    void Init(const RepairBayGameObjDef &definition);
-
-    SCRIPTS_API const RepairBayGameObjDef
-    &
-
-    Get_Definition(void) const;
-
-    RepairBayGameObj *As_RepairBayGameObj(void) { return this; }
-
-    bool Save(ChunkSaveClass &csave);
-
-    bool Load(ChunkLoadClass &cload);
-
-    const PersistFactoryClass &Get_Factory(void) const;
-
-    void CnC_Initialize(BaseControllerClass *base);
-
-    void Think(void);
-
-    void Export_Creation(BitStreamClass &packet);
-
-    void Import_Creation(BitStreamClass &packet);
-
+	RepairBayGameObj (void);
+	~RepairBayGameObj (void);
+	virtual	void						Init( void );
+	void									Init (const RepairBayGameObjDef & definition);
+	SCRIPTS_API const RepairBayGameObjDef &	Get_Definition (void) const;
+	RepairBayGameObj *				As_RepairBayGameObj (void)	{ return this; }
+	bool									Save (ChunkSaveClass &csave);
+	bool									Load (ChunkLoadClass &cload);
+	const	PersistFactoryClass &	Get_Factory (void) const;
+	void					CnC_Initialize (BaseControllerClass *base);
+	void					Think (void);
+	void								Export_Creation (BitStreamClass &packet);
+	void								Import_Creation (BitStreamClass &packet);
 private:
-    void Load_Variables(ChunkLoadClass &cload);
-
-    bool Repair_Vehicle(void);
-
-    void Play_Repairing_Animation(bool onoff);
-
-    void Update_Repairing_Animations(void);
-
-    void Emit_Welding_Arc(RenderObjClass *vehicle_model);
-
-    enum {
-        ARC_OBJ_COUNT = 4,
-        BONE_COUNT = 6
-    };
-    float RepairTimer;
-    OBBoxClass RepairZone;
-    int RepairAnimationID;
-    bool IsReparing;
-    DynamicVectorClass<ReferencerClass> VehicleList;
-    StaticPhysClass *RepairMesh;
-    SimpleGameObj *ArcObjects[ARC_OBJ_COUNT];
-    float ArcLifeRemaining[ARC_OBJ_COUNT];
-    Matrix3D EndTM;
-    Matrix3D Bones[BONE_COUNT];
-    static const char *BoneNames[BONE_COUNT];
+	void					Load_Variables (ChunkLoadClass &cload);
+	bool					Repair_Vehicle (void);
+	void					Play_Repairing_Animation (bool onoff);
+	void					Update_Repairing_Animations (void);
+	void					Emit_Welding_Arc (RenderObjClass *vehicle_model);
+	enum
+	{
+		ARC_OBJ_COUNT	= 4,
+		BONE_COUNT		= 6
+	};
+	float					RepairTimer;
+	OBBoxClass			RepairZone;
+	int					RepairAnimationID;
+	bool					IsReparing;
+	DynamicVectorClass<ReferencerClass>	VehicleList;
+	StaticPhysClass *								RepairMesh;
+	SimpleGameObj *		ArcObjects[ARC_OBJ_COUNT];
+	float						ArcLifeRemaining[ARC_OBJ_COUNT];
+	Matrix3D					EndTM;
+	Matrix3D					Bones[BONE_COUNT];
+	static const char *	BoneNames[BONE_COUNT];
 };
 
 #endif

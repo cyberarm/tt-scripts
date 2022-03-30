@@ -10,7 +10,6 @@
 	Only the source code to the module(s) containing the licenced code has to be released.
 */
 #pragma once
-
 #include "scripts.h"
 
 /*!
@@ -25,9 +24,10 @@
  * \param SoundName
  *   Name of sound file to play after teleportation.
  */
-class UP_Teleport : public ScriptImpClass {
+class UP_Teleport : public ScriptImpClass
+{
 public:
-    void Entered(GameObject *obj, GameObject *enterer);
+	void Entered(GameObject* obj, GameObject* enterer);
 };
 
 /*!
@@ -48,9 +48,10 @@ public:
  * \param Blue
  *   Blue tone of the message.
  */
-class UP_HUD_Message_Zone_Enter : public ScriptImpClass {
+class UP_HUD_Message_Zone_Enter : public ScriptImpClass
+{
 public:
-    void Entered(GameObject *obj, GameObject *enterer) override;
+	void Entered(GameObject* obj, GameObject* enterer) override;
 };
 
 
@@ -72,9 +73,10 @@ public:
  * \param Blue
  *   Blue tone of the message.
  */
-class UP_HUD_Message_Zone_Exit : public ScriptImpClass {
+class UP_HUD_Message_Zone_Exit : public ScriptImpClass
+{
 public:
-    void Exited(GameObject *obj, GameObject *exiter) override;
+	void Exited(GameObject* obj, GameObject* exiter) override;
 };
 
 /*!
@@ -87,16 +89,15 @@ public:
  * \param Duration
  *   Amount of time to keep vehicle engine disabled.
  */
-class UP_Stop_Vehicle_Engine : public ScriptImpClass {
+class UP_Stop_Vehicle_Engine : public ScriptImpClass
+{
 public:
-    void Created(GameObject *obj);
-
-    void Custom(GameObject *obj, int type, int param, GameObject *sender);
-
-    void Timer_Expired(GameObject *obj, int number);
+	void Created(GameObject* obj);
+	void Custom(GameObject* obj, int type, int param, GameObject* sender);
+	void Timer_Expired(GameObject* obj, int number);
 
 private:
-    ReferencerClass Vehicle;
+	ReferencerClass Vehicle;
 };
 
 /*!
@@ -111,9 +112,10 @@ private:
  * \param Rounds
  *   Amount of rounds to give.
  */
-class UP_Change_Vehicle_Weapon : public ScriptImpClass {
+class UP_Change_Vehicle_Weapon : public ScriptImpClass
+{
 public:
-    void Created(GameObject *obj);
+	void Created(GameObject* obj);
 };
 
 /*!
@@ -128,14 +130,14 @@ public:
  * \param Multiplier
  *   Damage multiplier of MCT.
  */
-class UP_MCT_Building : public ScriptImpClass {
+class UP_MCT_Building : public ScriptImpClass
+{
 public:
-    void Created(GameObject *obj);
-
-    void Damaged(GameObject *obj, GameObject *damager, float amount);
+	void Created(GameObject* obj);
+	void Damaged(GameObject* obj, GameObject* damager, float amount);
 
 private:
-    ReferencerClass MCTObj;
+	ReferencerClass MCTObj;
 };
 
 /*!
@@ -150,15 +152,15 @@ private:
  * \param Multiplier
  *   Damage multiplier of this MCT.
  */
-class UP_Master_Control_Terminal : public ScriptImpClass {
+class UP_Master_Control_Terminal : public ScriptImpClass
+{
 private:
-    GameObject *MainBuilding;
-    float Multiplier;
+	GameObject* MainBuilding;
+	float Multiplier;
 
 public:
-    void Created(GameObject *obj);
-
-    void Damaged(GameObject *obj, GameObject *damager, float amount);
+	void Created(GameObject* obj);
+	void Damaged(GameObject* obj, GameObject* damager, float amount);
 };
 
 /*!
@@ -177,8 +179,9 @@ public:
  * \param AutoSelect
  *   Automatically select the weapon after giving.
  */
-class UP_Grant_Weapon : public ScriptImpClass {
-    void Created(GameObject *obj);
+class UP_Grant_Weapon : public ScriptImpClass
+{
+	void Created(GameObject* obj);
 };
 
 /*!
@@ -197,8 +200,9 @@ class UP_Grant_Weapon : public ScriptImpClass {
  * \param AutoSelect
  *   Automatically select the weapon after giving.
  */
-class UP_Grant_Weapon_Zone_Enter : public ScriptImpClass {
-    void Entered(GameObject *obj, GameObject *enterer);
+class UP_Grant_Weapon_Zone_Enter : public ScriptImpClass
+{
+	void Entered(GameObject* obj, GameObject* enterer);
 };
 
 /*!
@@ -217,8 +221,9 @@ class UP_Grant_Weapon_Zone_Enter : public ScriptImpClass {
  * \param AutoSelect
  *   Automatically select the weapon after giving.
  */
-class UP_Grant_Weapon_Zone_Exit : public ScriptImpClass {
-    void Exited(GameObject *obj, GameObject *exiter);
+class UP_Grant_Weapon_Zone_Exit : public ScriptImpClass
+{
+	void Exited(GameObject* obj, GameObject* exiter);
 };
 
 /*!
@@ -231,8 +236,9 @@ class UP_Grant_Weapon_Zone_Exit : public ScriptImpClass {
  * \param Preset
  *   Name of the preset to spawn.
  */
-class UP_Spawn_When_Death : public ScriptImpClass {
-    void Killed(GameObject *obj, GameObject *killer);
+class UP_Spawn_When_Death : public ScriptImpClass
+{
+	void Killed(GameObject* obj, GameObject* killer);
 };
 
 /*!
@@ -242,8 +248,9 @@ class UP_Spawn_When_Death : public ScriptImpClass {
  *
  * Ends the game when attached object dies.
  */
-class UP_GameOver_When_Death : public ScriptImpClass {
-    void Killed(GameObject *obj, GameObject *killer);
+class UP_GameOver_When_Death : public ScriptImpClass
+{
+	void Killed(GameObject* obj, GameObject* killer);
 };
 
 /*!
@@ -256,8 +263,9 @@ class UP_GameOver_When_Death : public ScriptImpClass {
  * \param Preset
  *   Name of the soldier preset to change.
  */
-class UP_Change_Character : public ScriptImpClass {
-    void Created(GameObject *obj);
+class UP_Change_Character : public ScriptImpClass
+{
+	void Created(GameObject* obj);
 };
 
 /*!
@@ -270,8 +278,9 @@ class UP_Change_Character : public ScriptImpClass {
  * \param Preset
  *   Name of the soldier preset to change.
  */
-class UP_Grant_Character_Zone_Enter : public ScriptImpClass {
-    void Entered(GameObject *obj, GameObject *enterer);
+class UP_Grant_Character_Zone_Enter : public ScriptImpClass
+{
+	void Entered(GameObject* obj, GameObject* enterer);
 };
 
 /*!
@@ -284,8 +293,9 @@ class UP_Grant_Character_Zone_Enter : public ScriptImpClass {
  * \param Preset
  *   Name of the soldier preset to change.
  */
-class UP_Grant_Character_Zone_Exit : public ScriptImpClass {
-    void Exited(GameObject *obj, GameObject *exiter);
+class UP_Grant_Character_Zone_Exit : public ScriptImpClass
+{
+	void Exited(GameObject* obj, GameObject* exiter);
 };
 
 /*!
@@ -298,8 +308,9 @@ class UP_Grant_Character_Zone_Exit : public ScriptImpClass {
  * \param Preset
  *   Name of the preset to spawn.
  */
-class UP_Spawn_And_Destroy_When_Fully_Repaired : public ScriptImpClass {
-    void Damaged(GameObject *obj, GameObject *damager, float amount);
+class UP_Spawn_And_Destroy_When_Fully_Repaired : public ScriptImpClass
+{
+	void Damaged(GameObject* obj, GameObject* damager, float amount);
 };
 
 /*!
@@ -316,15 +327,15 @@ class UP_Spawn_And_Destroy_When_Fully_Repaired : public ScriptImpClass {
  * \param Amount
  *   Amount of money to give.
  */
-class UP_Refinery_Object : public ScriptImpClass {
+class UP_Refinery_Object : public ScriptImpClass
+{
 private:
-    int Team;
-    float Amount;
+	int Team;
+	float Amount;
 
 public:
-    void Created(GameObject *obj);
-
-    void Timer_Expired(GameObject *obj, int number);
+	void Created(GameObject* obj);
+	void Timer_Expired(GameObject* obj, int number);
 };
 
 /*!
@@ -343,21 +354,20 @@ public:
  * \param Credits
  *   Money required to spawn the preset.
  */
-class UP_Vehicle_Purchase_Terminal : public ScriptImpClass {
+class UP_Vehicle_Purchase_Terminal : public ScriptImpClass
+{
 private:
-    bool Pokable;
-    Vector3 SpawnLocation;
-    float Facing;
-    ReferencerClass Terminal;
-    StringClass Preset;
-    int Amount;
+	bool Pokable;
+	Vector3 SpawnLocation;
+	float Facing;
+	ReferencerClass Terminal;
+	StringClass Preset;
+	int Amount;
 
 public:
-    void Created(GameObject *obj);
-
-    void Poked(GameObject *obj, GameObject *poker);
-
-    void Timer_Expired(GameObject *obj, int number);
+	void Created(GameObject* obj);
+	void Poked(GameObject* obj, GameObject* poker);
+	void Timer_Expired(GameObject* obj, int number);
 };
 
 /*!
@@ -374,19 +384,18 @@ public:
  * \param Credits
  *   Money required to buy and switch to the infantry preset.
  */
-class UP_Character_Purchase_Terminal : public ScriptImpClass {
+class UP_Character_Purchase_Terminal : public ScriptImpClass
+{
 private:
-    bool Pokable;
-    ReferencerClass Terminal;
-    StringClass Preset;
-    int Amount;
+	bool Pokable;
+	ReferencerClass Terminal;
+	StringClass Preset;
+	int Amount;
 
 public:
-    void Created(GameObject *obj);
-
-    void Poked(GameObject *obj, GameObject *poker);
-
-    void Timer_Expired(GameObject *obj, int number);
+	void Created(GameObject* obj);
+	void Poked(GameObject* obj, GameObject* poker);
+	void Timer_Expired(GameObject* obj, int number);
 };
 
 /*!
@@ -399,10 +408,10 @@ public:
  * \param Team
  *   ID of team to change after leaving the vehicle.
  */
-class UP_Set_Team_When_Exit : public ScriptImpClass {
-    void Custom(GameObject *obj, int type, int param, GameObject *sender);
-
-    void Timer_Expired(GameObject *obj, int number);
+class UP_Set_Team_When_Exit : public ScriptImpClass
+{
+	void Custom(GameObject* obj, int type, int param, GameObject* sender);
+	void Timer_Expired(GameObject* obj, int number);
 };
 
 /*!
@@ -412,8 +421,9 @@ class UP_Set_Team_When_Exit : public ScriptImpClass {
  *
  * Creates an Ion Cannon explosion at the attached object's location when it dies.
  */
-class UP_Ion_Explosion_When_Death : public ScriptImpClass {
-    void Killed(GameObject *obj, GameObject *killer);
+class UP_Ion_Explosion_When_Death : public ScriptImpClass
+{
+	void Killed(GameObject* obj, GameObject* killer);
 };
 
 /*!
@@ -423,8 +433,9 @@ class UP_Ion_Explosion_When_Death : public ScriptImpClass {
  *
  * Enables fly mode for attached object, and detaches.
  */
-class UP_FlyMode_Enable : public ScriptImpClass {
-    void Created(GameObject *obj);
+class UP_FlyMode_Enable : public ScriptImpClass
+{
+	void Created(GameObject* obj);
 };
 
 /*!
@@ -434,8 +445,9 @@ class UP_FlyMode_Enable : public ScriptImpClass {
  *
  * Disables fly mode for attached object, and detaches.
  */
-class UP_FlyMode_Disable : public ScriptImpClass {
-    void Created(GameObject *obj);
+class UP_FlyMode_Disable : public ScriptImpClass
+{
+	void Created(GameObject* obj);
 };
 
 /*!
@@ -445,8 +457,9 @@ class UP_FlyMode_Disable : public ScriptImpClass {
  *
  * Enables or disables spectator mode for attached player, and detaches.
  */
-class UP_Spectate : public ScriptImpClass {
-    void Created(GameObject *obj);
+class UP_Spectate : public ScriptImpClass
+{
+	void Created(GameObject* obj);
 };
 
 /*!
@@ -456,8 +469,9 @@ class UP_Spectate : public ScriptImpClass {
  *
  * Enables or disables spectator mode for enterer players.
  */
-class UP_Spectate_Zone_Enter : public ScriptImpClass {
-    void Entered(GameObject *obj, GameObject *enterer);
+class UP_Spectate_Zone_Enter : public ScriptImpClass
+{
+	void Entered(GameObject* obj, GameObject* enterer);
 };
 
 /*!
@@ -467,8 +481,9 @@ class UP_Spectate_Zone_Enter : public ScriptImpClass {
  *
  * Enables or disables spectator mode for exiter players.
  */
-class UP_Spectate_Zone_Exit : public ScriptImpClass {
-    void Exited(GameObject *obj, GameObject *exiter);
+class UP_Spectate_Zone_Exit : public ScriptImpClass
+{
+	void Exited(GameObject* obj, GameObject* exiter);
 };
 
 /*!
@@ -481,8 +496,9 @@ class UP_Spectate_Zone_Exit : public ScriptImpClass {
  * \param WeaponPreset
  *   Name of the weapon preset to select. Nothing happens if player does not have the weapon or is an invalid preset.
  */
-class UP_Select_Weapon : public ScriptImpClass {
-    void Created(GameObject *obj);
+class UP_Select_Weapon : public ScriptImpClass
+{
+	void Created(GameObject* obj);
 };
 
 /*!
@@ -495,8 +511,9 @@ class UP_Select_Weapon : public ScriptImpClass {
  * \param WeaponPreset
  *   Name of the weapon preset to select. Nothing happens if player does not have the weapon or is an invalid preset.
  */
-class UP_Select_Weapon_On_Zone_Enter : public ScriptImpClass {
-    void Entered(GameObject *obj, GameObject *enterer);
+class UP_Select_Weapon_On_Zone_Enter : public ScriptImpClass
+{
+	void Entered(GameObject* obj, GameObject* enterer);
 };
 
 /*!
@@ -509,8 +526,9 @@ class UP_Select_Weapon_On_Zone_Enter : public ScriptImpClass {
  * \param WeaponPreset
  *   Name of the weapon preset to select. Nothing happens if player does not have the weapon or is an invalid preset.
  */
-class UP_Select_Weapon_On_Zone_Exit : public ScriptImpClass {
-    void Exited(GameObject *obj, GameObject *exiter);
+class UP_Select_Weapon_On_Zone_Exit : public ScriptImpClass
+{
+	void Exited(GameObject* obj, GameObject* exiter);
 };
 
 /*!
@@ -530,38 +548,47 @@ class UP_Select_Weapon_On_Zone_Exit : public ScriptImpClass {
  * \param ThirdPreset
  *   Name of the preset to spawn in third slot.
  */
-class UP_Chinook_Reinforcements_Paradrop : public ScriptImpClass {
+class UP_Chinook_Reinforcements_Paradrop : public ScriptImpClass
+{
 private:
-    bool chinookKilled;
-    int paratrooperIndex;
-    GameObject *presetObj1;
-    GameObject *presetObj2;
-    GameObject *presetObj3;
-    GameObject *helicopter;
-    GameObject *trajectory;
+	bool chinookKilled;
+	int paratrooperIndex;
+	GameObject* presetObj1;
+	GameObject* presetObj2;
+	GameObject* presetObj3;
+	GameObject* helicopter;
+	GameObject* trajectory;
 
-    bool Check_Object(GameObject *obj) {
-        if (obj) {
-            if (obj->As_SmartGameObj()) {
-                if (obj->As_SoldierGameObj()) {
-                    return true;
-                } else {
-                    return false;
-                }
-            } else {
-                return false;
-            }
-        } else {
-            return false;
-        }
-    }
+	bool Check_Object(GameObject* obj)
+	{
+		if (obj)
+		{
+			if (obj->As_SmartGameObj())
+			{
+				if (obj->As_SoldierGameObj())
+				{
+					return true;
+				}
+				else
+				{
+					return false;
+				}
+			}
+			else
+			{
+				return false;
+			}
+		}
+		else
+		{
+			return false;
+		}
+	}
 
 public:
-    void Created(GameObject *obj);
-
-    void Custom(GameObject *obj, int type, int param, GameObject *sender);
-
-    void Timer_Expired(GameObject *obj, int number);
+	void Created(GameObject* obj);
+	void Custom(GameObject* obj, int type, int param, GameObject* sender);
+	void Timer_Expired(GameObject* obj, int number);
 };
 
 /*!
@@ -574,10 +601,10 @@ public:
  * \param Message
  *   Type of the custom event to disable invincibility.
  */
-class UP_Unkillable_Until_Custom : public ScriptImpClass {
-    void Custom(GameObject *obj, int type, int param, GameObject *sender);
-
-    void Damaged(GameObject *obj, GameObject *damager, float amount);
+class UP_Unkillable_Until_Custom : public ScriptImpClass
+{
+	void Custom(GameObject* obj, int type, int param, GameObject* sender);
+	void Damaged(GameObject* obj, GameObject* damager, float amount);
 };
 
 /*!
@@ -596,18 +623,18 @@ class UP_Unkillable_Until_Custom : public ScriptImpClass {
  * \param Interval
  *   Delay between each attach.
  */
-class UP_AttachScript_Interval_Self : public ScriptImpClass {
+class UP_AttachScript_Interval_Self : public ScriptImpClass
+{
 private:
-    StringClass Script;
-    StringClass Parameters;
-    float Interval;
-    int LoopCount;
-    int Looped;
+	StringClass Script;
+	StringClass Parameters;
+	float Interval;
+	int LoopCount;
+	int Looped;
 
 public:
-    void Created(GameObject *obj);
-
-    void Timer_Expired(GameObject *obj, int number);
+	void Created(GameObject* obj);
+	void Timer_Expired(GameObject* obj, int number);
 };
 
 /*!
@@ -628,19 +655,19 @@ public:
  * \param Interval
  *   Delay between each attach.
  */
-class UP_AttachScript_Interval : public ScriptImpClass {
+class UP_AttachScript_Interval : public ScriptImpClass
+{
 private:
-    StringClass Script;
-    StringClass Parameters;
-    GameObject *Target;
-    float Interval;
-    int LoopCount;
-    int Looped;
+	StringClass Script;
+	StringClass Parameters;
+	GameObject* Target;
+	float Interval;
+	int LoopCount;
+	int Looped;
 
 public:
-    void Created(GameObject *obj);
-
-    void Timer_Expired(GameObject *obj, int number);
+	void Created(GameObject* obj);
+	void Timer_Expired(GameObject* obj, int number);
 };
 
 /*!
@@ -655,18 +682,17 @@ public:
  * \param DestroyScriptCustomID
  *   ID to listen to detach this script.
  */
-class UP_Object_Follower_AI : public ScriptImpClass {
+class UP_Object_Follower_AI : public ScriptImpClass
+{
 private:
-    int TargetChangeCustom;
-    int DestroyScriptCustom;
-    ReferencerClass TargetObject;
+	int TargetChangeCustom;
+	int DestroyScriptCustom;
+	ReferencerClass TargetObject;
 
 public:
-    void Created(GameObject *obj);
-
-    void Custom(GameObject *obj, int type, int param, GameObject *sender);
-
-    void Timer_Expired(GameObject *obj, int number);
+	void Created(GameObject* obj);
+	void Custom(GameObject* obj, int type, int param, GameObject* sender);
+	void Timer_Expired(GameObject* obj, int number);
 };
 
 /*!
@@ -685,16 +711,15 @@ public:
  * \param Blue
  *   Blue tone of the message.
  */
-class UP_Private_Color_Message_On_Poke : public ScriptImpClass {
+class UP_Private_Color_Message_On_Poke : public ScriptImpClass
+{
 private:
-    bool Pokable;
+	bool Pokable;
 
 public:
-    void Created(GameObject *obj);
-
-    void Timer_Expired(GameObject *obj, int number);
-
-    void Poked(GameObject *obj, GameObject *poker);
+	void Created(GameObject* obj);
+	void Timer_Expired(GameObject* obj, int number);
+	void Poked(GameObject* obj, GameObject* poker);
 };
 
 /*!
@@ -709,11 +734,11 @@ public:
  * \param CustomID
  *   Unique custom type for this script to grant weapons back to player.
  */
-class UP_Seize_Weapon_Enter : public ScriptImpClass {
+class UP_Seize_Weapon_Enter : public ScriptImpClass
+{
 public:
-    void Entered(GameObject *obj, GameObject *enterer);
-
-    void Exited(GameObject *obj, GameObject *exiter);
+	void Entered(GameObject* obj, GameObject* enterer);
+	void Exited(GameObject* obj, GameObject* exiter);
 };
 
 /*!
@@ -728,11 +753,11 @@ public:
  * \param CustomID
  *   Unique custom type for this script to grant weapons back to player.
  */
-class UP_Seize_Weapon_Exit : public ScriptImpClass {
+class UP_Seize_Weapon_Exit : public ScriptImpClass
+{
 public:
-    void Entered(GameObject *obj, GameObject *enterer);
-
-    void Exited(GameObject *obj, GameObject *exiter);
+	void Entered(GameObject* obj, GameObject* enterer);
+	void Exited(GameObject* obj, GameObject* exiter);
 };
 
 /*!
@@ -747,16 +772,15 @@ public:
  * \param CustomID
  *   Unique custom type for this script to grant weapons back to player.
  */
-class UP_Seize_All_Weapons_Enter : public ScriptImpClass {
+class UP_Seize_All_Weapons_Enter : public ScriptImpClass
+{
 private:
-    DynamicVectorClass <StringClass> Weapons;
+	DynamicVectorClass<StringClass> Weapons;
 
 public:
-    void Created(GameObject *obj);
-
-    void Entered(GameObject *obj, GameObject *enterer);
-
-    void Exited(GameObject *obj, GameObject *exiter);
+	void Created(GameObject* obj);
+	void Entered(GameObject* obj, GameObject* enterer);
+	void Exited(GameObject* obj, GameObject* exiter);
 };
 
 /*!
@@ -771,16 +795,15 @@ public:
  * \param CustomID
  *   Unique custom type for this script to grant weapons back to player.
  */
-class UP_Seize_All_Weapons_Exit : public ScriptImpClass {
+class UP_Seize_All_Weapons_Exit : public ScriptImpClass
+{
 private:
-    DynamicVectorClass <StringClass> Weapons;
+	DynamicVectorClass<StringClass> Weapons;
 
 public:
-    void Created(GameObject *obj);
-
-    void Entered(GameObject *obj, GameObject *enterer);
-
-    void Exited(GameObject *obj, GameObject *exiter);
+	void Created(GameObject* obj);
+	void Entered(GameObject* obj, GameObject* enterer);
+	void Exited(GameObject* obj, GameObject* exiter);
 };
 
 /*!
@@ -801,9 +824,10 @@ public:
  * \param CustomID
  *   Type of the custom event to grant weapon and detach.
  */
-class UP_Grant_Weapon_Custom_Then_Detach : public ScriptImpClass {
+class UP_Grant_Weapon_Custom_Then_Detach : public ScriptImpClass
+{
 public:
-    void Custom(GameObject *obj, int type, int param, GameObject *sender);
+	void Custom(GameObject* obj, int type, int param, GameObject* sender);
 };
 
 /*!
@@ -813,15 +837,15 @@ public:
  *
  * Removes weapon from vehicle if driver is gunner, and gives back when a gunner enters. Designed to work with DriverIsAlwaysGunner turned off.
  */
-class UP_Disable_Weapon_For_Driver : public ScriptImpClass {
+class UP_Disable_Weapon_For_Driver : public ScriptImpClass
+{
 private:
-    bool HasWeapon;
-    StringClass Weapon;
-    int ClipAmmo;
-    int InventoryAmmo;
+	bool HasWeapon;
+	StringClass Weapon;
+	int ClipAmmo;
+	int InventoryAmmo;
 
 public:
-    void Created(GameObject *obj);
-
-    void Custom(GameObject *obj, int type, int param, GameObject *sender);
+	void Created(GameObject* obj);
+	void Custom(GameObject* obj, int type, int param, GameObject* sender);
 };

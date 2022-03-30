@@ -15,50 +15,31 @@
 #include "DynamicPhysClass.h"
 #include "DecorationPhysDefClass.h"
 
-class DecorationPhysClass : public DynamicPhysClass {
+class DecorationPhysClass : public DynamicPhysClass
+{
 public:
-    DecorationPhysClass(void);
-
-    virtual DecorationPhysClass *As_DecorationPhysClass(void) { return this; }
-
-    void Init(const DecorationPhysDefClass &def);
-
-    virtual void Timestep(float dt) {}
-
-    virtual void Set_Model(RenderObjClass *model);
-
-    virtual bool Cast_Ray(PhysRayCollisionTestClass &raytest);
-
-    virtual bool Cast_AABox(PhysAABoxCollisionTestClass &boxtest);
-
-    virtual bool Cast_OBBox(PhysOBBoxCollisionTestClass &boxtest);
-
-    virtual bool Intersection_Test(PhysAABoxIntersectionTestClass &test);
-
-    virtual bool Intersection_Test(PhysOBBoxIntersectionTestClass &test);
-
-    virtual const AABoxClass &Get_Bounding_Box(void) const;
-
-    virtual const Matrix3D &Get_Transform(void) const;
-
-    virtual void Set_Transform(const Matrix3D &m);
-
-    virtual void Get_Shadow_Blob_Box(AABoxClass *set_obj_space_box);
-
-    virtual const PersistFactoryClass &Get_Factory(void) const;
-
-    virtual bool Save(ChunkSaveClass &csave);
-
-    virtual bool Load(ChunkLoadClass &cload);
-
-    virtual void On_Post_Load(void);
-
+	DecorationPhysClass(void);
+	virtual DecorationPhysClass *	As_DecorationPhysClass(void)							{ return this; }
+	void									Init(const DecorationPhysDefClass & def);
+	virtual void						Timestep(float dt)										{ } 
+	virtual void						Set_Model(RenderObjClass * model);
+	virtual bool						Cast_Ray(PhysRayCollisionTestClass & raytest);
+	virtual bool						Cast_AABox(PhysAABoxCollisionTestClass & boxtest);
+	virtual bool						Cast_OBBox(PhysOBBoxCollisionTestClass & boxtest);
+	virtual bool						Intersection_Test(PhysAABoxIntersectionTestClass & test);
+	virtual bool						Intersection_Test(PhysOBBoxIntersectionTestClass & test);
+	virtual const AABoxClass &		Get_Bounding_Box(void) const;
+	virtual const Matrix3D &		Get_Transform(void) const;
+	virtual void						Set_Transform(const Matrix3D & m);
+	virtual void						Get_Shadow_Blob_Box(AABoxClass * set_obj_space_box);
+	virtual const PersistFactoryClass &	Get_Factory (void) const;
+	virtual bool								Save (ChunkSaveClass &csave);
+	virtual bool								Load (ChunkLoadClass &cload);		
+	virtual void								On_Post_Load(void);
 private:
-    DecorationPhysClass(const DecorationPhysClass &);
-
-    DecorationPhysClass &operator=(const DecorationPhysClass &);
-
-    AABoxClass ObjSpaceWorldBox;
+	DecorationPhysClass(const DecorationPhysClass &);
+	DecorationPhysClass & operator = (const DecorationPhysClass &);
+	AABoxClass							ObjSpaceWorldBox;
 };
 
 

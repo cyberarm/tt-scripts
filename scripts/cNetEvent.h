@@ -13,30 +13,26 @@
 #define TT_INCLUDE__CNETEVENT_H
 
 
+
 #include "engine_common.h"
 #include "engine_string.h"
 #include "NetworkObjectClass.h"
 
 class cNetEvent :
-        public NetworkObjectClass {
+	public NetworkObjectClass
+{
 
 public:
 
-    virtual ~cNetEvent();
+   virtual ~cNetEvent();
+   virtual unsigned int Get_Network_Class_ID() const = 0;
+   virtual void Import_Creation (BitStreamClass& oStream);
+   virtual void Export_Creation (BitStreamClass& oStream);
+   virtual void Delete          ();
+   virtual void Act             () = 0;
 
-    virtual unsigned int Get_Network_Class_ID() const = 0;
-
-    virtual void Import_Creation(BitStreamClass &oStream);
-
-    virtual void Export_Creation(BitStreamClass &oStream);
-
-    virtual void Delete();
-
-    virtual void Act() = 0;
-
-    void Init();
-
-    SCRIPTS_API void Set_Object_Dirty_Bit_For_Revision(uint revision, DIRTY_BIT dirty_bit, bool onoff);
+   void Init();
+   SCRIPTS_API void Set_Object_Dirty_Bit_For_Revision(uint revision,DIRTY_BIT dirty_bit, bool onoff);
 
 }; // 06B4
 

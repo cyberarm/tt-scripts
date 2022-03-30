@@ -11,38 +11,28 @@
 */
 #ifndef TT_INCLUDE__SOLDIERFACTORYGAMEOBJDEF_H
 #define TT_INCLUDE__SOLDIERFACTORYGAMEOBJDEF_H
-
 #include "BuildingGameObjDef.h"
-
-class SoldierFactoryGameObjDef : public BuildingGameObjDef {
+class SoldierFactoryGameObjDef : public BuildingGameObjDef
+{
 public:
-    SoldierFactoryGameObjDef(void);
-
-    ~SoldierFactoryGameObjDef(void);
-
-    uint32 Get_Class_ID(void) const;
-
-    PersistClass *Create(void) const;
-
-    bool Save(ChunkSaveClass &csave);
-
-    bool Load(ChunkLoadClass &cload);
-
-    const PersistFactoryClass &Get_Factory(void) const;
-
+	SoldierFactoryGameObjDef(void);
+	~SoldierFactoryGameObjDef (void);
+	uint32								Get_Class_ID (void) const;
+	PersistClass *						Create (void) const;
+	bool									Save (ChunkSaveClass &csave);
+	bool									Load (ChunkLoadClass &cload);
+	const PersistFactoryClass &	Get_Factory (void) const;
 #ifdef DDBEDIT
-    virtual void                        Dump (FileClass &file);
+	virtual void                        Dump (FileClass &file);
 #endif
-    DECLARE_EDITABLE (SoldierFactoryGameObjDef, BuildingGameObjDef);
+	DECLARE_EDITABLE (SoldierFactoryGameObjDef, BuildingGameObjDef);
 protected:
-    void Load_Variables(ChunkLoadClass &cload);
-
+	void					Load_Variables (ChunkLoadClass &cload);
 private:
-    int unk1;
-    int unk2;
-    int unk3;
-
-    friend class PresetDump;
+	int unk1;
+	int unk2;
+	int unk3;
+	friend class PresetDump;
 };
 
 #endif

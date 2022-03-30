@@ -10,11 +10,9 @@
 	Only the source code to the module(s) containing the licenced code has to be released.
 */
 #pragma once
-
-class TDA_Stealth_Armor : public ScriptImpClass {
-    void Custom(GameObject *obj, int type, int param, GameObject *sender);
-
-    void Timer_Expired(GameObject *obj, int timer_id);
+class TDA_Stealth_Armor:public ScriptImpClass {
+	void Custom(GameObject *obj,int type,int param,GameObject *sender);
+	void Timer_Expired(GameObject *obj,int timer_id);
 };
 
 // Use this to send messages on ZoneEnter and Zone Exit
@@ -27,10 +25,9 @@ class TDA_Stealth_Armor : public ScriptImpClass {
 //ExitParam:int			'Parameter on Exited
 //Team_ID:int			'Team ID 0=Nod,1=GDI,2=Any
 
-class TDA_Send_Custom_Zone : public ScriptImpClass {
-    void Entered(GameObject *obj, GameObject *enterer);
-
-    void Exited(GameObject *obj, GameObject *exiter);
+class TDA_Send_Custom_Zone: public ScriptImpClass {
+	void Entered(GameObject *obj,GameObject *enterer);
+	void Exited(GameObject *obj,GameObject *exiter);
 };
 
 // Construction Yard Controllers,will send the appropriate messages to the specified objects
@@ -49,12 +46,10 @@ class TDA_Send_Custom_Zone : public ScriptImpClass {
 //Building9_ID=0:int		'9th building to disable
 //Building10_ID=0:int		'10th building to disable
 
-class TDA_Conyard_Controller : public ScriptImpClass {
-    void Killed(GameObject *obj, GameObject *killer);
-
-    void Custom(GameObject *obj, int type, int param, GameObject *sender);
-
-    void Enable_Repairs(GameObject *obj, bool Enable);
+class TDA_Conyard_Controller: public ScriptImpClass {
+	void Killed(GameObject *obj,GameObject *killer);
+	void Custom(GameObject *obj,int type,int param,GameObject *sender);
+	void Enable_Repairs(GameObject *obj,bool Enable);
 };
 
 // Conyard Repair Script,still working on the script commands to do this,but for now
@@ -64,17 +59,12 @@ class TDA_Conyard_Controller : public ScriptImpClass {
 // Repair_Frequency:int		'how many ticks till it recieves 1 health
 // Timer_ID:int				'ID of the object it is attached to,will crash game if left blank.
 
-class TDA_Conyard_Repair : public ScriptImpClass {
-    void Timer_Expired(GameObject *obj, int timer_id);
-
-    void Custom(GameObject *obj, int type, int param, GameObject *sender);
-
-    void Created(GameObject *obj);
-
-public:
-    void Register_Auto_Save_Variables();
-
-    bool Enabled;
+class TDA_Conyard_Repair: public ScriptImpClass {
+	void Timer_Expired(GameObject *obj,int timer_id);
+	void Custom(GameObject *obj,int type,int param,GameObject *sender);
+	void Created(GameObject *obj);
+	public: void Register_Auto_Save_Variables();
+	bool Enabled;
 };
 
 // Use this to get the flying objects to appear on the Helipad...
@@ -83,8 +73,8 @@ public:
 //Preset_Name:string		'flying objects name
 //HelipadLocation:Vector	'location to create the object
 
-class TDA_User_Purchased_VTOL_Object : public ScriptImpClass {
-    void Created(GameObject *obj);
+class TDA_User_Purchased_VTOL_Object:public ScriptImpClass {
+	void Created(GameObject *obj);
 };
 
 // This will disable helicopter purchases upon destruction
@@ -95,8 +85,8 @@ class TDA_User_Purchased_VTOL_Object : public ScriptImpClass {
 //VTOL_Controller1=0:int		VTOL Controller to kill on destruction
 //VTOL_Controller2=0:int		VTOL Controller to kill on destruction
 
-class TDA_Helipad_Controller : public ScriptImpClass {
-    void Killed(GameObject *obj, GameObject *killer);
+class TDA_Helipad_Controller:public ScriptImpClass {
+	void Killed(GameObject *obj,GameObject *killer);
 };
 
 // This is the VTOL_Controller that actually creates the Helicopters
@@ -104,8 +94,8 @@ class TDA_Helipad_Controller : public ScriptImpClass {
 //TDA_VTOL_Controller
 //Cinematic_Object:string		text cinematic object to create the helicopter
 
-class TDA_VTOL_Controller : public ScriptImpClass {
-    void Custom(GameObject *obj, int type, int param, GameObject *sender);
+class TDA_VTOL_Controller:public ScriptImpClass {
+	void Custom(GameObject *obj,int type,int param,GameObject *sender);
 };
 
 // This is used to grab the purchase from the PT and then send a request to build it 
@@ -114,8 +104,8 @@ class TDA_VTOL_Controller : public ScriptImpClass {
 //TDA_VTOL_Object
 //VTOL_Controller=0:int		ID of the VTOL Controller to bind to.
 
-class TDA_VTOL_Object : public ScriptImpClass {
-    void Created(GameObject *obj);
+class TDA_VTOL_Object:public ScriptImpClass {
+	void Created(GameObject *obj);
 };
 
 // Use this to enable/disable stealth effect. Will activate stealth on enter,and deactivate stealth on exit
@@ -127,10 +117,9 @@ class TDA_VTOL_Object : public ScriptImpClass {
 //							2=zone exit to disable
 //Player_Type				Same as others 0=Nod,1=GDI,2=Any
 
-class TDA_Toggle_Stealth_Zone : public ScriptImpClass {
-    void Entered(GameObject *obj, GameObject *enterer);
-
-    void Exited(GameObject *obj, GameObject *exiter);
+class TDA_Toggle_Stealth_Zone:public ScriptImpClass {
+	void Entered(GameObject *obj,GameObject *enterer);
+	void Exited(GameObject *obj,GameObject *exiter);
 };
 
 // use this to teleport a unit to a desired location when they enter this zone 
@@ -141,8 +130,8 @@ class TDA_Toggle_Stealth_Zone : public ScriptImpClass {
 //Object_ID					Object to teleport to (use an editor only object for this,or else will teleport inside
 //							the other object
 
-class TDA_Teleport_Zone : public ScriptImpClass {
-    void Entered(GameObject *obj, GameObject *enterer);
+class TDA_Teleport_Zone:public ScriptImpClass {
+	void Entered(GameObject *obj,GameObject *enterer);
 };
 
 // This will Disable a building on Entered,it will not destroy,just disable.
@@ -151,10 +140,9 @@ class TDA_Teleport_Zone : public ScriptImpClass {
 // Building_ID:int			ID of the building to disable
 // Team_ID:int				ID of the team to trigger the script (0=Nod,1=GDI,2=Any)
 
-class TDA_Disable_Building_Zone : public ScriptImpClass {
-    void Entered(GameObject *obj, GameObject *enterer);
-
-    void Custom(GameObject *obj, int type, int param, GameObject *sender);
+class TDA_Disable_Building_Zone:public ScriptImpClass {
+	void Entered(GameObject *obj,GameObject *enterer);
+	void Custom(GameObject *obj,int type,int param,GameObject *sender);
 };
 
 // These are the controller scripts for a stealth generator attached to a Zone. 
@@ -163,8 +151,8 @@ class TDA_Disable_Building_Zone : public ScriptImpClass {
 //TDA_Stealth_Generator
 //Zone_ID:int				ID of the Connecting Zone
 
-class TDA_Stealth_Generator : public ScriptImpClass {
-    void Killed(GameObject *obj, GameObject *killer);
+class TDA_Stealth_Generator:public ScriptImpClass {
+	void Killed(GameObject *obj,GameObject *killer);
 };
 
 //Zone Script for above
@@ -172,19 +160,13 @@ class TDA_Stealth_Generator : public ScriptImpClass {
 //TDA_Stealth_Generator_Zone
 //Player_Type:int			player type (0=Nod,1=GDI,2=Any (unteamed))
 
-class TDA_Stealth_Generator_Zone : public ScriptImpClass {
-    void Custom(GameObject *obj, int type, int param, GameObject *sender);
-
-    void Entered(GameObject *obj, GameObject *enterer);
-
-    void Exited(GameObject *obj, GameObject *exiter);
-
-    void Created(GameObject *obj);
-
-public:
-    void Register_Auto_Save_Variables();
-
-    bool Disabled;
+class TDA_Stealth_Generator_Zone:public ScriptImpClass {
+	void Custom(GameObject *obj,int type,int param,GameObject *sender);
+	void Entered(GameObject *obj,GameObject *enterer);
+	void Exited(GameObject *obj,GameObject *exiter);
+	void Created(GameObject *obj);
+	public: void Register_Auto_Save_Variables();
+	bool Disabled;
 };
 
 //This is a Script use only script,no practical general use for it
@@ -192,18 +174,13 @@ public:
 //TDA_CTF_Attached
 //No Parameters
 
-class TDA_CTF_Attached : public ScriptImpClass {
-    void Killed(GameObject *obj, GameObject *killer);
-
-    void Custom(GameObject *obj, int type, int param, GameObject *sender);
-
-    void Created(GameObject *obj);
-
-public:
-    void Register_Auto_Save_Variables();
-
-    unsigned int MyFlagId;
-    unsigned int ZoneCapturedId;
+class TDA_CTF_Attached:public ScriptImpClass {
+	void Killed(GameObject *obj,GameObject *killer);
+	void Custom(GameObject *obj,int type,int param,GameObject *sender);
+	void Created(GameObject *obj);
+	public: void Register_Auto_Save_Variables();
+	unsigned int MyFlagId;
+	unsigned int ZoneCapturedId;
 };
 
 //Attach this to a zone for CTF type game... (for this to work,the game 
@@ -220,22 +197,16 @@ public:
 //Building_To_Destroy5=0:int	5th Building to Destroy on Max Captures
 //Play_Capture_Sounds=1:int		This setting will enable the CTF Event sounds (0=disable,1=enable)
 
-class TDA_CTF_Zone : public ScriptImpClass {
-    void Entered(GameObject *obj, GameObject *enterer);
-
-    void Custom(GameObject *obj, int type, int param, GameObject *sender);
-
-    void Timer_Expired(GameObject *obj, int timer_id);
-
-    void Created(GameObject *obj);
-
-public:
-    void Register_Auto_Save_Variables();
-
-    int NumCaptured;
-    bool GotFlag;
-    unsigned int DecorFlag;
-    unsigned int FlagId;
-    unsigned int PlayerId;
-    bool DecorFlagPresent;
+class TDA_CTF_Zone:public ScriptImpClass {
+	void Entered(GameObject *obj,GameObject *enterer);
+	void Custom(GameObject *obj,int type,int param,GameObject *sender);
+	void Timer_Expired(GameObject *obj,int timer_id);
+	void Created(GameObject *obj);
+	public: void Register_Auto_Save_Variables();
+	int NumCaptured;
+	bool GotFlag;
+	unsigned int DecorFlag;
+	unsigned int FlagId;
+	unsigned int PlayerId;
+	bool DecorFlagPresent;
 };

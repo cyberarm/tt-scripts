@@ -15,49 +15,37 @@
 #include "DynamicPhysDefClass.h"
 
 
-class MoveablePhysDefClass : public DynamicPhysDefClass {
+class MoveablePhysDefClass : public DynamicPhysDefClass
+{
 public:
-    MoveablePhysDefClass(void);
-
-    virtual const char *Get_Type_Name(void) { return "MoveablePhysDef"; }
-
-    virtual bool Is_Type(const char *);
-
-    virtual bool Save(ChunkSaveClass &csave);
-
-    virtual bool Load(ChunkLoadClass &cload);
-
-    float Get_Mass(void) { return Mass; }
-
-    float Get_Grav_Scale(void) { return GravScale; }
-
-    float Get_Elasticity(void) { return Elasticity; }
-
-    void Set_Mass(float new_mass) { Mass = new_mass; }
-
-    void Set_Grav_Scale(float new_g) { GravScale = new_g; }
-
-    void Set_Elasticity(float new_e) { Elasticity = new_e; }
-
+	MoveablePhysDefClass(void);
+	virtual const char *						Get_Type_Name(void)			{ return "MoveablePhysDef"; }
+	virtual bool								Is_Type(const char *);
+	virtual bool								Save(ChunkSaveClass &csave);
+	virtual bool								Load(ChunkLoadClass &cload);
+	float											Get_Mass(void)					{ return Mass; }
+	float											Get_Grav_Scale(void)			{ return GravScale; }
+	float											Get_Elasticity(void) { return Elasticity; }
+	void											Set_Mass(float new_mass)	{ Mass = new_mass; }
+	void											Set_Grav_Scale(float new_g){ GravScale = new_g; }
+	void											Set_Elasticity(float new_e) { Elasticity = new_e; }
 #ifdef DDBEDIT
-    virtual void                        Dump (FileClass &file);
+	virtual void                        Dump (FileClass &file);
 #endif
-    DECLARE_EDITABLE(MoveablePhysDefClass, DynamicPhysDefClass);
+	DECLARE_EDITABLE(MoveablePhysDefClass,DynamicPhysDefClass);
 protected:
-    float Mass;
-    float GravScale;
-    float Elasticity;
-    enum {
-        CINEMATIC_COLLISION_NONE = 0,
-        CINEMATIC_COLLISION_STOP,
-        CINEMATIC_COLLISION_PUSH,
-        CINEMATIC_COLLISION_KILL
-    };
-    int CinematicCollisionMode;
-
-    friend class MoveablePhysClass;
-
-    friend class PresetDump;
+	float				Mass;
+	float				GravScale;
+	float				Elasticity;
+	enum { 
+		CINEMATIC_COLLISION_NONE = 0, 
+		CINEMATIC_COLLISION_STOP, 
+		CINEMATIC_COLLISION_PUSH, 
+		CINEMATIC_COLLISION_KILL 
+	};
+	int				CinematicCollisionMode;
+	friend class MoveablePhysClass;
+	friend class PresetDump;
 }; // 36
 
 #endif

@@ -15,44 +15,50 @@
 #include "engine_vector.h"
 
 
+
 class GameDefinition :
-        public NoEqualsClass<GameDefinition> {
+	public NoEqualsClass<GameDefinition>
+{
 
 public:
 
-    GameDefinition() {
-    }
+	GameDefinition()
+	{
+	}
 
-    GameDefinition(const GameDefinition &that) {
-        name = that.name;
-        mapName = that.mapName;
-        serverPresetsFile = that.serverPresetsFile;
+	GameDefinition(const GameDefinition& that)
+	{
+		name = that.name;
+		mapName = that.mapName;
+		serverPresetsFile = that.serverPresetsFile;
 
-        int packageCount = that.packages.Length();
-        packages.Resize(packageCount);
-        for (int i = 0; i < packageCount; ++i)
-            packages[i] = that.packages[i];
-    }
+		int packageCount = that.packages.Length();
+		packages.Resize(packageCount);
+		for (int i = 0; i < packageCount; ++i)
+			packages[i] = that.packages[i];
+	}
 
-    GameDefinition &operator=(const GameDefinition &that) {
-        name = that.name;
-        mapName = that.mapName;
-        serverPresetsFile = that.serverPresetsFile;
+	GameDefinition& operator =(const GameDefinition& that)
+	{
+		name = that.name;
+		mapName = that.mapName;
+		serverPresetsFile = that.serverPresetsFile;
 
-        int packageCount = that.packages.Length();
-        packages.Resize(packageCount);
-        for (int i = 0; i < packageCount; ++i)
-            packages[i] = that.packages[i];
+		int packageCount = that.packages.Length();
+		packages.Resize(packageCount);
+		for (int i = 0; i < packageCount; ++i)
+			packages[i] = that.packages[i];
 
-        return *this;
-    }
+		return *this;
+	}
 
-    StringClass name;
-    StringClass mapName;
-    StringClass serverPresetsFile;
-    SimpleVecClass<uint32> packages;
+	StringClass name;
+	StringClass mapName;
+	StringClass serverPresetsFile;
+	SimpleVecClass<uint32> packages;
 
-    const StringClass &GetDisplayName() const {
-        return name.Compare_No_Case(mapName) == 0 ? mapName : name;
-    }
+	const StringClass& GetDisplayName() const
+	{
+		return name.Compare_No_Case(mapName) == 0 ? mapName : name;
+	}
 };

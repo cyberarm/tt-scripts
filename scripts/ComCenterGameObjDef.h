@@ -11,38 +11,27 @@
 */
 #ifndef TT_INCLUDE_COMCENTERGAMEOBJDEF_H
 #define TT_INCLUDE_COMCENTERGAMEOBJDEF_H
-
 #include "BuildingGameObjDef.h"
-
-class ComCenterGameObjDef : public BuildingGameObjDef {
+class ComCenterGameObjDef : public BuildingGameObjDef
+{
 public:
-    ComCenterGameObjDef(void);
-
-    ~ComCenterGameObjDef(void);
-
-    uint32 Get_Class_ID(void) const;
-
-    PersistClass *Create(void) const;
-
-    bool Save(ChunkSaveClass &csave);
-
-    bool Load(ChunkLoadClass &cload);
-
-    const PersistFactoryClass &Get_Factory(void) const;
-
+	ComCenterGameObjDef (void);
+	~ComCenterGameObjDef (void);
+	uint32								Get_Class_ID (void) const;
+	PersistClass *						Create (void) const;
+	bool									Save (ChunkSaveClass &csave);
+	bool									Load (ChunkLoadClass &cload);
+	const PersistFactoryClass &	Get_Factory (void) const;
 #ifdef DDBEDIT
-    virtual void                        Dump (FileClass &file);
+	virtual void                        Dump (FileClass &file);
 #endif
-    DECLARE_EDITABLE (ComCenterGameObjDef, BuildingGameObjDef);
+	DECLARE_EDITABLE (ComCenterGameObjDef, BuildingGameObjDef);
 protected:
-    void Load_Variables(ChunkLoadClass &cload);
-
+	void					Load_Variables (ChunkLoadClass &cload);
 private:
-    int unk1;
-    int unk2;
-    int unk3;
-
-    friend class PresetDump;
+	int unk1;
+	int unk2;
+	int unk3;
+	friend class PresetDump;
 };
-
 #endif

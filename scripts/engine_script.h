@@ -11,57 +11,31 @@
 */
 #ifndef SCRIPTS_INCLUDE__ENGINE_SCRIPT_H
 #define SCRIPTS_INCLUDE__ENGINE_SCRIPT_H
-
 #include "scripts.h"
 #include "engine_string.h"
 #include "SList.h"
 
-SCRIPTS_API void Remove_Script(GameObject *obj, const char *script); //removes all copies of <script> from an object
+SCRIPTS_API void Remove_Script(GameObject *obj,const char *script); //removes all copies of <script> from an object
 SCRIPTS_API void Remove_All_Scripts(GameObject *obj); //removes all scripts from an object
-SCRIPTS_API void Attach_Script_Preset(const char *script, const char *params, const char *preset,
-                                      int team); //attached <script> to all objects of <preset> in team <team>
-SCRIPTS_API void Attach_Script_Type(const char *script, const char *params, unsigned long type,
-                                    int team); //attaches <script> to all objects of <type> in team <team>
-SCRIPTS_API void Remove_Script_Preset(const char *script, const char *preset,
-                                      int team); //removes all copies of <script> from all objects of <preset> in team <team>
-SCRIPTS_API void Remove_Script_Type(const char *script, unsigned long type,
-                                    int team); //removes all copies of <script> from all objects of <type> in team <team>
-SCRIPTS_API bool Is_Script_Attached(GameObject *obj, const char *script); //is the script attached
-SCRIPTS_API void Attach_Script_Once(GameObject *obj, const char *script,
-                                    const char *params); //attach a script if its not already attached
-SCRIPTS_API void Attach_Script_Preset_Once(const char *script, const char *params, const char *preset,
-                                           int team); //attach a script to all objects of preset if its not already attached
-SCRIPTS_API void Attach_Script_Type_Once(const char *script, const char *params, unsigned long type,
-                                         int team); //attach a script to all objects of type if its not already attached
-SCRIPTS_API void
-Attach_Script_Building(const char *script, const char *params, int team); //attach a script to all buildings
-SCRIPTS_API void Attach_Script_Is_Preset(GameObject *obj, const char *preset, const char *script, const char *params,
-                                         int team); //attach the script if object is of preset
-SCRIPTS_API void Attach_Script_Is_Type(GameObject *obj, unsigned long type, const char *script, const char *params,
-                                       int team); //attach the script if object is of type
-SCRIPTS_API void Attach_Script_Player_Once(const char *script, const char *params,
-                                           int team); //attach a script to all players if its not already attached
+SCRIPTS_API void Attach_Script_Preset(const char *script,const char *params,const char *preset,int team); //attached <script> to all objects of <preset> in team <team>
+SCRIPTS_API void Attach_Script_Type(const char *script,const char *params,unsigned long type,int team); //attaches <script> to all objects of <type> in team <team>
+SCRIPTS_API void Remove_Script_Preset(const char *script,const char *preset,int team); //removes all copies of <script> from all objects of <preset> in team <team>
+SCRIPTS_API void Remove_Script_Type(const char *script,unsigned long type,int team); //removes all copies of <script> from all objects of <type> in team <team>
+SCRIPTS_API bool Is_Script_Attached(GameObject *obj,const char *script); //is the script attached
+SCRIPTS_API void Attach_Script_Once(GameObject *obj,const char *script,const char *params); //attach a script if its not already attached
+SCRIPTS_API void Attach_Script_Preset_Once(const char *script,const char *params,const char *preset,int team); //attach a script to all objects of preset if its not already attached
+SCRIPTS_API void Attach_Script_Type_Once(const char *script,const char *params,unsigned long type,int team); //attach a script to all objects of type if its not already attached
+SCRIPTS_API void Attach_Script_Building(const char *script,const char *params,int team); //attach a script to all buildings
+SCRIPTS_API void Attach_Script_Is_Preset(GameObject *obj,const char *preset,const char *script,const char *params,int team); //attach the script if object is of preset
+SCRIPTS_API void Attach_Script_Is_Type(GameObject *obj,unsigned long type,const char *script,const char *params,int team); //attach the script if object is of type
+SCRIPTS_API void Attach_Script_Player_Once(const char *script,const char *params,int team); //attach a script to all players if its not already attached
 SCRIPTS_API void Remove_Duplicate_Script(GameObject *obj, const char *script); //remove duplicate scripts from an object
-SCRIPTS_API void Attach_Script_All_Buildings_Team(int Team, const char *Script, const char *Params,
-                                                  bool Once); //attach a script to all buildings by team
-SCRIPTS_API void Attach_Script_All_Turrets_Team(int Team, const char *Script, const char *Params,
-                                                bool Once); //attach a script to all static vehicles by team
-SCRIPTS_API GameObject
-*
-
-Find_Building_With_Script(int Team, int Type, const char *Script,
-                          GameObject *Caller); //Find a building of this type with this script attached to it
-SCRIPTS_API GameObject
-*
-
-Find_Object_With_Script(const char *script); //Find the first object with this script on it
-SCRIPTS_API GameObject
-*
-
-Find_Closest_Object_With_Script(const char *script,
-                                Vector3 pos); //Find the closest object to pos with this script on it
-SCRIPTS_API void
-Find_All_Objects_With_Script(const char *script, SList<GameObject> &objects); // Find all objects with this script on it
+SCRIPTS_API void Attach_Script_All_Buildings_Team(int Team,const char *Script,const char *Params,bool Once); //attach a script to all buildings by team
+SCRIPTS_API void Attach_Script_All_Turrets_Team(int Team,const char *Script,const char *Params,bool Once); //attach a script to all static vehicles by team
+SCRIPTS_API GameObject *Find_Building_With_Script(int Team,int Type,const char *Script,GameObject *Caller); //Find a building of this type with this script attached to it
+SCRIPTS_API GameObject *Find_Object_With_Script(const char *script); //Find the first object with this script on it
+SCRIPTS_API GameObject *Find_Closest_Object_With_Script(const char *script, Vector3 pos); //Find the closest object to pos with this script on it
+SCRIPTS_API void Find_All_Objects_With_Script(const char *script, SList<GameObject>& objects); // Find all objects with this script on it
 
 /*!
 * \brief Find Objects With Script - Distance Sorted
@@ -78,34 +52,13 @@ Find_All_Objects_With_Script(const char *script, SList<GameObject> &objects); //
 * \param[in] position
 *   The position to calculate distance from
 */
-SCRIPTS_API void
-Find_All_Objects_With_Script_By_Distance(const char *script, SList<GameObject> &objects, Vector3 position);
+SCRIPTS_API void Find_All_Objects_With_Script_By_Distance(const char *script, SList<GameObject>& objects, Vector3 position);
+SCRIPTS_API void Find_All_Vehicles_By_Distance(SList<GameObject>& objects, Vector3 position);
 
-SCRIPTS_API void Find_All_Vehicles_By_Distance(SList<GameObject> &objects, Vector3 position);
-
-SCRIPTS_API void Send_Custom_Event_To_Objects_With_Script(GameObject * sender,
-const char *script,
-int message,
-int param,
-float delay
-); // Script to send a custom to all objects with a specific script
-SCRIPTS_API void Send_Custom_Event_To_Objects_With_Script_Ranged(GameObject * sender,
-const char *script,
-int message,
-int param,
-float delay,
-float range
-); // Script to send a custom to all objects with a specific script in a specified range
-SCRIPTS_API ScriptImpClass
-*
-Find_Script_On_Object(GameObject
-* obj,
-const char *script
-); // Returns a pointer to the first instance of the named script on the given object, or NULL if not found
-SCRIPTS_API void Attach_Script_Occupants(GameObject * obj,
-const char *script,
-const char *params
-); //attaches a script to all occupants of a vehicle
+SCRIPTS_API void Send_Custom_Event_To_Objects_With_Script( GameObject *sender, const char *script, int message, int param, float delay ); // Script to send a custom to all objects with a specific script
+SCRIPTS_API void Send_Custom_Event_To_Objects_With_Script_Ranged( GameObject *sender, const char *script, int message, int param, float delay, float range ); // Script to send a custom to all objects with a specific script in a specified range
+SCRIPTS_API ScriptImpClass* Find_Script_On_Object(GameObject* obj, const char *script); // Returns a pointer to the first instance of the named script on the given object, or NULL if not found
+SCRIPTS_API void Attach_Script_Occupants(GameObject *obj,const char *script,const char *params); //attaches a script to all occupants of a vehicle
 
 /*!
 * \brief Attach Script with Formatted Parameters
@@ -123,10 +76,7 @@ const char *params
 * \param[in] params
 *   The format string for the script parameters
 */
-SCRIPTS_API void Attach_Script_V(GameObject * pObj,
-const char *script,
-const char *params, ...
-);
+SCRIPTS_API void Attach_Script_V ( GameObject* pObj, const char* script, const char* params, ... );
 
 /*!
 * \brief Attach Script with Formatted Parameters (va_list)
@@ -145,10 +95,7 @@ const char *params, ...
 * \param[in] vargs
 *   The variable arguments object
 */
-SCRIPTS_API void Attach_Script_V(GameObject * pObj,
-const char *script,
-const char *params, va_list
-vargs );
+SCRIPTS_API void Attach_Script_V ( GameObject* pObj, const char* script, const char* params, va_list vargs );
 
 /*!
 * \brief Attach Script Once with Formatted Parameters
@@ -166,57 +113,56 @@ vargs );
 * \param[in] params
 *   The format string for the script parameters
 */
-SCRIPTS_API void Attach_Script_Once_V(GameObject * pObj,
-const char *script,
-const char *params, ...
-);
+SCRIPTS_API void Attach_Script_Once_V ( GameObject* pObj, const char* script, const char* params, ... );
 
-class ScriptParameter : public NoEqualsClass<ScriptParameter> {
+class ScriptParameter : public NoEqualsClass<ScriptParameter>
+{
 public:
-    StringClass name;
-    StringClass value;
-    int type;
+	StringClass name;
+	StringClass value;
+	int type;
 };
 
-typedef enum {
-    PARAM_TYPE_INT = 0,
-    PARAM_TYPE_FLOAT,
-    PARAM_TYPE_STRING,
-    PARAM_TYPE_BOOL,
-    PARAM_TYPE_ID,
-    PARAM_TYPE_VECTOR3,
-    PARAM_TYPE_ENUM,
-    PARAM_TYPE_EMITTER,
-    PARAM_TYPE_WEAPON,
-    PARAM_TYPE_AMMO,
-    PARAM_TYPE_EXPLOSION,
-    PARAM_TYPE_ANIMATION,
-    PARAM_TYPE_GANG,
-    PARAM_TYPE_FILE,
-    PARAM_TYPE_SOUND,
-    PARAM_TYPE_COLOR,
-    PARAM_TYPE_COUNT
+typedef enum
+{
+	PARAM_TYPE_INT = 0,
+	PARAM_TYPE_FLOAT,
+	PARAM_TYPE_STRING,
+	PARAM_TYPE_BOOL,
+	PARAM_TYPE_ID,
+	PARAM_TYPE_VECTOR3,
+	PARAM_TYPE_ENUM,
+	PARAM_TYPE_EMITTER,
+	PARAM_TYPE_WEAPON,
+	PARAM_TYPE_AMMO,
+	PARAM_TYPE_EXPLOSION,
+	PARAM_TYPE_ANIMATION,
+	PARAM_TYPE_GANG,
+	PARAM_TYPE_FILE,
+	PARAM_TYPE_SOUND,
+	PARAM_TYPE_COLOR,
+	PARAM_TYPE_COUNT
 } PARAM_TYPES;
 
-const char *const PARAM_TYPE_STRINGS[PARAM_TYPE_COUNT] =
-        {
-                "int",
-                "float",
-                "string",
-                "bool",
-                "ID",
-                "vector3",
-                "enum",
-                "emitter",
-                "weapon",
-                "ammo",
-                "explosion",
-                "animation",
-                "gang",
-                "file",
-                "sound",
-                "color",
-        };
+const char * const PARAM_TYPE_STRINGS[PARAM_TYPE_COUNT] =
+{
+	"int",
+	"float",
+	"string",
+	"bool",
+	"ID",
+	"vector3",
+	"enum",
+	"emitter",
+	"weapon",
+	"ammo",
+	"explosion",
+	"animation",
+	"gang",
+	"file",
+	"sound",
+	"color",
+};
 
 SCRIPTS_API void Get_Script_Parameters(const char *script, DynamicVectorClass<ScriptParameter> &parameters);
 

@@ -10,37 +10,28 @@
 	Only the source code to the module(s) containing the licenced code has to be released.
 */
 #pragma once
-
 class NH_Spawn_Object_On_Poke : public ScriptImpClass {
-    int spawn;
-
-    void Created(GameObject *obj);
-
-    void Damaged(GameObject *obj, GameObject *damager, float amount);
-
-    void Custom(GameObject *obj, int type, int param, GameObject *sender);
-
-    void Timer_Expired(GameObject *obj, int number);
+	int spawn;
+	void Created(GameObject *obj);
+	void Damaged(GameObject *obj,GameObject *damager,float amount);
+	void Custom(GameObject *obj,int type,int param,GameObject *sender);
+	void Timer_Expired(GameObject *obj,int number);
 };
 
 class NH_SetTeam_OnLeave : public ScriptImpClass {
-    void Custom(GameObject *obj, int type, int param, GameObject *sender);
+	void Custom(GameObject *obj,int type,int param,GameObject *sender);
 };
 
 class NH_Deploy_Building_On_Poke : public ScriptImpClass {
-    void Death(GameObject *obj, GameObject *killer);
+	void Death(GameObject *obj,GameObject *killer);
 };
 
 class NH_Create_Buy_Panels : public ScriptImpClass {
-    int panel1;
-    int panel2;
-    int panel3;
-    int panel4;
-
-    void Created(GameObject *obj);
-
-    void Death(GameObject *obj, GameObject *killer);
-
-public:
-    void Register_Auto_Save_Variables();
+	int panel1;
+	int panel2;
+	int panel3;
+	int panel4;
+	void Created(GameObject *obj);
+	void Death(GameObject *obj,GameObject *killer);
+	public: void Register_Auto_Save_Variables();
 };

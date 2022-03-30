@@ -16,56 +16,56 @@
 
 
 // Define building child types
-#define BUILDING_CHILD_TYPE_GENERIC                    0
-#define BUILDING_CHILD_TYPE_MINOR_WEAKPOINT        1
-#define BUILDING_CHILD_TYPE_MAJOR_WEAKPOINT        2
-#define BUILDING_CHILD_TYPE_CAPTUREPOINT          3
+#define BUILDING_CHILD_TYPE_GENERIC				    0
+#define BUILDING_CHILD_TYPE_MINOR_WEAKPOINT		1
+#define BUILDING_CHILD_TYPE_MAJOR_WEAKPOINT		2
+#define BUILDING_CHILD_TYPE_CAPTUREPOINT		  3
 
 
 /*------------------------
 Building Controller Script
 --------------------------*/
 
-class dp88_buildingScripts_controller : public ScriptImpClass {
-    // Struct to contain data for building children
-    struct ChildData {
-        int objectId;
-        int type;
-        bool destroyed;
+class dp88_buildingScripts_controller : public ScriptImpClass
+{
+  // Struct to contain data for building children
+  struct ChildData
+  {
+    int objectId;
+    int type;
+    bool destroyed;
 
-        ChildData *operator=(ChildData *cd) {
-            objectId = cd->objectId;
-            type = cd->type;
-            destroyed = false;
-        }
-    };
+    ChildData* operator= (ChildData* cd )
+    {
+      objectId = cd->objectId;
+      type = cd->type;
+      destroyed = false;
+    }
+  };
 
-    void Created(GameObject *obj);
+  void Created( GameObject *obj );
+  void Destroyed( GameObject *obj );
+  void Killed( GameObject *obj, GameObject *killer );
+  void Custom( GameObject *obj, int type, int param, GameObject *sender );
 
-    void Destroyed(GameObject *obj);
+  // Array of data for child objects belonging to this building controller
+  int numChildren;
+  ChildData* children;
 
-    void Killed(GameObject *obj, GameObject *killer);
+  /*!
+  * Find the position of the given object ID in the children array
+  * \return Array index of child, or -1 if not found
+  */
+  int findChild ( int objectId );
 
-    void Custom(GameObject *obj, int type, int param, GameObject *sender);
+  // Is the building online?
+  bool buildingOnline;
 
-    // Array of data for child objects belonging to this building controller
-    int numChildren;
-    ChildData *children;
-
-    /*!
-    * Find the position of the given object ID in the children array
-    * \return Array index of child, or -1 if not found
-    */
-    int findChild(int objectId);
-
-    // Is the building online?
-    bool buildingOnline;
-
-    // String IDs
-    unsigned long team0_buildingOfflineStringId;
-    unsigned long team1_buildingOfflineStringId;
-    unsigned long team0_buildingOnlineStringId;
-    unsigned long team1_buildingOnlineStringId;
+  // String IDs
+  unsigned long team0_buildingOfflineStringId;
+  unsigned long team1_buildingOfflineStringId;
+  unsigned long team0_buildingOnlineStringId;
+  unsigned long team1_buildingOnlineStringId;
 };
 
 // -------------------------------------------------------------------------------------------------
@@ -78,41 +78,42 @@ class dp88_buildingScripts_controller : public ScriptImpClass {
 * handles location of the parent building (where necessary) and parsing all of the custom messages
 * from the parent building.
 */
-class dp88_buildingScripts_baseClass : public ScriptImpClass {
+class dp88_buildingScripts_baseClass : public ScriptImpClass
+{
 public:
-    dp88_buildingScripts_baseClass();
+  dp88_buildingScripts_baseClass();
 
 protected:
-    /*! This function should be called in the Created() function of any derived script which is placed
-    on an object other than the one with the dp88_buildingScripts_controller script attached.
-    If no parent is found this will call Destroy_Script() and return false */
-    GameObject *RegisterWithParent(GameObject *obj, const char *preset_name, int type);
+  /*! This function should be called in the Created() function of any derived script which is placed
+  on an object other than the one with the dp88_buildingScripts_controller script attached.
+  If no parent is found this will call Destroy_Script() and return false */
+  GameObject* RegisterWithParent( GameObject* obj, const char* preset_name, int type );
 
 
-    /*! Handles custom messages from the parent building, should not be overridden by derived classes,
-    which should instead override the new OnCustom() stub function if they need to do their own custom
-    processing */
-    void Custom(GameObject *obj, int type, int param, GameObject *sender);
+  /*! Handles custom messages from the parent building, should not be overridden by derived classes,
+  which should instead override the new OnCustom() stub function if they need to do their own custom
+  processing */
+  void Custom( GameObject *obj, int type, int param, GameObject *sender );
 
-    /*! This function is called by Custom() for any custom it has not handled itself */
-    virtual void OnCustom(GameObject *obj, int type, int param, GameObject *sender) {};
-
-
-    /*! Event function called when the building enters the "offline" state */
-    virtual void OnBuildingOffline(GameObject *obj) {};
-
-    /*! Event function called when the building enters the "online" state */
-    virtual void OnBuildingOnline(GameObject *obj) {};
-
-    /*! Event function called when the building has been captured by a team or become neutral */
-    virtual void OnBuildingCaptured(GameObject *obj, int team) {};
-
-    /*! Event function called when the building has been destroyed */
-    virtual void OnBuildingDestroyed(GameObject *obj) {};
+  /*! This function is called by Custom() for any custom it has not handled itself */
+  virtual void OnCustom( GameObject* obj, int type, int param, GameObject *sender ) {};
 
 
-    /*! ID of the building controller we belong to */
-    int m_parentId;
+  /*! Event function called when the building enters the "offline" state */
+  virtual void OnBuildingOffline( GameObject* obj ) {};
+
+  /*! Event function called when the building enters the "online" state */
+  virtual void OnBuildingOnline( GameObject* obj ) {};
+
+  /*! Event function called when the building has been captured by a team or become neutral */
+  virtual void OnBuildingCaptured( GameObject* obj, int team ) {};
+
+  /*! Event function called when the building has been destroyed */
+  virtual void OnBuildingDestroyed( GameObject* obj ) {};
+
+
+  /*! ID of the building controller we belong to */
+  int m_parentId;
 };
 
 // -------------------------------------------------------------------------------------------------
@@ -124,25 +125,26 @@ protected:
 * An extension of dp88_buildingScripts_objectBaseClass which adds extra support for building
 * components such as weakpoints and purchase terminals.
 */
-class dp88_buildingScripts_componentBaseClass : public dp88_buildingScripts_baseClass {
+class dp88_buildingScripts_componentBaseClass : public dp88_buildingScripts_baseClass
+{
 public:
-    dp88_buildingScripts_componentBaseClass();
+  dp88_buildingScripts_componentBaseClass();
 
 protected:
-    /*! Cleans up animation controller */
-    void Detach(GameObject *obj);
+  /*! Cleans up animation controller */
+  void Detach( GameObject* obj );
 
-    /*! Called by Detach() to allow derived classes to use the event without overriding Detach() */
-    virtual void OnDetach(GameObject *obj) {};
-
-
-    /*! Plays the specified animation, creating a new animation controller if one does not exist. If
-    the animation name is NULL, a zero length string or invalid any existing animation is stopped */
-    void PlayAnimation(GameObject *obj, const char *animation, int nStartFrame, int nEndFrame, bool bLooped);
+  /*! Called by Detach() to allow derived classes to use the event without overriding Detach() */
+  virtual void OnDetach( GameObject* obj ) {};
 
 
-    /*! Controller for the weakpoint animation */
-    LoopedAnimationController *m_pAnimController;
+  /*! Plays the specified animation, creating a new animation controller if one does not exist. If
+  the animation name is NULL, a zero length string or invalid any existing animation is stopped */
+  void PlayAnimation( GameObject* obj, const char* animation, int nStartFrame, int nEndFrame, bool bLooped );
+
+
+  /*! Controller for the weakpoint animation */
+  LoopedAnimationController* m_pAnimController;
 };
 
 // -------------------------------------------------------------------------------------------------
@@ -181,11 +183,11 @@ protected:
 *   parameters in this script blank and use a script such as dp88_damageAnimation to provide more
 *   control over the component animation.
 */
-class dp88_buildingScripts_component : public dp88_buildingScripts_componentBaseClass {
+class dp88_buildingScripts_component : public dp88_buildingScripts_componentBaseClass
+{
 protected:
-    void Created(GameObject *obj);
-
-    void OnBuildingDestroyed(GameObject *obj);
+  void Created( GameObject *obj );
+  void OnBuildingDestroyed( GameObject *obj );
 };
 
 // -------------------------------------------------------------------------------------------------
@@ -224,13 +226,12 @@ protected:
 *   parameters in this script blank and use a script such as dp88_damageAnimation to provide more
 *   control over the weakpoint animation.
 */
-class dp88_buildingScripts_majorWeakpoint : public dp88_buildingScripts_componentBaseClass {
+class dp88_buildingScripts_majorWeakpoint : public dp88_buildingScripts_componentBaseClass
+{
 protected:
-    void Created(GameObject *obj);
-
-    void Killed(GameObject *obj, GameObject *killer);
-
-    void OnBuildingDestroyed(GameObject *obj);
+  void Created( GameObject *obj );
+  void Killed( GameObject *obj, GameObject *killer );
+  void OnBuildingDestroyed( GameObject *obj );
 };
 
 // -------------------------------------------------------------------------------------------------
@@ -278,21 +279,19 @@ protected:
 * \note
 *   The "alive" and "destroyed" animations can both be contained in the same animation if desired
 */
-class dp88_buildingScripts_minorWeakpoint : public dp88_buildingScripts_componentBaseClass {
+class dp88_buildingScripts_minorWeakpoint : public dp88_buildingScripts_componentBaseClass
+{
 protected:
-    void Created(GameObject *obj);
+  void Created( GameObject *obj );
+  void Damaged ( GameObject *obj, GameObject *damager, float amount );
+  void Killed( GameObject *obj, GameObject *killer );
+  void OnBuildingDestroyed( GameObject *obj );
 
-    void Damaged(GameObject *obj, GameObject *damager, float amount);
+  void UpdateAnimation( GameObject* pSelf );
 
-    void Killed(GameObject *obj, GameObject *killer);
-
-    void OnBuildingDestroyed(GameObject *obj);
-
-    void UpdateAnimation(GameObject *pSelf);
-
-    /*! Tracks whether this weakpoint has been destroyed, so we can trigger the repaired event
-    upon reaching 100% health again */
-    bool m_bIsDestroyed;
+  /*! Tracks whether this weakpoint has been destroyed, so we can trigger the repaired event
+  upon reaching 100% health again */
+  bool m_bIsDestroyed;
 };
 
 // -------------------------------------------------------------------------------------------------
@@ -306,12 +305,14 @@ protected:
 *
 * \todo document script
 */
-class dp88_buildingScripts_functionProduceInfantry : public dp88_buildingScripts_baseClass {
+class dp88_buildingScripts_functionProduceInfantry : public dp88_buildingScripts_baseClass
+{
 protected:
-    void OnBuildingOffline(GameObject *obj);
-
-    void OnBuildingOnline(GameObject *obj);
+  void OnBuildingOffline( GameObject* obj );
+  void OnBuildingOnline( GameObject* obj );
 };
+
+
 
 
 /*!
@@ -321,11 +322,11 @@ protected:
 *
 * \todo document script
 */
-class dp88_buildingScripts_functionProduceVehicles : public dp88_buildingScripts_baseClass {
+class dp88_buildingScripts_functionProduceVehicles : public dp88_buildingScripts_baseClass
+{
 protected:
-    void OnBuildingOffline(GameObject *obj);
-
-    void OnBuildingOnline(GameObject *obj);
+  void OnBuildingOffline( GameObject* obj );
+  void OnBuildingOnline( GameObject* obj );
 };
 
 
@@ -336,11 +337,11 @@ protected:
 *
 * \todo document script
 */
-class dp88_buildingScripts_functionProduceAircraft : public dp88_buildingScripts_baseClass {
+class dp88_buildingScripts_functionProduceAircraft : public dp88_buildingScripts_baseClass
+{
 protected:
-    void OnBuildingOffline(GameObject *obj);
-
-    void OnBuildingOnline(GameObject *obj);
+  void OnBuildingOffline( GameObject* obj );
+  void OnBuildingOnline( GameObject* obj );
 };
 
 /*!
@@ -350,11 +351,11 @@ protected:
 *
 * \todo document script
 */
-class dp88_buildingScripts_functionProduceNavalUnits : public dp88_buildingScripts_baseClass {
+class dp88_buildingScripts_functionProduceNavalUnits : public dp88_buildingScripts_baseClass
+{
 protected:
-    void OnBuildingOffline(GameObject *obj);
-
-    void OnBuildingOnline(GameObject *obj);
+  void OnBuildingOffline( GameObject* obj );
+  void OnBuildingOnline( GameObject* obj );
 };
 
 /*!
@@ -364,11 +365,11 @@ protected:
 *
 * \todo document script
 */
-class dp88_buildingScripts_functionProvidePower : public dp88_buildingScripts_baseClass {
+class dp88_buildingScripts_functionProvidePower : public dp88_buildingScripts_baseClass
+{
 protected:
-    void OnBuildingOffline(GameObject *obj);
-
-    void OnBuildingOnline(GameObject *obj);
+  void OnBuildingOffline( GameObject* obj );
+  void OnBuildingOnline( GameObject* obj );
 };
 
 /*!
@@ -378,11 +379,11 @@ protected:
 *
 * \todo document script
 */
-class dp88_buildingScripts_functionProvideRadar : public dp88_buildingScripts_baseClass {
+class dp88_buildingScripts_functionProvideRadar : public dp88_buildingScripts_baseClass
+{
 protected:
-    void OnBuildingOffline(GameObject *obj);
-
-    void OnBuildingOnline(GameObject *obj);
+  void OnBuildingOffline( GameObject* obj );
+  void OnBuildingOnline( GameObject* obj );
 };
 
 /*!
@@ -392,27 +393,26 @@ protected:
 *
 * \todo document script
 */
-class dp88_buildingScripts_functionProvideHarvester : public dp88_buildingScripts_baseClass {
+class dp88_buildingScripts_functionProvideHarvester : public dp88_buildingScripts_baseClass
+{
 protected:
-    void OnBuildingOffline(GameObject *obj);
-
-    void OnBuildingOnline(GameObject *obj);
+  void OnBuildingOffline( GameObject* obj );
+  void OnBuildingOnline( GameObject* obj );
 };
 
 
 // Money trickle function - gives the owning team X credits per second whilst alive
-class dp88_buildingScripts_functionMoneyTrickle : public dp88_buildingScripts_baseClass {
+class dp88_buildingScripts_functionMoneyTrickle : public dp88_buildingScripts_baseClass
+{
 public:
-    dp88_buildingScripts_functionMoneyTrickle() : isTimerRunning(false) {}
+  dp88_buildingScripts_functionMoneyTrickle() : isTimerRunning(false) {}
 
-    void Created(GameObject *obj);
-
-    void Timer_Expired(GameObject *obj, int number);
-
-    void OnBuildingCaptured(GameObject *obj, int team);
+  void Created ( GameObject* obj );
+  void Timer_Expired ( GameObject* obj, int number );
+  void OnBuildingCaptured ( GameObject* obj, int team );
 
 private:
-    bool isTimerRunning;
+  bool isTimerRunning;
 };
 
 // -------------------------------------------------------------------------------------------------
@@ -432,44 +432,42 @@ private:
 * \param onceOnly
 *   Only give credits the first time the building is captured
 */
-class dp88_buildingScripts_functionMoneyGrant : public dp88_buildingScripts_baseClass {
-    void Created(GameObject *obj);
-
-    void OnBuildingCaptured(GameObject *obj, int team);
-
-    /*! \name Cached Script Parameters */
-    /*! @{ */
-    float m_credits;
-    /*! @} */
+class dp88_buildingScripts_functionMoneyGrant : public dp88_buildingScripts_baseClass
+{
+  void Created ( GameObject* obj );
+  void OnBuildingCaptured ( GameObject* obj, int team );
+  
+  /*! \name Cached Script Parameters */
+  /*! @{ */
+  float m_credits;
+  /*! @} */
 };
 
 // -------------------------------------------------------------------------------------------------
 
 // Spawn team zone - spawns a script zone depending on which team currently owns
 // the building
-class dp88_buildingScripts_functionSpawnTeamZone : public dp88_buildingScripts_baseClass {
+class dp88_buildingScripts_functionSpawnTeamZone : public dp88_buildingScripts_baseClass
+{
 public:
-    dp88_buildingScripts_functionSpawnTeamZone() : zoneId(NULL) {}
+  dp88_buildingScripts_functionSpawnTeamZone() : zoneId(NULL) {}
 
-    void Created(GameObject *obj);
-
-    void OnBuildingOffline(GameObject *obj);
-
-    void OnBuildingOnline(GameObject *obj);
-
-    void OnBuildingCaptured(GameObject *obj, int team);
-
-    void Destroyed(GameObject *obj);
+	void Created ( GameObject* obj );
+	void OnBuildingOffline( GameObject* obj );
+	void OnBuildingOnline ( GameObject* obj );
+	void OnBuildingCaptured ( GameObject* obj, int team );
+	void Destroyed ( GameObject* obj );
 
 private:
-    // Functions to create and destroy the script zone
-    void createZone(GameObject *obj);
+	// Functions to create and destroy the script zone
+	void createZone(GameObject* obj);
+	void destroyZone(GameObject* obj);
 
-    void destroyZone(GameObject *obj);
-
-    // ID of the zone we have created
-    int zoneId;
+	// ID of the zone we have created
+	int zoneId;
 };
+
+
 
 
 /*!
@@ -497,26 +495,25 @@ private:
 *   Whether to destroy the spawned script zone when the parent building is destroyed. 1 to enable,
 *   0 to disable
 */
-class dp88_buildingScripts_functionSpawnZone : public dp88_buildingScripts_baseClass {
+class dp88_buildingScripts_functionSpawnZone : public dp88_buildingScripts_baseClass
+{
 public:
-    dp88_buildingScripts_functionSpawnZone() : zoneId(NULL) {}
+  dp88_buildingScripts_functionSpawnZone() : zoneId(NULL) {}
 
-    void Created(GameObject *obj);
+  void Created( GameObject *obj );
+  void OnBuildingOffline( GameObject* obj );
+  void OnBuildingOnline ( GameObject* obj );
+  void OnBuildingDestroyed ( GameObject* obj );
 
-    void OnBuildingOffline(GameObject *obj);
+  // Functions to create and destroy the script zone
+  void createZone(GameObject* obj);
+  void destroyZone(GameObject* obj);
 
-    void OnBuildingOnline(GameObject *obj);
-
-    void OnBuildingDestroyed(GameObject *obj);
-
-    // Functions to create and destroy the script zone
-    void createZone(GameObject *obj);
-
-    void destroyZone(GameObject *obj);
-
-    // ID of the zone we have created
-    int zoneId;
+  // ID of the zone we have created
+  int zoneId;
 };
+
+
 
 
 /*!
@@ -526,41 +523,37 @@ public:
 *
 * \todo document script
 */
-class dp88_buildingScripts_capturePoint : public dp88_buildingScripts_baseClass {
+class dp88_buildingScripts_capturePoint : public dp88_buildingScripts_baseClass
+{
 protected:
-    void Created(GameObject *obj);
+  void Created( GameObject *obj );
+  void Damaged ( GameObject *obj, GameObject *damager, float amount );
+  void OnBuildingCaptured ( GameObject* obj, int team );
+  void OnBuildingDestroyed( GameObject *obj );
+  void Timer_Expired( GameObject *obj, int number );
 
-    void Damaged(GameObject *obj, GameObject *damager, float amount);
+  void UpdateAnimationFrame( GameObject* obj );
 
-    void OnBuildingCaptured(GameObject *obj, int team);
+  int currentTeam;
 
-    void OnBuildingDestroyed(GameObject *obj);
-
-    void Timer_Expired(GameObject *obj, int number);
-
-    void UpdateAnimationFrame(GameObject *obj);
-
-    int currentTeam;
-
-    /*! \name Cached Script Parameters */
-    /*! @{ */
-    int m_nAnimTransitionFrames;
-    /*! @} */
+  /*! \name Cached Script Parameters */
+  /*! @{ */
+  int m_nAnimTransitionFrames;
+  /*! @} */
 };
+
 
 
 /*------------------------
 Spawn Building Part script
 --------------------------*/
 
-class dp88_buildingScripts_spawnPart : public dp88_buildingScripts_baseClass {
-    void Created(GameObject *obj);
+class dp88_buildingScripts_spawnPart : public dp88_buildingScripts_baseClass
+{
+	void Created ( GameObject* obj );
+	void Timer_Expired( GameObject *obj, int number );
+	void OnBuildingCaptured ( GameObject* obj, int team );
+	void Destroyed ( GameObject* obj );
 
-    void Timer_Expired(GameObject *obj, int number);
-
-    void OnBuildingCaptured(GameObject *obj, int team);
-
-    void Destroyed(GameObject *obj);
-
-    int partObjectId;
+	int partObjectId;
 };

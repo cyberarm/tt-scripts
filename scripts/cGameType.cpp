@@ -13,4 +13,5 @@
 #include "cGameType.h"
 
 
+
 REF_DEF3(int, cGameType::GameType, 0x00856518, 0x00855700, 0x0085E494);

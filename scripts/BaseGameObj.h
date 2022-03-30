@@ -16,66 +16,48 @@
 #include "Persist.h"
 
 class PhysicalGameObj;
-
 class VehicleGameObj;
-
 class SmartGameObj;
-
 class ScriptableGameObj;
-
 class DefinitionClass;
-
 class BaseGameObjDef;
 
-class BaseGameObj : public PersistClass, public NetworkObjectClass {
+class BaseGameObj: public PersistClass, public NetworkObjectClass
+{
 public:
 
     BaseGameObj();
-
     virtual ~BaseGameObj();
 
-    virtual void Init() = 0;
+    virtual void                Init() = 0;
+    void                        Init(const BaseGameObjDef & definition);
 
-    void Init(const BaseGameObjDef &definition);
+    virtual bool                Save(ChunkSaveClass& csave);
+    virtual bool                Load(ChunkLoadClass& cload);
+    virtual void                Think() { IsPostThinkAllowed = true; }
+    virtual void                Post_Think() {};
+    virtual bool                Is_Hibernating() { return false; }
 
-    virtual bool Save(ChunkSaveClass &csave);
+    virtual PhysicalGameObj*    As_PhysicalGameObj() { return nullptr; }
+    virtual VehicleGameObj*     As_VehicleGameObj() { return nullptr; }
+    virtual SmartGameObj*       As_SmartGameObj() { return nullptr; }
+    virtual ScriptableGameObj*  As_ScriptableGameObj() { return nullptr; }
 
-    virtual bool Load(ChunkLoadClass &cload);
+    virtual uint32              Get_Network_Class_ID() const { return 0x3E8; }
+    virtual void                Delete() { delete this; }
 
-    virtual void Think() { IsPostThinkAllowed = true; }
+    const BaseGameObjDef&       Get_Definition() const { return *Definition; };
+    void                        Set_ID(int id) { Set_Network_ID(id); }
+    int                         Get_ID() const { return Get_Network_ID(); }
 
-    virtual void Post_Think() {};
-
-    virtual bool Is_Hibernating() { return false; }
-
-    virtual PhysicalGameObj *As_PhysicalGameObj() { return nullptr; }
-
-    virtual VehicleGameObj *As_VehicleGameObj() { return nullptr; }
-
-    virtual SmartGameObj *As_SmartGameObj() { return nullptr; }
-
-    virtual ScriptableGameObj *As_ScriptableGameObj() { return nullptr; }
-
-    virtual uint32 Get_Network_Class_ID() const { return 0x3E8; }
-
-    virtual void Delete() { delete this; }
-
-    const BaseGameObjDef &Get_Definition() const { return *Definition; };
-
-    void Set_ID(int id) { Set_Network_ID(id); }
-
-    int Get_ID() const { return Get_Network_ID(); }
-
-    bool Is_Post_Think_Allowed() { return IsPostThinkAllowed; }
-
-    void Enable_Cinematic_Freeze(bool enable) { EnableCinematicFreeze = enable; }
-
-    bool Is_Cinematic_Freeze_Enabled() { return EnableCinematicFreeze; }
+    bool                        Is_Post_Think_Allowed() { return IsPostThinkAllowed; }
+    void                        Enable_Cinematic_Freeze(bool enable) { EnableCinematicFreeze = enable; }
+    bool                        Is_Cinematic_Freeze_Enabled() { return EnableCinematicFreeze; }
 
 private:
 
-    const BaseGameObjDef *Definition;             // 06BC
-    bool IsPostThinkAllowed;     // 06C0
-    bool EnableCinematicFreeze;  // 06C1
+    const BaseGameObjDef*       Definition;             // 06BC
+    bool                        IsPostThinkAllowed;     // 06C0
+    bool                        EnableCinematicFreeze;  // 06C1
 
 };// 06C2

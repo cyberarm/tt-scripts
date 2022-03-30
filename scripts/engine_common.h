@@ -17,29 +17,25 @@
 #define TT_VERSION_MAGIC '!TT!'
 #define TT_VERSION ((float)4.7f)
 
-#define SAFE_DELETE_ARRAY(p)    { delete[] p; p = NULL; }
-#define SAFE_DELETE(p)            { delete p; p = NULL; }
+#define SAFE_DELETE_ARRAY(p)	{ delete[] p; p = NULL; }
+#define SAFE_DELETE(p)			{ delete p; p = NULL; }
 
-template<typename T>
-TT_INLINE void SafeRelease(T &IUnk) {
-    if (IUnk) {
-        IUnk->Release();
-        IUnk = 0;
-    }
+template <typename T> TT_INLINE void SafeRelease(T& IUnk)
+{
+	if (IUnk)
+	{
+		IUnk->Release();
+		IUnk = 0;
+	}
+}; 
+
+template <typename T, typename T2> TT_INLINE void RefPtrSet(T& dest, T2& source)
+{
+	if (source) source->AddRef();
+	if (dest)	dest->Release();
+	dest = source;
 };
 
-template<typename T, typename T2>
-TT_INLINE void RefPtrSet(T &dest, T2 &source) {
-    if (source) source->AddRef();
-    if (dest) dest->Release();
-    dest = source;
-};
-
-void SCRIPTS_API
-
-Console_Input(
-        const char *Input); //triggers console input (i.e. passes the string in as though it was typed into the console)
-void SCRIPTS_API
-
-Console_Output(const char *Output, ...); //prints stuff to the console, works like printf
+void SCRIPTS_API Console_Input(const char *Input); //triggers console input (i.e. passes the string in as though it was typed into the console)
+void SCRIPTS_API Console_Output(const char *Output,...); //prints stuff to the console, works like printf
 #endif

@@ -12,15 +12,15 @@
 #include "General.h"
 #include "RandomClass.h"
 #include "Random3Class.h"
-
-RandomClass::RandomClass(unsigned seed) : Seed(seed) {
+RandomClass::RandomClass(unsigned seed) : Seed(seed)
+{
 }
-
-int RandomClass::operator()(void) {
-    Seed = (Seed * MULT_CONSTANT) + ADD_CONSTANT;
-    return ((Seed >> THROW_AWAY_BITS) & (~((~0) << SIGNIFICANT_BITS)));
+int RandomClass::operator ()(void)
+{
+	Seed = (Seed * MULT_CONSTANT) + ADD_CONSTANT;
+	return((Seed >> THROW_AWAY_BITS) & (~((~0) << SIGNIFICANT_BITS)));
 }
-
-int RandomClass::operator()(int minval, int maxval) {
-    return (Pick_Random_Number(*this, minval, maxval));
+int RandomClass::operator() (int minval, int maxval)
+{
+	return(Pick_Random_Number(*this, minval, maxval));
 }

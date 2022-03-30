@@ -13,33 +13,40 @@
 
 #include "scripts.h"
 
-ScriptFactory::ScriptFactory(const char *name, const char *param) : mNext(NULL) {
-    ScriptName = name;
-    ParamDescription = param;
-    ScriptRegistrar::RegisterScript(this);
+ScriptFactory::ScriptFactory(const char* name, const char* param) : mNext(NULL)
+{
+	ScriptName = name;
+	ParamDescription = param;
+	ScriptRegistrar::RegisterScript(this);
 }
 
-ScriptFactory *ScriptFactory::GetNext() const {
-    return mNext;
+ScriptFactory* ScriptFactory::GetNext() const
+{
+	return mNext;
 }
 
-const char *ScriptFactory::GetName() {
-    return ScriptName;
+const char *ScriptFactory::GetName()
+{
+	return ScriptName;
 }
 
-const char *ScriptFactory::GetParamDescription() {
-    return ParamDescription;
+const char *ScriptFactory::GetParamDescription()
+{
+	return ParamDescription;
 }
 
-ScriptFactory::~ScriptFactory() {
-    ScriptRegistrar::UnregisterScript(this);
-    ScriptName = NULL;
-    ParamDescription = NULL;
+ScriptFactory::~ScriptFactory()
+{
+	ScriptRegistrar::UnregisterScript(this);
+	ScriptName = NULL;
+	ParamDescription = NULL;
 }
 
-void ScriptFactory::SetNext(ScriptFactory *link) {
-    if (mNext != NULL) {
-        link->SetNext(mNext);
-    }
-    mNext = link;
+void ScriptFactory::SetNext(ScriptFactory* link)
+{
+	if (mNext != NULL)
+	{
+		link->SetNext(mNext);
+	}
+	mNext = link;
 }

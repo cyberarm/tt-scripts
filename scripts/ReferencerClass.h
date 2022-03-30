@@ -14,65 +14,53 @@
 
 #include "PostLoadableClass.h"
 #include "ReferenceableClass.h"
-
-template<class T>
-class ReferenceableClass;
-
-class SCRIPTS_API ReferencerClass
-
-: public PostLoadableClass
+template <class T> class ReferenceableClass;
+class SCRIPTS_API ReferencerClass : public PostLoadableClass
 {
 
 private:
-ReferenceableClass<ScriptableGameObj> *ReferenceTarget;
-ReferencerClass *TargetReferencerListNext;
+	ReferenceableClass<ScriptableGameObj>* ReferenceTarget;
+	ReferencerClass* TargetReferencerListNext;
 
 public:
+	friend class ReferenceableClass<ScriptableGameObj>;
+	~ReferencerClass();
 
-friend class ReferenceableClass<ScriptableGameObj>;
+	bool Save         (ChunkSaveClass& chunkSaver);
+	bool Load         (ChunkLoadClass& chunkLoader);
+	void On_Post_Load ();
 
-~
+	ReferencerClass& operator = (ScriptableGameObj* object);
+	ReferencerClass& operator = (const ReferencerClass& referencer);
 
-ReferencerClass();
+	operator ScriptableGameObj* () const;
+	inline ScriptableGameObj* operator ->() { return Get_Ptr(); }
 
-bool Save(ChunkSaveClass &chunkSaver);
-
-bool Load(ChunkLoadClass &chunkLoader);
-
-void On_Post_Load();
-
-ReferencerClass &operator=(ScriptableGameObj *object);
-
-ReferencerClass &operator=(const ReferencerClass &referencer);
-
-operator ScriptableGameObj *() const;
-
-inline ScriptableGameObj *operator->() { return Get_Ptr(); }
-
-inline ReferencerClass()
-        : ReferenceTarget(0), TargetReferencerListNext(0) {
-}
+	inline ReferencerClass()
+		: ReferenceTarget(0), TargetReferencerListNext(0)
+	{
+	}
 
 
-inline ReferencerClass
-(ScriptableGameObj
-* object)
-: ReferenceTarget(0), TargetReferencerListNext(0)
-{
-*this =
-object;
-}
+	inline ReferencerClass
+		(ScriptableGameObj* object)
+		: ReferenceTarget(0), TargetReferencerListNext(0)
+	{
+		*this = object;
+	}
 
 
-inline ScriptableGameObj *Get_Ptr() const {
-    return ReferenceTarget ? ReferenceTarget->Get_Data() : NULL;
-}
+	inline ScriptableGameObj* Get_Ptr() const
+	{
+		return ReferenceTarget ? ReferenceTarget->Get_Data() : NULL;
+	}
 
 
-inline void Set_Ptr
-        (ScriptableGameObj * object) {
-    *this = object;
-}
+	inline void Set_Ptr
+		(ScriptableGameObj* object)
+	{
+		*this = object;
+	}
 
 
 }; // size: 16

@@ -14,91 +14,80 @@
 
 #include "engine_common.h"
 #include "engine_vector.h"
-
 class CompressedVisTableClass;
-
 class VisTableClass;
-
-class VisDecompressionCacheClass {
+class VisDecompressionCacheClass
+{
 public:
-    SimpleVecClass<VisTableClass *> Cache; //0
-    MultiListClass<VisTableClass> tablelist; //C
-    int timestamp; //24
-    VisDecompressionCacheClass() {
-    }
-
-    ~VisDecompressionCacheClass() {
-    }
-
-    void Reset(int size);
-
-    VisTableClass *Get_Table(int id);
-
-    void Add_Table(VisTableClass *table);
-
-    void Release_Old_Tables();
+	SimpleVecClass<VisTableClass *> Cache; //0
+	MultiListClass<VisTableClass> tablelist; //C
+	int timestamp; //24
+	VisDecompressionCacheClass()
+	{
+	}
+	~VisDecompressionCacheClass()
+	{
+	}
+	void Reset(int size);
+	VisTableClass *Get_Table(int id);
+	void Add_Table(VisTableClass *table);
+	void Release_Old_Tables();
 };
-
-class VisTableMgrClass {
+class VisTableMgrClass
+{
 public:
-    int count; //0
-    int size; //4
-    SimpleDynVecClass<CompressedVisTableClass *> tables; //8
-    VisDecompressionCacheClass *cache; //18
-    int frames; //1C
-    VisTableMgrClass() : count(0), size(0), frames(0) {
-        cache = new VisDecompressionCacheClass();
-        Reset();
-    }
-
-    ~VisTableMgrClass() {
-        Reset();
-        if (cache) {
-            cache->Reset(0);
-            delete cache;
-        }
-    }
-
-    void Reset() {
-        Delete_All_Vis_Tables();
-        tables.Delete_All();
-        size = 1;
-        count = 0;
-        frames = 0;
-        cache->Reset(0);
-    }
-
-    void Delete_All_Vis_Tables();
-
-    unsigned int Get_Vis_Table_Size() {
-        return size;
-    }
-
-    VisTableClass *Get_Vis_Table(int id, bool b);
-
-    void Save(ChunkSaveClass &csave);
-
-    void Load(ChunkLoadClass &cload);
-
-    int Allocate_Vis_Object_ID(int count);
-
-    int Allocate_Vis_Sector_ID(int count);
-
-    int Get_Vis_Table_Count() {
-        return count;
-    }
-
-    bool Has_Vis_Table(int table) {
-        return tables[table] != 0;
-    }
-
-    void Notify_Frame_Ended();
-
-    void Set_Optimized_Vis_Object_Count(int count) {
-        size = count;
-    }
-
-    void Update_Vis_Table(int, VisTableClass *);
+	int count; //0
+	int size; //4
+	SimpleDynVecClass<CompressedVisTableClass *> tables; //8
+	VisDecompressionCacheClass *cache; //18
+	int frames; //1C
+	VisTableMgrClass() : count(0), size(0), frames(0)
+	{
+		cache = new VisDecompressionCacheClass();
+		Reset();
+	}
+	~VisTableMgrClass()
+	{
+		Reset();
+		if (cache)
+		{
+			cache->Reset(0);
+			delete cache;
+		}
+	}
+	void Reset()
+	{
+		Delete_All_Vis_Tables();
+		tables.Delete_All();
+		size = 1;
+		count = 0;
+		frames = 0;
+		cache->Reset(0);
+	}
+	void Delete_All_Vis_Tables();
+	unsigned int Get_Vis_Table_Size()
+	{
+		return size;
+	}
+	VisTableClass *Get_Vis_Table(int id,bool b);
+	void Save(ChunkSaveClass &csave);
+	void Load(ChunkLoadClass &cload);
+	int Allocate_Vis_Object_ID(int count);
+	int Allocate_Vis_Sector_ID(int count);
+	int Get_Vis_Table_Count()
+	{
+		return count;
+	}
+	bool Has_Vis_Table(int table)
+	{
+		return tables[table] != 0;
+	}
+	void Notify_Frame_Ended();
+	void Set_Optimized_Vis_Object_Count(int count)
+	{
+		size = count;
+	}
+	void Update_Vis_Table(int, VisTableClass *);
 }; //20
 
 #endif

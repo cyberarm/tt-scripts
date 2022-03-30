@@ -11,7 +11,6 @@
 */
 #ifndef SCRIPTS_INCLUDE__ENGINE_TDB_H
 #define SCRIPTS_INCLUDE__ENGINE_TDB_H
-
 #include "scripts.h"
 
 /*!
@@ -21,9 +20,7 @@
 *
 * \param[in] ID Translation database ID to get the string for
 */
-SCRIPTS_API const
-
-char *Get_Translated_String(unsigned long ID);
+SCRIPTS_API const char *Get_Translated_String(unsigned long ID);
 
 /*!
 * \ingroup api_translations
@@ -32,9 +29,7 @@ char *Get_Translated_String(unsigned long ID);
 *
 * \param[in] ID Translation database ID to get the string for
 */
-SCRIPTS_API const
-
-wchar_t *Get_Wide_Translated_String(unsigned long ID);
+SCRIPTS_API const wchar_t *Get_Wide_Translated_String(unsigned long ID);
 
 /*!
 * \ingroup api_translations
@@ -43,9 +38,7 @@ wchar_t *Get_Wide_Translated_String(unsigned long ID);
 *
 * \param[in] obj GameObject to get the translated name of
 */
-SCRIPTS_API const
-
-char *Get_Translated_Preset_Name(GameObject *obj);
+SCRIPTS_API const char *Get_Translated_Preset_Name(GameObject *obj);
 
 /*!
 * \ingroup api_translations
@@ -55,9 +48,7 @@ char *Get_Translated_Preset_Name(GameObject *obj);
 * \param[in] obj GameObject which has the weapon in question
 * \param[in] position Position in the weapon bag of the weapon to get the translated name of
 */
-SCRIPTS_API const
-
-char *Get_Translated_Weapon(GameObject *obj, int position);
+SCRIPTS_API const char *Get_Translated_Weapon(GameObject *obj,int position);
 
 /*!
 * \ingroup api_translations
@@ -66,9 +57,7 @@ char *Get_Translated_Weapon(GameObject *obj, int position);
 *
 * \param[in] obj GameObject for which to get the translated name of their current weapon
 */
-SCRIPTS_API const
-
-char *Get_Current_Translated_Weapon(GameObject *obj);
+SCRIPTS_API const char *Get_Current_Translated_Weapon(GameObject *obj);
 
 /*!
 * \ingroup api_translations
@@ -77,9 +66,7 @@ char *Get_Current_Translated_Weapon(GameObject *obj);
 *
 * \param[in] obj GameObject for which to get the translated name of their current weapon
 */
-SCRIPTS_API const
-
-wchar_t *Get_Current_Wide_Translated_Weapon(GameObject *obj);
+SCRIPTS_API const wchar_t *Get_Current_Wide_Translated_Weapon(GameObject *obj);
 
 /*!
 * \ingroup api_translations
@@ -88,9 +75,7 @@ wchar_t *Get_Current_Wide_Translated_Weapon(GameObject *obj);
 *
 * \param[in] Team ID of the team to get the translated name of
 */
-SCRIPTS_API const
-
-char *Get_Team_Name(int Team);
+SCRIPTS_API const char *Get_Team_Name(int Team);
 
 /*!
 * \ingroup api_translations
@@ -99,9 +84,7 @@ char *Get_Team_Name(int Team);
 *
 * \param[in] Team ID of the team to get the translated name of
 */
-SCRIPTS_API StringClass
-
-Get_Short_Team_Name(int Team);
+SCRIPTS_API StringClass Get_Short_Team_Name(int Team);
 
 /*!
 * \ingroup api_translations
@@ -110,9 +93,7 @@ Get_Short_Team_Name(int Team);
 *
 * \param[in] Team ID of the team to get the translated name of
 */
-SCRIPTS_API const
-
-wchar_t *Get_Wide_Team_Name(int Team);
+SCRIPTS_API const wchar_t *Get_Wide_Team_Name(int Team);
 
 /*!
 * \ingroup api_translations
@@ -121,9 +102,7 @@ wchar_t *Get_Wide_Team_Name(int Team);
 *
 * \param[in] obj VehicleGameObject to get the translated name of
 */
-SCRIPTS_API const
-
-char *Get_Vehicle_Name(GameObject *obj);
+SCRIPTS_API const char *Get_Vehicle_Name(GameObject *obj);
 
 /*!
 * \ingroup api_translations
@@ -132,10 +111,7 @@ char *Get_Vehicle_Name(GameObject *obj);
 *
 * \param[in] obj VehicleGameObject to get the translated name of
 */
-SCRIPTS_API const
-
-wchar_t *Get_Wide_Vehicle_Name(
-        GameObject *obj); //Get the name of a vehicle (as used for the HUD display) as a wide character string
+SCRIPTS_API const wchar_t *Get_Wide_Vehicle_Name(GameObject *obj); //Get the name of a vehicle (as used for the HUD display) as a wide character string
 
 /*!
 * \ingroup api_translations
@@ -144,9 +120,7 @@ wchar_t *Get_Wide_Vehicle_Name(
 *
 * \param[in] preset Name of the preset to get the translated name of
 */
-SCRIPTS_API const
-
-char *Get_Translated_Definition_Name(const char *preset);
+SCRIPTS_API const char *Get_Translated_Definition_Name(const char *preset);
 
 /*!
 * \ingroup api_translations
@@ -156,9 +130,7 @@ char *Get_Translated_Definition_Name(const char *preset);
 * \param[in] ID An ID to check for validity
 * \return Returns true if the ID exists in the translations database, false otherwise
 */
-SCRIPTS_API
-
-bool Is_Valid_String_ID(unsigned long ID);
+SCRIPTS_API bool Is_Valid_String_ID(unsigned long ID);
 
 /*!
 * \ingroup api_translations
@@ -170,9 +142,7 @@ bool Is_Valid_String_ID(unsigned long ID);
 *   The translation database ID for the translation matching the specified description, or 0
 *   if no such translation was found
 */
-SCRIPTS_API
-
-unsigned long Get_String_ID_By_Desc(const char *desc); //Get the ID of a string given it's ID_Desc
+SCRIPTS_API unsigned long Get_String_ID_By_Desc(const char *desc); //Get the ID of a string given it's ID_Desc
 
 /*!
 * \ingroup api_translations
@@ -184,8 +154,6 @@ unsigned long Get_String_ID_By_Desc(const char *desc); //Get the ID of a string 
 *   The preset ID of the sound preset associated with the translation, or 0 if no translation was
 *   found with the specified translation ID or the translation has no associated sound
 */
-SCRIPTS_API
-
-unsigned long Get_String_Sound_ID(unsigned long ID);
+SCRIPTS_API unsigned long Get_String_Sound_ID(unsigned long ID);
 
 #endif

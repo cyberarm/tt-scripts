@@ -13,91 +13,102 @@
 #define TT_INCLUDE__CRITICALSECTIONCLASS_H
 
 
+
 #include "ThreadClass.h"
 
 
+
 class SCRIPTS_API CriticalSectionClass
-        {
-
-                private:
-
-                void* handle;
-                unsigned int locked;
-
-                public:
-
-                class LockClass
-                {
-
-                    private:
-
-                    CriticalSectionClass &CriticalSection;
-
-                    public:
-
-                    LockClass(CriticalSectionClass & section);
-                    ~LockClass();
-                    LockClass operator=(LockClass &);
-
-                };
-
-                CriticalSectionClass();
-                ~CriticalSectionClass();
-                void Enter();
-                void Exit();
-
-        };
-
-
-class FastCriticalSectionClass {
+{
 
 private:
 
-    friend class LockClass;
+	void* handle;
+	unsigned int locked;
 
-    volatile long Flag; // 0000
+public:
+
+	class LockClass
+	{
+	
+	private:
+	
+		CriticalSectionClass& CriticalSection;
+
+	public:
+
+		LockClass(CriticalSectionClass& section);
+		~LockClass();
+		LockClass operator=(LockClass&);
+
+	};
+
+	CriticalSectionClass();
+	~CriticalSectionClass();
+	void Enter();
+	void Exit();
+
+};
 
 
-    void Enter() {
-        TT_ASSERT((size_t) & Flag % 4 == 0); // aligned to 4 bytes please
-        for (;;) {
-            if (_interlockedbittestandset(&Flag, 0) == 0) return;
-            _mm_pause();
-        };
-    }
+class FastCriticalSectionClass
+{
+
+private:
+
+	friend class LockClass;
+
+	volatile long Flag; // 0000
 
 
-    void Leave() {
-        Flag = 0;
-    }
+	void Enter()
+	{
+		TT_ASSERT((size_t)&Flag % 4 == 0); // aligned to 4 bytes please
+		for (;;)
+		{
+			if (_interlockedbittestandset(&Flag, 0) == 0) return;
+			_mm_pause();
+		};
+	}
+
+
+	void Leave()
+	{
+		Flag = 0;
+	}
 
 
 public:
 
-    class LockClass {
-        FastCriticalSectionClass &criticalSection;
+	class LockClass
+	{
+		FastCriticalSectionClass& criticalSection;
 
-        LockClass &operator=(const LockClass &) {
-            return *this;
-        }
+		LockClass& operator=(const LockClass&)
+		{
+			return *this;
+		}
 
 
-    public:
+	public:
 
-        LockClass(FastCriticalSectionClass &_criticalSection) :
-                criticalSection(_criticalSection) {
-            criticalSection.Enter();
-        }
+		LockClass(FastCriticalSectionClass& _criticalSection) :
+			criticalSection(_criticalSection)
+		{
+			criticalSection.Enter();
+		}
 
-        ~LockClass() {
-            criticalSection.Leave();
-        }
+		~LockClass()
+		{
+			criticalSection.Leave();
+		}
 
-    };
+	};
 
-    FastCriticalSectionClass() :
-            Flag(0) {
-    }
+	FastCriticalSectionClass() :
+		Flag(0)
+	{
+	}
 
 }; // 0004
 

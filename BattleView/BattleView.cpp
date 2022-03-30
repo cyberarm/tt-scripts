@@ -9,12 +9,18 @@
 	In addition, an exemption is given to allow Run Time Dynamic Linking of this code with any closed source module that does not contain code covered by this licence.
 	Only the source code to the module(s) containing the licenced code has to be released.
 */
+
 #include "General.h"
+#include "Defines.h"
+
 #include "BattleView.h"
+
+#include "GameObjManager.h"
+#include "BuildingGameObj.h"
+#include "SoldierGameObj.h"
+
 #include "engine_tt.h"
 #include "engine_io.h"
-#include "Defines.h"
-#include "GameObjManager.h"
 #include "gmgame.h"
 
 BattleViewPlugin::BattleViewPlugin() {
@@ -27,6 +33,9 @@ BattleViewPlugin::BattleViewPlugin() {
     RegisterEvent(EVENT_PLAYER_JOIN_HOOK, this);
     RegisterEvent(EVENT_PLAYER_LEAVE_HOOK, this);
     RegisterEvent(EVENT_THINK_HOOK, this);
+
+    m_think_interval = 500; // 60;
+    m_think_counter = m_think_counter; // Run at first call
 }
 
 BattleViewPlugin::~BattleViewPlugin() {
@@ -41,13 +50,28 @@ BattleViewPlugin::~BattleViewPlugin() {
     UnregisterEvent(EVENT_THINK_HOOK, this);
 }
 
-void BattleViewPlugin::OnLoadGlobalINISettings(INIClass *ssgm_ini) {
-    Console_Output("[BattleView] Attempting to load global INI settings...\n");
-    m_battleview_mode = ssgm_ini->Get_Int(m_battleview_ini_key, m_battleview_ini_mode_key, 0);
-    Console_Output(__FUNCTION__ "\n");
+/*************
+* HELPER METHODS
+*/
+
+void BattleViewPlugin::HandleINIConfiguration(INIClass* ssgm_ini, bool is_map)
+{
+    m_config_mode            = ssgm_ini->Get_Int ("BattleView", "mode",            is_map ? m_config_mode : 0); // BattleView Frontend is currently fixed at mode 7
+    m_config_bots_as_players = ssgm_ini->Get_Bool("BattleView", "bots_as_players", is_map ? m_config_bots_as_players : true); // Appease SkyNET
 }
 
-// Don't need?
+
+/*************************
+* Load Global Settings
+*/
+void BattleViewPlugin::OnLoadGlobalINISettings(INIClass *ssgm_ini) {
+    Console_Output(__FUNCTION__ "\n");
+    Console_Output("[BattleView] Attempting to load global INI settings...\n");
+
+    HandleINIConfiguration(ssgm_ini, false);
+}
+
+// Don't need? What do?
 void BattleViewPlugin::OnFreeData() {
     Console_Output(__FUNCTION__ "\n");
 }
@@ -55,6 +79,8 @@ void BattleViewPlugin::OnFreeData() {
 // Configure Mode level
 void BattleViewPlugin::OnLoadMapINISettings(INIClass *ssgm_ini) {
     Console_Output("[BattleView] Attempting to load map INI settings...\n");
+
+    HandleINIConfiguration(ssgm_ini, true);
 }
 
 void BattleViewPlugin::OnFreeMapData() {
@@ -64,6 +90,28 @@ void BattleViewPlugin::OnFreeMapData() {
 // Maybe handle configuration chat commands?
 bool BattleViewPlugin::OnChat(int player_id, TextMessageEnum type, const wchar_t *message, int receiver_id) {
     Console_Output(__FUNCTION__ "\n");
+
+    const char* message_type = "UNKNOWN";
+
+    switch (type)
+    {
+    case TEXT_MESSAGE_PUBLIC:
+        message_type = "PUBLIC";
+        break;
+    case TEXT_MESSAGE_TEAM:
+        message_type = "TEAM";
+        break;
+    case TEXT_MESSAGE_PRIVATE:
+        message_type = "PRIVATE";
+        break;
+    case TEXT_MESSAGE_TMSG:
+        message_type = "TMSG";
+        break;
+    default:
+        break;
+    }
+
+    Console_Output("[%s] (%i) %s wrote: %s [%i]\n", message_type, player_id, "?sender_name?", message, receiver_id);
     return true;
 }
 
@@ -86,28 +134,36 @@ void BattleViewPlugin::OnPlayerLeave(int player_id) {
 
 // This will probably be our favorite callback
 void BattleViewPlugin::OnThink() {
+    m_think_counter += 1;
+
+    if (m_think_counter < m_think_interval)
+        return;
+
+    m_think_counter = 0;
+
     Console_Output(__FUNCTION__ "\n");
 
-    for (SLNode<BuildingGameObj> *z = GameObjManager::BuildingGameObjList.Head(); z; z = z->Next()) {
-        GameObject *building = z->Data();
+    Console_Output("Buildings:\n");
+    for (SLNode<BuildingGameObj>* z = GameObjManager::BuildingGameObjList.Head(); z; z = z->Next()) {
+        BuildingGameObj* building = z->Data();
 
         Vector3 pos;
-        building->Get_Position(&pos);
-        Get_Team
+        building->Get_World_Position(pos);
+
+        Console_Output("Name: %s, Prefix: %s at X: %f,Y: %f, Z: %f for Team ID %i\n", Get_Translated_Preset_Name(building), building->Get_Name_Prefix(), pos.X, pos.Y, pos.Z, building->Get_Player_Type());
     }
 
-    for (SLNode<cPlayer> *z = Get_Player_List()->Head(); z; z = z->Next()) {
-        cPlayer * player = z->Data();
-
+    Console_Output("Players:\n");
+    for (SLNode<SoldierGameObj>* z = GameObjManager::SoldierGameObjList.Head(); z; z = z->Next()) {
+        SoldierGameObj* soldier = z->Data();
         Vector3 pos;
 
-        player->Get_Is_Active();
-        player->Get_Is_In_Game();
-        player->Is_Team_Player();
-        player->Get_World_Position(pos);
+        if (soldier->Is_Bot() && !m_config_bots_as_players)
+            continue;
 
-        if (player->Get_Is_In_Game() && player->Get_Player_Type() == Team) {
-        }
+        soldier->Get_World_Position(pos);
+
+        Console_Output("Name: %s at X: %f,Y: %f, Z: %f for Team ID %i [%s]\n", Get_Player_Name(soldier), pos.X, pos.Y, pos.Z, soldier->Get_Player_Type(), soldier->Get_Bot_Tag());
     }
 }
 

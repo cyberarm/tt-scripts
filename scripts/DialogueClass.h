@@ -11,93 +11,70 @@
 */
 #ifndef TT_INCLUDE__DIALOGUECLASS_H
 #define TT_INCLUDE__DIALOGUECLASS_H
-
 #include "engine_vector.h"
 #include "engine_string.h"
-
 class ChunkSaveClass;
-
 class ChunkLoadClass;
-
-class DialogueOptionClass {
+class DialogueOptionClass
+{
 private:
-    float Weight;
-    int Conversation_ID;
+	float Weight;
+	int Conversation_ID;
 public:
-    DialogueOptionClass();
-
-    DialogueOptionClass(DialogueOptionClass const &that);
-
-    virtual ~DialogueOptionClass();
-
-    const DialogueOptionClass &operator=(DialogueOptionClass const &that);
-
-    void Save(ChunkSaveClass &csave);
-
-    void Load(ChunkLoadClass &cload);
-
-    void Load_Variables(ChunkLoadClass &cload);
-
-    int Get_Conversation_ID() const { return Conversation_ID; }
-
-    float Get_Weight() const { return Weight; }
-
-    void Set_Conversation_ID(int id) { Conversation_ID = id; }
-
-    void Set_Weight(float weight) { Weight = weight; }
+	DialogueOptionClass();
+	DialogueOptionClass(DialogueOptionClass const &that);
+	virtual ~DialogueOptionClass();
+	const DialogueOptionClass& operator=(DialogueOptionClass const &that);
+	void Save(ChunkSaveClass& csave);
+	void Load(ChunkLoadClass& cload);
+	void Load_Variables(ChunkLoadClass& cload);
+	int Get_Conversation_ID() const {return Conversation_ID;}
+	float Get_Weight() const {return Weight;}
+	void Set_Conversation_ID(int id) {Conversation_ID = id;}
+	void Set_Weight(float weight) {Weight = weight;}
 };
-
-class DialogueClass {
+class DialogueClass
+{
 private:
-    DynamicVectorClass<DialogueOptionClass *> DialogueOptions;
-    float SilenceWeight;
+	DynamicVectorClass<DialogueOptionClass*> DialogueOptions;
+	float SilenceWeight;
 public:
-    DialogueClass();
-
-    DialogueClass(DialogueClass const &that);
-
-    virtual ~DialogueClass();
-
-    const DialogueClass &operator=(const DialogueClass &string);
-
-    void Save(ChunkSaveClass &csave);
-
-    void Load(ChunkLoadClass &cload);
-
-    void Load_Variables(ChunkLoadClass &cload);
-
-    void Free_Options();
-
-    int Get_Conversation();
-
-    DynamicVectorClass<DialogueOptionClass *> &Get_Option_List() { return DialogueOptions; }
-
-    float Get_Silence_Weight() { return SilenceWeight; }
-
-    void Set_Silence_Weight(float weight) { SilenceWeight = weight; }
+	DialogueClass();
+	DialogueClass(DialogueClass const &that);
+	virtual ~DialogueClass();
+	const DialogueClass& operator=(const DialogueClass& string);
+	void Save(ChunkSaveClass& csave);
+	void Load(ChunkLoadClass& cload);
+	void Load_Variables(ChunkLoadClass& cload);
+	void Free_Options();
+	int Get_Conversation();
+	DynamicVectorClass<DialogueOptionClass*> &Get_Option_List() {return DialogueOptions;}
+	float Get_Silence_Weight() {return SilenceWeight;}
+	void Set_Silence_Weight(float weight) {SilenceWeight = weight;}
 }; // size: 32
-enum DialogueTypes {
-    DIALOG_ON_TAKE_DAMAGE_FROM_FRIEND,
-    DIALOG_ON_TAKE_DAMAGE_FROM_ENEMY,
-    DIALOG_ON_DAMAGE_FRIEND,
-    DIALOG_ON_DAMAGE_ENEMY,
-    DIALOG_ON_KILLED_FRIEND,
-    DIALOG_ON_KILLED_ENEMY,
-    DIALOG_ON_SAW_FRIEND,
-    DIALOG_ON_SAW_ENEMY,
-    DIALOG_ON_OBSOLETE_01,
-    DIALOG_ON_OBSOLETE_02,
-    DIALOG_ON_DIE,
-    DIALOG_ON_POKE_IDLE,
-    DIALOG_ON_POKE_SEARCH,
-    DIALOG_ON_POKE_COMBAT,
-    DIALOG_ON_IDLE_TO_COMBAT,
-    DIALOG_ON_IDLE_TO_SEARCH,
-    DIALOG_ON_SEARCH_TO_COMBAT,
-    DIALOG_ON_SEARCH_TO_IDLE,
-    DIALOG_ON_COMBAT_TO_SEARCH,
-    DIALOG_ON_COMBAT_TO_IDLE,
-    DIALOG_MAX
+enum DialogueTypes
+{
+	DIALOG_ON_TAKE_DAMAGE_FROM_FRIEND,
+	DIALOG_ON_TAKE_DAMAGE_FROM_ENEMY,
+	DIALOG_ON_DAMAGE_FRIEND,
+	DIALOG_ON_DAMAGE_ENEMY,
+	DIALOG_ON_KILLED_FRIEND,
+	DIALOG_ON_KILLED_ENEMY,
+	DIALOG_ON_SAW_FRIEND,
+	DIALOG_ON_SAW_ENEMY,
+	DIALOG_ON_OBSOLETE_01,
+	DIALOG_ON_OBSOLETE_02,
+	DIALOG_ON_DIE,
+	DIALOG_ON_POKE_IDLE,
+	DIALOG_ON_POKE_SEARCH,
+	DIALOG_ON_POKE_COMBAT,
+	DIALOG_ON_IDLE_TO_COMBAT,
+	DIALOG_ON_IDLE_TO_SEARCH,
+	DIALOG_ON_SEARCH_TO_COMBAT,
+	DIALOG_ON_SEARCH_TO_IDLE,
+	DIALOG_ON_COMBAT_TO_SEARCH,
+	DIALOG_ON_COMBAT_TO_IDLE,
+	DIALOG_MAX
 };
 
 #endif

@@ -13,25 +13,21 @@
 
 #include "Iterator.h"
 
-template<typename T>
-inline T clone(const T &o) { return o; }
+template<typename T> inline T clone(const T& o) { return o; }
 
 #define TT_SCOPE_DEFINE(d) for (bool c = true; c;) for (d; c; c = false) // Hack, but it should be compiled away anyway.
 #define TT_EACH_OBSERVER(observee) TT_CONST_FOREACH(observer, (observee).getObservers()) (**observer)
 #define TT_EACH_OBSERVER_SAFE(observee) TT_SCOPE_DEFINE(auto observeeClone = clone((observee).getObservers())) TT_CONST_FOREACH(observer, observeeClone) (**observer)
 
 
-template<class Observer>
-class Observee {
-    SimpleDynVecClass<Observer *> observers;
+template<class Observer> class Observee
+{
+	SimpleDynVecClass<Observer*> observers;
 
 public:
-
-    void addObserver(Observer &observer) { observers.Add(&observer); }
-
-    void removeObserver(Observer &observer) { observers.Delete(&observer); }
-
-    SimpleDynVecClass<Observer *> &getObservers() { return observers; }
-
-    bool hasObservers() const { return !observers.isEmpty(); }
+	
+	void addObserver(Observer& observer) { observers.Add(&observer); }
+	void removeObserver(Observer& observer) { observers.Delete(&observer); }
+	SimpleDynVecClass<Observer*>& getObservers() { return observers; }
+	bool hasObservers() const { return !observers.isEmpty(); }
 };

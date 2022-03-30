@@ -40,9 +40,7 @@
 #include <wininet.h>
 #include <dbghelp.h>
 #include <d3d9.h>
-
 #define DIRECTINPUT_VERSION 0x800
-
 #include <dinput.h>
 #include <imm.h>
 

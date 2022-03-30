@@ -11,38 +11,27 @@
 */
 #ifndef TT_INCLUDE_POWERPLANTGAMEOBJDEF_H
 #define TT_INCLUDE_POWERPLANTGAMEOBJDEF_H
-
 #include "BuildingGameObjDef.h"
-
-class PowerPlantGameObjDef : public BuildingGameObjDef {
+class PowerPlantGameObjDef : public BuildingGameObjDef
+{
 public:
-    PowerPlantGameObjDef(void);
-
-    ~PowerPlantGameObjDef(void);
-
-    uint32 Get_Class_ID(void) const;
-
-    PersistClass *Create(void) const;
-
-    bool Save(ChunkSaveClass &csave);
-
-    bool Load(ChunkLoadClass &cload);
-
-    const PersistFactoryClass &Get_Factory(void) const;
-
+	PowerPlantGameObjDef(void);
+	~PowerPlantGameObjDef (void);
+	uint32								Get_Class_ID (void) const;
+	PersistClass *						Create (void) const;
+	bool									Save (ChunkSaveClass &csave);
+	bool									Load (ChunkLoadClass &cload);
+	const PersistFactoryClass &	Get_Factory (void) const;
 #ifdef DDBEDIT
-    virtual void                        Dump (FileClass &file);
+	virtual void                        Dump (FileClass &file);
 #endif
-    DECLARE_EDITABLE (PowerPlantGameObjDef, BuildingGameObjDef);
+	DECLARE_EDITABLE (PowerPlantGameObjDef, BuildingGameObjDef);
 protected:
-    void Load_Variables(ChunkLoadClass &cload);
-
+	void					Load_Variables (ChunkLoadClass &cload);
 private:
-    int unk1;
-    int unk2;
-    int unk3;
-
-    friend class PresetDump;
+	int unk1;
+	int unk2;
+	int unk3;
+	friend class PresetDump;
 };
-
 #endif

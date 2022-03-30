@@ -14,44 +14,46 @@
 #include "scripts.h"
 #include "tfx.h"
 
-void TFX_Spawn_When_Killed::Killed(GameObject *obj, GameObject *killer) {
-    float facing = Commands->Get_Facing(obj);
-    Vector3 position = Commands->Get_Position(obj);
-    GameObject *newobj;
-    position.Z += Get_Float_Parameter("DropHeight");
-    newobj = Commands->Create_Object(Get_Parameter("PresetName"), position);
-    if (!Get_Int_Parameter("SameFacing")) {
-        return;
-    }
-    Commands->Set_Facing(newobj, facing);
-    float maxhealth = Commands->Get_Max_Health(newobj);
-    float maxarmor = Commands->Get_Max_Shield_Strength(newobj);
-    if (maxhealth) Commands->Set_Health(newobj, maxhealth * Get_Float_Parameter("HealthPercent") / 100);
-    if (maxarmor) Commands->Set_Shield_Strength(newobj, maxarmor * Get_Float_Parameter("ArmorPercent") / 100);
+void TFX_Spawn_When_Killed::Killed(GameObject *obj,GameObject *killer)
+{
+	float facing = Commands->Get_Facing(obj);
+	Vector3 position = Commands->Get_Position(obj);
+	GameObject *newobj;
+	position.Z += Get_Float_Parameter("DropHeight");
+	newobj = Commands->Create_Object(Get_Parameter("PresetName"),position);
+	if (!Get_Int_Parameter("SameFacing"))
+	{
+		return;
+	}
+	Commands->Set_Facing(newobj,facing);
+	float maxhealth = Commands->Get_Max_Health(newobj);
+	float maxarmor = Commands->Get_Max_Shield_Strength(newobj);
+	if (maxhealth) Commands->Set_Health(newobj,maxhealth*Get_Float_Parameter("HealthPercent") / 100);
+	if (maxarmor) Commands->Set_Shield_Strength(newobj,maxarmor*Get_Float_Parameter("ArmorPercent") / 100);
 }
 
-void TFX_Replace_When_Repaired::Damaged(GameObject *obj, GameObject *damager, float amount) {
-    if (amount >= 0 || Commands->Get_Health(obj) < Commands->Get_Max_Health(obj) ||
-        Commands->Get_Shield_Strength(obj) < Commands->Get_Max_Shield_Strength(obj)) {
-        return;
-    }
-    float facing = Commands->Get_Facing(obj);
-    Vector3 position = Commands->Get_Position(obj);
-    GameObject *newobj;
-    Commands->Destroy_Object(obj);
-    position.Z += Get_Float_Parameter("DropHeight");
-    newobj = Commands->Create_Object(Get_Parameter("PresetName"), position);
-    if (!Get_Int_Parameter("SameFacing")) {
-        return;
-    }
-    Commands->Set_Facing(newobj, facing);
-    float maxhealth = Commands->Get_Max_Health(newobj);
-    float maxarmor = Commands->Get_Max_Shield_Strength(newobj);
-    if (maxhealth) Commands->Set_Health(newobj, maxhealth * Get_Float_Parameter("HealthPercent") / 100);
-    if (maxarmor) Commands->Set_Shield_Strength(newobj, maxarmor * Get_Float_Parameter("ArmorPercent") / 100);
+void TFX_Replace_When_Repaired::Damaged(GameObject *obj,GameObject *damager,float amount)
+{
+	if (amount >= 0 || Commands->Get_Health(obj) < Commands->Get_Max_Health(obj) || Commands->Get_Shield_Strength(obj) < Commands->Get_Max_Shield_Strength(obj))
+	{
+		return;
+	}
+	float facing = Commands->Get_Facing(obj);
+	Vector3 position = Commands->Get_Position(obj);
+	GameObject*newobj;
+	Commands->Destroy_Object(obj);
+	position.Z += Get_Float_Parameter("DropHeight");
+	newobj = Commands->Create_Object(Get_Parameter("PresetName"),position);
+	if (!Get_Int_Parameter("SameFacing"))
+	{
+		return;
+	}
+	Commands->Set_Facing(newobj,facing);
+	float maxhealth = Commands->Get_Max_Health(newobj);
+	float maxarmor = Commands->Get_Max_Shield_Strength(newobj);
+	if (maxhealth) Commands->Set_Health(newobj,maxhealth*Get_Float_Parameter("HealthPercent") / 100);
+	if (maxarmor) Commands->Set_Shield_Strength(newobj,maxarmor*Get_Float_Parameter("ArmorPercent") / 100);
 }
 
-ScriptRegistrant<TFX_Spawn_When_Killed> TFX_Spawn_When_Killed_Registrant("TFX_Spawn_When_Killed",
-                                                                         "PresetName:string,DropHeight=0:float,SameFacing=1:int,HealthPercent=100.0000:float,ArmorPercent=100.0000:float");
-ScriptRegistrant<TFX_Replace_When_Repaired> TFX_Replace_When_Repaired_Registrant("TFX_Replace_When_Repaired",
-                                                                                 "PresetName:string,DropHeight=0:float,SameFacing=1:int,HealthPercent=100.0000:float,ArmorPercent=100.0000:float");
+ScriptRegistrant<TFX_Spawn_When_Killed> TFX_Spawn_When_Killed_Registrant("TFX_Spawn_When_Killed","PresetName:string,DropHeight=0:float,SameFacing=1:int,HealthPercent=100.0000:float,ArmorPercent=100.0000:float");
+ScriptRegistrant<TFX_Replace_When_Repaired> TFX_Replace_When_Repaired_Registrant("TFX_Replace_When_Repaired","PresetName:string,DropHeight=0:float,SameFacing=1:int,HealthPercent=100.0000:float,ArmorPercent=100.0000:float");

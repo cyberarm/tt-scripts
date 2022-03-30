@@ -14,39 +14,26 @@
 
 #include "DynamicPhysClass.h"
 #include "DecorationPhysClass.h"
-
-class LightPhysClass : public DecorationPhysClass {
+class LightPhysClass : public DecorationPhysClass
+{
 public:
-    LightPhysClass(bool auto_allocate_light = false);
-
-    virtual LightPhysClass *As_LightPhysClass(void) { return this; }
-
-    void Set_Model(RenderObjClass *model);
-
-    void Set_Vis_Sector_ID(int new_id) { VisSectorID = new_id; }
-
-    int Get_Vis_Sector_ID(void) const { return VisSectorID; }
-
-    void Set_Group_ID(int new_id) { GroupID = new_id; }
-
-    int Get_Group_ID(void) const { return GroupID; }
-
-    int Is_Vis_Object_Visible(int vis_object_id);
-
-    virtual const PersistFactoryClass &Get_Factory(void) const;
-
-    virtual bool Save(ChunkSaveClass &csave);
-
-    virtual bool Load(ChunkLoadClass &cload);
-
-    virtual void On_Post_Load(void);
-
+	LightPhysClass(bool auto_allocate_light = false);
+	virtual LightPhysClass *				As_LightPhysClass(void)		{ return this; }
+	void											Set_Model(RenderObjClass * model);
+	void											Set_Vis_Sector_ID(int new_id)		{ VisSectorID = new_id; }	
+	int											Get_Vis_Sector_ID(void) const		{ return VisSectorID; }
+	void											Set_Group_ID(int new_id)			{ GroupID = new_id; }
+	int											Get_Group_ID(void) const			{ return GroupID; }
+	int											Is_Vis_Object_Visible(int vis_object_id);
+	virtual const PersistFactoryClass &	Get_Factory (void) const;
+	virtual bool								Save (ChunkSaveClass &csave);
+	virtual bool								Load (ChunkLoadClass &cload);
+	virtual void								On_Post_Load(void);
 private:
-    int VisSectorID;            // static lights have a pvs.
-    int GroupID;                    // group id, used by external code
-    LightPhysClass(const LightPhysClass &);
-
-    LightPhysClass &operator=(const LightPhysClass &);
+	int											VisSectorID;			// static lights have a pvs.
+	int											GroupID;					// group id, used by external code
+	LightPhysClass(const LightPhysClass &);
+	LightPhysClass & operator = (const LightPhysClass &);
 };
 
 #endif

@@ -13,18 +13,22 @@
 #define TT_INCLUDE__CGAMETYPE_H
 
 
+
 #define IS_MISSION (cGameType::GameType == 1)
 #define IS_SOLOPLAY (cGameType::GameType != 3)
 #define IS_MULTIPLAY (cGameType::GameType == 3)
 
 
-class cGameType {
+
+class cGameType
+{
 
 public:
 
-    static REF_DECL(int, GameType);
+	static REF_DECL(int, GameType);
 
 };
+
 
 
 #endif

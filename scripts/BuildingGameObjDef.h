@@ -18,76 +18,67 @@
 #include "engine_threading.h"
 #include "engine_string.h"
 #include "DamageableGameObjDef.h"
+typedef	unsigned int	ArmorType;
+namespace BuildingConstants
+{
+	typedef enum
+	{
+		TYPE_NONE					= -1,
+		TYPE_POWER_PLANT,
+		TYPE_SOLDIER_FACTORY,
+		TYPE_VEHICLE_FACTORY,
+		TYPE_REFINERY,
+		TYPE_COM_CENTER,
+		TYPE_REPAIR_BAY,		
+		TYPE_SHRINE,
+		TYPE_HELIPAD,
+		TYPE_CONYARD,
+		TYPE_BASE_DEFENSE,
+		TYPE_TECH_CENTER,
+		TYPE_NAVAL_FACTORY,
+		TYPE_SPECIAL,
+		TYPE_COUNT
+	} BuildingType;
 
-typedef unsigned int ArmorType;
-namespace BuildingConstants {
-    typedef enum {
-        TYPE_NONE = -1,
-        TYPE_POWER_PLANT,
-        TYPE_SOLDIER_FACTORY,
-        TYPE_VEHICLE_FACTORY,
-        TYPE_REFINERY,
-        TYPE_COM_CENTER,
-        TYPE_REPAIR_BAY,
-        TYPE_SHRINE,
-        TYPE_HELIPAD,
-        TYPE_CONYARD,
-        TYPE_BASE_DEFENSE,
-        TYPE_TECH_CENTER,
-        TYPE_NAVAL_FACTORY,
-        TYPE_SPECIAL,
-        TYPE_COUNT
-    } BuildingType;
+	typedef enum
+	{
+		LEGACY_TEAM_GDI						= 0,
+		LEGACY_TEAM_NOD,
+	} LegacyBuildingTeam;
 
-    typedef enum {
-        LEGACY_TEAM_GDI = 0,
-        LEGACY_TEAM_NOD,
-    } LegacyBuildingTeam;
-
-    typedef enum {
-        BASE_COUNT = 2,
-    };
+	typedef enum
+	{
+		BASE_COUNT = 2,
+	};
 }
-class BuildingGameObjDef : public DamageableGameObjDef {
+class BuildingGameObjDef : public DamageableGameObjDef
+{
 public:
-    BuildingGameObjDef(void);
-
-    virtual uint32 Get_Class_ID(void) const;
-
-    virtual PersistClass *Create(void) const;
-
-    virtual bool Save(ChunkSaveClass &csave);
-
-    virtual bool Load(ChunkLoadClass &cload);
-
-    virtual const PersistFactoryClass &Get_Factory(void) const;
-
+	BuildingGameObjDef( void );
+	virtual uint32								Get_Class_ID( void ) const;
+	virtual PersistClass *						Create( void ) const ;
+	virtual bool								Save( ChunkSaveClass &csave );
+	virtual bool								Load( ChunkLoadClass &cload );
+	virtual const PersistFactoryClass &	Get_Factory( void ) const;
 #ifdef DDBEDIT
-    virtual void                        Dump (FileClass &file);
+	virtual void                        Dump (FileClass &file);
 #endif
-    DECLARE_EDITABLE(BuildingGameObjDef, DamageableGameObjDef);
-
-    void Set_Type(BuildingConstants::BuildingType type) { Type = type; }
-
-    BuildingConstants::BuildingType Get_Type(void) const { return Type; }
-
-    const StringClass &Get_Mesh_Prefix(void) const { return MeshPrefix; }
-
-    int Get_Damage_Report(int team) const;
-
-    int Get_Destroy_Report(int team) const;
-
+	DECLARE_EDITABLE( BuildingGameObjDef, DamageableGameObjDef );
+	void										Set_Type (BuildingConstants::BuildingType type) { Type = type; }
+	BuildingConstants::BuildingType				Get_Type (void) const	{ return Type; }
+	const StringClass &							Get_Mesh_Prefix (void) const	{ return MeshPrefix; }
+	int Get_Damage_Report(int team) const;
+	int Get_Destroy_Report(int team) const;
 protected:
-    StringClass MeshPrefix; // 0084
-    ArmorType MCTSkin; // 0088
-    BuildingConstants::BuildingType Type; // 008C
-    int GDIDamageReportID; // 0090
-    int NodDamageReportID; // 0094
-    int GDIDestroyReportID; // 0098
-    int NodDestroyReportID; // 009C
-    friend class BuildingGameObj;
-
-    friend class PresetDump;
+	StringClass MeshPrefix; // 0084
+	ArmorType MCTSkin; // 0088
+	BuildingConstants::BuildingType Type; // 008C
+	int GDIDamageReportID; // 0090
+	int NodDamageReportID; // 0094
+	int GDIDestroyReportID; // 0098
+	int NodDestroyReportID; // 009C
+	friend class BuildingGameObj;
+	friend class PresetDump;
 }; // 00A0
 
 

@@ -16,14 +16,16 @@
 
 // -------------------------------------------------------------------------------------------------
 
-struct dp88_Veterancy_Settings {
-public:
+struct dp88_Veterancy_Settings
+{
+  public:
     dp88_Veterancy_Settings();
 
     void Reset();
 
-    static dp88_Veterancy_Settings &GetInstance() {
-        return ms_instance;
+    static dp88_Veterancy_Settings& GetInstance()
+    {
+      return ms_instance;
     }
 
     float valueMultiplier[3];    //!< Value multiplier for veteran and elite levels
@@ -63,39 +65,33 @@ private:
 *   The price to buy 1 veterancy point in the boost system, which adds an additional keyhook for
 *   players to spend money to reach the next level. Boost is disabled if this is 0. Default: 0
 */
-class dp88_Veterancy_Controller : public ScriptImpClass {
-public:
-    void Created(GameObject *obj);
-
-    void Destroyed(GameObject *obj);
+class dp88_Veterancy_Controller : public ScriptImpClass
+{
+  public:
+    void Created(GameObject* obj);
+    void Destroyed(GameObject* obj);
 };
 
 // -------------------------------------------------------------------------------------------------
 
 /* Script to handle veterancy on any type of object, either player or AI controlled */
-class dp88_veterancyUnit : public MultiKeyHookScriptImpClass {
-public:
-    void Created(GameObject *obj);
-
-    void Damaged(GameObject *obj, GameObject *damager, float amount);
-
-    void Killed(GameObject *obj, GameObject *killer);
-
-    void Destroyed(GameObject *obj);
-
-    void Detach(GameObject *obj);
-
-    void Custom(GameObject *obj, int type, int param, GameObject *sender);
-
-    void Timer_Expired(GameObject *obj, int number);
-
-    void KeyHook(const char *logicalKey);
+class dp88_veterancyUnit : public MultiKeyHookScriptImpClass
+{
+  public:
+    void Created ( GameObject *obj );
+    void Damaged( GameObject *obj, GameObject *damager, float amount );
+    void Killed ( GameObject *obj, GameObject *killer );
+    void Destroyed ( GameObject *obj );
+    void Detach(GameObject* obj);
+    void Custom ( GameObject* obj, int type, int param, GameObject* sender );
+    void Timer_Expired( GameObject *obj, int number );
+    void KeyHook(const char* logicalKey);
 
 
     // Recieve veterancy points
-    void recieveVeterancyPoints(float points);
+    void recieveVeterancyPoints ( float points );
 
-private:
+  private:
     /****************
     Variables
     *****************/
@@ -126,8 +122,8 @@ private:
 
 
     // Static arrays of pointers to all veterancy units
-    static dp88_veterancyUnit *playerData[128];
-    static dp88_veterancyUnit *AIUnitData[256];
+    static dp88_veterancyUnit* playerData[128];
+    static dp88_veterancyUnit* AIUnitData[256];
 
     // Logical key hooks
     static const char ShowVeterancyPointsHookName[];
@@ -138,17 +134,16 @@ private:
     *****************/
 
     /*! Called when this unit has been killed or destroyed to deregister from the static array */
-    void Deregister(GameObject *obj);
+    void Deregister(GameObject* obj);
 
     /*! Grant x veterancy points to the specified unit */
-    void grantVeterancyPoints(GameObject *obj, float points);
+    void grantVeterancyPoints ( GameObject* obj, float points );
 
     /*! Get a pointer to the dp88_veterancyUnit class object for the specified GameObject */
-    dp88_veterancyUnit *getVeterancyData(GameObject *obj);
+    dp88_veterancyUnit* getVeterancyData ( GameObject* obj );
 
     /*! Handle promotion events */
     void promoteToVeteran();
-
     void promoteToElite();
 
     /*! Handle demotion event - Mainly for vehicles when their drivers get out */
@@ -156,7 +151,6 @@ private:
 
     /*! Chevron scripts */
     void createChevrons();
-
     void clearChevrons();
 
     /****************
@@ -164,14 +158,15 @@ private:
     is now called correctly in this instance so we can't rely on that mechanism for carry-over)
     *****************/
 
-    struct PointsCarryOverData {
-        long playerId;
-        unsigned int gameTime;
-        float infantryVeterancyPoints, vehicleVeterancyPoints;
+    struct PointsCarryOverData
+    {
+      long playerId;
+      unsigned int gameTime;
+      float infantryVeterancyPoints, vehicleVeterancyPoints;
 
-        PointsCarryOverData() : playerId(-1) {}
+      PointsCarryOverData() : playerId(-1) {}
     };
-
+    
     // Only need one instance, carry-over should happen immediately after Destroyed() is called
     static PointsCarryOverData carryOverData;
 };
@@ -179,37 +174,36 @@ private:
 // -------------------------------------------------------------------------------------------------
 
 /*! Script to grant veterancy points to whatever it is attached to, also works for crates */
-class dp88_veterancyGrantPoints : public ScriptImpClass {
-    void Created(GameObject *obj);
-
-    void Custom(GameObject *obj, int type, int param, GameObject *sender);
+class dp88_veterancyGrantPoints : public ScriptImpClass
+{
+  void Created ( GameObject *obj );
+  void Custom ( GameObject *obj, int type, int param, GameObject *sender );
 };
 
 // -------------------------------------------------------------------------------------------------
 
 // Script to link veterancy points of two objects together
-class dp88_linkVetPoints : public ScriptImpClass {
-    void Created(GameObject *obj);
+class dp88_linkVetPoints : public ScriptImpClass
+{
+  void Created ( GameObject *obj );
+  void Timer_Expired ( GameObject *obj, int number );
+  void equalisePoints( GameObject* obj );
 
-    void Timer_Expired(GameObject *obj, int number);
-
-    void equalisePoints(GameObject *obj);
-
-    int parentObjID;
-    float lastInfantryPoints;
-    float lastVehiclePoints;
+  int parentObjID;
+  float lastInfantryPoints;
+  float lastVehiclePoints;
 };
 
 // -------------------------------------------------------------------------------------------------
 
 // Script to grant extra health / armour upon promotion
-class dp88_veterancyPromotionHealthArmourIncrease : public ScriptImpClass {
-    void Created(GameObject *obj);
-
-    void Custom(GameObject *obj, int type, int param, GameObject *sender);
+class dp88_veterancyPromotionHealthArmourIncrease : public ScriptImpClass
+{
+  void Created( GameObject *obj );
+  void Custom( GameObject *obj, int type, int param, GameObject *sender );
 
 private:
-    int m_veterancyLevel;
+  int m_veterancyLevel;
 };
 
 // -------------------------------------------------------------------------------------------------
@@ -237,14 +231,14 @@ private:
 * \param powerupPreset_elite
 *   The name of a powerup preset to grant to the unit when it is promoted to elite level
 */
-class dp88_veterancyGrantPowerup : public ScriptImpClass {
-    char weaponName[64];
-    char oldWeapon[64];
+class dp88_veterancyGrantPowerup : public ScriptImpClass
+{
+  char weaponName[64];
+  char oldWeapon[64];
 
-    void Created(GameObject *obj);
-
-    void Custom(GameObject *obj, int type, int param, GameObject *sender);
+  void Created( GameObject *obj );
+  void Custom( GameObject *obj, int type, int param, GameObject *sender );
 
 private:
-    int veterancyLevel;
+  int veterancyLevel;
 };

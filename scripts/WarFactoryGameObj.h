@@ -15,43 +15,26 @@
 #include "VehicleFactoryGameObj.h"
 
 class WarFactoryGameObjDef;
-
-class WarFactoryGameObj : public VehicleFactoryGameObj {
+class WarFactoryGameObj : public VehicleFactoryGameObj
+{
 public:
-    WarFactoryGameObj(void);
-
-    ~WarFactoryGameObj(void);
-
-    virtual void Init(void);
-
-    void Init(const WarFactoryGameObjDef &definition);
-
-    SCRIPTS_API const WarFactoryGameObjDef
-    &
-
-    Get_Definition(void) const;
-
-    WarFactoryGameObj *As_WarFactoryGameObj(void) { return this; }
-
-    bool Save(ChunkSaveClass &csave);
-
-    bool Load(ChunkLoadClass &cload);
-
-    const PersistFactoryClass &Get_Factory(void) const;
-
-    void CnC_Initialize(BaseControllerClass *base);
-
-    void Think(void);
-
+	WarFactoryGameObj (void);
+	~WarFactoryGameObj (void);
+	virtual	void						Init( void );
+	void									Init (const WarFactoryGameObjDef & definition);
+	SCRIPTS_API const WarFactoryGameObjDef &	Get_Definition (void) const;
+	WarFactoryGameObj *				As_WarFactoryGameObj (void)	{ return this; }
+	bool									Save (ChunkSaveClass &csave);
+	bool									Load (ChunkLoadClass &cload);
+	const	PersistFactoryClass &	Get_Factory (void) const;
+	void					CnC_Initialize (BaseControllerClass *base);
+	void					Think (void);
 protected:
-    void Load_Variables(ChunkLoadClass &cload);
-
-    void Play_Creation_Animation(bool onoff);
-
-    void Begin_Generation(void);
-
-    int CreationAnimationID;
-    float CreationFinishedTimer;
+	void					Load_Variables (ChunkLoadClass &cload);
+	void					Play_Creation_Animation (bool onoff);
+	void					Begin_Generation (void);
+	int					CreationAnimationID;
+	float					CreationFinishedTimer;
 };
 
 

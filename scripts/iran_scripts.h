@@ -12,62 +12,50 @@
 
 
 class Iran_Beaconing_Prevention_Zone : public ScriptImpClass {
-    // This is an experimental script that might crash the FDS, don't use this.
-    void Entered(GameObject *obj, GameObject *enter);
-
-    void Timer_Expired(GameObject *obj, int number);
-
-    void Remove_Weapon_Safely(GameObject *obj, const char *WeaponName);
+	// This is an experimental script that might crash the FDS, don't use this.
+	void Entered(GameObject *obj,GameObject *enter);
+	void Timer_Expired(GameObject *obj,int number);
+	void Remove_Weapon_Safely(GameObject *obj,const char *WeaponName);
 };
 
 // Generic kill zone scripts, based on the JFW_ damage zone scripts written by jonwil
-class Iran_Vehicle_All_Kill_Zone : public ScriptImpClass {
-    int saved;
-
-    void Entered(GameObject *obj, GameObject *enter);
-
-    void Timer_Expired(GameObject *obj, int number);
+class Iran_Vehicle_All_Kill_Zone: public ScriptImpClass {
+	int saved;
+	void Entered(GameObject *obj,GameObject *enter);
+	void Timer_Expired(GameObject *obj,int number);
 };
 
-class Iran_All_Kill_Zone : public ScriptImpClass {
-    int saved;
-
-    void Entered(GameObject *obj, GameObject *enter);
-
-    void Timer_Expired(GameObject *obj, int number);
+class Iran_All_Kill_Zone: public ScriptImpClass {
+	int saved;
+	void Entered(GameObject *obj,GameObject *enter);
+	void Timer_Expired(GameObject *obj,int number);
 };
 
-class Iran_Star_Kill_Zone : public ScriptImpClass {
-    int saved;
-
-    void Entered(GameObject *obj, GameObject *enter);
-
-    void Timer_Expired(GameObject *obj, int number);
+class Iran_Star_Kill_Zone: public ScriptImpClass {
+	int saved;
+	void Entered(GameObject *obj,GameObject *enter);
+	void Timer_Expired(GameObject *obj,int number);
 };
 
-class Iran_Vehicle_Ground_Kill_Zone : public ScriptImpClass {
-    int saved;
-
-    void Entered(GameObject *obj, GameObject *enter);
-
-    void Timer_Expired(GameObject *obj, int number);
+class Iran_Vehicle_Ground_Kill_Zone: public ScriptImpClass {
+	int saved;
+	void Entered(GameObject *obj,GameObject *enter);
+	void Timer_Expired(GameObject *obj,int number);
 };
 
-class Iran_Vehicle_Flying_Kill_Zone : public ScriptImpClass {
-    int saved;
-
-    void Entered(GameObject *obj, GameObject *enter);
-
-    void Timer_Expired(GameObject *obj, int number);
+class Iran_Vehicle_Flying_Kill_Zone: public ScriptImpClass {
+	int saved;
+	void Entered(GameObject *obj,GameObject *enter);
+	void Timer_Expired(GameObject *obj,int number);
 };
 
 // Destroys the object it's attached to and crates an invisible laser fence blocker
 // at the same position and facing
 class Iran_Invisible_Blocker : public ScriptImpClass {
-    void Created(GameObject *obj);
+	void Created(GameObject *obj);
 };
 
 // Same as above but shows the laser fence, for placing purposes 
 class Iran_Invisible_Blocker_Visible : public ScriptImpClass {
-    void Created(GameObject *obj);
+	void Created(GameObject *obj);
 };

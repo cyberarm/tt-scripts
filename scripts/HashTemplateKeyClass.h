@@ -13,25 +13,27 @@
 #define TT_INCLUDE__HASHTEMPLATEKEYCLASS_H
 
 
-template<typename Key>
-class HashTemplateKeyClass {
+
+template<typename Key> class HashTemplateKeyClass
+{
 
 public:
 
-    static uint Get_Hash_Value(const Key &key);
+	static uint Get_Hash_Value(const Key& key);
 
 };
 
 
-template<> uint SCRIPTS_API
 
-HashTemplateKeyClass<uint>::Get_Hash_Value(const uint &key);
+template<> uint SCRIPTS_API HashTemplateKeyClass<uint>::Get_Hash_Value(const uint& key);
 
 
-template<class T>
-uint HashTemplateKeyClass<T>::Get_Hash_Value(const T &key) {
-    return key.GetHash();
+
+template<class T> uint HashTemplateKeyClass<T>::Get_Hash_Value(const T& key)
+{
+	return key.GetHash();
 }
+
 
 
 #endif

@@ -11,27 +11,18 @@
 */
 #ifndef TT_INCLUDE__CASTRESULTSTRUCT_H
 #define TT_INCLUDE__CASTRESULTSTRUCT_H
-
 #include "Vector3.h"
 
-struct CastResultStruct {
-    CastResultStruct(void) { Reset(); }
-
-    void Reset(void) {
-        StartBad = false;
-        Fraction = 1.0f;
-        Normal.Set(0, 0, 0);
-        SurfaceType = 0;
-        ComputeContactPoint = false;
-        ContactPoint.Set(0, 0, 0);
-    }
-
-    bool StartBad;        // was the inital configuration interpenetrating something?
-    float Fraction;        // fraction of the move up until collision
-    Vector3 Normal;            // surface normal at the collision point
-    uint32 SurfaceType;    // surface type of polygon at collision point (see W3D_SURFACE_TYPES in w3d_file.h)
-    bool ComputeContactPoint;        // This signals the collision code to compute the point of collision
-    Vector3 ContactPoint;                // This will be set to the point of collision if ComputeContactPoint is true
+struct CastResultStruct
+{
+	CastResultStruct(void)	{ Reset(); }
+	void		Reset(void)		{ StartBad = false; Fraction = 1.0f; Normal.Set(0,0,0); SurfaceType = 0; ComputeContactPoint = false; ContactPoint.Set(0,0,0); }
+	bool		StartBad;		// was the inital configuration interpenetrating something?
+	float		Fraction;		// fraction of the move up until collision
+	Vector3	Normal;			// surface normal at the collision point
+	uint32	SurfaceType;	// surface type of polygon at collision point (see W3D_SURFACE_TYPES in w3d_file.h)
+	bool		ComputeContactPoint;		// This signals the collision code to compute the point of collision
+	Vector3	ContactPoint;				// This will be set to the point of collision if ComputeContactPoint is true
 }; // 40
 
 #endif

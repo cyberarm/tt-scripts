@@ -17,46 +17,50 @@
 #include "BaseControllerClass.h"
 #include "engine_script.h"
 
-enum {
-    CINEMATIC_SET_SLOT = 10000,
-    CINEMATIC_START = 99000,
-    SH_CVFB_DELIVERED = 43000,
+enum
+{
+    CINEMATIC_SET_SLOT  = 10000,
+    CINEMATIC_START     = 99000,
+    SH_CVFB_DELIVERED   = 43000,
 };
 
-class SH_CinematicVehicleFactoryBypass : public ScriptImpClass {
+class SH_CinematicVehicleFactoryBypass: public ScriptImpClass
+{
 public:
 
     int hook_handle;
     int monitor_handle;
     unsigned int preset_id;
 
-    SH_CinematicVehicleFactoryBypass() : hook_handle(0), monitor_handle(0), preset_id(0) {
+    SH_CinematicVehicleFactoryBypass(): hook_handle(0), monitor_handle(0), preset_id(0)
+    {
     }
 
-    void Created(GameObject *obj) {
-        hook_handle = AddVehiclePurchaseHook(PurchaseHook, (const char *) this);
-        monitor_handle = AddVehiclePurchaseMonHook(PurchaseMonitor, (const char *) this);
+    void Created(GameObject* obj)
+    {
+        hook_handle = AddVehiclePurchaseHook(PurchaseHook, (const char*)this);
+        monitor_handle = AddVehiclePurchaseMonHook(PurchaseMonitor, (const char*)this);
         preset_id = Get_Definition_ID(Get_Parameter("PresetName"));
     }
 
-    void Destroyed(GameObject *obj) {
+    void Destroyed(GameObject *obj)
+    {
         RemoveVehiclePurchaseHook(hook_handle);
         RemoveVehiclePurchaseMonHook(monitor_handle);
         hook_handle = 0;
         monitor_handle = 0;
     }
 
-    int PurchaseHook(BaseControllerClass *base, GameObject *purchaser, unsigned int cost, unsigned int preset) {
-        if (preset != preset_id || base->Get_Player_Type() != Get_Player_Type(purchaser))
-            return -1; // not ours, process normally
+    int PurchaseHook(BaseControllerClass* base, GameObject* purchaser, unsigned int cost, unsigned int preset)
+    {
+       if (preset != preset_id || base->Get_Player_Type() != Get_Player_Type(purchaser)) return -1; // not ours, process normally
 
-        return -3; // process normally, but prevent creation
+       return -3; // process normally, but prevent creation
     }
 
-    void PurchaseMonitor(BaseControllerClass *base, GameObject *purchaser, unsigned int cost, unsigned int preset,
-                         unsigned int purchase_status) {
-        if (purchase_status != 0 || preset != preset_id || base->Get_Player_Type() != Get_Player_Type(purchaser))
-            return; // not ours
+    void PurchaseMonitor(BaseControllerClass* base, GameObject* purchaser, unsigned int cost, unsigned int preset, unsigned int purchase_status)
+    {
+        if (purchase_status != 0 || preset != preset_id || base->Get_Player_Type() != Get_Player_Type(purchaser)) return; // not ours
 
         auto owner = Owner();
         Vector3 position = Commands->Get_Position(owner);
@@ -71,7 +75,7 @@ public:
         Commands->Attach_Script(cinematic, "JFW_Cinematic", cinematic_params);
 
         // create vehicle at delivery site
-        GameObject * vehicle = Commands->Create_Object(Get_Parameter("PresetName"), position);
+        GameObject* vehicle = Commands->Create_Object(Get_Parameter("PresetName"), position);
         Commands->Set_Facing(vehicle, facing);
         Commands->Attach_Script(vehicle, "SH_CinematicVehicleDeliveryCallback", "");
 
@@ -81,27 +85,29 @@ public:
         Commands->Send_Custom_Event(owner, cinematic, CINEMATIC_START, 0, 0);
     }
 
-    static int PurchaseHook(BaseControllerClass *base, GameObject *purchaser, unsigned int cost, unsigned int preset,
-                            const char *instance) {
-        return ((SH_CinematicVehicleFactoryBypass *) instance)->PurchaseHook(base, purchaser, cost, preset);
+    static int PurchaseHook(BaseControllerClass* base, GameObject* purchaser, unsigned int cost, unsigned int preset, const char* instance)
+    {
+        return ((SH_CinematicVehicleFactoryBypass*)instance)->PurchaseHook(base, purchaser, cost, preset);
     }
 
-    static void
-    PurchaseMonitor(BaseControllerClass *base, GameObject *purchaser, unsigned int cost, unsigned int preset,
-                    unsigned int purchase_status, const char *instance) {
-        ((SH_CinematicVehicleFactoryBypass *) instance)->PurchaseMonitor(base, purchaser, cost, preset,
-                                                                         purchase_status);
+    static void PurchaseMonitor(BaseControllerClass* base, GameObject* purchaser, unsigned int cost, unsigned int preset, unsigned int purchase_status, const char* instance)
+    {
+        ((SH_CinematicVehicleFactoryBypass*)instance)->PurchaseMonitor(base, purchaser, cost, preset, purchase_status);
     }
 };
 
-class SH_CinematicVehicleDeliveryCallback : public ScriptImpClass {
-    void Created(GameObject *obj) {
+class SH_CinematicVehicleDeliveryCallback: public ScriptImpClass
+{
+    void Created(GameObject *obj)
+    {
         Commands->Attach_Script(obj, "SH_Invulnerable", "");
         Commands->Enable_Vehicle_Transitions(obj, false);
     }
 
-    void Custom(GameObject *obj, int type, int param, GameObject *sender) {
-        if (type == SH_CVFB_DELIVERED) {
+    void Custom(GameObject* obj, int type, int param, GameObject* sender)
+    {
+        if (type == SH_CVFB_DELIVERED)
+        {
             Remove_Script(obj, "SH_Invulnerable");
             Commands->Enable_Vehicle_Transitions(obj, true);
         }

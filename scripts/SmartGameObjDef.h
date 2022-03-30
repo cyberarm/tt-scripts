@@ -19,39 +19,30 @@
 #include "engine_string.h"
 #include "engine_vector.h"
 
-class SmartGameObjDef : public ArmedGameObjDef {
+class SmartGameObjDef : public ArmedGameObjDef
+{
 public:
-    SmartGameObjDef(void);
-
-    virtual bool Save(ChunkSaveClass &csave);
-
-    virtual bool Load(ChunkLoadClass &cload);
-
-    bool Is_Stealthed() const { return IsStealthUnit; }
-
-    /* Modifies the sight range of the object. SightRange is used by AI code only. */
-    void Set_Sight_Range(const float range) { SightRange = range; }
-
-    float Get_Sight_Range() const { return SightRange; }
-
-    /* Modifies the sight arc of the object. SightArc is used by AI code only. */
-    void Set_Sight_Arc(const float arc) { SightArc = arc; }
-
-    float Get_Sight_Arc() const { return SightArc; }
-
+	SmartGameObjDef( void );
+	virtual bool								Save( ChunkSaveClass &csave );
+	virtual bool								Load( ChunkLoadClass &cload );
+	bool Is_Stealthed() const {return IsStealthUnit;}
+	/* Modifies the sight range of the object. SightRange is used by AI code only. */
+	void Set_Sight_Range (const float range) { SightRange = range; }
+	float Get_Sight_Range() const {return SightRange;}
+	/* Modifies the sight arc of the object. SightArc is used by AI code only. */
+	void Set_Sight_Arc (const float arc) { SightArc = arc; }
+	float Get_Sight_Arc() const {return SightArc;}
 #ifdef DDBEDIT
-    virtual void                        Dump (FileClass &file);
+	virtual void                        Dump (FileClass &file);
 #endif
-    DECLARE_EDITABLE(SmartGameObjDef, ArmedGameObjDef);
+	DECLARE_EDITABLE( SmartGameObjDef, ArmedGameObjDef );
 protected:
-    float SightRange;
-    float SightArc;
-    float ListenerScale;
-    bool IsStealthUnit;
-
-    friend class SmartGameObj;
-
-    friend class PresetDump;
+	float											SightRange;
+	float											SightArc;
+	float											ListenerScale;
+	bool											IsStealthUnit;
+	friend	class								SmartGameObj;
+	friend class PresetDump;
 }; // size: 224
 
 

@@ -11,71 +11,43 @@
 */
 #ifndef TT_INCLUDE_SCRIPTZONEGAMEOBJ_H
 #define TT_INCLUDE_SCRIPTZONEGAMEOBJ_H
-
 #include "SList.h"
 #include "ReferencerClass.h"
 #include "ScriptZoneGameObjDef.h"
 #include "ScriptableGameObj.h"
 #include "OBBoxClass.h"
-
 class SmartGameObj;
-
 class RenderObjClass;
-
 class ScriptZoneGameObj : public ScriptableGameObj {
 private:
-    OBBoxClass BoundingBox;
-    int PlayerType;
-    SList<ReferencerClass> ZoneContents;
+	OBBoxClass BoundingBox;
+	int PlayerType;
+	SList<ReferencerClass> ZoneContents;
 
-    RenderObjClass *Model;
+	RenderObjClass* Model;
 public:
-    ScriptZoneGameObj();
-
-    ~ScriptZoneGameObj();
-
-    const PersistFactoryClass &Get_Factory() const;
-
-    void Init();
-
-    void Init(const ScriptZoneGameObjDef &);
-
-    const ScriptZoneGameObjDef SCRIPTS_API
-    &
-
-    Get_Definition(void) const;
-
-    bool Save(ChunkSaveClass &csave);
-
-    bool Load(ChunkLoadClass &cload);
-
-    void On_Post_Load();
-
-    void Think();
-
-    bool In_List(PhysicalGameObj *);
-
-    bool Inside_Me(PhysicalGameObj *obj);
-
-    static ScriptZoneGameObj *Find_Closest_Zone(Vector3 &, ZoneConstants::ZoneType);
-
-    int Count_Team_Members_Inside(int);
-
-    ScriptZoneGameObj *As_ScriptZoneGameObj() { return this; }
-
-    void Get_Position(Vector3 *Position) const { *Position = BoundingBox.Center; }
-
-    void Set_Bounding_Box(OBBoxClass &box) { BoundingBox = box; }
-
-    OBBoxClass &Get_Bounding_Box() { return BoundingBox; }
-
-    int Get_Player_Type() const { return PlayerType; }
-
-    void Set_Player_Type(int type) { PlayerType = type; }
-
-    bool Is_Environment_Zone() { return Get_Definition().IsEnvironmentZone; }
-
-    virtual bool Point_In_Zone(const Vector3 &v);
+	ScriptZoneGameObj();
+	~ScriptZoneGameObj();
+	const PersistFactoryClass &Get_Factory() const;
+	void Init();
+	void Init(const ScriptZoneGameObjDef &);
+	const ScriptZoneGameObjDef SCRIPTS_API & Get_Definition( void ) const ;
+	bool Save(ChunkSaveClass &csave);
+	bool Load(ChunkLoadClass &cload);
+	void On_Post_Load();
+	void Think();
+	bool In_List(PhysicalGameObj *);
+	bool Inside_Me(PhysicalGameObj *obj);
+	static ScriptZoneGameObj *Find_Closest_Zone(Vector3 &,ZoneConstants::ZoneType);
+	int Count_Team_Members_Inside(int);
+	ScriptZoneGameObj * As_ScriptZoneGameObj() {return this;}
+	void Get_Position(Vector3 *Position) const {*Position = BoundingBox.Center;}
+	void Set_Bounding_Box(OBBoxClass &box) {BoundingBox = box;}
+	OBBoxClass &Get_Bounding_Box() {return BoundingBox;}
+	int Get_Player_Type() const {return PlayerType;}
+	void Set_Player_Type(int type) {PlayerType = type;}
+	bool Is_Environment_Zone() {return Get_Definition().IsEnvironmentZone;}
+	virtual bool Point_In_Zone(const Vector3 &v);
 };
 
 #endif

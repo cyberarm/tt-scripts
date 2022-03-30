@@ -11,40 +11,24 @@
 */
 #ifndef TT_INCLUDE_COMCENTERGAMEOBJ_H
 #define TT_INCLUDE_COMCENTERGAMEOBJ_H
-
 #include "BuildingGameObj.h"
-
 class ComCenterGameObjDef;
-
-class ComCenterGameObj : public BuildingGameObj {
+class ComCenterGameObj : public BuildingGameObj
+{
 public:
-    ComCenterGameObj(void);
-
-    ~ComCenterGameObj(void);
-
-    virtual void Init(void);
-
-    void Init(const ComCenterGameObjDef &definition);
-
-    SCRIPTS_API const ComCenterGameObjDef
-    &
-
-    Get_Definition(void) const;
-
-    ComCenterGameObj *As_ComCenterGameObj(void) { return this; }
-
-    bool Save(ChunkSaveClass &csave);
-
-    bool Load(ChunkLoadClass &cload);
-
-    const PersistFactoryClass &Get_Factory(void) const;
-
-    void On_Destroyed(void);
-
-    void On_Revived(void);
-
+	ComCenterGameObj (void);
+	~ComCenterGameObj (void);
+	virtual	void					Init( void );
+	void								Init (const ComCenterGameObjDef & definition);
+	SCRIPTS_API const ComCenterGameObjDef &	Get_Definition (void) const;
+	ComCenterGameObj *				As_ComCenterGameObj (void)	{ return this; }
+	bool									Save (ChunkSaveClass &csave);
+	bool									Load (ChunkLoadClass &cload);
+	const	PersistFactoryClass &	Get_Factory (void) const;
+	void					On_Destroyed (void);
+	void					On_Revived (void);
 private:
-    void Load_Variables(ChunkLoadClass &cload);
+	void					Load_Variables (ChunkLoadClass &cload);	
 };
 
 #endif

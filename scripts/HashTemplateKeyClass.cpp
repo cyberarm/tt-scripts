@@ -13,7 +13,8 @@
 #include "HashTemplateKeyClass.h"
 
 
-template<>
-uint SCRIPTS_API HashTemplateKeyClass<uint>::Get_Hash_Value(const uint &key) {
-    return (key >> 20) + (key >> 10) + (key >> 5) + key;
+
+template<> uint SCRIPTS_API HashTemplateKeyClass<uint>::Get_Hash_Value(const uint& key)
+{
+	return (key >> 20) + (key >> 10) + (key >> 5) + key;
 }

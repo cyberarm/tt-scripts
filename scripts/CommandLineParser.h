@@ -13,23 +13,23 @@
 
 
 class SCRIPTS_API CommandLineParser
-        {
+{
 
-                private:
+private:
 
-                char* command;
-                char* commandIter;
-                bool skipWhitespace();
-                void skipToken();
+	char* command;
+	char* commandIter;
+	bool skipWhitespace();
+	void skipToken();
 
-                public:
+public:
 
-                CommandLineParser(const char* _command);
-                ~CommandLineParser();
-                void skip();
-                const char* getString();
-                const char* getRemainingString();
-                int getInt();
-                double getDouble();
+	CommandLineParser(const char* _command);
+	~CommandLineParser();
+	void skip();
+	const char* getString();
+	const char* getRemainingString();
+	int getInt();
+	double getDouble();
 
-        };
+};

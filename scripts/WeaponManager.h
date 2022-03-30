@@ -13,20 +13,16 @@
 #define TT_INCLUDE_WEAPONMANAGER_H
 
 class AmmoDefinitionClass;
-
 class WeaponDefinitionClass;
-
-class WeaponManager {
+class WeaponManager
+{
 
 public:
 
-    static const AmmoDefinitionClass *Find_Ammo_Definition(const char *presetName);
-
-    static const AmmoDefinitionClass *Find_Ammo_Definition(int presetId);
-
-    static const WeaponDefinitionClass *Find_Weapon_Definition(const char *presetName);
-
-    static const WeaponDefinitionClass *Find_Weapon_Definition(int presetId);
+   static const AmmoDefinitionClass*   Find_Ammo_Definition   (const char* presetName);
+   static const AmmoDefinitionClass*   Find_Ammo_Definition   (int presetId);
+   static const WeaponDefinitionClass* Find_Weapon_Definition (const char* presetName);
+   static const WeaponDefinitionClass* Find_Weapon_Definition (int presetId);
 
 };
 

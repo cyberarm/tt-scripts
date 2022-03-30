@@ -11,35 +11,24 @@
 */
 #ifndef TT_INCLUDE_C4GAMEOBJDEF_H
 #define TT_INCLUDE_C4GAMEOBJDEF_H
-
 #include "SimpleGameObjDef.h"
-
 class C4GameObjDef : public SimpleGameObjDef {
 public:
-    C4GameObjDef();
-
-    ~C4GameObjDef() {};
-
-    const PersistFactoryClass &Get_Factory() const;
-
-    bool Save(ChunkSaveClass &csave);
-
-    bool Load(ChunkLoadClass &cload);
-
-    uint32 Get_Class_ID() const;
-
-    PersistClass *Create() const;
-
+	C4GameObjDef();
+	~C4GameObjDef() {};
+	const PersistFactoryClass &Get_Factory() const;
+	bool Save(ChunkSaveClass &csave);
+	bool Load(ChunkLoadClass &cload);
+	uint32 Get_Class_ID() const;
+	PersistClass *Create() const;
 #ifdef DDBEDIT
-    virtual void                        Dump (FileClass &file);
+	virtual void                        Dump (FileClass &file);
 #endif
-    DECLARE_EDITABLE(C4GameObjDef, SimpleGameObjDef);
+	DECLARE_EDITABLE( C4GameObjDef, SimpleGameObjDef );
 private:
-    float ThrowVelocity;
-
-    friend class C4GameObj;
-
-    friend class PresetDump;
+	float ThrowVelocity;
+	friend class C4GameObj;
+	friend class PresetDump;
 };
 
 #endif

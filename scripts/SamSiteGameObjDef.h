@@ -11,32 +11,22 @@
 */
 #ifndef TT_INCLUDE_SAMSITEGAMEOBJDEF_H
 #define TT_INCLUDE_SAMSITEGAMEOBJDEF_H
-
 #include "SmartGameObjDef.h"
-
 class SAMSiteGameObjDef : public SmartGameObjDef {
 public:
-    SAMSiteGameObjDef();
-
-    virtual ~SAMSiteGameObjDef() {}
-
-    const PersistFactoryClass &Get_Factory() const;
-
-    bool Save(ChunkSaveClass &csave);
-
-    bool Load(ChunkLoadClass &cload);
-
-    uint32 Get_Class_ID() const;
-
-    PersistClass *Create() const;
-
+	SAMSiteGameObjDef();
+	virtual ~SAMSiteGameObjDef() {}
+	const PersistFactoryClass &Get_Factory() const;
+	bool Save(ChunkSaveClass &csave);
+	bool Load(ChunkLoadClass &cload);
+	uint32 Get_Class_ID() const;
+	PersistClass *Create() const;
 #ifdef DDBEDIT
-    virtual void                        Dump (FileClass &file);
-    virtual void                        DumpPhys (FileClass &file);
+	virtual void                        Dump (FileClass &file);
+	virtual void                        DumpPhys (FileClass &file);
 #endif
-    DECLARE_EDITABLE(SAMSiteGameObjDef, SmartGameObjDef);
-
-    friend class PresetDump;
+	DECLARE_EDITABLE(SAMSiteGameObjDef,SmartGameObjDef);
+	friend class PresetDump;
 };
 
 #endif

@@ -13,8 +13,8 @@
 #include "Vector3.h"
 #include "GameObjManager.h"
 
-SList <C4GameObj> GameObjManager::C4GameObjList;
-SList <BeaconGameObj> GameObjManager::BeaconGameObjList;
-SList <SoldierGameObj> GameObjManager::SoldierGameObjList;
-SList <VehicleGameObj> GameObjManager::VehicleGameObjList;
-SList <ScriptZoneGameObj> GameObjManager::ScriptZoneGameObjList;
+SList<C4GameObj> GameObjManager::C4GameObjList;
+SList<BeaconGameObj> GameObjManager::BeaconGameObjList;
+SList<SoldierGameObj> GameObjManager::SoldierGameObjList;
+SList<VehicleGameObj> GameObjManager::VehicleGameObjList;
+SList<ScriptZoneGameObj> GameObjManager::ScriptZoneGameObjList;

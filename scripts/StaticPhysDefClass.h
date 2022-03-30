@@ -15,36 +15,27 @@
 #include "PhysDefClass.h"
 
 
-class StaticPhysDefClass : public PhysDefClass {
+class StaticPhysDefClass : public PhysDefClass
+{
 public:
-    StaticPhysDefClass(void);
-
-    virtual uint32 Get_Class_ID(void) const;
-
-    virtual PersistClass *Create(void) const;
-
-    virtual const char *Get_Type_Name(void);
-
-    virtual bool Is_Type(const char *);
-
-    virtual const PersistFactoryClass &Get_Factory(void) const;
-
-    virtual bool Save(ChunkSaveClass &csave);
-
-    virtual bool Load(ChunkLoadClass &cload);
-
+	StaticPhysDefClass(void);
+	virtual uint32								Get_Class_ID (void) const;
+	virtual PersistClass *					Create(void) const;
+	virtual const char *						Get_Type_Name(void);
+	virtual bool								Is_Type(const char *);
+	virtual const PersistFactoryClass &	Get_Factory (void) const;
+	virtual bool								Save(ChunkSaveClass &csave);
+	virtual bool								Load(ChunkLoadClass &cload);
 #ifdef DDBEDIT
-    virtual void                        Dump (FileClass &file);
+	virtual void                        Dump (FileClass &file);
 #endif
-    DECLARE_EDITABLE(StaticPhysDefClass, PhysDefClass);
+	DECLARE_EDITABLE(StaticPhysDefClass,PhysDefClass);
 protected:
-    bool IsNonOccluder;
-    char CollisionGroup;
-    char VisibilityMode;
-
-    friend class StaticPhysClass;
-
-    friend class PresetDump;
+	bool											IsNonOccluder;
+	char											CollisionGroup;
+	char											VisibilityMode;
+	friend class StaticPhysClass;
+	friend class PresetDump;
 }; // RH7: 40
 
 #endif

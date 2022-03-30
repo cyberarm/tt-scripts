@@ -12,17 +12,17 @@
 #ifndef TT_INCLUDE_GMLOG_H
 #define TT_INCLUDE_GMLOG_H
 
-class SCRIPTS_API SSGMGameLog{
-        public:
-        static void Init(unsigned short port);
-        static void Log_Message(const char *message, const char *category);
-        static void Log_Gamelog(const char *format, ...);
-        static void Log_RenLog(const char *message);
-        static void Log_Custom(int id, const char *format, ...);
-        static void Send_Console(const char *message);
-        static void Shutdown();
-        static void Think();
-        static void Send(const char *data);
+class SCRIPTS_API SSGMGameLog {
+public:
+	static void Init(unsigned short port);
+	static void Log_Message(const char *message,const char *category);
+	static void Log_Gamelog(const char *format,...);
+	static void Log_RenLog(const char *message);
+	static void Log_Custom(int id,const char *format,...);
+	static void Send_Console(const char *message);
+	static void Shutdown();
+	static void Think();
+	static void Send(const char *data);
 };
 
 #endif

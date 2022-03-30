@@ -15,38 +15,23 @@
 
 
 class BuildingAggregateDefClass;
-
-class BuildingAggregateClass : public StaticAnimPhysClass {
+class BuildingAggregateClass : public StaticAnimPhysClass 
+{
 public:
-    BuildingAggregateClass(void);
-
-    virtual ~BuildingAggregateClass(void);
-
-    void Init(const BuildingAggregateDefClass &definition);
-
-    const BuildingAggregateDefClass *
-    Get_BuildingAggregateDef(void) const { return (BuildingAggregateDefClass *) Definition; }
-
-    int Get_Current_State(void);
-
-    void Set_Current_State(int new_state, bool force_update = false);
-
-    SCRIPTS_API bool Is_MCT(void);
-
-    virtual bool Save(ChunkSaveClass &csave);
-
-    virtual bool Load(ChunkLoadClass &cload);
-
-    virtual void Save_State(ChunkSaveClass &csave);
-
-    virtual void Load_State(ChunkLoadClass &cload);
-
-    virtual void On_Post_Load(void);
-
-    virtual const PersistFactoryClass &Get_Factory(void) const;
-
+	BuildingAggregateClass( void );
+	virtual ~BuildingAggregateClass( void );
+	void	Init( const BuildingAggregateDefClass & definition );
+	const BuildingAggregateDefClass * Get_BuildingAggregateDef( void ) const {return (BuildingAggregateDefClass *)Definition; }
+	int				Get_Current_State(void);
+	void				Set_Current_State(int new_state,bool force_update = false);
+	SCRIPTS_API bool				Is_MCT(void);
+	virtual	bool	Save( ChunkSaveClass & csave );
+	virtual	bool	Load( ChunkLoadClass & cload );
+	virtual	void	Save_State( ChunkSaveClass & csave );
+	virtual	void	Load_State( ChunkLoadClass & cload );
+	virtual	void	On_Post_Load( void );
+	virtual	const	PersistFactoryClass & Get_Factory( void ) const;
 protected:
-    bool Is_Power_On(int state);
-
-    int CurrentState;
+	bool				Is_Power_On(int state);
+	int				CurrentState;
 }; // 00E8  00E8  0104  0100

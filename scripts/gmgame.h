@@ -11,225 +11,169 @@
 */
 #ifndef TT_INCLUDE_GMGAME_H
 #define TT_INCLUDE_GMGAME_H
-
 #include "gmplugin.h"
 #include "engine_ttdef.h"
-
 class SSGMGameManager {
 public:
-    static void Init();
-
-    static void Shutdown();
-
-    static bool ChatHook(int PlayerID, TextMessageEnum Type, const wchar_t *Message, int recieverID);
-
-    static bool
-    RadioHook(int PlayerType, int PlayerID, int AnnouncementID, int IconID, AnnouncementEnum AnnouncementType);
-
-    static void ObjectCreateHook(void *data, GameObject *obj);
-
-    static void LoadLevelHook();
-
-    static void PreLoadLevelHook();
-
-    static void GameOverHook();
-
-    static void ConsoleOutputHook(const char *output);
-
-    static void LogFileHook(const char *output);
-
-    static bool RefillHook(GameObject *purchaser);
-
-    static void PlayerJoinHook(int PlayerID, const char *PlayerName);
-
-    static void PlayerLeaveHook(int PlayerID);
-
-    static int
-    PowerupPurchaseHook(BaseControllerClass *base, GameObject *purchaser, unsigned int cost, unsigned int preset,
-                        const char *data);
-
-    static int
-    VehiclePurchaseHook(BaseControllerClass *base, GameObject *purchaser, unsigned int cost, unsigned int preset,
-                        const char *data);
-
-    static int
-    CharacterPurchaseHook(BaseControllerClass *base, GameObject *purchaser, unsigned int cost, unsigned int preset,
-                          const char *data);
-
-    static void ReadConfig(INIClass *SSGMIni = NULL);
-
-    static void ReadMapConfig();
-
-    static void FreeData();
-
-    static void FreeMapData();
-
-    static void ThinkHook();
-
-    static bool StockDamageHook(PhysicalGameObj *damager, PhysicalGameObj *target, float damage, uint warheadId);
-
-    static bool
-    TtDamageHook(PhysicalGameObj *damager, PhysicalGameObj *target, const AmmoDefinitionClass *ammo, const char *bone);
+	static void Init();
+	static void Shutdown();
+	static bool ChatHook(int PlayerID,TextMessageEnum Type,const wchar_t *Message,int recieverID);
+	static bool RadioHook(int PlayerType, int PlayerID, int AnnouncementID, int IconID, AnnouncementEnum AnnouncementType);
+	static void ObjectCreateHook(void *data,GameObject *obj);
+	static void LoadLevelHook();
+	static void PreLoadLevelHook();
+	static void GameOverHook();
+	static void ConsoleOutputHook(const char *output);
+	static void LogFileHook(const char *output);
+	static bool RefillHook(GameObject *purchaser);
+	static void PlayerJoinHook(int PlayerID,const char *PlayerName);
+	static void PlayerLeaveHook(int PlayerID);
+	static int PowerupPurchaseHook(BaseControllerClass *base,GameObject *purchaser,unsigned int cost,unsigned int preset,const char *data);
+	static int VehiclePurchaseHook(BaseControllerClass *base,GameObject *purchaser,unsigned int cost,unsigned int preset,const char *data);
+	static int CharacterPurchaseHook(BaseControllerClass *base,GameObject *purchaser,unsigned int cost,unsigned int preset,const char *data);
+	static void ReadConfig(INIClass *SSGMIni = NULL);
+	static void ReadMapConfig();
+	static void FreeData();
+	static void FreeMapData();
+	static void ThinkHook();
+	static bool StockDamageHook(PhysicalGameObj* damager, PhysicalGameObj* target, float damage, uint warheadId);
+	static bool TtDamageHook(PhysicalGameObj* damager, PhysicalGameObj* target, const AmmoDefinitionClass* ammo, const char* bone);
 };
 
 class SSGM_Random_Weather : public ScriptImpClass {
-    void Created(GameObject *obj);
-
-    void Timer_Expired(GameObject *obj, int number);
-
-    float Range, CurrentClouds, CurrentRain, CurrentLightning, CurrentSnow, CurrentAsh, CurrentWind, FogEnd;
+	void Created(GameObject *obj);
+	void Timer_Expired(GameObject *obj, int number);
+	float Range, CurrentClouds, CurrentRain, CurrentLightning, CurrentSnow, CurrentAsh, CurrentWind, FogEnd;
 };
 
 class SSGM_Log_Scores : public ScriptImpClass {
-    void Created(GameObject *obj);
-
-    void Timer_Expired(GameObject *obj, int number);
+	void Created(GameObject *obj);
+	void Timer_Expired(GameObject *obj, int number);
 };
 
 class SSGM_Log_Beacon : public ScriptImpClass {
-    void Created(GameObject *obj);
-
-    void Destroyed(GameObject *obj);
-
-    void Killed(GameObject *obj, GameObject *shooter);
-
-    void Damaged(GameObject *obj, GameObject *damager, float damage);
-
-    void Custom(GameObject *obj, int message, int param, GameObject *sender);
-
-    void Timer_Expired(GameObject *obj, int number);
-
-public:
-    void Register_Auto_Save_Variables();
-
-    bool triggerrepairing;
-    bool killed;
+	void Created(GameObject *obj);
+	void Destroyed(GameObject *obj);
+	void Killed(GameObject *obj, GameObject *shooter);
+	void Damaged(GameObject *obj, GameObject *damager, float damage);
+	void Custom(GameObject *obj, int message, int param, GameObject *sender);
+	void Timer_Expired(GameObject *obj, int number);
+	public: void Register_Auto_Save_Variables();
+	bool triggerrepairing;
+	bool killed;
 };
 
 class SSGM_Log_Mine : public ScriptImpClass {
-    void Destroyed(GameObject *obj);
-
-    void Killed(GameObject *obj, GameObject *shooter);
-
-    void Damaged(GameObject *obj, GameObject *damager, float damage);
-
-    void Created(GameObject *obj);
-
-    bool WasDisarmed;
-    bool WasDetonated;
+	void Destroyed(GameObject *obj);
+	void Killed(GameObject *obj, GameObject *shooter);
+	void Damaged(GameObject *obj, GameObject *damager, float damage);
+	void Created(GameObject *obj);
+	bool WasDisarmed;
+	bool WasDetonated;
 };
 
 class SSGM_Powerup_Expire : public ScriptImpClass {
-    void Created(GameObject *obj);
-
-    void Timer_Expired(GameObject *obj, int number);
+	void Created(GameObject *obj);
+	void Timer_Expired(GameObject *obj, int number);
 };
 
 class SSGM_Powerup : public ScriptImpClass {
-    void Custom(GameObject *obj, int message, int param, GameObject *sender);
+	void Custom(GameObject *obj, int message, int param, GameObject *sender);
 };
 
 class SSGM_Drop_DNA_Powerup : public ScriptImpClass {
-    void Destroyed(GameObject *obj);
+	void Destroyed(GameObject *obj);
 };
 
 class SSGM_Powerup_SBH : public ScriptImpClass {
-    void Custom(GameObject *obj, int message, int param, GameObject *sender);
+	void Custom(GameObject *obj, int message, int param, GameObject *sender);
 };
 
 class SSGM_Powerup_Havoc : public ScriptImpClass {
-    void Custom(GameObject *obj, int message, int param, GameObject *sender);
+	void Custom(GameObject *obj, int message, int param, GameObject *sender);
 };
 
 class SSGM_Powerup_Deadeye : public ScriptImpClass {
-    void Custom(GameObject *obj, int message, int param, GameObject *sender);
+	void Custom(GameObject *obj, int message, int param, GameObject *sender);
 };
 
 class SSGM_Powerup_BHSniper : public ScriptImpClass {
-    void Custom(GameObject *obj, int message, int param, GameObject *sender);
+	void Custom(GameObject *obj, int message, int param, GameObject *sender);
 };
 
 class SSGM_Powerup_Sakura : public ScriptImpClass {
-    void Custom(GameObject *obj, int message, int param, GameObject *sender);
+	void Custom(GameObject *obj, int message, int param, GameObject *sender);
 };
 
 class SSGM_Powerup_SydneyPower : public ScriptImpClass {
-    void Custom(GameObject *obj, int message, int param, GameObject *sender);
+	void Custom(GameObject *obj, int message, int param, GameObject *sender);
 };
 
 class SSGM_Powerup_Raveshaw : public ScriptImpClass {
-    void Custom(GameObject *obj, int message, int param, GameObject *sender);
+	void Custom(GameObject *obj, int message, int param, GameObject *sender);
 };
 
 class SSGM_Powerup_Mobius : public ScriptImpClass {
-    void Custom(GameObject *obj, int message, int param, GameObject *sender);
+	void Custom(GameObject *obj, int message, int param, GameObject *sender);
 };
 
 class SSGM_Powerup_Mendoza : public ScriptImpClass {
-    void Custom(GameObject *obj, int message, int param, GameObject *sender);
+	void Custom(GameObject *obj, int message, int param, GameObject *sender);
 };
 
 class SSGM_Powerup_GDI_RSoldier : public ScriptImpClass {
-    void Custom(GameObject *obj, int message, int param, GameObject *sender);
+	void Custom(GameObject *obj, int message, int param, GameObject *sender);
 };
 
 class SSGM_Powerup_Nod_RSoldier : public ScriptImpClass {
-    void Custom(GameObject *obj, int message, int param, GameObject *sender);
+	void Custom(GameObject *obj, int message, int param, GameObject *sender);
 };
 
 class SSGM_Powerup_Hotwire : public ScriptImpClass {
-    void Custom(GameObject *obj, int message, int param, GameObject *sender);
+	void Custom(GameObject *obj, int message, int param, GameObject *sender);
 };
 
 class SSGM_Powerup_Technician : public ScriptImpClass {
-    void Custom(GameObject *obj, int message, int param, GameObject *sender);
+	void Custom(GameObject *obj, int message, int param, GameObject *sender);
 };
 
 class SSGM_Powerup_Gunner : public ScriptImpClass {
-    void Custom(GameObject *obj, int message, int param, GameObject *sender);
+	void Custom(GameObject *obj, int message, int param, GameObject *sender);
 };
 
 class SSGM_Powerup_GDI_Sydney : public ScriptImpClass {
-    void Custom(GameObject *obj, int message, int param, GameObject *sender);
+	void Custom(GameObject *obj, int message, int param, GameObject *sender);
 };
 
 class SSGM_Powerup_GDI_Officer : public ScriptImpClass {
-    void Custom(GameObject *obj, int message, int param, GameObject *sender);
+	void Custom(GameObject *obj, int message, int param, GameObject *sender);
 };
 
 class SSGM_Powerup_Nod_Officer : public ScriptImpClass {
-    void Custom(GameObject *obj, int message, int param, GameObject *sender);
+	void Custom(GameObject *obj, int message, int param, GameObject *sender);
 };
 
 class SSGM_Powerup_LCG : public ScriptImpClass {
-    void Custom(GameObject *obj, int message, int param, GameObject *sender);
+	void Custom(GameObject *obj, int message, int param, GameObject *sender);
 };
 
 class SSGM_Powerup_Patch : public ScriptImpClass {
-    void Custom(GameObject *obj, int message, int param, GameObject *sender);
+	void Custom(GameObject *obj, int message, int param, GameObject *sender);
 };
 
 class SSGM_Powerup_Chemwar : public ScriptImpClass {
-    void Custom(GameObject *obj, int message, int param, GameObject *sender);
+	void Custom(GameObject *obj, int message, int param, GameObject *sender);
 };
 
 
-SCRIPTS_API const char *Get_Translated_Preset_Name_Ex(GameObject * obj);
-SCRIPTS_API const char *Get_Translated_Preset_Name_Ini(GameObject * obj);
-
+SCRIPTS_API const char *Get_Translated_Preset_Name_Ex(GameObject *obj);
+SCRIPTS_API const char *Get_Translated_Preset_Name_Ini(GameObject *obj);
 SCRIPTS_API const char *Get_Translated_Definition_Name_Ini(const char *preset);
-
-SCRIPTS_API void Log_Killed_Message(GameObject * obj, GameObject * killer,
-const char *objectType
-);
-
-SCRIPTS_API void RegisterEvent(EventType evt, Plugin *plugin);
-
-SCRIPTS_API void UnregisterEvent(EventType evt, Plugin *plugin);
-
+SCRIPTS_API void Log_Killed_Message(GameObject *obj, GameObject *killer, const char *objectType);
+SCRIPTS_API void RegisterEvent(EventType evt,Plugin *plugin);
+SCRIPTS_API void UnregisterEvent(EventType evt,Plugin *plugin);
 SCRIPTS_API bool IsPresetDisabled(int preset);
-
-SCRIPTS_API void Print_C4(GameObject * Player);
+SCRIPTS_API void Print_C4(GameObject *Player);
 SCRIPTS_API extern bool BuildingDeathPages;
 SCRIPTS_API extern unsigned int RefillLimit;
 SCRIPTS_API extern int WeatherType;

@@ -1,5 +1,4 @@
 #pragma once
-
 #include "scripts.h"
 
 
@@ -95,72 +94,60 @@
 #define MS_RGB_JOINLEFT_MSG                              178,178,178     // grey
 #define MS_RGB_DEBUG                                     255,255,255
 
-class Radio_Message_Type {
+class Radio_Message_Type
+{
 public:
-    static int BUILDING_NEEDS_REPAIRS;
-    static int GET_IN_THE_VEHICLE;
-    static int GET_OUT_OF_THE_VEHICLE;
-    static int DESTROY_THAT_VEHICLE;
-    static int DONT_GET_IN_MY_WAY;
-    static int AFFIRMATIVE;
-    static int NEGATIVE;
+	static int BUILDING_NEEDS_REPAIRS;
+	static int GET_IN_THE_VEHICLE;
+	static int GET_OUT_OF_THE_VEHICLE;
+	static int DESTROY_THAT_VEHICLE;
+	static int DONT_GET_IN_MY_WAY;
+	static int AFFIRMATIVE;
+	static int NEGATIVE;
 
-    static int TAKE_THE_POINT;
-    static int MOVE_OUT;
-    static int FOLLOW_ME;
-    static int COVER_ME;
-    static int DESTROY_IT_NOW;
+	static int TAKE_THE_POINT;
+	static int MOVE_OUT;
+	static int FOLLOW_ME;
+	static int COVER_ME;
+	static int DESTROY_IT_NOW;
 
-    static int ATTACK_THE_HARVESTER;
-    static int ATTACK_THAT_STRUCTURE;
-    static int DEFEND_THE_BASE;
-    static int DEFEND_THE_HARVESTER;
-    static int DEFEND_THAT_STRUCTURE;
+	static int ATTACK_THE_HARVESTER;
+	static int ATTACK_THAT_STRUCTURE;
+	static int DEFEND_THE_BASE;
+	static int DEFEND_THE_HARVESTER;
+	static int DEFEND_THAT_STRUCTURE;
 };
 
 
-class MS_AccessHelper {
+class MS_AccessHelper
+{
 public:
-    static void Init_AI_Global_Controller();
-
-    static int Get_AI_Player_Controllers_Count(int team);
-
-    static void Give_Bot_Credits(int team, float amount);
-
-    static float Steal_Bot_Credits(int team, float percentage);
-
-    static void Receive_Radio_Command(GameObject *sender, int AnnouncementID, int orderType = 0, int orderObjID = 0);
-
-    static void Send_Radio_Order_To_Bot(GameObject *sender, GameObject *receiver, int radioIndex, int orderType = 0,
-                                        int orderObjID = 0);
-
-    static float Get_Money(GameObject *object);
-
-    static void Give_Money(GameObject *object, float money);
-
-    static void Activate_Defense_Protocol(int team);
+	static void Init_AI_Global_Controller();
+	static int Get_AI_Player_Controllers_Count(int team);
+	static void Give_Bot_Credits(int team, float amount);
+	static float Steal_Bot_Credits(int team, float percentage);
+	static void Receive_Radio_Command(GameObject *sender, int AnnouncementID, int orderType = 0, int orderObjID = 0);
+	static void Send_Radio_Order_To_Bot(GameObject *sender, GameObject *receiver, int radioIndex, int orderType = 0, int orderObjID = 0);
+	static float Get_Money(GameObject *object);
+	static void Give_Money(GameObject *object, float money);
+	static void Activate_Defense_Protocol(int team);
 };
 
 
-class MS_AI_Rally_Point : public ScriptImpClass {
-    void Created(GameObject *obj) override;
-
-    void Destroyed(GameObject *obj) override;
-
+class MS_AI_Rally_Point : public ScriptImpClass
+{
+	void Created(GameObject *obj) override;
+	void Destroyed(GameObject *obj) override;
 public:
-    int Get_Team();
-
-    int Get_NodeGroup();
-
-    int Get_NodeNum();
-
-    bool Get_IsInfantryOnly();
-
-    GameObject *Get_Object();
+	int Get_Team();
+	int Get_NodeGroup();
+	int Get_NodeNum();
+	bool Get_IsInfantryOnly();
+	GameObject *Get_Object();
 };
 
-class MS_AI_Patrol_Point : public MS_AI_Rally_Point {
-    void Created(GameObject *obj) override;
-
-    void Destroyed(GameObject *obj) override;
+class MS_AI_Patrol_Point : public MS_AI_Rally_Point
+{
+	void Created(GameObject *obj) override;
+	void Destroyed(GameObject *obj) override;
 };

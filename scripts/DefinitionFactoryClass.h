@@ -11,25 +11,17 @@
 */
 #ifndef TT_INCLUDE_DEFINITIONFACTORYCLASS_H
 #define TT_INCLUDE_DEFINITIONFACTORYCLASS_H
-
 #include "Definition.h"
-
 class DefinitionFactoryClass {
 public:
-    DefinitionFactoryClass *m_NextFactory;
-    DefinitionFactoryClass *m_PrevFactory;
-
-    DefinitionFactoryClass();
-
-    virtual ~DefinitionFactoryClass();
-
-    virtual DefinitionClass *Create() const = 0;
-
-    virtual const char *Get_Name() const = 0;
-
-    virtual uint32 Get_Class_ID() const = 0;
-
-    virtual bool Is_Displayed() const = 0;
+	DefinitionFactoryClass* m_NextFactory;
+	DefinitionFactoryClass* m_PrevFactory;
+	DefinitionFactoryClass();
+	virtual ~DefinitionFactoryClass();
+	virtual DefinitionClass *Create() const = 0;
+	virtual const char *Get_Name() const = 0;
+	virtual uint32 Get_Class_ID() const = 0;
+	virtual bool Is_Displayed() const = 0;
 };
 
 #endif

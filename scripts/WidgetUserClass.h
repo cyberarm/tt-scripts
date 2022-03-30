@@ -14,20 +14,18 @@
 
 
 class WidgetRenderOpClass;
-
-class WidgetUserClass {
+class WidgetUserClass
+{
 public:
-    WidgetUserClass() {}
-
-    ~WidgetUserClass() {}
-
+	WidgetUserClass() {}
+	~WidgetUserClass() {}
 #ifdef PARAM_EDITING_ON
-    virtual void	Add_Debug_Point(const Vector3 & p,const Vector3 & color);
-    virtual void	Add_Debug_Vector(const Vector3 & p,const Vector3 & v,const Vector3 & color);
-    virtual void	Add_Debug_AABox(const AABoxClass & box,const Vector3 & color,float opacity = 0.25f);
-    virtual void	Add_Debug_OBBox(const OBBoxClass & box,const Vector3 & color,float opacity = 0.25f);
-    virtual void	Add_Debug_Axes(const Matrix3D & transform,const Vector3 & color);
-    WidgetRenderOpClass *			WidgetRenderOpList;
+	virtual void	Add_Debug_Point(const Vector3 & p,const Vector3 & color);
+	virtual void	Add_Debug_Vector(const Vector3 & p,const Vector3 & v,const Vector3 & color);
+	virtual void	Add_Debug_AABox(const AABoxClass & box,const Vector3 & color,float opacity = 0.25f);
+	virtual void	Add_Debug_OBBox(const OBBoxClass & box,const Vector3 & color,float opacity = 0.25f);
+	virtual void	Add_Debug_Axes(const Matrix3D & transform,const Vector3 & color);
+	WidgetRenderOpClass *			WidgetRenderOpList;
 #endif
 };
 

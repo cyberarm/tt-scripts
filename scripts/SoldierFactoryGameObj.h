@@ -11,42 +11,25 @@
 */
 #ifndef TT_INCLUDE__SOLDIERFACTORYGAMEOBJ_H
 #define TT_INCLUDE__SOLDIERFACTORYGAMEOBJ_H
-
 #include "BuildingGameObj.h"
-
 class SoldierFactoryGameObjDef;
-
-class SoldierFactoryGameObj : public BuildingGameObj {
+class SoldierFactoryGameObj : public BuildingGameObj
+{
 public:
-    SoldierFactoryGameObj(void);
-
-    ~SoldierFactoryGameObj(void);
-
-    virtual void Init(void);
-
-    void Init(const SoldierFactoryGameObjDef &definition);
-
-    SCRIPTS_API const SoldierFactoryGameObjDef
-    &
-
-    Get_Definition(void) const;
-
-    SoldierFactoryGameObj *As_SoldierFactoryGameObj(void) { return this; }
-
-    bool Save(ChunkSaveClass &csave);
-
-    bool Load(ChunkLoadClass &cload);
-
-    const PersistFactoryClass &Get_Factory(void) const;
-
-    void CnC_Initialize(BaseControllerClass *base);
-
-    void On_Destroyed(void);
-
-    void On_Revived(void);
-
+	SoldierFactoryGameObj (void);
+	~SoldierFactoryGameObj (void);
+	virtual	void					Init( void );
+	void								Init (const SoldierFactoryGameObjDef & definition);
+	SCRIPTS_API const SoldierFactoryGameObjDef &	Get_Definition (void) const;
+	SoldierFactoryGameObj *				As_SoldierFactoryGameObj (void)	{ return this; }
+	bool									Save (ChunkSaveClass &csave);
+	bool									Load (ChunkLoadClass &cload);
+	const	PersistFactoryClass &	Get_Factory (void) const;
+	void					CnC_Initialize (BaseControllerClass *base);
+	void					On_Destroyed (void);
+	void					On_Revived (void);
 private:
-    void Load_Variables(ChunkLoadClass &cload);
+	void					Load_Variables (ChunkLoadClass &cload);	
 };
 
 #endif

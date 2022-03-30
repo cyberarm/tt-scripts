@@ -11,41 +11,28 @@
 */
 #ifndef TT_INCLUDE_SPECIALEFFECTSGAMEOBJDEF_H
 #define TT_INCLUDE_SPECIALEFFECTSGAMEOBJDEF_H
-
 #include "PhysicalGameObjDef.h"
-
 class SpecialEffectsGameObjDef : public PhysicalGameObjDef {
 public:
-    SpecialEffectsGameObjDef();
-
-    ~SpecialEffectsGameObjDef();
-
-    const PersistFactoryClass &Get_Factory() const;
-
-    bool Save(ChunkSaveClass &csave);
-
-    bool Load(ChunkLoadClass &cload);
-
-    uint32 Get_Class_ID() const;
-
-    PersistClass *Create() const;
-
+	SpecialEffectsGameObjDef();
+	~SpecialEffectsGameObjDef();
+	const PersistFactoryClass &Get_Factory() const;
+	bool Save(ChunkSaveClass &csave);
+	bool Load(ChunkLoadClass &cload);
+	uint32 Get_Class_ID() const;
+	PersistClass *Create() const;
 #ifdef DDBEDIT
-    virtual void                        Dump (FileClass &file);
-    virtual void                        DumpPhys (FileClass &file);
+	virtual void                        Dump (FileClass &file);
+	virtual void                        DumpPhys (FileClass &file);
 #endif
-    DECLARE_EDITABLE(SpecialEffectsGameObjDef, PhysicalGameObjDef);
+	DECLARE_EDITABLE(SpecialEffectsGameObjDef,PhysicalGameObjDef);
 private:
-    void Save_Variables(ChunkSaveClass &csave);
-
-    void Load_Variables(ChunkLoadClass &cload);
-
-    StringClass AnimationName;
-    int SoundDefID;
-
-    friend class PresetDump;
-
-    friend class SpecialEffectsGameObj;
+	void Save_Variables(ChunkSaveClass &csave);
+	void Load_Variables(ChunkLoadClass &cload);
+	StringClass AnimationName;
+	int SoundDefID;
+	friend class PresetDump;
+	friend class SpecialEffectsGameObj;
 };
 
 #endif

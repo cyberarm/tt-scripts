@@ -14,22 +14,21 @@
 
 
 class SCRIPTS_API SysTimeClass
-        {
-                private:
-                uint32 uTimeInit;
-                uint32 uTimeInitNeg;
-                public:
+{
+private:
+	uint32 uTimeInit;
+	uint32 uTimeInitNeg;
+public:
 #if (TDBEDIT) || (DDBEDIT) || (W3DVIEWER)
-                static bool _is_init;
-                static SysTimeClass SystemTime;
+	static bool _is_init;
+	static SysTimeClass SystemTime;
 #else
-                static REF_DECL(bool, _is_init);
-                static REF_DECL(SysTimeClass, SystemTime);
+	static REF_DECL(bool, _is_init);
+	static REF_DECL(SysTimeClass, SystemTime);
 #endif
-                uint32 Get   ();
-                void Reset ();
+	uint32 Get   ();
+	void   Reset ();
 
-        };
-
+};
 #define TIMEGETTIME() SysTimeClass::SystemTime.Get()
 #endif

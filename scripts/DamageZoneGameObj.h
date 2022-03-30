@@ -11,40 +11,25 @@
 */
 #ifndef TT_INCLUDE_DAMAGEZONEGAMEOBJ_H
 #define TT_INCLUDE_DAMAGEZONEGAMEOBJ_H
-
 #include "DamageZoneGameObjDef.h"
 #include "BaseGameObj.h"
 #include "OBBoxClass.h"
-
 class DamageZoneGameObj : public BaseGameObj {
 private:
-    OBBoxClass BoundingBox;
-    float Time;
+	OBBoxClass BoundingBox;
+	float Time;
 public:
-    DamageZoneGameObj();
-
-    ~DamageZoneGameObj();
-
-    const PersistFactoryClass &Get_Factory() const;
-
-    bool Save(ChunkSaveClass &csave);
-
-    bool Load(ChunkLoadClass &cload);
-
-    void Init();
-
-    void Init(const DamageZoneGameObjDef &);
-
-    SCRIPTS_API const DamageZoneGameObjDef
-    &
-
-    Get_Definition(void) const;
-
-    void Think();
-
-    void Set_Bounding_Box(OBBoxClass &box) { BoundingBox = box; }
-
-    OBBoxClass &Get_Bounding_Box() { return BoundingBox; }
+	DamageZoneGameObj();
+	~DamageZoneGameObj();
+	const PersistFactoryClass &Get_Factory() const;
+	bool Save(ChunkSaveClass &csave);
+	bool Load(ChunkLoadClass &cload);
+	void Init();
+	void Init(const DamageZoneGameObjDef &);
+	SCRIPTS_API const DamageZoneGameObjDef & Get_Definition( void ) const ;
+	void Think();
+	void Set_Bounding_Box(OBBoxClass &box) {BoundingBox = box;}
+	OBBoxClass &Get_Bounding_Box() {return BoundingBox;}
 };
 
 #endif

@@ -13,11 +13,12 @@
 #include "DefinitionFactoryClass.h"
 #include "DefinitionFactoryMgrClass.h"
 #include "SimpleDefinitionFactoryClass.h"
-
-DefinitionFactoryClass::DefinitionFactoryClass() : m_NextFactory(0), m_PrevFactory(0) {
-    DefinitionFactoryMgrClass::Register_Factory(this);
+DefinitionFactoryClass::DefinitionFactoryClass() : m_NextFactory(0), m_PrevFactory(0)
+{
+	DefinitionFactoryMgrClass::Register_Factory(this);
 }
 
-DefinitionFactoryClass::~DefinitionFactoryClass() {
-    DefinitionFactoryMgrClass::Unregister_Factory(this);
+DefinitionFactoryClass::~DefinitionFactoryClass()
+{
+	DefinitionFactoryMgrClass::Unregister_Factory(this);
 }

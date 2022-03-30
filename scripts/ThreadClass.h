@@ -13,38 +13,40 @@
 #define TT_INCLUDE__THREADCLASS_H
 
 
+
 class SCRIPTS_API ThreadClass
-        {
+{
 
-                public:
-                bool running; //4
-                char name[67]; //5
-                int threadid; //48
-                LONG (WINAPI *exceptionhandler)(int, LPEXCEPTION_POINTERS); //4C
-                HANDLE handle; //50
-                int thread_priority; //54
-                ThreadClass(char const *Name, LONG (WINAPI *ExceptionHandler)(int, LPEXCEPTION_POINTERS));
-                virtual ~ThreadClass();
-                virtual void Thread_Function() = 0;
-                static void Internal_Thread_Function(void*);
-                void Execute();
-                void Set_Priority(int);
-                void Stop(uint);
-                static void Sleep_Ms(uint);
+public:
+	bool running; //4
+	char name[67]; //5
+	int threadid; //48
+	LONG (WINAPI *exceptionhandler)(int, LPEXCEPTION_POINTERS); //4C
+	HANDLE handle; //50
+	int thread_priority; //54
+	ThreadClass(char  const *Name, LONG (WINAPI *ExceptionHandler)(int, LPEXCEPTION_POINTERS));
+	virtual ~ThreadClass();
+	virtual void Thread_Function() = 0;
+	static void Internal_Thread_Function(void*);
+	void Execute();
+	void Set_Priority(int);
+	void Stop(uint);
+	static void Sleep_Ms(uint);
 
-                bool Is_Running()
-                {
-                    return handle != 0;
-                }
-                static int Get_Current_Thread_ID()
-                {
-                    return GetCurrentThreadId();
-                }
-                const char *Get_Name()
-                {
-                    return name;
-                }
-        };
+	bool Is_Running()
+	{
+		return handle != 0;
+	}
+	static int Get_Current_Thread_ID()
+	{
+		return GetCurrentThreadId();
+	}
+	const char *Get_Name()
+	{
+		return name;
+	}
+};
+
 
 
 #endif

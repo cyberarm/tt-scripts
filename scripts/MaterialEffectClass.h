@@ -11,43 +11,29 @@
 */
 #ifndef TT_INCLUDE__MATERIALEFFECTCLASS_H
 #define TT_INCLUDE__MATERIALEFFECTCLASS_H
-
 #include "engine_vector.h"
-
 class PhysClass;
-
 class RenderInfoClass;
-
-class MaterialPassClass;
-
-class MaterialEffectClass : public MultiListObjectClass, public RefCountClass {
+class	MaterialPassClass;
+class MaterialEffectClass : public MultiListObjectClass, public RefCountClass
+{
 public:
-    MaterialEffectClass(void);
-
-    virtual ~MaterialEffectClass(void);
-
-    void Enable_Auto_Remove(bool onoff) { AutoRemoveEnabled = onoff; }
-
-    bool Is_Auto_Remove_Enabled(void) { return AutoRemoveEnabled; }
-
-    void Enable_Suppress_Shadows(bool onoff) { SuppressShadows = onoff; }
-
-    bool Are_Shadows_Suppressed(void) { return SuppressShadows; }
-
-    virtual void Timestep(float dt) {}
-
-    virtual void Render_Push(RenderInfoClass &rinfo, PhysClass *obj) = 0;
-
-    virtual void Render_Pop(RenderInfoClass &rinfo) = 0;
-
-    static void Timestep_All_Effects(float dt);
-
+	MaterialEffectClass(void);
+	virtual ~MaterialEffectClass(void);
+	void					Enable_Auto_Remove(bool onoff)			{ AutoRemoveEnabled = onoff; }
+	bool					Is_Auto_Remove_Enabled(void)				{ return AutoRemoveEnabled; }
+	void					Enable_Suppress_Shadows(bool onoff)		{ SuppressShadows = onoff; }
+	bool					Are_Shadows_Suppressed(void)				{ return SuppressShadows; }
+	virtual void		Timestep(float dt)							{ }
+	virtual void		Render_Push(RenderInfoClass & rinfo,PhysClass * obj)		= 0;
+	virtual void		Render_Pop(RenderInfoClass & rinfo)								= 0;
+	static void			Timestep_All_Effects(float dt);
 private:
-    bool AutoRemoveEnabled;
-    bool SuppressShadows;
+	bool					AutoRemoveEnabled;
+	bool					SuppressShadows;
 #ifndef TTLE_EXPORTS
 #ifndef DDBEDIT
-    static MultiListClass<MaterialEffectClass> AllocatedEffects;
+	static MultiListClass<MaterialEffectClass> AllocatedEffects;
 #endif
 #endif
 }; // size: 20, RH7: 44

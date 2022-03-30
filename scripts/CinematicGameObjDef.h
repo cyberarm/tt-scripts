@@ -11,41 +11,30 @@
 */
 #ifndef TT_INCLUDE_CINEMATICGAMEOBJDEF_H
 #define TT_INCLUDE_CINEMATICGAMEOBJDEF_H
-
 #include "ArmedGameObjDef.h"
-
 class CinematicGameObjDef : public ArmedGameObjDef {
 public:
-    CinematicGameObjDef();
-
-    ~CinematicGameObjDef();
-
-    const PersistFactoryClass &Get_Factory() const;
-
-    bool Save(ChunkSaveClass &csave);
-
-    bool Load(ChunkLoadClass &cload);
-
-    uint32 Get_Class_ID() const;
-
-    PersistClass *Create() const;
-
+	CinematicGameObjDef();
+	~CinematicGameObjDef();
+	const PersistFactoryClass &Get_Factory() const;
+	bool Save(ChunkSaveClass &csave);
+	bool Load(ChunkLoadClass &cload);
+	uint32 Get_Class_ID() const;
+	PersistClass *Create() const;
 #ifdef DDBEDIT
-    virtual void                        Dump (FileClass &file);
-    virtual void                        DumpPhys (FileClass &file);
+	virtual void                        Dump (FileClass &file);
+	virtual void                        DumpPhys (FileClass &file);
 #endif
-    DECLARE_EDITABLE(CinematicGameObjDef, ArmedGameObjDef);
+	DECLARE_EDITABLE( CinematicGameObjDef, ArmedGameObjDef );
 private:
-    int SoundDefID;
-    StringClass SoundBoneName;
-    StringClass AnimationName;
-    bool AutoFireWeapon;
-    bool DestroyAfterAnimation;
-    bool CameraRelative;
-
-    friend class CinematicGameObj;
-
-    friend class PresetDump;
+	int SoundDefID;
+	StringClass SoundBoneName;
+	StringClass AnimationName;
+	bool AutoFireWeapon;
+	bool DestroyAfterAnimation;
+	bool CameraRelative;
+	friend class CinematicGameObj;
+	friend class PresetDump;
 };
 
 #endif

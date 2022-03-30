@@ -12,7 +12,6 @@
 #include "General.h"
 #include "Random2Class.h"
 #include "Random3Class.h"
-
 #define N 624
 #define M 397
 #define MATRIX_A 0x9908b0df
@@ -30,67 +29,76 @@ REF_DEF2(CRandom, FreeRandom, 0x0085CB40, 0x0085BD28);
 #endif
 #endif
 
-Random2Class::Random2Class(unsigned seed) : Index1(0), Index2(103) {
-    Random3Class random(seed);
-    for (int index = 0; index < ARRAY_SIZE(Table); index++) {
-        Table[index] = random;
-    }
+Random2Class::Random2Class(unsigned seed) : Index1(0), Index2(103)
+{
+	Random3Class random(seed);
+	for (int index = 0; index < ARRAY_SIZE(Table); index++)
+	{
+		Table[index] = random;
+	}
 }
 
-int Random2Class::operator()(void) {
-    Table[Index1] ^= Table[Index2];
-    int val = Table[Index1];
-    Index1++;
-    Index2++;
-    if (Index1 >= ARRAY_SIZE(Table)) Index1 = 0;
-    if (Index2 >= ARRAY_SIZE(Table)) Index2 = 0;
-    return (val);
+int Random2Class::operator() (void) 
+{
+	Table[Index1] ^= Table[Index2];
+	int val = Table[Index1];
+	Index1++;
+	Index2++;
+	if (Index1 >= ARRAY_SIZE(Table)) Index1 = 0;
+	if (Index2 >= ARRAY_SIZE(Table)) Index2 = 0;
+	return(val);
 }
 
-int Random2Class::operator()(int minval, int maxval) {
-    return (Pick_Random_Number(*this, minval, maxval));
+int Random2Class::operator() (int minval, int maxval)
+{
+	return(Pick_Random_Number(*this, minval, maxval));
 }
 
-Random4Class::Random4Class(unsigned int seed) {
-    if (!seed) seed = 4375;
-    mt[0] = seed & 0xffffffff;
-    for (mti = 1; mti < N; mti++)
-        mt[mti] = (69069 * mt[mti - 1]) & 0xffffffff;
+Random4Class::Random4Class(unsigned int seed)
+{
+	if (!seed) seed=4375;
+	mt[0]= seed & 0xffffffff;
+	for (mti=1; mti<N; mti++)
+		mt[mti] = (69069 * mt[mti-1]) & 0xffffffff;	
+}
+int Random4Class::operator() (void)
+{
+	unsigned int y;
+	static unsigned int mag01[2]={0x0, MATRIX_A};
+	if (mti >= N)
+	{
+		int kk;
+		for (kk=0;kk<N-M;kk++)
+		{
+			y = (mt[kk]&UPPER_MASK)|(mt[kk+1]&LOWER_MASK);
+			mt[kk] = mt[kk+M] ^ (y >> 1) ^ mag01[y & 0x1];
+		}
+		for (;kk<N-1;kk++)
+		{
+			y = (mt[kk]&UPPER_MASK)|(mt[kk+1]&LOWER_MASK);
+			mt[kk] = mt[kk+(M-N)] ^ (y >> 1) ^ mag01[y & 0x1];
+		}
+		y = (mt[N-1]&UPPER_MASK)|(mt[0]&LOWER_MASK);
+		mt[N-1] = mt[M-1] ^ (y >> 1) ^ mag01[y & 0x1];
+		mti = 0;
+	}
+	y = mt[mti++];
+	y ^= TEMPERING_SHIFT_U(y);
+	y ^= TEMPERING_SHIFT_S(y) & TEMPERING_MASK_B;
+	y ^= TEMPERING_SHIFT_T(y) & TEMPERING_MASK_C;
+	y ^= TEMPERING_SHIFT_L(y);
+	int *x=(int *)&y;
+	return *x;
+}
+int Random4Class::operator() (int minval, int maxval)
+{
+	return(Pick_Random_Number(*this, minval, maxval));
 }
 
-int Random4Class::operator()(void) {
-    unsigned int y;
-    static unsigned int mag01[2] = {0x0, MATRIX_A};
-    if (mti >= N) {
-        int kk;
-        for (kk = 0; kk < N - M; kk++) {
-            y = (mt[kk] & UPPER_MASK) | (mt[kk + 1] & LOWER_MASK);
-            mt[kk] = mt[kk + M] ^ (y >> 1) ^ mag01[y & 0x1];
-        }
-        for (; kk < N - 1; kk++) {
-            y = (mt[kk] & UPPER_MASK) | (mt[kk + 1] & LOWER_MASK);
-            mt[kk] = mt[kk + (M - N)] ^ (y >> 1) ^ mag01[y & 0x1];
-        }
-        y = (mt[N - 1] & UPPER_MASK) | (mt[0] & LOWER_MASK);
-        mt[N - 1] = mt[M - 1] ^ (y >> 1) ^ mag01[y & 0x1];
-        mti = 0;
-    }
-    y = mt[mti++];
-    y ^= TEMPERING_SHIFT_U(y);
-    y ^= TEMPERING_SHIFT_S(y) & TEMPERING_MASK_B;
-    y ^= TEMPERING_SHIFT_T(y) & TEMPERING_MASK_C;
-    y ^= TEMPERING_SHIFT_L(y);
-    int *x = (int *) &y;
-    return *x;
-}
+float Random4Class::Get_Float()
+{
+	int x=(*this)();
+	unsigned int *y=(unsigned int *) &x;
 
-int Random4Class::operator()(int minval, int maxval) {
-    return (Pick_Random_Number(*this, minval, maxval));
-}
-
-float Random4Class::Get_Float() {
-    int x = (*this)();
-    unsigned int *y = (unsigned int *) &x;
-
-    return (*y) * 2.3283064370807973754314699618685e-10f;
+	return (*y)*2.3283064370807973754314699618685e-10f;
 }

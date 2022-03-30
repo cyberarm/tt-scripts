@@ -16,7 +16,6 @@
 
 #include "Types.h"
 #include "stdarg.h"
-
 #if (WWCONFIG) || (TDBEDIT) || (W3DSHADER) || (W3DLIB_EXPORTS) || (W3DMESHMENDER) || (W3DDEPENDS) || (W3DMAPPER) || (ACHASH) || (PACKAGEEDITOR) || (FIXPLANES) || (MERGELOD) || (MIXCHECK) || (DDBEDIT) || (MAKEMIX) || (ALTMAT) || (W3DVIEWER)
 #define EXTERNAL 1
 #endif
@@ -48,14 +47,14 @@
 #ifdef DEBUG
 #	define TT_ASSERT(expression) \
    {                             \
-       __analysis_assume(expression); \
+	   __analysis_assume(expression); \
       if (!(expression))         \
          TT_INTERRUPT;            \
    }
 #else
 #	define TT_ASSERT(expression) \
    {                             \
-       __analysis_assume(expression); \
+	   __analysis_assume(expression); \
    }
 #endif
 
@@ -89,10 +88,10 @@
 #endif
 
 // countof for static array
-template<typename T, size_t N>
-char ( &_ArraySizeHelper(T (&array)[N]))[N];
+template <typename T, size_t N>
+char ( &_ArraySizeHelper( T (&array)[N] ))[N];
 
-#define countof(array) (sizeof( _ArraySizeHelper( array ) ))
+#define countof( array ) (sizeof( _ArraySizeHelper( array ) ))
 
 // This can be used as a workaround for when a template type in a class is needed.
 // something like MACRO(Class<Param1, Param2>) will make the preprocessor think two
@@ -123,33 +122,37 @@ char ( &_ArraySizeHelper(T (&array)[N]))[N];
 #   endif
 #endif
 
-template<typename T>
-T &ResolveGameReference(const int client, const int server, const int leveledit) {
-    if (Exe == 6) InitEngine();
+template <typename T> T& ResolveGameReference(const int client, const int server, const int leveledit)
+{
+	if (Exe == 6) InitEngine();
 #pragma warning(suppress: 6011) //warning C6011: dereferencing NULL pointer <name>
-    return *((T *) ((Exe == 0) ? client : ((Exe == 1) ? server : ((Exe == 4) ? leveledit : 0))));
+	return *((T*)((Exe == 0) ? client : ((Exe == 1) ? server : ((Exe == 4) ? leveledit : 0))));
 };
 
-template<typename T, const int size>
-class RefArrayHelper {
+template <typename T, const int size> class RefArrayHelper
+{
 protected:
-    char _dummy[size * sizeof(T)];
+	char _dummy[size * sizeof(T)];
 public:
-    operator T *() {
-        return (T *) this;
-    };
+	operator T* ()
+	{
+		return (T*) this;
+	};
 
-    operator const T *() const {
-        return (T *) this;
-    };
+	operator const T* () const
+	{
+		return (T*) this;
+	};
 
-    T *operator&() {
-        return (T *) this;
-    };
+	T* operator & ()
+	{
+		return (T*) this;
+	};
 
-    const T *operator&() const {
-        return (T *) this;
-    };
+	const T* operator & () const
+	{
+		return (T*) this;
+	};
 };
 
 
@@ -182,9 +185,7 @@ public:
 // RENEGADE_FUNCTION void ExampleFunction3()	AT3(0xdeadbeef, 0xbaadf00d, 0xdeadc0de);
 
 #ifndef SSGMPLUGIN
-
-void *HookupAT3(void *a, void *b, void *c, void *patch_start);
-
+void* HookupAT3(void* a, void* b, void* c, void* patch_start);
 #define RENEGADE_FUNCTION  __declspec(naked)
 #ifndef TTLE_EXPORTS
 #define AT2(client, server) AT3(client, server, 0)
@@ -204,9 +205,7 @@ void *HookupAT3(void *a, void *b, void *c, void *patch_start);
     __asm pop ecx                       \
     __asm jmp eax                       \
 }
-
 void InitEngine();
-
 extern int Exe;  // used by Vx()/ATx() macros
 #endif
 
@@ -215,83 +214,90 @@ extern int Exe;  // used by Vx()/ATx() macros
 #define SHARED_API
 #endif
 
-template<int stackBufferLength, typename Char>
-class FormattedString;
+template<int stackBufferLength, typename Char> class FormattedString;
 
-template<int stackBufferLength>
-class FormattedString<stackBufferLength, char> {
+template<int stackBufferLength> class FormattedString<stackBufferLength, char>
+{
 
 public:
 
-    char stackBuffer[stackBufferLength + 1];
-    char *heapBuffer;
-    const char *value;
-    int length;
+	char stackBuffer[stackBufferLength+1];
+	char* heapBuffer;
+	const char* value;
+	int length;
 
-    FormattedString(const char *format, ...) {
-        va_list arguments;
-        va_start(arguments, format);
-        length = vsnprintf(stackBuffer, stackBufferLength, format, arguments);
-        if (length >= 0) {
-            // The formatted string fit on the stack. Use the stack buffer.
-            stackBuffer[length] = '\0'; // Fix terminator. Only necessary if length == stackBufferLength.
-            heapBuffer = 0;
-            value = stackBuffer;
-        } else {
-            // The formatted string did not fit on the stack. Allocate a heap buffer.
-            length = _vscprintf(format, arguments);
-            heapBuffer = new char[length + 1];
-            vsprintf(heapBuffer, format, arguments);
-            value = heapBuffer;
-        }
-        va_end(arguments);
-    }
+	FormattedString(const char* format, ...)
+	{
+		va_list arguments;
+		va_start(arguments, format);
+		length = vsnprintf(stackBuffer, stackBufferLength, format, arguments);
+		if (length >= 0)
+		{
+			// The formatted string fit on the stack. Use the stack buffer.
+			stackBuffer[length] = '\0'; // Fix terminator. Only necessary if length == stackBufferLength.
+			heapBuffer = 0;
+			value = stackBuffer;
+		}
+		else
+		{
+			// The formatted string did not fit on the stack. Allocate a heap buffer.
+			length = _vscprintf(format, arguments);
+			heapBuffer = new char[length + 1];
+			vsprintf(heapBuffer, format, arguments);
+			value = heapBuffer;
+		}
+		va_end(arguments);
+	}
 
-    ~FormattedString() {
-        delete[] heapBuffer;
-    }
-
-    const char *getValue() const { return value; }
-
-    const int getLength() const { return length; }
+	~FormattedString()
+	{
+		delete[] heapBuffer;
+	}
+	
+	const char* getValue() const { return value; }
+	const int getLength() const { return length; }
 };
 
-template<int stackBufferLength>
-class FormattedString<stackBufferLength, wchar_t> {
+template<int stackBufferLength> class FormattedString<stackBufferLength, wchar_t>
+{
 
 public:
 
-    wchar_t stackBuffer[stackBufferLength + 1];
-    wchar_t *heapBuffer;
-    const wchar_t *value;
-    int length;
+	wchar_t stackBuffer[stackBufferLength+1];
+	wchar_t* heapBuffer;
+	const wchar_t* value;
+	int length;
 
-    FormattedString(const wchar_t *format, ...) {
-        va_list arguments;
-        va_start(arguments, format);
-        length = _vsnwprintf(stackBuffer, stackBufferLength, format, arguments);
-        if (length >= 0) {
-            // The formatted string fit on the stack. Use the stack buffer.
-            stackBuffer[length] = '\0'; // Fix terminator. Only necessary if length == stackBufferLength.
-            heapBuffer = 0;
-            value = stackBuffer;
-        } else {
-            // The formatted string did not fit on the stack. Allocate a heap buffer.
-            length = _vscwprintf(format, arguments);
-            heapBuffer = new wchar_t[length + 1];
-            _vsnwprintf(heapBuffer, length + 1, format, arguments);
-            value = heapBuffer;
-        }
-        va_end(arguments);
-    }
+	FormattedString(const wchar_t* format, ...)
+	{
+		va_list arguments;
+		va_start(arguments, format);
+		length = _vsnwprintf(stackBuffer, stackBufferLength, format, arguments);
+		if (length >= 0)
+		{
+			// The formatted string fit on the stack. Use the stack buffer.
+			stackBuffer[length] = '\0'; // Fix terminator. Only necessary if length == stackBufferLength.
+			heapBuffer = 0;
+			value = stackBuffer;
+		}
+		else
+		{
+			// The formatted string did not fit on the stack. Allocate a heap buffer.
+			length = _vscwprintf(format, arguments);
+			heapBuffer = new wchar_t[length + 1];
+			_vsnwprintf(heapBuffer, length + 1, format, arguments);
+			value = heapBuffer;
+		}
+		va_end(arguments);
+	}
 
-    ~FormattedString() {
-        delete[] heapBuffer;
-    }
-
-    const wchar_t *getValue() const { return value; }
-
-    const int getLength() const { return length; }
+	~FormattedString()
+	{
+		delete[] heapBuffer;
+	}
+	
+	const wchar_t* getValue() const { return value; }
+	const int getLength() const { return length; }
 };
 
 // Format a string (sprintf style) using a stack buffer of a given size if possible, or a heap buffer otherwise.

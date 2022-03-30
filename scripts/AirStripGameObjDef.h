@@ -13,42 +13,35 @@
 #define TT_INCLUDE__AIRSTRIPGAMEOBJDEF_H
 
 
+
 #include "VehicleFactoryGameObjDef.h"
 
 
+
 class AirStripGameObjDef :
-        public VehicleFactoryGameObjDef {
+	public VehicleFactoryGameObjDef
+{
 public:
-    AirStripGameObjDef();
-
-    virtual ~AirStripGameObjDef();
-
-    virtual const PersistFactoryClass &Get_Factory() const;
-
-    virtual bool Save(ChunkSaveClass &chunkSaver);
-
-    virtual bool Load(ChunkLoadClass &chunkLoader);
-
-    virtual uint32 Get_Class_ID() const;
-
-    virtual PersistClass *Create() const;
-
+			AirStripGameObjDef();
+	virtual ~AirStripGameObjDef();
+	virtual const PersistFactoryClass& Get_Factory  () const;
+	virtual bool                       Save         (ChunkSaveClass& chunkSaver);
+	virtual bool                       Load         (ChunkLoadClass& chunkLoader);
+	virtual uint32                     Get_Class_ID () const;
+	virtual PersistClass*              Create       () const;
 #ifdef DDBEDIT
-    virtual void                        Dump (FileClass &file);
+	virtual void                        Dump (FileClass &file);
 #endif
-    DECLARE_EDITABLE (AirStripGameObjDef, VehicleFactoryGameObjDef);
+	DECLARE_EDITABLE (AirStripGameObjDef, VehicleFactoryGameObjDef);
 private:
-    void Load_Variables(ChunkLoadClass &cload);
-
-    int DropCinematicDefId; // 00A8
-    int CinematicSlotIndex; // 00AC
-    float CinematicLengthToDropOff; // 00B0
-    float CinematicLengthToVehicleDisplay; // 00B4
-    bool HideVehicles;
-
-    friend class AirStripGameObj;
-
-    friend class PresetDump;
+	void					Load_Variables (ChunkLoadClass &cload);
+	int DropCinematicDefId; // 00A8
+	int CinematicSlotIndex; // 00AC
+	float CinematicLengthToDropOff; // 00B0
+	float CinematicLengthToVehicleDisplay; // 00B4
+	bool HideVehicles;
+	friend class AirStripGameObj;
+	friend class PresetDump;
 }; // 00B8
 
 

@@ -11,40 +11,24 @@
 */
 #ifndef TT_INCLUDE_POWERPLANTGAMEOBJ_H
 #define TT_INCLUDE_POWERPLANTGAMEOBJ_H
-
 #include "BuildingGameObj.h"
-
 class PowerPlantGameObjDef;
-
-class PowerPlantGameObj : public BuildingGameObj {
+class PowerPlantGameObj : public BuildingGameObj
+{
 public:
-    PowerPlantGameObj(void);
-
-    ~PowerPlantGameObj(void);
-
-    virtual void Init(void);
-
-    void Init(const PowerPlantGameObjDef &definition);
-
-    SCRIPTS_API const PowerPlantGameObjDef
-    &
-
-    Get_Definition(void) const;
-
-    PowerPlantGameObj *As_PowerPlantGameObj(void) { return this; }
-
-    bool Save(ChunkSaveClass &csave);
-
-    bool Load(ChunkLoadClass &cload);
-
-    const PersistFactoryClass &Get_Factory(void) const;
-
-    void On_Destroyed(void);
-
-    void On_Revived(void);
-
+	PowerPlantGameObj (void);
+	~PowerPlantGameObj (void);
+	virtual	void					Init( void );
+	void								Init (const PowerPlantGameObjDef & definition);
+	SCRIPTS_API const PowerPlantGameObjDef &	Get_Definition (void) const;
+	PowerPlantGameObj *				As_PowerPlantGameObj (void)	{ return this; }
+	bool									Save (ChunkSaveClass &csave);
+	bool									Load (ChunkLoadClass &cload);
+	const	PersistFactoryClass &	Get_Factory (void) const;
+	void					On_Destroyed (void);
+	void					On_Revived (void);
 private:
-    void Load_Variables(ChunkLoadClass &cload);
+	void					Load_Variables (ChunkLoadClass &cload);	
 };
 
 #endif

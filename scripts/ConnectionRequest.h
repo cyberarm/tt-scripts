@@ -10,20 +10,21 @@
 	Only the source code to the module(s) containing the licenced code has to be released.
 */
 #pragma once
-
 #include "engine_string.h"
 
 
-struct ConnectionRequest {
-    // Implicit/server controlled
-    int clientId;
-    sockaddr_in clientAddress;
 
-    // Explicit/client sent
-    WideStringClass clientName;
-    int clientExeKey;
-    StringClass clientSerialHash;
-    float clientVersion;
-    uint clientRevisionNumber;
-    WideStringClass password;
+struct ConnectionRequest
+{
+	// Implicit/server controlled
+	int clientId;
+	sockaddr_in clientAddress;
+
+	// Explicit/client sent
+	WideStringClass clientName;
+	int clientExeKey;
+	StringClass clientSerialHash;
+	float clientVersion;
+	uint clientRevisionNumber;
+	WideStringClass password;
 };

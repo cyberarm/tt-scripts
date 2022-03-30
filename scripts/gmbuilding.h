@@ -11,23 +11,15 @@
 */
 #ifndef TT_INCLUDE_GMBUILDING_H
 #define TT_INCLUDE_GMBUILDING_H
-
 class SSGM_Building : public ScriptImpClass {
-    void Created(GameObject *obj);
-
-    void Destroyed(GameObject *obj);
-
-    void Damaged(GameObject *obj, GameObject *damager, float amount);
-
-    void Killed(GameObject *obj, GameObject *killer);
-
-    void Timer_Expired(GameObject *obj, int number);
-
-public:
-    void Register_Auto_Save_Variables();
-
-    bool triggerrepairing;
-    bool triggerrepaired;
+	void Created(GameObject *obj);
+	void Destroyed(GameObject *obj);
+	void Damaged(GameObject *obj,GameObject *damager,float amount);
+	void Killed(GameObject *obj,GameObject *killer);
+	void Timer_Expired(GameObject *obj, int number);
+	public: void Register_Auto_Save_Variables();
+	bool triggerrepairing;
+	bool triggerrepaired;
 };
 
 #endif

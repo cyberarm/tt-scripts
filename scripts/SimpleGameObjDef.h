@@ -11,39 +11,28 @@
 */
 #ifndef TT_INCLUDE_SIMPLEGAMEOBJDEF_H
 #define TT_INCLUDE_SIMPLEGAMEOBJDEF_H
-
 #include "PhysicalGameObjDef.h"
-
 class SimpleGameObjDef : public PhysicalGameObjDef {
 public:
-    SimpleGameObjDef();
-
-    const PersistFactoryClass &Get_Factory() const;
-
-    bool Save(ChunkSaveClass &csave);
-
-    bool Load(ChunkLoadClass &cload);
-
-    uint32 Get_Class_ID() const;
-
-    PersistClass *Create() const;
-
-    bool Get_Is_Editor_Object() const { return IsEditorObject; }
-
-    int Get_Player_Terminal_Type() const { return PlayerTerminalType; }
-
+	SimpleGameObjDef();
+	const PersistFactoryClass &Get_Factory() const;
+	bool Save(ChunkSaveClass &csave);
+	bool Load(ChunkLoadClass &cload);
+	uint32 Get_Class_ID() const;
+	PersistClass *Create() const;
+	bool Get_Is_Editor_Object() const { return IsEditorObject; }
+	int Get_Player_Terminal_Type() const {return PlayerTerminalType;}
 #ifdef DDBEDIT
-    virtual void                        Dump (FileClass &file);
-    virtual void                        DumpPhys (FileClass &file);
+	virtual void                        Dump (FileClass &file);
+	virtual void                        DumpPhys (FileClass &file);
 #endif
-    DECLARE_EDITABLE(SimpleGameObjDef, PhysicalGameObjDef);
+	DECLARE_EDITABLE( SimpleGameObjDef, PhysicalGameObjDef );
 protected:
-    bool IsEditorObject; // 00A5
-    bool IsHiddenObject; // 00A6
-    int PlayerTerminalType; // 00A8
-    friend class SimpleGameObj;
-
-    friend class PresetDump;
+	bool IsEditorObject; // 00A5
+	bool IsHiddenObject; // 00A6
+	int PlayerTerminalType; // 00A8
+	friend class SimpleGameObj;
+	friend class PresetDump;
 }; // 00AC
 
 #endif

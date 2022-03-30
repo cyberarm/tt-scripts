@@ -15,28 +15,21 @@
 #include "PhysDefClass.h"
 
 
-class DynamicPhysDefClass : public PhysDefClass {
+class DynamicPhysDefClass : public PhysDefClass
+{
 public:
-    DynamicPhysDefClass(void);
-
-    virtual bool Save(ChunkSaveClass &csave);
-
-    virtual bool Load(ChunkLoadClass &cload);
-
-    virtual const char *Get_Type_Name(void) { return "DynamicPhysDef"; }
-
-    virtual bool Is_Type(const char *);
-
-    virtual bool Is_Valid_Config(StringClass &message);
-
+	DynamicPhysDefClass(void);
+	virtual bool								Save(ChunkSaveClass &csave);
+	virtual bool								Load(ChunkLoadClass &cload);
+	virtual const char *						Get_Type_Name(void)			{ return "DynamicPhysDef"; }
+	virtual bool								Is_Type(const char *);
+	virtual bool								Is_Valid_Config (StringClass &message);
 #ifdef DDBEDIT
-    virtual void                        Dump (FileClass &file);
+	virtual void                        Dump (FileClass &file);
 #endif
-    DECLARE_EDITABLE(DynamicPhysDefClass, PhysDefClass);
+	DECLARE_EDITABLE(DynamicPhysDefClass,PhysDefClass);
 protected:
-    friend class DynamicPhysClass;
-
-    friend class PresetDump;
+	friend class DynamicPhysClass;
+	friend class PresetDump;
 };
-
 #endif

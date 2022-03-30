@@ -11,30 +11,20 @@
 */
 #ifndef TT_INCLUDE_DEFINITIONFACTORYMGRCLASS_H
 #define TT_INCLUDE_DEFINITIONFACTORYMGRCLASS_H
-
 class DefinitionFactoryClass;
-
 class DefinitionFactoryMgrClass {
 public:
-    static void Register_Factory(DefinitionFactoryClass *factory);
-
-    static void Unregister_Factory(DefinitionFactoryClass *factory);
-
-    static void Link_Factory(DefinitionFactoryClass *factory);
-
-    static void Unlink_Factory(DefinitionFactoryClass *factory);
-
-    static DefinitionFactoryClass *Find_Factory(uint32 id);
-
-    static DefinitionFactoryClass *Get_First(uint32 id);
-
-    static DefinitionFactoryClass *Get_Next(DefinitionFactoryClass *factory, uint32 id);
-
+	static void Register_Factory(DefinitionFactoryClass* factory);
+	static void Unregister_Factory(DefinitionFactoryClass* factory);
+	static void Link_Factory(DefinitionFactoryClass *factory);
+	static void Unlink_Factory(DefinitionFactoryClass *factory);
+	static DefinitionFactoryClass *Find_Factory(uint32 id);
+	static DefinitionFactoryClass *Get_First(uint32 id);
+	static DefinitionFactoryClass *Get_Next(DefinitionFactoryClass *factory,uint32 id);
 #if (TDBEDIT) || (DDBEDIT) || (W3DVIEWER)
-    static DefinitionFactoryClass *_FactoryListHead;
+	static DefinitionFactoryClass *_FactoryListHead;
 #else
-    static REF_DECL(DefinitionFactoryClass
-    *, _FactoryListHead);
+	static REF_DECL(DefinitionFactoryClass *, _FactoryListHead);
 #endif
 };
 

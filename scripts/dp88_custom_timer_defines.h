@@ -169,19 +169,19 @@ Unsorted customs and timers
 ****************************/
 
 // Customs for Prism Tower script
-#define CUSTOM_PRISMTOWER_REQUEST_CHARGING            1144060001
-#define CUSTOM_PRISMTOWER_STOP_CHARGING                1144060002
+#define CUSTOM_PRISMTOWER_REQUEST_CHARGING			1144060001
+#define CUSTOM_PRISMTOWER_STOP_CHARGING				1144060002
 
 
 // Custom for changing bot count on a map
-#define CUSTOM_AI_CHANGE_BOTCOUNT                    1144062001
-#define CUSTOM_AI_CHANGE_BOTCOUNTTEAM                1144062002
+#define CUSTOM_AI_CHANGE_BOTCOUNT					1144062001
+#define CUSTOM_AI_CHANGE_BOTCOUNTTEAM				1144062002
 
-#define TIMER_CLEG_PHASEDEATH                    10055222
-#define TIMER_CLEG_CHECKDROPOBJ                    10055223
-#define TIMER_CLEG_CHECKRELEASETARGET            10055224
-#define TIMER_LINKHEALTH                        10055235
-#define TIMER_LINKVETPOINTS                        10055236
+#define TIMER_CLEG_PHASEDEATH					10055222
+#define TIMER_CLEG_CHECKDROPOBJ					10055223
+#define TIMER_CLEG_CHECKRELEASETARGET			10055224
+#define TIMER_LINKHEALTH						10055235
+#define TIMER_LINKVETPOINTS						10055236
 
 // Timers for prism towers and tesla coils
 #define TIMER_TESLACOIL_DECREMENT_CHARGE      2244040002

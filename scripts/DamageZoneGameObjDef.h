@@ -11,39 +11,27 @@
 */
 #ifndef TT_INCLUDE_DAMAGEZONEGAMEOBJDEF_H
 #define TT_INCLUDE_DAMAGEZONEGAMEOBJDEF_H
-
 #include "BaseGameObjDef.h"
-
 class DamageZoneGameObjDef : public BaseGameObjDef {
 public:
-    DamageZoneGameObjDef();
-
-    ~DamageZoneGameObjDef() {};
-
-    const PersistFactoryClass &Get_Factory() const;
-
-    bool Save(ChunkSaveClass &csave);
-
-    bool Load(ChunkLoadClass &cload);
-
-    uint32 Get_Class_ID() const;
-
-    PersistClass *Create() const;
-
-    Vector3 &Get_Color() { return Color; }
-
+	DamageZoneGameObjDef();
+	~DamageZoneGameObjDef() {};
+	const PersistFactoryClass &Get_Factory() const;
+	bool Save(ChunkSaveClass &csave);
+	bool Load(ChunkLoadClass &cload);
+	uint32 Get_Class_ID() const;
+	PersistClass *Create() const;
+	Vector3 &Get_Color() {return Color;}
 #ifdef DDBEDIT
-    virtual void                        Dump (FileClass &file);
+	virtual void                        Dump (FileClass &file);
 #endif
-    DECLARE_EDITABLE(DamageZoneGameObjDef, BaseGameObjDef);
+	DECLARE_EDITABLE(DamageZoneGameObjDef, BaseGameObjDef);
 private:
-    float DamageRate;
-    int DamageWarhead;
-    Vector3 Color;
-
-    friend class PresetDump;
-
-    friend class DamageZoneGameObj;
+	float DamageRate;
+	int DamageWarhead;
+	Vector3 Color;
+	friend class PresetDump;
+	friend class DamageZoneGameObj;
 };
 
 #endif

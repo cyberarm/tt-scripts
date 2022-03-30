@@ -17,55 +17,58 @@
 #include "PhysicalGameObj.h"
 
 // CustomCollisionGroup - When this script becomes attached to an object, it gives it a custom collision group. Upon detach, the original collision group is restored.
-class SH_CustomCollisionGroup : public ScriptImpClass {
+class SH_CustomCollisionGroup: public ScriptImpClass
+{
 protected:
 
-    Collision_Group_Type original_group;        // needed to undo custom collision group on detach
+	Collision_Group_Type original_group;		// needed to undo custom collision group on detach
 
 public:
 
-    void Created(GameObject *obj) {
-        // pull out the physical_obj
-        PhysicalGameObj *physical_obj = obj->As_PhysicalGameObj();
+	void Created(GameObject* obj)
+	{
+		// pull out the physical_obj
+		PhysicalGameObj* physical_obj = obj->As_PhysicalGameObj();
 
-        // only physical objects can play
-        if (!physical_obj) return;
+		// only physical objects can play
+		if (!physical_obj) return;
 
-        // pull out the phys
-        PhysClass *phys = physical_obj->Peek_Physical_Object();
+		// pull out the phys
+		PhysClass* phys = physical_obj->Peek_Physical_Object();
 
-        // backup the original collision group
-        original_group = phys->Get_Collision_Group();
+		// backup the original collision group
+		original_group = phys->Get_Collision_Group();
 
-        // tweak the current collision group
-        phys->Set_Collision_Group((Collision_Group_Type) Get_Int_Parameter("CollisionGroup"));
+		// tweak the current collision group
+		phys->Set_Collision_Group((Collision_Group_Type)Get_Int_Parameter("CollisionGroup"));
 
-        // inform netcode of the dirty things we've done with the phys
-        physical_obj->Set_Object_Dirty_Bit(NetworkObjectClass::BIT_RARE, true);
-    };
+		// inform netcode of the dirty things we've done with the phys
+		physical_obj->Set_Object_Dirty_Bit(NetworkObjectClass::BIT_RARE, true);
+	};
 
-    void Detach(GameObject *obj) {
-        // base implementation
-        ScriptImpClass::Detach(obj);
+	void Detach(GameObject* obj)
+	{
+		// base implementation
+		ScriptImpClass::Detach(obj);
 
-        if (Exe != 4) //make sure we dont try things in LE that may cause issues
-        {
-            // pull out the physical_obj
-            PhysicalGameObj *physical_obj = obj->As_PhysicalGameObj();
-
-            // only physical objects can play
-            if (!physical_obj) return;
-
-            // pull out the phys
-            PhysClass *phys = physical_obj->Peek_Physical_Object();
-
-            // restore the original collision group
-            phys->Set_Collision_Group(original_group);
-
-            // inform netcode of the dirty things we've done with the phys
-            physical_obj->Set_Object_Dirty_Bit(NetworkObjectClass::BIT_RARE, true);
-        }
-    };
+		if (Exe != 4) //make sure we dont try things in LE that may cause issues
+		{
+			// pull out the physical_obj
+			PhysicalGameObj* physical_obj = obj->As_PhysicalGameObj();
+	
+			// only physical objects can play
+			if (!physical_obj) return;
+	
+			// pull out the phys
+			PhysClass* phys = physical_obj->Peek_Physical_Object();
+	
+			// restore the original collision group
+			phys->Set_Collision_Group(original_group);
+	
+			// inform netcode of the dirty things we've done with the phys
+			physical_obj->Set_Object_Dirty_Bit(NetworkObjectClass::BIT_RARE, true);
+		}
+	};
 };
 
 #define REGISTER_SCRIPT(name, params) ScriptRegistrant<name> name##Registrant(#name, params);

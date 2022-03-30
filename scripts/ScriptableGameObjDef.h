@@ -11,27 +11,22 @@
 */
 #ifndef TT_INCLUDE_SCRIPTABLEGAMEOBJDEF_H
 #define TT_INCLUDE_SCRIPTABLEGAMEOBJDEF_H
-
 #include "BaseGameObjDef.h"
-
-class ScriptableGameObjDef : public BaseGameObjDef {
+class ScriptableGameObjDef : public BaseGameObjDef
+{
 public:
-    ScriptableGameObjDef(void);
-
-    virtual bool Save(ChunkSaveClass &csave);
-
-    virtual bool Load(ChunkLoadClass &cload);
-
+	ScriptableGameObjDef( void );
+	virtual bool								Save( ChunkSaveClass &csave );
+	virtual bool								Load( ChunkLoadClass &cload );
 #ifdef DDBEDIT
-    virtual void                        Dump (FileClass &file);
+	virtual void                        Dump (FileClass &file);
 #endif
-    DECLARE_EDITABLE(ScriptableGameObjDef, BaseGameObjDef);
-    DynamicVectorClass <StringClass> ScriptNameList; // 001C
-    DynamicVectorClass <StringClass> ScriptParameterList; // 0034
+	DECLARE_EDITABLE( ScriptableGameObjDef, BaseGameObjDef );
+	DynamicVectorClass<StringClass>		ScriptNameList; // 001C
+	DynamicVectorClass<StringClass>		ScriptParameterList; // 0034
 protected:
-    friend class ScriptableGameObj;
-
-    friend class PresetDump;
+	friend class ScriptableGameObj;
+	friend class PresetDump;
 }; // 004C
 
 #endif

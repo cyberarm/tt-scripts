@@ -11,30 +11,27 @@
 */
 #ifndef TT_INCLUDE_EDITABLE_H
 #define TT_INCLUDE_EDITABLE_H
-
 #include "Persist.h"
 #include "Parameter.h"
-
 class EditableClass : public PersistClass {
 public:
-    virtual int Get_Parameter_Count(void) const;
-
-    virtual ParameterClass *Lock_Parameter(int i);
-
-    virtual void Unlock_Parameter(int i);
+	virtual int						Get_Parameter_Count (void) const;
+	virtual ParameterClass *	Lock_Parameter (int i);
+	virtual void					Unlock_Parameter (int i);
 }; // 0008
 inline int
-EditableClass::Get_Parameter_Count(void) const {
-    return 0;
+EditableClass::Get_Parameter_Count (void) const
+{
+	return 0;
 }
-
 inline ParameterClass *
-EditableClass::Lock_Parameter(int i) {
-    return NULL;
+EditableClass::Lock_Parameter (int i)
+{
+	return NULL;
 }
-
 inline void
-EditableClass::Unlock_Parameter(int i) {
+EditableClass::Unlock_Parameter (int i)
+{
 }
 
 #endif

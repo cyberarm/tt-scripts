@@ -20,91 +20,86 @@
 #include "BaseGameObjDef.h"
 #include "ScriptableGameObjDef.h"
 
-DefinitionClass SCRIPTS_API
-*
-
-Find_Definition(unsigned long id) {
-    return DefinitionMgrClass::Find_Definition(id, true);
-}
-
-const char SCRIPTS_API
-*
-
-Get_Definition_Name(unsigned long id) {
-    if (!id) {
-        return "none";
-    }
-    DefinitionClass *d = DefinitionMgrClass::Find_Definition(id, 1);
-    if (!d) {
-        return "none";
-    }
-    return d->Get_Name();
-}
-
-DefinitionClass SCRIPTS_API
-*
-
-Find_Named_Definition(const char *name) {
-    return DefinitionMgrClass::Find_Named_Definition(name, 1);
-}
-
-int SCRIPTS_API
-
-Get_Definition_ID(const char *name) {
-    if (!name) {
-        return 0;
-    }
-    DefinitionClass *d = Find_Named_Definition(name);
-    if (!d) {
-        return 0;
-    }
-    return d->Get_ID();
-}
-
-DefinitionClass SCRIPTS_API
-*
-Get_Phys_Definition(GameObject
-*obj)
+DefinitionClass SCRIPTS_API *Find_Definition(unsigned long id)
 {
-if (!obj)
+	return DefinitionMgrClass::Find_Definition(id,true);
+}
+
+const char SCRIPTS_API *Get_Definition_Name(unsigned long id)
 {
-return 0;
+	if (!id)
+	{
+		return "none";
+	}
+	DefinitionClass *d = DefinitionMgrClass::Find_Definition(id,1);
+	if (!d)
+	{
+		return "none";
+	}
+	return d->Get_Name();
 }
-PhysicalGameObj *o = obj->As_PhysicalGameObj();
-if (!o)
+
+DefinitionClass SCRIPTS_API *Find_Named_Definition(const char *name)
 {
-return 0;
-}
-return (DefinitionClass *)o->Peek_Physical_Object()->Get_Definition();
+	return DefinitionMgrClass::Find_Named_Definition(name,1);
 }
 
-unsigned long SCRIPTS_API
-
-Get_Definition_Class_ID(const char *name) {
-    if (!name) {
-        return 0;
-    }
-    DefinitionClass *d = Find_Named_Definition(name);
-    if (!d) {
-        return 0;
-    }
-    return d->Get_Class_ID();
+int SCRIPTS_API Get_Definition_ID(const char *name)
+{
+	if (!name)
+	{
+		return 0;
+	}
+	DefinitionClass *d = Find_Named_Definition(name);
+	if (!d)
+	{
+		return 0;
+	}
+	return d->Get_ID();
 }
 
-bool SCRIPTS_API
-
-Is_Valid_Preset_ID(unsigned long ID) {
-    if (Find_Definition(ID)) {
-        return true;
-    }
-    return false;
+DefinitionClass SCRIPTS_API *Get_Phys_Definition(GameObject *obj)
+{
+	if (!obj)
+	{
+		return 0;
+	}
+	PhysicalGameObj *o = obj->As_PhysicalGameObj();
+	if (!o)
+	{
+		return 0;
+	}
+	return (DefinitionClass *)o->Peek_Physical_Object()->Get_Definition();
 }
 
-bool SCRIPTS_API
+unsigned long SCRIPTS_API Get_Definition_Class_ID(const char *name)
+{
+	if (!name)
+	{
+		return 0;
+	}
+	DefinitionClass *d = Find_Named_Definition(name);
+	if (!d)
+	{
+		return 0;
+	}
+	return d->Get_Class_ID();
+}
 
-Is_Valid_Preset(const char *Preset) {
-    if (Find_Named_Definition(Preset)) {
-        return true;
-    }
-    return false;
+bool SCRIPTS_API Is_Valid_Preset_ID(unsigned long ID)
+{
+	if (Find_Definition(ID))
+	{
+		return true;
+	}
+	return false;
+}
+
+bool SCRIPTS_API Is_Valid_Preset(const char *Preset)
+{
+	if (Find_Named_Definition(Preset))
+	{
+		return true;
+	}
+	return false;
 }

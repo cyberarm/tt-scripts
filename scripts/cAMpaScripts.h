@@ -10,31 +10,24 @@
 	Only the source code to the module(s) containing the licenced code has to be released.
 */
 #pragma once
-
 class cAMpa_Warn_Zone_Team : public ScriptImpClass {
-    void Created(GameObject *obj);
-
-    void Entered(GameObject *obj, GameObject *enterer);
+	void Created(GameObject *obj);
+	void Entered(GameObject *obj,GameObject *enterer);
 };
 
 class cAMpa_Kill_Zone_Team : public ScriptImpClass {
-    void Created(GameObject *obj);
-
-    void Entered(GameObject *obj, GameObject *enterer);
+	void Created(GameObject *obj);
+	void Entered(GameObject *obj,GameObject *enterer);
 };
 
 class cAMpa_Teleport_Zone_Small : public ScriptImpClass {
-    void Created(GameObject *obj);
-
-    void Entered(GameObject *obj, GameObject *enterer);
-
-    int lastUsed;
+	void Created(GameObject *obj);
+	void Entered(GameObject *obj,GameObject *enterer);
+	int lastUsed;
 };
 
 class cAMpa_Teleport_Zone_Large : public ScriptImpClass {
-    void Created(GameObject *obj);
-
-    void Entered(GameObject *obj, GameObject *enterer);
-
-    int lastUsed;
+	void Created(GameObject *obj);
+	void Entered(GameObject *obj,GameObject *enterer);
+	int lastUsed;
 };

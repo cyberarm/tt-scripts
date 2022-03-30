@@ -12,7 +12,6 @@
 #include "General.h"
 #include "wwmath.h"
 #include <stdlib.h>
-
 #ifndef W3DVIEWER
 SCRIPTS_API REF_ARR_DEF3(float, _FastAcosTable, ARC_TABLE_SIZE, 0x00852FB0, 0x00852198, 0x0087145C);
 SCRIPTS_API REF_ARR_DEF3(float, _FastAsinTable, ARC_TABLE_SIZE, 0x00850FB0, 0x00850198, 0x0086F45C);
@@ -24,27 +23,27 @@ float _FastAsinTable[ARC_TABLE_SIZE];
 float _FastSinTable[SIN_TABLE_SIZE];
 float _FastInvSinTable[SIN_TABLE_SIZE];
 #endif
-
-void WWMath::Init(void) {
-    for (int a = 0; a < ARC_TABLE_SIZE; ++a) {
-        float cv = float(a - ARC_TABLE_SIZE / 2) * (1.0f / (ARC_TABLE_SIZE / 2));
-        _FastAcosTable[a] = acos(cv);
-        _FastAsinTable[a] = asin(cv);
-    }
-    for (int a = 0; a < SIN_TABLE_SIZE; ++a) {
-        float cv = (float) a * 2.0f * WWMATH_PI / SIN_TABLE_SIZE;
-        _FastSinTable[a] = sin(cv);
-        if (a > 0) {
-            _FastInvSinTable[a] = 1.0f / _FastSinTable[a];
-        } else {
-            _FastInvSinTable[a] = WWMATH_FLOAT_MAX;
-        }
-    }
+void WWMath::Init(void)
+{
+	for (int a=0;a<ARC_TABLE_SIZE;++a) {
+		float cv=float(a-ARC_TABLE_SIZE/2)*(1.0f/(ARC_TABLE_SIZE/2));
+		_FastAcosTable[a]=acos(cv);
+		_FastAsinTable[a]=asin(cv);
+	}
+	for (int a=0;a<SIN_TABLE_SIZE;++a) {
+		float cv= (float)a * 2.0f * WWMATH_PI / SIN_TABLE_SIZE;
+		_FastSinTable[a]=sin(cv);
+		if (a>0) {
+			_FastInvSinTable[a]=1.0f/_FastSinTable[a];
+		} else {
+			_FastInvSinTable[a]=WWMATH_FLOAT_MAX;
+		}
+	}
 }
-
-void WWMath::Shutdown(void) {
+void WWMath::Shutdown(void)
+{
 }
-
-float WWMath::Random_Float(void) {
-    return ((float) (rand() & 0xFFF)) / (float) (0xFFF);
+float WWMath::Random_Float(void) 
+{ 
+	return ((float)(rand() & 0xFFF)) / (float)(0xFFF); 
 }

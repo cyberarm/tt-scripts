@@ -10,11 +10,10 @@
 	Only the source code to the module(s) containing the licenced code has to be released.
 */
 #pragma once
-
 class TFX_Spawn_When_Killed : public ScriptImpClass {
-    void Killed(GameObject *obj, GameObject *killer);
+	void Killed (GameObject *obj,GameObject *killer);
 };
 
 class TFX_Replace_When_Repaired : public ScriptImpClass {
-    void Damaged(GameObject *obj, GameObject *damager, float amount);
+	void Damaged (GameObject *obj,GameObject *damager,float amount);
 };

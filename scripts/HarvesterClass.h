@@ -17,118 +17,98 @@
 #include "OBBoxClass.h"
 #include "RefineryGameObj.h"
 #include "VehicleGameObj.h"
-
 class RefineryGameObj;
-
 class VehicleGameObj;
-
-class HarvesterClass : public GameObjObserverClass {
+class HarvesterClass : public GameObjObserverClass
+{
 
 public:
 
-    enum State {
-        NoState = 0,
-        StateGoingToHarvest = 1,
-        StateHarvesting = 2,
-        StateGoingToUnload = 3,
-        StateUnloading = 4,
-    };
+   enum State
+   {
+      NoState             = 0,
+      StateGoingToHarvest = 1,
+      StateHarvesting     = 2,
+      StateGoingToUnload  = 3,
+      StateUnloading      = 4,
+   };
 
 
 private:
 
-    RefineryGameObj *refinery;            //   8
-    Vector3 dockLocation;        //  12
-    Vector3 dockEntrance;        //  24
-    State state;               //  36
-    OBBoxClass tiberiumRegion;      //  40
-    VehicleGameObj *harvester;           // 100
-    StringClass harvestAnimation;    // 104
-    float harvestRelocateTime; // 108
-    float harvestTime;         // 112
-    bool harvesting;          // 116
+   RefineryGameObj* refinery;            //   8
+   Vector3          dockLocation;        //  12
+   Vector3          dockEntrance;        //  24
+   State            state;               //  36
+   OBBoxClass       tiberiumRegion;      //  40
+   VehicleGameObj*  harvester;           // 100
+   StringClass      harvestAnimation;    // 104
+   float            harvestRelocateTime; // 108
+   float            harvestTime;         // 112
+   bool             harvesting;          // 116
 
 
 public:
 
-    HarvesterClass();
+            HarvesterClass();
+   virtual ~HarvesterClass();
 
-    virtual ~HarvesterClass();
+   virtual const char*       Get_Name           ()
+   {
+	   return "HarvesterClass";
+   }
+   virtual void        Attach             (GameObject* object);
+   virtual void        Detach             (GameObject* object);
+   virtual void        Created            (GameObject* object)
+   {
+   }
+   virtual void        Destroyed          (GameObject* object);
+   virtual void        Killed             (GameObject* object, GameObject*)
+   {
+   }
+   virtual void        Damaged            (GameObject* object, GameObject*, float);
+   virtual void        Custom             (GameObject* object, int message, int, GameObject*);
+   virtual void        Sound_Heard        (GameObject* object, const CombatSound&)
+   {
+   }
+   virtual void        Enemy_Seen         (GameObject* object, GameObject*)
+   {
+   }
+   virtual void        Action_Complete    (GameObject* object, int id, ActionCompleteReason reason);
+   virtual void        Timer_Expired      (GameObject* object, int)
+   {
+   }
+   virtual void        Animation_Complete (GameObject* object, const char*)
+   {
+   }
+   virtual void        Poked              (GameObject* object, GameObject*)
+   {
+   }
+   virtual void        Entered            (GameObject* object, GameObject*)
+   {
+   }
+   virtual void        Exited             (GameObject* object, GameObject*)
+   {
+   }
 
-    virtual const char *Get_Name() {
-        return "HarvesterClass";
-    }
-
-    virtual void Attach(GameObject *object);
-
-    virtual void Detach(GameObject *object);
-
-    virtual void Created(GameObject *object) {
-    }
-
-    virtual void Destroyed(GameObject *object);
-
-    virtual void Killed(GameObject *object, GameObject *) {
-    }
-
-    virtual void Damaged(GameObject *object, GameObject *, float);
-
-    virtual void Custom(GameObject *object, int message, int, GameObject *);
-
-    virtual void Sound_Heard(GameObject *object, const CombatSound &) {
-    }
-
-    virtual void Enemy_Seen(GameObject *object, GameObject *) {
-    }
-
-    virtual void Action_Complete(GameObject *object, int id, ActionCompleteReason reason);
-
-    virtual void Timer_Expired(GameObject *object, int) {
-    }
-
-    virtual void Animation_Complete(GameObject *object, const char *) {
-    }
-
-    virtual void Poked(GameObject *object, GameObject *) {
-    }
-
-    virtual void Entered(GameObject *object, GameObject *) {
-    }
-
-    virtual void Exited(GameObject *object, GameObject *) {
-    }
-
-    void Initialize();
-
-    void Go_Harvest();
-
-    void Go_Unload_Tiberium();
-
-    VehicleGameObj *Get_Vehicle() {
-        return harvester;
-    }
-
-    State Get_State() { return state; }
-
-    void Harvest_Tiberium();
-
-    void Play_Harvest_Animation(bool play);
-
-    void Think();
-
-    void Unload_Tiberium();
-
-    void Set_Refinery(RefineryGameObj *obj) { refinery = obj; }
-
-    void Set_Dock_Location(Vector3 &location) { dockLocation = location; }
-
-    void Set_Dock_Entrance(Vector3 &location) { dockEntrance = location; }
-
-    void Set_Tiberium_Region(OBBoxClass &region) { tiberiumRegion = region; }
-
-    void Set_Harvest_Anim(const char *anim) { harvestAnimation = anim; }
-
-    void Stop();
+   void Initialize();
+   void            Go_Harvest             ();
+   void            Go_Unload_Tiberium     ();
+   VehicleGameObj* Get_Vehicle            ()
+   {
+	   return harvester;
+   }
+   State Get_State() {return state;}
+   void            Harvest_Tiberium       ();
+   void            Play_Harvest_Animation (bool play);
+   void            Think                  ();
+   void            Unload_Tiberium        ();
+   void Set_Refinery(RefineryGameObj *obj) {refinery = obj;}
+   void Set_Dock_Location(Vector3 &location) {dockLocation = location;}
+   void Set_Dock_Entrance(Vector3 &location) {dockEntrance = location;}
+   void Set_Tiberium_Region(OBBoxClass &region) {tiberiumRegion = region;}
+   void Set_Harvest_Anim(const char *anim) {harvestAnimation = anim;}
+   void Stop();
 };
 
 #endif

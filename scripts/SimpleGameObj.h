@@ -11,42 +11,24 @@
 */
 #ifndef TT_INCLUDE_SIMPLEGAMEOBJ_H
 #define TT_INCLUDE_SIMPLEGAMEOBJ_H
-
 #include "PhysicalGameObj.h"
 #include "SimpleGameObjDef.h"
-
 class SimpleGameObj : public PhysicalGameObj {
 public:
-    SimpleGameObj();
-
-    ~SimpleGameObj();
-
-    void On_Post_Load();
-
-    const PersistFactoryClass &Get_Factory() const;
-
-    bool Save(ChunkSaveClass &csave);
-
-    bool Load(ChunkLoadClass &cload);
-
-    void Init();
-
-    void Init(const SimpleGameObjDef &);
-
-    bool Is_Always_Dirty() { return false; }
-
-    SimpleGameObj *As_SimpleGameObj() { return this; }
-
-    const SimpleGameObjDef SCRIPTS_API
-    &
-
-    Get_Definition(void) const;
-
-    bool Is_Hidden_Object() { return Get_Definition().IsHiddenObject; }
-
-    void Export_Rare(BitStreamClass &packet);
-
-    void Import_Rare(BitStreamClass &packet);
+	SimpleGameObj();
+	~SimpleGameObj();
+	void On_Post_Load();
+	const PersistFactoryClass &Get_Factory() const;
+	bool Save(ChunkSaveClass &csave);
+	bool Load(ChunkLoadClass &cload);
+	void Init();
+	void Init(const SimpleGameObjDef &);
+	bool Is_Always_Dirty() {return false;}
+	SimpleGameObj * As_SimpleGameObj() {return this;}
+	const SimpleGameObjDef SCRIPTS_API & Get_Definition( void ) const;
+	bool Is_Hidden_Object() {return Get_Definition().IsHiddenObject;}
+	void Export_Rare( BitStreamClass &packet );
+	void Import_Rare( BitStreamClass &packet );
 }; // 07B0
 
 #endif

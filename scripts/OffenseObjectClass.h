@@ -11,42 +11,27 @@
 */
 #ifndef TT_INCLUDE_OFFENSEOBJECTCLASS_H
 #define TT_INCLUDE_OFFENSEOBJECTCLASS_H
-
 class ArmedGameObj;
-
 class OffenseObjectClass {
 public:
-#define    DEFAULT_DAMAGE        1.0f
-
-    OffenseObjectClass(float damage = DEFAULT_DAMAGE, unsigned int warhead = 0, ArmedGameObj *owner = NULL) : Damage(
-            damage), Warhead(warhead), ForceServerDamage(false), EnableClientDamage(false) { Set_Owner(owner); }
-
-    OffenseObjectClass(const OffenseObjectClass &base);
-
-    ~OffenseObjectClass() { Set_Owner(NULL); };
-
-    bool Save(ChunkSaveClass &csave);
-
-    bool Load(ChunkLoadClass &cload);
-
-    void Set_Damage(float damage) { Damage = damage; }
-
-    float Get_Damage(void) const { return Damage; }
-
-    void Set_Warhead(unsigned int warhead) { Warhead = warhead; }
-
-    unsigned int Get_Warhead(void) const { return Warhead; }
-
-    void Set_Owner(ArmedGameObj *owner) { Owner = (ScriptableGameObj *) owner; }
-
-    ArmedGameObj *Get_Owner(void) const { return (ArmedGameObj *) Owner.Get_Ptr(); }
-
-    bool ForceServerDamage;
-    bool EnableClientDamage;
+#define	DEFAULT_DAMAGE		1.0f
+	OffenseObjectClass( float damage = DEFAULT_DAMAGE, unsigned int warhead = 0, ArmedGameObj *owner = NULL ) : Damage( damage ), Warhead( warhead ), ForceServerDamage( false ), EnableClientDamage( false ) { Set_Owner( owner ); }
+	OffenseObjectClass( const OffenseObjectClass & base );
+	~OffenseObjectClass() { Set_Owner( NULL ); };
+	bool				Save( ChunkSaveClass & csave );
+	bool				Load( ChunkLoadClass & cload );
+	void	Set_Damage( float damage )	{ Damage = damage;	}
+	float	Get_Damage( void ) const 			{ return Damage;	}
+	void	Set_Warhead( unsigned int warhead )	{ Warhead = warhead;	}
+	unsigned int Get_Warhead( void ) const 				{ return Warhead;	}
+	void	Set_Owner( ArmedGameObj *owner )	{ Owner = (ScriptableGameObj *)owner; }
+	ArmedGameObj *Get_Owner( void ) const	{ return (ArmedGameObj *)Owner.Get_Ptr();	}
+	bool ForceServerDamage;
+	bool EnableClientDamage;
 private:
-    float Damage;
-    unsigned int Warhead;
-    ReferencerClass Owner;
+	float Damage;
+	unsigned int Warhead;
+	ReferencerClass Owner;
 };
 
 #endif

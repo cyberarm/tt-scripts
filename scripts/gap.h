@@ -10,47 +10,32 @@
 	Only the source code to the module(s) containing the licenced code has to be released.
 */
 #pragma once
-
 class RA_Global_Gap_Controller : public ScriptImpClass {
-    Gap_ListNode *ListHead;
-
-    void Created(GameObject *obj);
-
-    void Custom(GameObject *obj, int type, int param, GameObject *sender);
-
-    void Timer_Expired(GameObject *obj, int number);
-
-    void Destroyed(GameObject *obj);
-
-    void Add_Generator(unsigned long ObjectID, float Range, int Team);
-
-    void Remove_Generator(unsigned long ID);
-
-    void Update_Generator(unsigned long ID, bool Active, int Team);
-
-    void Update_Generator(unsigned long ID, bool Active);
+	Gap_ListNode *ListHead;
+	void Created(GameObject *obj);
+	void Custom(GameObject *obj, int type, int param, GameObject *sender);
+	void Timer_Expired(GameObject *obj, int number);
+	void Destroyed(GameObject *obj);
+	void Add_Generator(unsigned long ObjectID, float Range, int Team);
+	void Remove_Generator(unsigned long ID);
+	void Update_Generator(unsigned long ID, bool Active, int Team);
+	void Update_Generator(unsigned long ID, bool Active);
 };
 
 class RA_Gap_Generator_Building : public ScriptImpClass {
-    unsigned long shroudID;
-    unsigned long sizeID;
-
-    void Created(GameObject *obj);
-
-    void Timer_Expired(GameObject *obj, int number);
-
-    void Killed(GameObject *obj, GameObject *killer);
+	unsigned long shroudID;
+	unsigned long sizeID;
+	void Created(GameObject *obj);
+	void Timer_Expired(GameObject *obj, int number);
+	void Killed(GameObject *obj, GameObject *killer);
 };
 
 class RA_Gap_Generator_Vehicle : public ScriptImpClass {
-    unsigned long shroudID;
-    unsigned long sizeID;
-
-    void Created(GameObject *obj);
-
-    void Custom(GameObject *obj, int type, int param, GameObject *sender);
-
-    void Destroyed(GameObject *obj);
+	unsigned long shroudID;
+	unsigned long sizeID;
+	void Created(GameObject *obj);
+	void Custom(GameObject *obj, int type, int param, GameObject *sender);
+	void Destroyed(GameObject *obj);
 };
 
 class RA_Gap_Generator_Ignored : public ScriptImpClass {

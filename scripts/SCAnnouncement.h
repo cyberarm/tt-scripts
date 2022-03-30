@@ -17,34 +17,29 @@
 
 
 class SCAnnouncement :
-        public cNetEvent {
+	public cNetEvent
+{
 
-    int receiptientId; // 06B4
-    int senderId; // 06B8
-    int translationId; // 06BC
-    int emoticonId; // 06C0
-    AnnouncementEnum type; // 06C4
+	int receiptientId; // 06B4
+	int senderId; // 06B8
+	int translationId; // 06BC
+	int emoticonId; // 06C0
+	AnnouncementEnum type; // 06C4
 
 public:
 
-    virtual uint Get_Network_Class_ID() const;
+	virtual uint Get_Network_Class_ID() const;
+	virtual void Import_Creation(BitStreamClass& stream);
+	virtual void Export_Creation(BitStreamClass& stream);
+	virtual void Act();
 
-    virtual void Import_Creation(BitStreamClass &stream);
-
-    virtual void Export_Creation(BitStreamClass &stream);
-
-    virtual void Act();
-
-    SCAnnouncement();
-
-    ~SCAnnouncement();
-
-    void Init(int _receiptientId, int _senderId, int _translationId, AnnouncementEnum _type, int _emoticonId,
-              bool dodirtybit = true, bool doact = true);
-
-    SCRIPTS_API void Set_Dirty_Bit_For_Team(DIRTY_BIT value, int teamId);
+	SCAnnouncement();
+	~SCAnnouncement();
+	void Init(int _receiptientId, int _senderId, int _translationId, AnnouncementEnum _type, int _emoticonId, bool dodirtybit = true, bool doact = true);
+	SCRIPTS_API void Set_Dirty_Bit_For_Team(DIRTY_BIT value, int teamId);
 
 };
+
 
 
 #endif

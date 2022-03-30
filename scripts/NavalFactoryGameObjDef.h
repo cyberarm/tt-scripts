@@ -11,43 +11,32 @@
 */
 #ifndef TT_INCLUDE__NAVALFACTORYGAMEOBJDEF_H
 #define TT_INCLUDE__NAVALFACTORYGAMEOBJDEF_H
-
 #include "BuildingGameObjDef.h"
-
-class NavalFactoryGameObjDef : public BuildingGameObjDef {
+class NavalFactoryGameObjDef : public BuildingGameObjDef
+{
 public:
-    NavalFactoryGameObjDef(void);
-
-    ~NavalFactoryGameObjDef(void);
-
-    uint32 Get_Class_ID(void) const;
-
-    PersistClass *Create(void) const;
-
-    bool Save(ChunkSaveClass &csave);
-
-    bool Load(ChunkLoadClass &cload);
-
-    const PersistFactoryClass &Get_Factory(void) const;
-
+	NavalFactoryGameObjDef (void);
+	~NavalFactoryGameObjDef (void);
+	uint32								Get_Class_ID (void) const;
+	PersistClass *						Create (void) const;
+	bool									Save (ChunkSaveClass &csave);
+	bool									Load (ChunkLoadClass &cload);
+	const PersistFactoryClass &	Get_Factory (void) const;
 #ifdef DDBEDIT
-    virtual void                        Dump (FileClass &file);
+	virtual void                        Dump (FileClass &file);
 #endif
-    DECLARE_EDITABLE (NavalFactoryGameObjDef, BuildingGameObjDef);
+	DECLARE_EDITABLE (NavalFactoryGameObjDef, BuildingGameObjDef);
 protected:
-    void Load_Variables(ChunkLoadClass &cload);
-
-    float Timer;
-    int ConstructionZone1DefId;
-    int ConstructionZone2DefId;
-    int ConstructionZone3DefId;
-    int ConstructionZone4DefId;
-    int ConstructionZone5DefId;
-    int ConstructionZone6DefId;
-
-    friend class NavalFactoryGameObj;
-
-    friend class PresetDump;
+	void					Load_Variables (ChunkLoadClass &cload);
+	float Timer;
+	int ConstructionZone1DefId;
+	int ConstructionZone2DefId;
+	int ConstructionZone3DefId;
+	int ConstructionZone4DefId;
+	int ConstructionZone5DefId;
+	int ConstructionZone6DefId;
+	friend class NavalFactoryGameObj;
+	friend class PresetDump;
 };
 
 #endif

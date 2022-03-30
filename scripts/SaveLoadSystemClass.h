@@ -11,62 +11,42 @@
 */
 #ifndef TT_INCLUDE__SAVELOADSYSTEMCLASS_H
 #define TT_INCLUDE__SAVELOADSYSTEMCLASS_H
-
 #include "PointerRemapClass.h"
 #include "SaveLoadSubSystemClass.h"
-
 class PersistFactoryClass;
 
-class SaveLoadSystemClass {
+class SaveLoadSystemClass
+{
 
 public:
 
 #if (TDBEDIT) || (DDBEDIT) || (W3DVIEWER)
-    static PointerRemapClass PointerRemapper;
-    static PersistFactoryClass *_FactoryListHead;
-    static SaveLoadSubSystemClass *_SubSystemListHead;
+   static PointerRemapClass PointerRemapper;
+   static PersistFactoryClass *_FactoryListHead;
+   static SaveLoadSubSystemClass *_SubSystemListHead;
 #else
-    static REF_DECL(PointerRemapClass, PointerRemapper
-    );
-    static REF_DECL(PersistFactoryClass
-    *, _FactoryListHead);
-    static REF_DECL(SaveLoadSubSystemClass
-    *, _SubSystemListHead);
+   static REF_DECL(PointerRemapClass, PointerRemapper);
+   static REF_DECL(PersistFactoryClass *, _FactoryListHead);
+   static REF_DECL(SaveLoadSubSystemClass *, _SubSystemListHead);
 #endif
 
-    static SaveLoadSubSystemClass *Find_Sub_System(uint32 id);
-
-    static bool Load(ChunkLoadClass &chunkLoader, bool);
-
-    static bool Save(ChunkSaveClass &chunkSaver, SaveLoadSubSystemClass &subSystem);
-
-    static void Post_Load_Processing(void(*)());
-
-    static void Register_Pointer(void *, void *);
-
-    static void Register_Post_Load_Callback(PostLoadableClass *);
-
-    static void Request_Pointer_Remap(void **);
-
-    static void Register_Sub_System(SaveLoadSubSystemClass *);
-
-    static void Unregister_Sub_System(SaveLoadSubSystemClass *);
-
-    static void Link_Sub_System(SaveLoadSubSystemClass *);
-
-    static void Unlink_Sub_System(SaveLoadSubSystemClass *);
-
-    static void Register_Persist_Factory(PersistFactoryClass *);
-
-    static void Unregister_Persist_Factory(PersistFactoryClass *);
-
-    static PersistFactoryClass *Find_Persist_Factory(uint32);
-
-    static void Link_Factory(PersistFactoryClass *);
-
-    static void Unlink_Factory(PersistFactoryClass *);
-
-    static void Request_Ref_Counted_Pointer_Remap(RefCountClass **);
+   static SaveLoadSubSystemClass* Find_Sub_System                   (uint32 id);
+   static bool                    Load                              (ChunkLoadClass& chunkLoader, bool);
+   static bool                    Save                              (ChunkSaveClass& chunkSaver, SaveLoadSubSystemClass &subSystem);
+   static void                    Post_Load_Processing              (void(*)());
+   static void                    Register_Pointer                  (void*, void*);
+   static void                    Register_Post_Load_Callback       (PostLoadableClass*);
+   static void                    Request_Pointer_Remap             (void**);
+   static void                    Register_Sub_System               (SaveLoadSubSystemClass *);
+   static void                    Unregister_Sub_System             (SaveLoadSubSystemClass *);
+   static void                    Link_Sub_System                   (SaveLoadSubSystemClass *);
+   static void                    Unlink_Sub_System                 (SaveLoadSubSystemClass *);
+   static void                    Register_Persist_Factory          (PersistFactoryClass *);
+   static void                    Unregister_Persist_Factory        (PersistFactoryClass *);
+   static PersistFactoryClass *   Find_Persist_Factory              (uint32);
+   static void                    Link_Factory                      (PersistFactoryClass *);
+   static void                    Unlink_Factory                    (PersistFactoryClass *);
+   static void                    Request_Ref_Counted_Pointer_Remap (RefCountClass **);
 };
 
 

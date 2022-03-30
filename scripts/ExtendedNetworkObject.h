@@ -22,24 +22,25 @@
 #pragma once
 
 
-class GenericExtendedNetworkObject {
+class GenericExtendedNetworkObject
+{
 public:
+	
+	GenericExtendedNetworkObject();
+	~GenericExtendedNetworkObject();
 
-    GenericExtendedNetworkObject();
-
-    ~GenericExtendedNetworkObject();
-
-    virtual void setDirtyBitsForClient(const int clientId) = 0;
+	virtual void setDirtyBitsForClient(const int clientId) = 0;
 };
 
 
 template<class BaseClass>
 class ExtendedNetworkObject :
-        public BaseClass,
-        public GenericExtendedNetworkObject {
+	public BaseClass,
+	public GenericExtendedNetworkObject
+{
 public:
-
-    virtual void setDirtyBitsForClient(const int clientId) { return BaseClass::setDirtyBitsForClient(clientId); }
+	
+	virtual void setDirtyBitsForClient(const int clientId) { return BaseClass::setDirtyBitsForClient(clientId); }
 
 };
 
@@ -47,4 +48,4 @@ public:
 #define CONCAT(a, b) CONCAT_(a, b)
 #define CONCAT_(a, b) a ## b
 #define IMPLEMENT_EXTENDED_NETWORK_OBJECT(BaseClass) \
-    typedef ExtendedNetworkObject<BaseClass> CONCAT(Extended, BaseClass);
+	typedef ExtendedNetworkObject<BaseClass> CONCAT(Extended, BaseClass);

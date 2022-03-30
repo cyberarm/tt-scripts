@@ -13,6 +13,7 @@
 #define TT_INCLUDE__SINGLETON_H
 
 
+
 /*==============================================================================
 
 
@@ -39,25 +40,26 @@ protected:
 
 
 
-template<typename T>
-class Singleton {
+template<typename T> class Singleton
+{
 
 protected:
 
 #ifdef DEBUG
-    Singleton()
-    {
-        static uint instanceCount = 0;
-        TT_ASSERT(++instanceCount == 1);
-    }
+	Singleton()
+	{
+		static uint instanceCount = 0;
+		TT_ASSERT(++instanceCount == 1);
+	}
 #endif
 
 public:
-
-    static T &getInstance() {
-        static T instancex;
-        return instancex;
-    }
+	
+	static T& getInstance()
+	{
+		static T instancex;
+		return instancex;
+	}
 
 };
 

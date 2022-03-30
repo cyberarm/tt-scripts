@@ -13,30 +13,30 @@
 #define TT_INCLUDE__MUZZLERECOILCLASS_H
 
 
+
 class RenderObjClass;
 
 
-class MuzzleRecoilClass {
+
+class MuzzleRecoilClass
+{
 
 private:
 
-    int boneId;
-    float scale;
-    float remainingTime;
-    float timeScale;
-
+	int boneId;
+	float scale;
+	float remainingTime;
+	float timeScale;
+	
 public:
 
-    MuzzleRecoilClass();
-
-    void Init(int _boneId);
-
-    void Start_Recoil(float _scale, float time);
-
-    void Update(RenderObjClass *renderObj);
-
-    bool Is_Recoiling() { return remainingTime != 0; }
+	MuzzleRecoilClass();
+	void Init(int _boneId);
+	void Start_Recoil(float _scale, float time);
+	void Update(RenderObjClass* renderObj);
+	bool Is_Recoiling() {return remainingTime != 0;}
 };
+
 
 
 #endif

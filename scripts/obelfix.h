@@ -10,95 +10,66 @@
 	Only the source code to the module(s) containing the licenced code has to be released.
 */
 #pragma once
-
 class Nod_Obelisk_CnC : public ScriptImpClass {
-    int WeaponID;
+	int WeaponID;
 
-    void Created(GameObject *ObeliskObj);
+	void Created(GameObject* ObeliskObj);
+	void Killed(GameObject* ObeliskObj, GameObject* Killer);
+	void Custom(GameObject* ObeliskObj, int Type, int Param, GameObject* Sender);
 
-    void Killed(GameObject *ObeliskObj, GameObject *Killer);
-
-    void Custom(GameObject *ObeliskObj, int Type, int Param, GameObject *Sender);
-
-    void Create_Weapon(GameObject *ObeliskObj);
-
-    void Destroy_Weapon(GameObject *ObeliskObj);
+	void Create_Weapon(GameObject* ObeliskObj);
+	void Destroy_Weapon(GameObject* ObeliskObj);
 };
 
 class Obelisk_Weapon_CnC : public ScriptImpClass {
-    int EnemyID;
-    int EffectID;
-    bool Firing;
-    bool Charged;
+	int EnemyID;
+	int EffectID;
+	bool Firing;
+	bool Charged;
 
-    void Created(GameObject *WeaponObj);
+	void Created(GameObject* WeaponObj);
+	void Destroyed(GameObject* WeaponObj);
+	bool IsValidEnemy(GameObject* WeaponObj, GameObject* EnemyObj);
 
-    void Destroyed(GameObject *WeaponObj);
-
-    bool IsValidEnemy(GameObject *WeaponObj, GameObject *EnemyObj);
-
-    void StartFiring(GameObject *WeaponObj);
-
-    void StopFiring(GameObject *WeaponObj);
-
-    void StartEffect(GameObject *WeaponObj);
-
-    void StopEffect(GameObject *WeaponObj);
-
-    void FireAt(GameObject *WeaponObj, GameObject *EnemyObj);
-
-    void FaceEnemy(GameObject *WeaponObj, GameObject *EnemyObj);
-
-    void StopFireAt(GameObject *WeaponObj);
-
-    void Timer_Expired(GameObject *WeaponObj, int Number);
-
-    void Enemy_Seen(GameObject *WeaponObj, GameObject *EnemyObj);
-
-public:
-    void Register_Auto_Save_Variables();
+	void StartFiring(GameObject* WeaponObj);
+	void StopFiring(GameObject* WeaponObj);
+	void StartEffect(GameObject* WeaponObj);
+	void StopEffect(GameObject* WeaponObj);
+	void FireAt(GameObject* WeaponObj, GameObject* EnemyObj);
+	void FaceEnemy(GameObject* WeaponObj, GameObject* EnemyObj);
+	void StopFireAt(GameObject* WeaponObj);
+	void Timer_Expired(GameObject* WeaponObj, int Number);
+	void Enemy_Seen(GameObject* WeaponObj, GameObject* EnemyObj);
+	public: void Register_Auto_Save_Variables();
 };
 
 class Nod_Obelisk_CnC_Ground : public ScriptImpClass {
-    int WeaponID;
+	int WeaponID;
 
-    void Created(GameObject *ObeliskObj);
-
-    void Killed(GameObject *ObeliskObj, GameObject *Killer);
-
-    void Custom(GameObject *ObeliskObj, int type, int Param, GameObject *Sender);
+	void Created(GameObject* ObeliskObj);
+	void Killed(GameObject* ObeliskObj, GameObject* Killer);
+	
+	void Custom(GameObject* ObeliskObj, int type, int Param, GameObject* Sender);
 };
 
 class Obelisk_Weapon_CnC_Ground : public ScriptImpClass {
-    int EnemyID;
-    int EffectID;
-    bool Firing;
-    bool Charged;
+	int EnemyID;
+	int EffectID;
+	bool Firing;
+	bool Charged;
 
-    void Created(GameObject *WeaponObj);
+	void Created(GameObject* WeaponObj);
+	void Destroyed(GameObject* WeaponObj);
+	bool IsValidEnemy(GameObject* WeaponObj, GameObject* EnemyObj);
 
-    void Destroyed(GameObject *WeaponObj);
-
-    bool IsValidEnemy(GameObject *WeaponObj, GameObject *EnemyObj);
-
-    void StartFiring(GameObject *WeaponObj);
-
-    void StopFiring(GameObject *WeaponObj);
-
-    void StartEffect(GameObject *WeaponObj);
-
-    void StopEffect(GameObject *WeaponObj);
-
-    void FireAt(GameObject *WeaponObj, GameObject *EnemyObj);
-
-    void FaceEnemy(GameObject *WeaponObj, GameObject *EnemyObj);
-
-    void StopFireAt(GameObject *WeaponObj);
-
-    void Timer_Expired(GameObject *WeaponObj, int Number);
-
-    void Enemy_Seen(GameObject *WeaponObj, GameObject *EnemyObj);
-
-public:
-    void Register_Auto_Save_Variables();
+	void StartFiring(GameObject* WeaponObj);
+	void StopFiring(GameObject* WeaponObj);
+	void StartEffect(GameObject* WeaponObj);
+	void StopEffect(GameObject* WeaponObj);
+	void FireAt(GameObject* WeaponObj, GameObject* EnemyObj);
+	void FaceEnemy(GameObject* WeaponObj, GameObject* EnemyObj);
+	void StopFireAt(GameObject* WeaponObj);
+	void Timer_Expired(GameObject* WeaponObj, int Number);
+	void Enemy_Seen(GameObject* WeaponObj, GameObject* EnemyObj);
+	public: void Register_Auto_Save_Variables();
 };

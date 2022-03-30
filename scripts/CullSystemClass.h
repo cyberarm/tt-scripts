@@ -11,44 +11,30 @@
 */
 #ifndef TT_INCLUDE_CULLSYSTEMCLASS_H
 #define TT_INCLUDE_CULLSYSTEMCLASS_H
-
 #include "CullableClass.h"
-
 class FrustumClass;
 
-class CullSystemClass {
+class CullSystemClass
+{
 public:
-    CullSystemClass(void);
-
-    virtual ~CullSystemClass(void);
-
-    void Reset_Collection(void);
-
-    virtual void Collect_Objects(const Vector3 &point) = 0;
-
-    virtual void Collect_Objects(const AABoxClass &box) = 0;
-
-    virtual void Collect_Objects(const OBBoxClass &box) = 0;
-
-    virtual void Collect_Objects(const FrustumClass &frustum) = 0;
-
-    virtual void Update_Culling(CullableClass *obj) = 0;
-
+	CullSystemClass(void);
+	virtual ~CullSystemClass(void);
+	void					Reset_Collection(void);
+	virtual void		Collect_Objects(const Vector3 & point)					= 0;
+	virtual void		Collect_Objects(const AABoxClass & box)				= 0;
+	virtual void		Collect_Objects(const OBBoxClass & box)				= 0;
+	virtual void		Collect_Objects(const FrustumClass & frustum)		= 0;
+	virtual void		Update_Culling(CullableClass * obj)						= 0;
 protected:
-    CullableClass *Get_First_Collected_Object_Internal(void);
-
-    CullableClass *Get_Next_Collected_Object_Internal(CullableClass *obj);
-
-    CullableClass *Peek_First_Collected_Object_Internal(void);
-
-    CullableClass *Peek_Next_Collected_Object_Internal(CullableClass *obj);
-
-    void Add_To_Collection(CullableClass *obj);
-
-    CullableClass *CollectionHead;
-
-    friend class CullableClass;
+	CullableClass *	Get_First_Collected_Object_Internal(void);
+	CullableClass *	Get_Next_Collected_Object_Internal(CullableClass * obj);
+	CullableClass *	Peek_First_Collected_Object_Internal(void);
+	CullableClass *	Peek_Next_Collected_Object_Internal(CullableClass * obj);
+	void					Add_To_Collection(CullableClass * obj);
+	CullableClass *	CollectionHead;
+	friend class CullableClass;
 };
+
 
 
 #endif

@@ -11,41 +11,29 @@
 */
 #ifndef TT_INCLUDE_CONSTRUCTIONYARDGAMEOBJDEF_H
 #define TT_INCLUDE_CONSTRUCTIONYARDGAMEOBJDEF_H
-
 #include "BuildingGameObjDef.h"
-
-class ConstructionYardGameObjDef : public BuildingGameObjDef {
+class ConstructionYardGameObjDef : public BuildingGameObjDef
+{
 public:
-    ConstructionYardGameObjDef(void);
-
-    ~ConstructionYardGameObjDef(void);
-
-    uint32 Get_Class_ID(void) const;
-
-    PersistClass *Create(void) const;
-
-    bool Save(ChunkSaveClass &csave);
-
-    bool Load(ChunkLoadClass &cload);
-
-    const PersistFactoryClass &Get_Factory(void) const;
-
+	ConstructionYardGameObjDef (void);
+	~ConstructionYardGameObjDef (void);
+	uint32								Get_Class_ID (void) const;
+	PersistClass *						Create (void) const;
+	bool									Save (ChunkSaveClass &csave);
+	bool									Load (ChunkLoadClass &cload);
+	const PersistFactoryClass &	Get_Factory (void) const;
 #ifdef DDBEDIT
-    virtual void                        Dump (FileClass &file);
+	virtual void                        Dump (FileClass &file);
 #endif
-    DECLARE_EDITABLE (ConstructionYardGameObjDef, BuildingGameObjDef);
+	DECLARE_EDITABLE (ConstructionYardGameObjDef, BuildingGameObjDef);
 protected:
-    void Load_Variables(ChunkLoadClass &cload);
-
-    float RepairRate;
-    float VehicleRepairRate;
-    float RepairAmount;
-    float LowPowerRepairAmount;
-    int RepairWarhead;
-
-    friend class ConstructionYardGameObj;
-
-    friend class PresetDump;
+	void					Load_Variables (ChunkLoadClass &cload);
+	float RepairRate;
+	float VehicleRepairRate;
+	float RepairAmount;
+	float LowPowerRepairAmount;
+	int RepairWarhead;
+	friend class ConstructionYardGameObj;
+	friend class PresetDump;
 };
-
 #endif

@@ -11,39 +11,37 @@
 */
 #ifndef TT_INCLUDE_SIMPLEDEFINITIONFACTORYCLASS_H
 #define TT_INCLUDE_SIMPLEDEFINITIONFACTORYCLASS_H
-
 #include "DefinitionFactoryClass.h"
 #include "DefinitionFactoryMgrClass.h"
-
-template<class T, uint32 I, const char *N>
-class SimpleDefinitionFactoryClass : public DefinitionFactoryClass {
+template <class T, uint32 I, const char *N>
+class SimpleDefinitionFactoryClass : public DefinitionFactoryClass
+{
 public:
-    bool IsDisplayed;
-
-    SimpleDefinitionFactoryClass(bool is_displayed = true) : IsDisplayed(is_displayed) {
-    }
-
-    ~SimpleDefinitionFactoryClass() {
-    }
-
-    DefinitionClass *Create() const {
-        return new T;
-    }
-
-    const char *Get_Name() const {
-        return N;
-    }
-
-    uint32 Get_Class_ID() const {
-        return I;
-    }
-
-    bool Is_Displayed() const {
-        return IsDisplayed;
-    }
+	bool IsDisplayed;
+	SimpleDefinitionFactoryClass(bool is_displayed = true) : IsDisplayed(is_displayed)
+	{
+	}
+	~SimpleDefinitionFactoryClass()
+	{
+	}
+	DefinitionClass *Create() const
+	{
+		return new T;
+	}
+	const char *Get_Name() const
+	{
+		return N;
+	}
+	uint32 Get_Class_ID() const
+	{
+		return I;
+	}
+	bool Is_Displayed() const
+	{
+		return IsDisplayed;
+	}
 };
-
-#define DECLARE_DEFINITION_FACTORY(definition, classid, string) \
-    char definition##name[sizeof(string)] = string; \
-    SimpleDefinitionFactoryClass<definition,classid,(const char *)definition##name>
+#define DECLARE_DEFINITION_FACTORY(definition,classid,string) \
+	char definition##name[sizeof(string)] = string; \
+	SimpleDefinitionFactoryClass<definition,classid,(const char *)definition##name>
 #endif

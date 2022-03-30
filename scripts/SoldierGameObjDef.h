@@ -19,73 +19,54 @@
 #include "engine_vector.h"
 #include "engine_threading.h"
 #include "engine_string.h"
-
-class SoldierGameObjDef : public SmartGameObjDef {
+class SoldierGameObjDef : public SmartGameObjDef
+{
 public:
-    SoldierGameObjDef(void);
-
-    virtual uint32 Get_Class_ID(void) const;
-
-    virtual PersistClass *Create(void) const;
-
-    virtual bool Save(ChunkSaveClass &csave);
-
-    virtual bool Load(ChunkLoadClass &cload);
-
-    virtual const PersistFactoryClass &Get_Factory(void) const;
-
-    DialogueClass *Get_Dialog_List(void) { return DialogList; }
-
+	SoldierGameObjDef( void );
+	virtual uint32								Get_Class_ID( void ) const;
+	virtual PersistClass *					Create( void ) const ;
+	virtual bool								Save( ChunkSaveClass &csave );
+	virtual bool								Load( ChunkLoadClass &cload );
+	virtual const PersistFactoryClass &	Get_Factory( void ) const;
+	DialogueClass *							Get_Dialog_List( void )			{ return DialogList; }
 #ifdef DDBEDIT
-    virtual void                        Dump (FileClass &file);
-    virtual void                        DumpPhys (FileClass &file);
+	virtual void                        Dump (FileClass &file);
+	virtual void                        DumpPhys (FileClass &file);
 #endif
-    DECLARE_EDITABLE(SoldierGameObjDef, SmartGameObjDef);
-
-    float Get_Skeleton_Height() const { return SkeletonHeight; };
-
-    float Get_Skeleton_Width() const { return SkeletonWidth; };
-
-    bool Is_Spy() const { return IsSpy; }
-
-    bool Can_Refill() const { return CanRefill; }
-
-    bool Is_Unsquishable() const { return IsUnsquishable; }
-
+	DECLARE_EDITABLE( SoldierGameObjDef, SmartGameObjDef );
+	float Get_Skeleton_Height() const {return SkeletonHeight;};
+	float Get_Skeleton_Width() const {return SkeletonWidth;};
+	bool Is_Spy() const {return IsSpy;}
+	bool Can_Refill() const { return CanRefill; }
+	bool Is_Unsquishable() const { return IsUnsquishable; }
 protected:
-    float TurnRate;
-    float JumpVelocity;
-    float SkeletonHeight;
-    float SkeletonWidth;
-    bool UseInnateBehavior;
-    float InnateAggressiveness;
-    float InnateTakeCoverProbability;
-    bool InnateIsStationary;
-    DialogueClass DialogList[DIALOG_MAX];
-    StringClass FirstPersonHands;
-    int HumanAnimOverrideDefID;
-    int HumanLoiterCollectionDefID;
-    int DeathSoundPresetID;
-    bool CanStealVehicles;
-    bool CanDriveVehicles;
-    bool IsSpy;
-    bool IsUnsquishable;
-    bool CanRefill;
+	float											TurnRate;
+	float											JumpVelocity;
+	float											SkeletonHeight;
+	float											SkeletonWidth;
+	bool											UseInnateBehavior;
+	float											InnateAggressiveness;
+	float											InnateTakeCoverProbability;
+	bool											InnateIsStationary;
+	DialogueClass								DialogList[DIALOG_MAX];
+	StringClass									FirstPersonHands;
+	int											HumanAnimOverrideDefID;
+	int											HumanLoiterCollectionDefID;
+	int											DeathSoundPresetID;
+	bool										CanStealVehicles;
+	bool										CanDriveVehicles;
+	bool										IsSpy;
+	bool										IsUnsquishable;
+	bool CanRefill;
 
-    friend class SoldierGameObj;
-
-    friend class SoldierObserverClass;
-
-    friend class PresetDump;
-
+	friend	class								SoldierGameObj;
+	friend	class								SoldierObserverClass;
+	friend class PresetDump;
 public:
-    bool GetInnateBehavior() { return UseInnateBehavior; }
-
-    float GetInnateAggressiveness() { return InnateAggressiveness; }
-
-    float GetInnateTakeCoverProbability() { return InnateTakeCoverProbability; }
-
-    bool GetInnateIsStationary() { return InnateIsStationary; }
+	bool	GetInnateBehavior(){ return UseInnateBehavior;}
+	float	GetInnateAggressiveness(){ return InnateAggressiveness;}
+	float	GetInnateTakeCoverProbability(){ return InnateTakeCoverProbability;}
+	bool	GetInnateIsStationary(){ return InnateIsStationary;}
 }; // size: 912
 
 

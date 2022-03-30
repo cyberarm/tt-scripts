@@ -15,34 +15,36 @@
 #include "PersistFactoryClass.h"
 #include "SaveLoadSystemClass.h"
 
-template<class T, unsigned long I>
-class SimplePersistFactoryClass : public PersistFactoryClass {
+template <class T, unsigned long I>
+class SimplePersistFactoryClass : public PersistFactoryClass
+{
 public:
-    virtual uint32 Chunk_ID() const {
-        return I;
-    }
-
-    PersistClass *Load(ChunkLoadClass &xLoad) const {
-        T *newobj = new T;
-        void *pointer;
-        xLoad.Open_Chunk();
-        xLoad.Read(&pointer, 4);
-        xLoad.Close_Chunk();
-        xLoad.Open_Chunk();
-        newobj->Load(xLoad);
-        xLoad.Close_Chunk();
-        SaveLoadSystemClass::Register_Pointer(pointer, newobj);
-        return newobj;
-    }
-
-    void Save(ChunkSaveClass &xSave, PersistClass *persist) const {
-        xSave.Begin_Chunk(0x100100);
-        xSave.Write(&persist, 4);
-        xSave.End_Chunk();
-        xSave.Begin_Chunk(0x100101);
-        persist->Save(xSave);
-        xSave.End_Chunk();
-    }
+	virtual uint32 Chunk_ID () const
+	{
+		return I;
+	}
+	PersistClass* Load(ChunkLoadClass& xLoad) const
+	{
+		T *newobj = new T;
+		void *pointer;
+		xLoad.Open_Chunk();
+		xLoad.Read(&pointer,4);
+		xLoad.Close_Chunk();
+		xLoad.Open_Chunk();
+		newobj->Load(xLoad);
+		xLoad.Close_Chunk();
+		SaveLoadSystemClass::Register_Pointer(pointer,newobj);
+		return newobj;
+	}
+	void Save(ChunkSaveClass& xSave, PersistClass* persist) const
+	{
+		xSave.Begin_Chunk(0x100100);
+		xSave.Write(&persist,4);
+		xSave.End_Chunk();
+		xSave.Begin_Chunk(0x100101);
+		persist->Save(xSave);
+		xSave.End_Chunk();
+	}
 };
 
 

@@ -15,32 +15,24 @@
 #include "VehicleFactoryGameObjDef.h"
 
 
-class WarFactoryGameObjDef : public VehicleFactoryGameObjDef {
+class WarFactoryGameObjDef : public VehicleFactoryGameObjDef
+{
 public:
-    friend class WarFactoryGameObj;
-
-    WarFactoryGameObjDef(void);
-
-    ~WarFactoryGameObjDef(void);
-
-    uint32 Get_Class_ID(void) const;
-
-    PersistClass *Create(void) const;
-
-    bool Save(ChunkSaveClass &csave);
-
-    bool Load(ChunkLoadClass &cload);
-
-    const PersistFactoryClass &Get_Factory(void) const;
-
+	friend class WarFactoryGameObj;
+	WarFactoryGameObjDef (void);
+	~WarFactoryGameObjDef (void);
+	uint32								Get_Class_ID (void) const;
+	PersistClass *						Create (void) const;
+	bool									Save (ChunkSaveClass &csave);
+	bool									Load (ChunkLoadClass &cload);
+	const PersistFactoryClass &	Get_Factory (void) const;
 #ifdef DDBEDIT
-    virtual void                        Dump (FileClass &file);
+	virtual void                        Dump (FileClass &file);
 #endif
-    DECLARE_EDITABLE (WarFactoryGameObjDef, VehicleFactoryGameObjDef);
+	DECLARE_EDITABLE (WarFactoryGameObjDef, VehicleFactoryGameObjDef);
 protected:
-    void Load_Variables(ChunkLoadClass &cload);
-
-    friend class PresetDump;
+	void					Load_Variables (ChunkLoadClass &cload);
+	friend class PresetDump;
 }; // 168
 
 #endif

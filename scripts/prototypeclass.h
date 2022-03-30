@@ -11,33 +11,27 @@
 */
 #ifndef TT_INCLUDE__PROTOTYPECLASS_H
 #define TT_INCLUDE__PROTOTYPECLASS_H
-
 #include "engine_io.h"
-
 class RenderObjClass;
-
 class PrototypeClass {
 public:
-    PrototypeClass *NextHash;
-
-    PrototypeClass() : NextHash(0) {
-    }
-
-    virtual ~PrototypeClass() {
-    }
-
-    virtual const char *Get_Name() const = 0;
-
-    virtual int Get_Class_ID() const = 0;
-
-    virtual RenderObjClass *Create() = 0;
+	PrototypeClass* NextHash;
+	PrototypeClass() : NextHash(0)
+	{
+	}
+	virtual ~PrototypeClass()
+	{
+	}
+	virtual const char *Get_Name() const = 0;
+	virtual int Get_Class_ID() const = 0;
+	virtual RenderObjClass *Create() = 0;
 };
 
-class PrototypeLoaderClass {
+class PrototypeLoaderClass
+{
 public:
-    virtual int Chunk_Type() = 0;
-
-    virtual PrototypeClass *Load_W3D(ChunkLoadClass &chunk_load) = 0;
+	virtual int Chunk_Type() = 0;
+	virtual PrototypeClass* Load_W3D(ChunkLoadClass &chunk_load) = 0;
 };
 
 #endif

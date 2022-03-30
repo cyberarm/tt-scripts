@@ -13,25 +13,26 @@
 
 #include "engine_threading.h"
 
-void SetThreadName(DWORD dwThreadID, LPCSTR szThreadName) {
-    dwThreadID;
-    szThreadName;
+void SetThreadName(DWORD dwThreadID, LPCSTR szThreadName)
+{
+dwThreadID; 
+szThreadName;
 #ifdef DEBUG
-    THREADNAME_INFO info;
-    {
-        info.dwType = 0x1000;
-        info.szName = szThreadName;
-        info.dwThreadID = dwThreadID;
-        info.dwFlags = 0;
-    }
-    __try
-    {
-        RaiseException( 0x406D1388, 0, sizeof(info)/sizeof(DWORD), (DWORD*)&info );
-    }
+	THREADNAME_INFO info;
+	{
+		info.dwType = 0x1000;
+		info.szName = szThreadName;
+		info.dwThreadID = dwThreadID;
+		info.dwFlags = 0;
+	}
+	__try
+	{
+		RaiseException( 0x406D1388, 0, sizeof(info)/sizeof(DWORD), (DWORD*)&info );
+	}
 #pragma warning(suppress: 6312) //warning C6312: Possible infinite loop: use of the constant EXCEPTION_CONTINUE_EXECUTION in the exception-filter expression of a try-except
-    __except (EXCEPTION_CONTINUE_EXECUTION)
+	__except (EXCEPTION_CONTINUE_EXECUTION)
 #pragma warning(suppress: 6322) //warning C6322: empty _except block
-    {
-    }
+	{
+	}
 #endif
 }

@@ -10,14 +10,12 @@
 	Only the source code to the module(s) containing the licenced code has to be released.
 */
 #include "scripts.h"
-
-class Xpert_Teleport_Zone_Random : public ScriptImpClass {
+ 
+class Xpert_Teleport_Zone_Random : public ScriptImpClass
+{
 public:
-    int NextLocation;
-
-    Xpert_Teleport_Zone_Random();
-
-    void Entered(GameObject *Zone, GameObject *Enterer);
-
-    void Register_Auto_Save_Variables();
+	int NextLocation;
+	Xpert_Teleport_Zone_Random();
+	void Entered(GameObject* Zone, GameObject* Enterer);
+	void Register_Auto_Save_Variables();
 };

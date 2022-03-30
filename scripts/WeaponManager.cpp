@@ -21,18 +21,20 @@
 #include "WeaponManager.h"
 
 
-const WeaponDefinitionClass *WeaponManager::Find_Weapon_Definition(const char *name) {
-    return (const WeaponDefinitionClass *) DefinitionMgrClass::Find_Typed_Definition(name, 45057, true);
-}
 
-const WeaponDefinitionClass *WeaponManager::Find_Weapon_Definition(int id) {
-    return (const WeaponDefinitionClass *) DefinitionMgrClass::Find_Definition(id, true);
+const WeaponDefinitionClass *WeaponManager::Find_Weapon_Definition( const char *name )
+{
+	return (const WeaponDefinitionClass *)DefinitionMgrClass::Find_Typed_Definition( name, 45057, true);
 }
-
-const AmmoDefinitionClass *WeaponManager::Find_Ammo_Definition(const char *name) {
-    return (const AmmoDefinitionClass *) DefinitionMgrClass::Find_Typed_Definition(name, 45058, true);
+const WeaponDefinitionClass *WeaponManager::Find_Weapon_Definition( int id )
+{
+	return (const WeaponDefinitionClass *)DefinitionMgrClass::Find_Definition( id, true);
 }
-
-const AmmoDefinitionClass *WeaponManager::Find_Ammo_Definition(int id) {
-    return (const AmmoDefinitionClass *) DefinitionMgrClass::Find_Definition(id, true);
+const AmmoDefinitionClass *WeaponManager::Find_Ammo_Definition( const char *name )
+{
+	return (const AmmoDefinitionClass *)DefinitionMgrClass::Find_Typed_Definition( name, 45058, true);
+}
+const AmmoDefinitionClass *WeaponManager::Find_Ammo_Definition( int id )
+{
+	return (const AmmoDefinitionClass *)DefinitionMgrClass::Find_Definition( id, true);
 }

@@ -53,85 +53,94 @@ Generic / Utility scripts
 * \param AboveParam
 *   The parameter of the above custom message that will be sent to the object defined in the ID.
 */
-class MS_Health_Send_Custom : public ScriptImpClass {
-    float tresholdHP;
-    float currentHP;
-    bool underIgnored;
-    bool aboveIgnored;
-    bool underTriggered;
-    bool aboveTriggered;
-    bool triggerOnInstantDeath;
-    bool isPreventingSpam;
-    int underID;
-    int aboveID;
+class MS_Health_Send_Custom : public ScriptImpClass
+{
+	float tresholdHP;
+	float currentHP;
+	bool underIgnored;
+	bool aboveIgnored;
+	bool underTriggered;
+	bool aboveTriggered;
+	bool triggerOnInstantDeath;
+	bool isPreventingSpam;
+	int underID;
+	int aboveID;
 
-    void Created(GameObject *obj) override {
-        underIgnored = false;
-        aboveIgnored = false;
-        underTriggered = false;
-        isPreventingSpam = false;
+	void Created(GameObject* obj) override
+	{
+		underIgnored = false;
+		aboveIgnored = false;
+		underTriggered = false;
+		isPreventingSpam = false;
 
-        aboveTriggered = true;
-        tresholdHP = Get_Float_Parameter("Health");
-        underID = Get_Int_Parameter("UnderID");
-        aboveID = Get_Int_Parameter("AboveID");
-        triggerOnInstantDeath = Get_Int_Parameter("TriggerOnInstantDeath") == 1;
+		aboveTriggered = true;
+		tresholdHP = Get_Float_Parameter("Health");
+		underID = Get_Int_Parameter("UnderID");
+		aboveID = Get_Int_Parameter("AboveID");
+		triggerOnInstantDeath = Get_Int_Parameter("TriggerOnInstantDeath") == 1;
 
-        if (underID == -1) {
-            underIgnored = true;
-        }
+		if (underID == -1)
+		{
+			underIgnored = true;
+		}
 
-        if (aboveID == -1) {
-            aboveIgnored = true;
-        }
-        Do_Checks(obj);
-    }
+		if (aboveID == -1)
+		{
+			aboveIgnored = true;
+		}
+		Do_Checks(obj);
+	}
 
-    void Do_Checks(GameObject *obj) {
-        currentHP = Commands->Get_Health(obj);
-        if (currentHP <= 0 && !triggerOnInstantDeath) {
-            return;
-        }
+	void Do_Checks(GameObject *obj)
+	{
+		currentHP = Commands->Get_Health(obj);
+		if (currentHP <= 0 && !triggerOnInstantDeath)
+		{
+			return;
+		}
 
-        // Under
-        if (!underTriggered && currentHP < tresholdHP) {
-            underTriggered = true;
-            aboveTriggered = false;
-            if (!underIgnored) {
-                GameObject * targetUnder = underID ? Commands->Find_Object(underID) : obj;
-                Commands->Send_Custom_Event(obj, targetUnder, Get_Int_Parameter("UnderCustom"),
-                                            Get_Int_Parameter("UnderParam"), 0);
-            }
-        }
-            // Above
-        else if (!aboveTriggered && currentHP >= tresholdHP) {
-            aboveTriggered = true;
-            underTriggered = false;
-            if (!aboveIgnored) {
-                GameObject * targetAbove = aboveID ? Commands->Find_Object(aboveID) : obj;
-                Commands->Send_Custom_Event(obj, targetAbove, Get_Int_Parameter("AboveCustom"),
-                                            Get_Int_Parameter("AboveParam"), 0);
-            }
-        }
-    }
+		// Under
+		if (!underTriggered && currentHP < tresholdHP)
+		{
+			underTriggered = true;
+			aboveTriggered = false;
+			if (!underIgnored)
+			{
+				GameObject *targetUnder = underID ? Commands->Find_Object(underID) : obj;
+				Commands->Send_Custom_Event(obj, targetUnder, Get_Int_Parameter("UnderCustom"), Get_Int_Parameter("UnderParam"), 0);
+			}
+		}
+		// Above
+		else if (!aboveTriggered && currentHP >= tresholdHP)
+		{
+			aboveTriggered = true;
+			underTriggered = false;
+			if (!aboveIgnored)
+			{
+				GameObject *targetAbove = aboveID ? Commands->Find_Object(aboveID) : obj;
+				Commands->Send_Custom_Event(obj, targetAbove, Get_Int_Parameter("AboveCustom"), Get_Int_Parameter("AboveParam"), 0);
+			}
+		}
+	}
 
-    void Damaged(GameObject *obj, GameObject *damager, float amount) override {
-        if (!isPreventingSpam) {
-            Do_Checks(obj);
-            isPreventingSpam = true;
-            Commands->Start_Timer(obj, this, 1.0f, 0);
+	void Damaged(GameObject *obj, GameObject *damager, float amount) override
+	{
+		if (!isPreventingSpam)
+		{
+			Do_Checks(obj);
+			isPreventingSpam = true;
+			Commands->Start_Timer(obj, this, 1.0f, 0);
 
-        }
-    }
+		}
+	}
 
-    void Timer_Expired(GameObject *obj, int number) override {
-        Do_Checks(obj);
-        isPreventingSpam = false;
-    }
+	void Timer_Expired(GameObject* obj, int number) override
+	{
+		Do_Checks(obj);
+		isPreventingSpam = false;
+	}
 };
-
-REGISTER_SCRIPT(MS_Health_Send_Custom,
-                "Health=0.0:float,UnderID=-1:int,UnderCustom=0:int,UnderParam=0:int,AboveID=-1:int,AboveCustom=0:int,AboveParam=0:int,TriggerOnInstantDeath=0:int");
+REGISTER_SCRIPT(MS_Health_Send_Custom, "Health=0.0:float,UnderID=-1:int,UnderCustom=0:int,UnderParam=0:int,AboveID=-1:int,AboveCustom=0:int,AboveParam=0:int,TriggerOnInstantDeath=0:int");
 
 
 /*!
@@ -150,30 +159,31 @@ REGISTER_SCRIPT(MS_Health_Send_Custom,
 * \param Delay
 *   How many seconds to wait before the custom is sent to the object defined in the ID.
 */
-class MS_Healed_Send_Custom : public ScriptImpClass {
-    bool damaged;
+class MS_Healed_Send_Custom : public ScriptImpClass
+{
+	bool damaged;
 
-    void Created(GameObject *obj) override {
-        damaged = false;
-    }
+	void Created(GameObject* obj) override
+	{
+		damaged = false;
+	}
 
-    void Damaged(GameObject *obj, GameObject *damager, float amount) override {
-        if (Commands->Get_Health(obj) < Commands->Get_Max_Health(obj) ||
-            Commands->Get_Shield_Strength(obj) < Commands->Get_Max_Shield_Strength(obj)) {
-            damaged = true;
-        }
-        if (Commands->Get_Health(obj) == Commands->Get_Max_Health(obj) &&
-            Commands->Get_Shield_Strength(obj) == Commands->Get_Max_Shield_Strength(obj) && damaged) {
-            damaged = false;
-            int id = Get_Int_Parameter("ID");
-            GameObject * receiver = id ? Commands->Find_Object(id) : obj;
-            if (receiver)
-                Commands->Send_Custom_Event(obj, receiver, Get_Int_Parameter("Custom"), Get_Int_Parameter("Param"),
-                                            Get_Float_Parameter("Delay"));
-        }
-    }
+	void Damaged(GameObject *obj, GameObject *damager, float amount) override
+	{
+		if (Commands->Get_Health(obj) < Commands->Get_Max_Health(obj) || Commands->Get_Shield_Strength(obj) < Commands->Get_Max_Shield_Strength(obj))
+		{
+			damaged = true;
+		}
+		if (Commands->Get_Health(obj) == Commands->Get_Max_Health(obj) && Commands->Get_Shield_Strength(obj) == Commands->Get_Max_Shield_Strength(obj) && damaged)
+		{
+			damaged = false;
+			int id = Get_Int_Parameter("ID");
+			GameObject *receiver = id ? Commands->Find_Object(id) : obj;
+			if (receiver)
+				Commands->Send_Custom_Event(obj, receiver, Get_Int_Parameter("Custom"), Get_Int_Parameter("Param"), Get_Float_Parameter("Delay"));
+		}
+	}
 };
-
 REGISTER_SCRIPT(MS_Healed_Send_Custom, "ID=0:int,Custom=0:int,Param=0:int,Delay=0.0:float");
 
 
@@ -200,30 +210,35 @@ REGISTER_SCRIPT(MS_Healed_Send_Custom, "ID=0:int,Custom=0:int,Param=0:int,Delay=
 * \param DisableCustom
 *   The custom message that disables sending the custom.
 */
-class MS_Custom_Send_Custom_Switch : public ScriptImpClass {
-    bool enabled;
+class MS_Custom_Send_Custom_Switch : public ScriptImpClass
+{
+	bool enabled;
 
-    void Created(GameObject *obj) override {
-        enabled = false;
-    }
+	void Created(GameObject* obj) override
+	{
+		enabled = false;
+	}
 
-    void Custom(GameObject *obj, int type, int param, GameObject *sender) override {
-        if (type == Get_Int_Parameter("EnableCustom")) {
-            enabled = true;
-        } else if (type == Get_Int_Parameter("DisableCustom")) {
-            enabled = false;
-        } else if (enabled && type == Get_Int_Parameter("ReceiveCustom")) {
-            int id = Get_Int_Parameter("ID");
-            GameObject * receiver = id ? (id == -1 ? sender : Commands->Find_Object(id)) : obj;
-            if (receiver)
-                Commands->Send_Custom_Event(obj, receiver, Get_Int_Parameter("SendCustom"), Get_Int_Parameter("Param"),
-                                            Get_Float_Parameter("Delay"));
-        }
-    }
+	void Custom(GameObject *obj,int type,int param,GameObject *sender) override
+	{
+		if (type == Get_Int_Parameter("EnableCustom"))
+		{
+			enabled = true;
+		}
+		else if (type == Get_Int_Parameter("DisableCustom"))
+		{
+			enabled = false;
+		}
+		else if (enabled && type == Get_Int_Parameter("ReceiveCustom"))
+		{
+			int id = Get_Int_Parameter("ID");
+			GameObject *receiver = id ? (id == -1 ? sender : Commands->Find_Object(id)) : obj;
+			if (receiver)
+				Commands->Send_Custom_Event(obj, receiver, Get_Int_Parameter("SendCustom"), Get_Int_Parameter("Param"), Get_Float_Parameter("Delay"));
+		}
+	}
 };
-
-REGISTER_SCRIPT(MS_Custom_Send_Custom_Switch,
-                "ReceiveCustom=0:int,SendCustom=0:int,Param=0:int,Delay=0.0:float,ID=0:int,EnableCustom=0:int,DisableCustom=0:int");
+REGISTER_SCRIPT(MS_Custom_Send_Custom_Switch, "ReceiveCustom=0:int,SendCustom=0:int,Param=0:int,Delay=0.0:float,ID=0:int,EnableCustom=0:int,DisableCustom=0:int");
 
 
 /*!
@@ -238,14 +253,16 @@ REGISTER_SCRIPT(MS_Custom_Send_Custom_Switch,
 * \param Value
 *   The value to update the maximum health to.
 */
-class MS_Custom_Set_Max_Health : public ScriptImpClass {
-    void Custom(GameObject *obj, int type, int param, GameObject *sender) override {
-        if (type == Get_Int_Parameter("Custom")) {
-            Set_Max_Health_Without_Healing(obj, Get_Float_Parameter("Value"));
-        }
-    }
+class MS_Custom_Set_Max_Health : public ScriptImpClass
+{
+	void Custom(GameObject *obj,int type,int param,GameObject *sender) override
+	{
+		if (type == Get_Int_Parameter("Custom"))
+		{
+			Set_Max_Health_Without_Healing(obj,Get_Float_Parameter("Value"));
+		}
+	}
 };
-
 REGISTER_SCRIPT(MS_Custom_Set_Max_Health, "Custom=0:int,Value=0.0:float");
 
 
@@ -261,14 +278,16 @@ REGISTER_SCRIPT(MS_Custom_Set_Max_Health, "Custom=0:int,Value=0.0:float");
 * \param Value
 *   The value to update the maximum shield to.
 */
-class MS_Custom_Set_Max_Shield : public ScriptImpClass {
-    void Custom(GameObject *obj, int type, int param, GameObject *sender) override {
-        if (type == Get_Int_Parameter("Custom")) {
-            Set_Max_Shield_Strength_Without_Healing(obj, Get_Float_Parameter("Value"));
-        }
-    }
+class MS_Custom_Set_Max_Shield : public ScriptImpClass
+{
+	void Custom(GameObject *obj,int type,int param,GameObject *sender) override
+	{
+		if (type == Get_Int_Parameter("Custom"))
+		{
+			Set_Max_Shield_Strength_Without_Healing(obj,Get_Float_Parameter("Value"));
+		}
+	}
 };
-
 REGISTER_SCRIPT(MS_Custom_Set_Max_Shield, "Custom=0:int,Value=0.0:float");
 
 
@@ -311,24 +330,26 @@ REGISTER_SCRIPT(MS_Custom_Grant_Credits_Team, "Custom=0:int,Team=0:int,Amount=0:
 * \param Enable
 *   Enable or disable the spawner(s).
 */
-class MS_Custom_Toggle_Spawners : public ScriptImpClass {
-    void Created(GameObject *obj) override {
-        if (!Is_Valid_Preset(Get_Parameter("SpawnerName"))) {
-            Console_Output("[%d:%hs:%hs] Critical Error: '%hs' is not a valid preset. Destroying script...\n",
-                           Commands->Get_ID(obj), Commands->Get_Preset_Name(obj), this->Get_Name(),
-                           Get_Parameter("SpawnerName"));
-            Destroy_Script();
-            return;
-        }
-    }
+class MS_Custom_Toggle_Spawners : public ScriptImpClass
+{
+	void Created(GameObject* obj) override
+	{
+		if (!Is_Valid_Preset(Get_Parameter("SpawnerName")))
+		{
+			Console_Output("[%d:%hs:%hs] Critical Error: '%hs' is not a valid preset. Destroying script...\n", Commands->Get_ID(obj), Commands->Get_Preset_Name(obj), this->Get_Name(), Get_Parameter("SpawnerName"));
+			Destroy_Script();
+			return;
+		}
+	}
 
-    void Custom(GameObject *obj, int type, int param, GameObject *sender) override {
-        if (type == Get_Int_Parameter("Custom")) {
-            Enable_Spawners_By_Name(Get_Parameter("SpawnerName"), Get_Int_Parameter("Enable") == 1);
-        }
-    }
+	void Custom(GameObject *obj, int type, int param, GameObject *sender) override
+	{
+		if (type == Get_Int_Parameter("Custom"))
+		{
+			Enable_Spawners_By_Name(Get_Parameter("SpawnerName"), Get_Int_Parameter("Enable") == 1);
+		}
+	}
 };
-
 REGISTER_SCRIPT(MS_Custom_Toggle_Spawners, "Custom=0:int,SpawnerName:string,Enable=1:int");
 
 
@@ -511,44 +532,51 @@ REGISTER_SCRIPT(MS_Paradrop,
 *   The time duration for how long the object should wield the new skin and shield types.
 *	When set to 0, the new skin and shield types stay permanently, or until the script is removed from the object.
 */
-class MS_Switch_Skin_And_Shield_Timer : public ScriptImpClass {
-    const char *OriginalSkin;
-    const char *OriginalShield;
+class MS_Switch_Skin_And_Shield_Timer : public ScriptImpClass
+{
+	const char *OriginalSkin;
+	const char *OriginalShield;
 
-    void Created(GameObject *obj) override {
-        OriginalSkin = Get_Skin(obj);
-        OriginalShield = Get_Shield_Type(obj);
+	void Created(GameObject* obj) override
+	{
+		OriginalSkin = Get_Skin(obj);
+		OriginalShield = Get_Shield_Type(obj);
 
-        const char *ParamSkin = Get_Parameter("Skin");
-        const char *ParamShield = Get_Parameter("Shield");
+		const char *ParamSkin = Get_Parameter("Skin");
+		const char *ParamShield = Get_Parameter("Shield");
 
-        if (strcmp(ParamSkin, "null") != 0) {
-            Set_Skin(obj, ParamSkin);
-        }
-        if (strcmp(ParamShield, "null") != 0) {
-            Commands->Set_Shield_Type(obj, ParamShield);
-        }
+		if (strcmp(ParamSkin, "null") != 0)
+		{
+			Set_Skin(obj, ParamSkin);
+		}
+		if (strcmp(ParamShield, "null") != 0)
+		{
+			Commands->Set_Shield_Type(obj, ParamShield);
+		}
 
-        float time = Get_Float_Parameter("Time");
-        if (time != 0) {
-            Commands->Start_Timer(obj, this, time, 1);
-        }
+		float time = Get_Float_Parameter("Time");
+		if (time != 0)
+		{
+			Commands->Start_Timer(obj, this, time, 1);
+		}
 
-    }
+	}
 
-    void Timer_Expired(GameObject *obj, int number) override {
-        if (number == 1) {
-            Destroy_Script();
-        }
-    }
+	void Timer_Expired(GameObject* obj, int number) override
+	{
+		if (number == 1)
+		{
+			Destroy_Script();
+		}
+	}
 
-    void Detach(GameObject *obj) {
-        Set_Skin(obj, OriginalSkin);
-        Commands->Set_Shield_Type(obj, OriginalShield);
-        ScriptImpClass::Detach(obj);
-    }
+	void Detach(GameObject* obj)
+	{
+		Set_Skin(obj, OriginalSkin);
+		Commands->Set_Shield_Type(obj, OriginalShield);
+		ScriptImpClass::Detach(obj);
+	}
 };
-
 REGISTER_SCRIPT(MS_Switch_Skin_And_Shield_Timer, "Skin=null:string,Shield=null:string,Time=0.0:float");
 
 
@@ -565,42 +593,46 @@ REGISTER_SCRIPT(MS_Switch_Skin_And_Shield_Timer, "Skin=null:string,Shield=null:s
 * \param RemoveScriptsFromPassengers
 *   Should all scripts be removed from passengers or not. Can be useful e.g. if you don't want scripts to play death sounds.
 */
-class MS_Vehicle_Death_Kill_Passengers : public ScriptImpClass {
-    bool PassengersVisible;
-    bool RemoveScriptsFromPassengers;
+class MS_Vehicle_Death_Kill_Passengers : public ScriptImpClass
+{
+	bool PassengersVisible;
+	bool RemoveScriptsFromPassengers;
 
-    void Created(GameObject *obj) override {
-        PassengersVisible = true;
-        if (!obj->As_VehicleGameObj()) {
-            Console_Output(
-                    "[%d:%hs:%hs] Critical Error: This script is only compatible with vehicle game objects. Destroying script...\n",
-                    Commands->Get_ID(obj), Commands->Get_Preset_Name(obj), this->Get_Name());
-            Destroy_Script();
-            return;
-        }
-        PassengersVisible = Get_Int_Parameter("PassengersVisible") == 1;
-        RemoveScriptsFromPassengers = Get_Int_Parameter("RemoveScriptsFromPassengers") == 1;
-    }
+	void Created(GameObject* obj) override
+	{
+		PassengersVisible = true;
+		if (!obj->As_VehicleGameObj())
+		{
+			Console_Output("[%d:%hs:%hs] Critical Error: This script is only compatible with vehicle game objects. Destroying script...\n", Commands->Get_ID(obj), Commands->Get_Preset_Name(obj), this->Get_Name());
+			Destroy_Script();
+			return;
+		}
+		PassengersVisible = Get_Int_Parameter("PassengersVisible") == 1;
+		RemoveScriptsFromPassengers = Get_Int_Parameter("RemoveScriptsFromPassengers") == 1;
+	}
 
-    void Killed(GameObject *obj, GameObject *killer) override {
-        VehicleGameObj *vObj = obj->As_VehicleGameObj();
-        // Kill occupants
-        for (int i = 0; i < vObj->Get_Occupant_Count(); i++) {
-            SoldierGameObj *passenger = vObj->Get_Occupant(i);
-            if (passenger) {
-                if (!PassengersVisible)
-                    Commands->Set_Model(passenger, "S_A_HUMAN");
-                if (RemoveScriptsFromPassengers)
-                    Remove_All_Scripts(passenger);
+	void Killed(GameObject *obj, GameObject *killer) override
+	{
+		VehicleGameObj *vObj = obj->As_VehicleGameObj();
+		// Kill occupants
+		for (int i = 0; i < vObj->Get_Occupant_Count(); i++)
+		{
+			SoldierGameObj *passenger = vObj->Get_Occupant(i);
+			if (passenger)
+			{
+				if (!PassengersVisible)
+					Commands->Set_Model(passenger, "S_A_HUMAN");
+				if (RemoveScriptsFromPassengers)
+					Remove_All_Scripts(passenger);
 
-                Toggle_Fly_Mode(passenger);
-                Commands->Apply_Damage(passenger, 99999, "Death", killer);
-            }
-        }
-    }
+				Toggle_Fly_Mode(passenger);
+				Commands->Apply_Damage(passenger, 99999, "Death", killer);
+			}
+		}
+	}
 };
-
 REGISTER_SCRIPT(MS_Vehicle_Death_Kill_Passengers, "PassengersVisible=1:int,RemoveScriptsFromPassengers=0:int");
+
 
 
 /*!
@@ -624,21 +656,22 @@ REGISTER_SCRIPT(MS_Vehicle_Death_Kill_Passengers, "PassengersVisible=1:int,Remov
 * \param Team
 *   Which team should the custom sending trigger on. This is the team of the powerup collector.
 */
-class MS_Powerup_Send_Custom_Team : public ScriptImpClass {
-    void Custom(GameObject *obj, int type, int param, GameObject *sender) override {
-        if (Get_Object_Type(sender) != Get_Int_Parameter("Team"))
-            return;
+class MS_Powerup_Send_Custom_Team : public ScriptImpClass
+{
+	void Custom(GameObject *obj, int type, int param, GameObject *sender) override
+	{
+		if (Get_Object_Type(sender) != Get_Int_Parameter("Team"))
+			return;
 
-        if (type == CUSTOM_EVENT_POWERUP_GRANTED) {
-            int id = Get_Int_Parameter("ID");
-            GameObject * receiver = id ? (id == -1 ? sender : Commands->Find_Object(id)) : obj;
-            if (receiver)
-                Commands->Send_Custom_Event(obj, receiver, Get_Int_Parameter("Custom"), Get_Int_Parameter("Param"),
-                                            Get_Float_Parameter("Delay"));
-        }
-    }
+		if (type == CUSTOM_EVENT_POWERUP_GRANTED)
+		{
+			int id = Get_Int_Parameter("ID");
+			GameObject *receiver = id ? (id == -1 ? sender : Commands->Find_Object(id)) : obj;
+			if (receiver)
+				Commands->Send_Custom_Event(obj, receiver, Get_Int_Parameter("Custom"), Get_Int_Parameter("Param"), Get_Float_Parameter("Delay"));
+		}
+	}
 };
-
 REGISTER_SCRIPT(MS_Powerup_Send_Custom_Team, "ID=0:int,Custom=0:int,Param=0:int,Delay=0.0:float,Team=0:int");
 
 

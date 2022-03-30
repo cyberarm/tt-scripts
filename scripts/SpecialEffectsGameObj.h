@@ -11,43 +11,25 @@
 */
 #ifndef TT_INCLUDE_SPECIALEFFECTSGAMEOBJ_H
 #define TT_INCLUDE_SPECIALEFFECTSGAMEOBJ_H
-
 #include "PhysicalGameObj.h"
-
 class SpecialEffectsGameObjDef;
-
 class SpecialEffectsGameObj : public PhysicalGameObj {
 public:
-    SpecialEffectsGameObj();
-
-    ~SpecialEffectsGameObj();
-
-    const PersistFactoryClass &Get_Factory() const;
-
-    void Init();
-
-    void Init(const SpecialEffectsGameObjDef &);
-
-    SCRIPTS_API const SpecialEffectsGameObjDef
-    &
-
-    Get_Definition(void) const;
-
-    bool Save(ChunkSaveClass &csave);
-
-    bool Load(ChunkLoadClass &cload);
-
-    void Do_Effect();
-
-    void Think();
-
+	SpecialEffectsGameObj();
+	~SpecialEffectsGameObj();
+	const PersistFactoryClass &Get_Factory() const;
+	void Init();
+	void Init(const SpecialEffectsGameObjDef &);
+	SCRIPTS_API const SpecialEffectsGameObjDef & Get_Definition( void ) const ;
+	bool Save(ChunkSaveClass &csave);
+	bool Load(ChunkLoadClass &cload);
+	void Do_Effect();
+	void Think();
 private:
-    void Save_Variables(ChunkSaveClass &csave);
-
-    void Load_Variables(ChunkLoadClass &cload);
-
-    float TotalTime;
-    bool EffectRunning;
+	void Save_Variables(ChunkSaveClass &csave);
+	void Load_Variables(ChunkLoadClass &cload);
+	float TotalTime;
+	bool EffectRunning;
 };
 
 #endif

@@ -23,33 +23,30 @@
 * infantry unit is automatically transitioned into it. Pressing the keyhook again will cause the
 * infantry unit to exit the vehicle, which will then be destroyed.
 */
-class dp88_AR_Rocketeer : public JFW_Key_Hook_Base {
+class dp88_AR_Rocketeer : public JFW_Key_Hook_Base
+{
 public:
-    dp88_AR_Rocketeer() : m_nSoldierID(0) {};
+  dp88_AR_Rocketeer() : m_nSoldierID(0) {};
 
 protected:
-    void Created(GameObject *pObj);
+  void Created ( GameObject* pObj );
+  void Destroyed (GameObject* pObj);
+  void Custom ( GameObject* pObj, int type, int param, GameObject* pSender );
+  void Timer_Expired ( GameObject* pObj, int number );
+  void KeyHook();
 
-    void Destroyed(GameObject *pObj);
+  void Toggle_Flight_Mode ( class SoldierGameObj* pSoldier, bool bState );
 
-    void Custom(GameObject *pObj, int type, int param, GameObject *pSender);
+  int m_nSoldierID;     //!< ID of the infantry unit, since KeyHook doesn't pass an object pointer
+  int m_nVehicleID;     //!< ID of the flight vehicle, if it is currently in use
+  time_t m_lastDeploy;  //!< Timestamp of the last deploy event (to restrict usage)
+  bool m_bCanDrive;     //!< Cached value of SoldierGameObj->Can_Drive_Vehicles()
 
-    void Timer_Expired(GameObject *pObj, int number);
-
-    void KeyHook();
-
-    void Toggle_Flight_Mode(class SoldierGameObj *pSoldier, bool bState);
-
-    int m_nSoldierID;     //!< ID of the infantry unit, since KeyHook doesn't pass an object pointer
-    int m_nVehicleID;     //!< ID of the flight vehicle, if it is currently in use
-    time_t m_lastDeploy;  //!< Timestamp of the last deploy event (to restrict usage)
-    bool m_bCanDrive;     //!< Cached value of SoldierGameObj->Can_Drive_Vehicles()
-
-    /*! \name Cached Script Parameters */
-    /*! @{ */
-    int m_minWalkTime;
-    int m_minFlightTime;
-    /*! @} */
+  /*! \name Cached Script Parameters */
+  /*! @{ */
+  int m_minWalkTime;
+  int m_minFlightTime;
+  /*! @} */
 };
 
 
@@ -71,78 +68,77 @@ Mirage Tank Script
 *   The length of time, in seconds, before the mirage disguise becomes active when the tank is not
 *   moving, firing or taking damage
 */
-class dp88_AR_MirageTank : public ScriptImpClass {
-    void Created(GameObject *obj);
+class dp88_AR_MirageTank : public ScriptImpClass
+{
+	void Created( GameObject *obj );
+	void Damaged( GameObject *obj, GameObject *damager, float amount );
+	void Killed( GameObject *obj, GameObject *killer );
+	void Custom( GameObject *obj, int type, int param, GameObject *sender );
+	void Timer_Expired( GameObject *obj, int number );
 
-    void Damaged(GameObject *obj, GameObject *damager, float amount);
+	void setHidden ( GameObject *obj, bool hidden );
 
-    void Killed(GameObject *obj, GameObject *killer);
+	int m_driverID;         //!< ID of our driver
+  int m_mirageID;         //!< ID of the mirage disguising us
+  int m_controllerID;     //!< ID of the game controller
 
-    void Custom(GameObject *obj, int type, int param, GameObject *sender);
-
-    void Timer_Expired(GameObject *obj, int number);
-
-    void setHidden(GameObject *obj, bool hidden);
-
-    int m_driverID;         //!< ID of our driver
-    int m_mirageID;         //!< ID of the mirage disguising us
-    int m_controllerID;     //!< ID of the game controller
-
-    /*! \name Cached Script Parameters */
-    /*! @{ */
-    int m_delay;                //!< Delay before the mirage disguise activates
-    time_t m_lastActivity;      //!< The time of the last activity that would interrupt mirage mode (moving, shooting, damage)
-    /*! @} */
+  /*! \name Cached Script Parameters */
+  /*! @{ */
+  int m_delay;                //!< Delay before the mirage disguise activates
+  time_t m_lastActivity;      //!< The time of the last activity that would interrupt mirage mode (moving, shooting, damage)
+  /*! @} */
 };
+
+
 
 
 /*------------------------
 IFV Scripts
 --------------------------*/
 
-class dp88_AR_IFV : public JFW_Key_Hook_Base {
-    void Created(GameObject *obj);
+class dp88_AR_IFV : public JFW_Key_Hook_Base
+{
+	void Created ( GameObject* obj );
+	void Destroyed ( GameObject *obj );
+	void Custom ( GameObject* obj, int type, int param, GameObject* sender );
+	void Timer_Expired ( GameObject* obj, int number );
+	void KeyHook();
 
-    void Destroyed(GameObject *obj);
+	/* General variables. ID of this object, ID of the pilot, current
+	veterancy level. */
+	int objectID, pilotID, veterancyLevel;
 
-    void Custom(GameObject *obj, int type, int param, GameObject *sender);
+	/* Flags to indicate deployment status and if it's currently deploying */
+	bool isDeployed, isDeploying;
 
-    void Timer_Expired(GameObject *obj, int number);
-
-    void KeyHook();
-
-    /* General variables. ID of this object, ID of the pilot, current
-    veterancy level. */
-    int objectID, pilotID, veterancyLevel;
-
-    /* Flags to indicate deployment status and if it's currently deploying */
-    bool isDeployed, isDeploying;
-
-    int deployedAnimFrame;                    // Animation frame for deployed mode
-    int deployedRookieWeaponPowerupId;        // Powerup ID for rookie deployed weapon
-    int deployedVeteranWeaponPowerupId;        // Powerup ID for veteran deployed weapon
-    int deployedEliteWeaponPowerupId;        // Powerup ID for elite deployed weapon
+	int deployedAnimFrame;					// Animation frame for deployed mode
+	int deployedRookieWeaponPowerupId;		// Powerup ID for rookie deployed weapon
+	int deployedVeteranWeaponPowerupId;		// Powerup ID for veteran deployed weapon
+	int deployedEliteWeaponPowerupId;		// Powerup ID for elite deployed weapon
 
 
-    char defaultWeapon[64];                // Original default model
-    char currentDefaultWeapon[64];        // Current default model
-    char currentWeapon[64];                // Current model
+	char defaultWeapon[64];				// Original default model
+	char currentDefaultWeapon[64];		// Current default model
+	char currentWeapon[64];				// Current model
 
+	
 
+	// Deploy / undeploy functions
+	void deploy();
+	void undeploy();
 
-    // Deploy / undeploy functions
-    void deploy();
-
-    void undeploy();
-
-    bool nullWeaponGranted; // test to see if this works around stupid FDS bug
+	bool nullWeaponGranted; // test to see if this works around stupid FDS bug
 };
 
 
 // IFV driver script
-class dp88_AR_IFVDriver : public ScriptImpClass {
-    void Custom(GameObject *obj, int type, int param, GameObject *sender);
+class dp88_AR_IFVDriver : public ScriptImpClass
+{
+	void Custom ( GameObject* obj, int type, int param, GameObject* sender );
 };
+
+
+
 
 
 /*!
@@ -255,48 +251,45 @@ class dp88_AR_IFVDriver : public ScriptImpClass {
 *   Never leave the Debug parameter enabled when releasing your mod, it will clog up everyones
 *   machines with useless text files everywhere... people usually don't like that :D
 */
-class dp88_AR_Tesla_Coil : public dp88_AI_ChargedTurret {
-    /* -----
-    Events
-    ----- */
+class dp88_AR_Tesla_Coil : public dp88_AI_ChargedTurret
+{
+  /* -----
+  Events
+  ----- */
 
-    void Created(GameObject *obj);
+  void Created ( GameObject *obj );
+  void Damaged ( GameObject *obj, GameObject *damager, float amount );
+  void Timer_Expired ( GameObject *obj, int number );
 
-    void Damaged(GameObject *obj, GameObject *damager, float amount);
+  // Custom AI initialisation script overloads
+  virtual void Init( GameObject *obj );
+  virtual void loadSettings( GameObject *obj, bool loadSecondaryFireSettings = true, bool loadBuildingTargetSettings = false );
 
-    void Timer_Expired(GameObject *obj, int number);
+  // Overload the checkPowerState function to return true when sufficient
+  // charge level exists to provide power
+  virtual bool checkPowerState(GameObject* obj);
 
-    // Custom AI initialisation script overloads
-    virtual void Init(GameObject *obj);
+  private:
+  /* -----
+  Functions
+  ----- */
 
-    virtual void
-    loadSettings(GameObject *obj, bool loadSecondaryFireSettings = true, bool loadBuildingTargetSettings = false);
+  void setSuperchargedState(GameObject* obj, bool state);
 
-    // Overload the checkPowerState function to return true when sufficient
-    // charge level exists to provide power
-    virtual bool checkPowerState(GameObject *obj);
+  /* -----
+  Variables
+  ----- */
 
-private:
-    /* -----
-    Functions
-    ----- */
+  int m_chargeLevel;
+  bool m_isSupercharged;
+  StringClass m_defaultWeapon;
+  int m_defaultWeaponRange;
+  StringClass m_superchargedWeapon;
+  int m_superchargedWeaponRange;
 
-    void setSuperchargedState(GameObject *obj, bool state);
-
-    /* -----
-    Variables
-    ----- */
-
-    int m_chargeLevel;
-    bool m_isSupercharged;
-    StringClass m_defaultWeapon;
-    int m_defaultWeaponRange;
-    StringClass m_superchargedWeapon;
-    int m_superchargedWeaponRange;
-
-    // Settings
-    unsigned int m_chargeWarheadID;
-    int m_chargeDuration;
-    int m_chargesPowerOn;
-    int m_chargesSupercharge;
+  // Settings
+  unsigned int m_chargeWarheadID;
+  int m_chargeDuration;
+  int m_chargesPowerOn;
+  int m_chargesSupercharge;
 };

@@ -10,127 +10,90 @@
 	Only the source code to the module(s) containing the licenced code has to be released.
 */
 #pragma once
-
 /******************Missle Silo Script Declarations*******************/
 
 class RA_Missile_Silo : public ScriptImpClass {
-    bool alive;
-    bool launching;
-
-    void Created(GameObject *obj);
-
-    void Custom(GameObject *obj, int type, int param, GameObject *sender);
-
-    void Killed(GameObject *obj, GameObject *killer);
-
-    void Timer_Expired(GameObject *obj, int number);
-
-public:
-    void Register_Auto_Save_Variables();
+	bool alive; 
+	bool launching;
+	void Created(GameObject *obj);
+	void Custom(GameObject *obj, int type, int param, GameObject *sender);
+	void Killed(GameObject *obj, GameObject *killer);
+	void Timer_Expired(GameObject *obj, int number);
+	public: void Register_Auto_Save_Variables();
 };
 
 class RA_Missile_Manager : public ScriptImpClass {
-    void Created(GameObject *obj);
-
-    void Custom(GameObject *obj, int type, int param, GameObject *sender);
+	void Created(GameObject *obj);
+	void Custom(GameObject *obj, int type, int param, GameObject *sender);
 };
 
 class RA_Silo_Animation : public ScriptImpClass {
-    void Created(GameObject *obj);
-
-    void Timer_Expired(GameObject *obj, int number);
+	void Created(GameObject *obj);
+	void Timer_Expired(GameObject *obj, int number);
 };
 
 class RA_ABomb_Terminal : public ScriptImpClass {
-    bool active;
-
-    void Created(GameObject *obj);
-
-    void Custom(GameObject *obj, int type, int param, GameObject *sender);
-
-    void Poked(GameObject *obj, GameObject *poker);
-
-    void Timer_Expired(GameObject *obj, int number);
-
-public:
-    void Register_Auto_Save_Variables();
+	bool active;
+	void Created(GameObject *obj);
+	void Custom(GameObject *obj, int type, int param, GameObject *sender);
+	void Poked(GameObject *obj, GameObject *poker);
+	void Timer_Expired(GameObject *obj, int number);
+	public: void Register_Auto_Save_Variables();
 };
 
 class RA_ABomb_Beacon : public ScriptImpClass {
-    void Created(GameObject *obj);
+	void Created(GameObject *obj);
 };
 
 /****************Weather Change Script Declarations******************/
 
 class RA_CanyonRiver_Weather : public ScriptImpClass {
-    void Custom(GameObject *obj, int type, int param, GameObject *sender);
-
-    void Timer_Expired(GameObject *obj, int number);
+	void Custom(GameObject *obj,int type,int param,GameObject * sender);
+	void Timer_Expired(GameObject *obj, int number);
 };
 
 class RA_Metro_Weather : public ScriptImpClass {
-    bool max;
-
-    void Created(GameObject *obj);
-
-    void Timer_Expired(GameObject *obj, int number);
-
-public:
-    void Register_Auto_Save_Variables();
+	bool max;
+	void Created(GameObject *obj);
+	void Timer_Expired(GameObject *obj, int number);
+	public: void Register_Auto_Save_Variables();
 };
 
 /******************Underwater Script Declarations********************/
 
 class RA_Underwater_OnCustom : public ScriptImpClass {
-    bool allowed;
-    bool underwater;
-    bool driving;
-
-    void Created(GameObject *obj);
-
-    void Custom(GameObject *obj, int type, int param, GameObject *sender);
-
-public:
-    void Register_Auto_Save_Variables();
+	bool allowed;
+	bool underwater;
+	bool driving; 
+	void Created(GameObject *obj);
+	void Custom(GameObject *obj, int type, int param, GameObject *sender);
+	public: void Register_Auto_Save_Variables();
 };
 
 class RA_Underwater_Zone : public ScriptImpClass {
-    void Entered(GameObject *obj, GameObject *enter);
-
-    void Exited(GameObject *obj, GameObject *exit);
+	void Entered(GameObject *obj,GameObject * enter); 
+	void Exited(GameObject *obj,GameObject * exit);
 };
 
 /*****************Miscellaneous Script Declarations******************/
 
 class RA_Submarine : public ScriptImpClass {
-    int driverID;
-    bool underwater;
-    bool occupied;
-    int blockers[4];
-
-    void Created(GameObject *obj);
-
-    void Custom(GameObject *obj, int type, int param, GameObject *sender);
-
-    void Killed(GameObject *obj, GameObject *killer);
-
-    void Destroyed(GameObject *obj);
-
-public:
-    void Register_Auto_Save_Variables();
+	int driverID;
+	bool underwater;
+	bool occupied;
+	int blockers[4];
+	void Created(GameObject *obj);
+	void Custom(GameObject *obj, int type, int param, GameObject *sender);
+	void Killed(GameObject *obj, GameObject *killer);
+	void Destroyed(GameObject *obj);
+	public: void Register_Auto_Save_Variables();
 };
 
 class RA_Vehicle : public ScriptImpClass {
-    int IDarray[6];
-
-    void Created(GameObject *obj);
-
-    void Custom(GameObject *obj, int type, int param, GameObject *sender);
-
-    void Destroyed(GameObject *obj);
-
-    void Killed(GameObject *obj, GameObject *killer);
-
-public:
-    void Register_Auto_Save_Variables();
+	int IDarray[6];
+	void Created(GameObject * obj);
+	void Custom(GameObject * obj,int type,int param,GameObject * sender);
+	void Destroyed(GameObject *obj);
+	void Killed(GameObject * obj,GameObject * killer);
+	public: void Register_Auto_Save_Variables();
 };

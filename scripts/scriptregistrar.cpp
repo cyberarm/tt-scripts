@@ -12,78 +12,98 @@
 #include "general.h"
 
 #include "scripts.h"
-
 ScriptFactory *ScriptRegistrar::mScriptFactories = NULL;
 
-void ScriptRegistrar::UnregisterScript(ScriptFactory *factory) {
-    ScriptFactory * previous = NULL;
-    ScriptFactory * current = mScriptFactories;
-    while (current != NULL) {
-        ScriptFactory * next = current->GetNext();
-        if (current == factory) {
-            if (previous == NULL) {
-                mScriptFactories = next;
-            } else {
-                previous->SetNext(next);
-            }
-        }
-        previous = current;
-        current = next;
-    }
+void ScriptRegistrar::UnregisterScript(ScriptFactory* factory)
+{
+	ScriptFactory* previous = NULL;
+	ScriptFactory* current = mScriptFactories;
+	while (current != NULL)
+	{
+		ScriptFactory* next = current->GetNext();
+		if (current == factory)
+		{
+			if (previous == NULL)
+			{
+				mScriptFactories = next;
+			}
+			else
+			{
+				previous->SetNext(next);
+			}
+		}
+		previous = current;
+		current = next;
+	}
 }
 
-void ScriptRegistrar::RegisterScript(ScriptFactory *factory) {
-    if (factory != NULL) {
-        factory->SetNext(mScriptFactories);
-        mScriptFactories = factory;
-    }
+void ScriptRegistrar::RegisterScript(ScriptFactory* factory)
+{
+	if (factory != NULL)
+	{
+		factory->SetNext(mScriptFactories);
+		mScriptFactories = factory;
+	}
 }
 
-ScriptFactory *ScriptRegistrar::GetScriptFactory(const char *name) {
-    if (name != NULL) {
-        ScriptFactory * factory = mScriptFactories;
-        while (factory != NULL) {
-            if (_stricmp(factory->GetName(), name) == 0) {
-                return factory;
-            }
-            factory = factory->GetNext();
-        }
-    }
-    return NULL;
+ScriptFactory* ScriptRegistrar::GetScriptFactory(const char* name)
+{
+	if (name != NULL)
+	{
+		ScriptFactory* factory = mScriptFactories;
+		while (factory != NULL)
+		{
+			if (_stricmp(factory->GetName(), name) == 0)
+			{
+				return factory;
+			}
+			factory = factory->GetNext();
+		}
+	}
+	return NULL;
 }
 
-ScriptFactory *ScriptRegistrar::GetScriptFactory(int index) {
-    int count = 0;
-    ScriptFactory * factory = mScriptFactories;
-    while (factory != NULL) {
-        if (count == index) {
-            return factory;
-        }
-        count++;
-        factory = factory->GetNext();
-    }
-    return NULL;
+ScriptFactory* ScriptRegistrar::GetScriptFactory(int index)
+{
+	int count = 0;
+	ScriptFactory* factory = mScriptFactories;
+	while (factory != NULL)
+	{
+		if (count == index)
+		{
+			return factory;
+		}
+		count++;
+		factory = factory->GetNext();
+	}
+	return NULL;
 }
 
-int ScriptRegistrar::Count() {
-    int count = 0;
-    ScriptFactory * factory = mScriptFactories;
-    while (factory != NULL) {
-        count++;
-        factory = factory->GetNext();
-    }
-    return count;
+int ScriptRegistrar::Count()
+{
+	int count = 0;
+	ScriptFactory* factory = mScriptFactories;
+	while (factory != NULL)
+	{
+		count++;
+		factory = factory->GetNext();
+	}
+	return count;
 }
 
-ScriptImpClass *ScriptRegistrar::CreateScript(const char *scriptName) {
-    if (scriptName != NULL) {
-        ScriptFactory * factory = mScriptFactories;
-        while (factory != NULL) {
-            if (_stricmp(factory->GetName(), scriptName) == 0) {
-                return factory->Create();
-            }
-            factory = factory->GetNext();
-        }
-    }
-    return NULL;
+ScriptImpClass* ScriptRegistrar::CreateScript(const char* scriptName)
+{
+	if (scriptName != NULL)
+	{
+		ScriptFactory* factory = mScriptFactories;
+		while (factory != NULL)
+		{
+			if (_stricmp(factory->GetName(), scriptName) == 0)
+			{
+				return factory->Create();
+			}
+			factory = factory->GetNext();
+		}
+	}
+	return NULL;
 }

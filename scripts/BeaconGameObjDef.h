@@ -11,61 +11,47 @@
 */
 #ifndef TT_INCLUDE_BEACONGAMEOBJDEF_H
 #define TT_INCLUDE_BEACONGAMEOBJDEF_H
-
 #include "SimpleGameObjDef.h"
-
 class BeaconGameObjDef :
-        public SimpleGameObjDef {
+	public SimpleGameObjDef
+{
 public:
-    BeaconGameObjDef();
-
-    ~BeaconGameObjDef() {};
-
-    const PersistFactoryClass &Get_Factory() const;
-
-    bool Save(ChunkSaveClass &chunks);
-
-    bool Load(ChunkLoadClass &chunks);
-
-    bool Load_Variables(ChunkLoadClass &chunks);
-
-    uint32 Get_Class_ID() const;
-
-    PersistClass *Create() const;
-
-    int Is_Nuke() const { return IsNuke; }
-
-    bool Requires_Silo() const { return RequiresSilo; }
-
-    int Get_Explosion_Obj_Def() const { return ExplosionObjDef; }
-
+	BeaconGameObjDef();
+	~BeaconGameObjDef() {};
+	const PersistFactoryClass& Get_Factory() const;
+	bool Save(ChunkSaveClass& chunks);
+	bool Load(ChunkLoadClass& chunks);
+	bool Load_Variables(ChunkLoadClass& chunks);
+	uint32 Get_Class_ID() const;
+	PersistClass* Create() const;
+	int Is_Nuke() const {return IsNuke;}
+	bool Requires_Silo() const {return RequiresSilo;}
+	int Get_Explosion_Obj_Def() const {return ExplosionObjDef;}
 #ifdef DDBEDIT
-    virtual void                        Dump (FileClass &file);
+	virtual void                        Dump (FileClass &file);
 #endif
-    DECLARE_EDITABLE(BeaconGameObjDef, SimpleGameObjDef);
+	DECLARE_EDITABLE( BeaconGameObjDef, SimpleGameObjDef );
 private:
-    float BroadcastToAllTime; // 00AC
-    float ArmTime; // 00B0
-    float DisarmTime; // 00B4
-    float PreDetonateCinematicDelay; // 00B8
-    float DetonateTime; // 00BC
-    float PostDetonateTime; // 00C0
-    int ArmedSoundDefID; // 00C4
-    int DisarmingTextID; // 00C8
-    int DisarmedTextID; // 00CC
-    int ArmingTextID; // 00D0
-    int ArmingInterruptedTextID; // 00D4
-    int DisarmingInterruptedTextID; // 00D8
-    int PreDetonateCinematicObjDef; // 00DC
-    int PostDetonateCinematicObjDef; // 00E0
-    int ExplosionObjDef; // 00E4
-    int IsNuke; // 00E8
-    StringClass ArmingAnimationName; // 00EC
-    bool RequiresSilo;
-
-    friend class BeaconGameObj;
-
-    friend class PresetDump;
+	float BroadcastToAllTime; // 00AC
+	float ArmTime; // 00B0
+	float DisarmTime; // 00B4
+	float PreDetonateCinematicDelay; // 00B8
+	float DetonateTime; // 00BC
+	float PostDetonateTime; // 00C0
+	int ArmedSoundDefID; // 00C4
+	int DisarmingTextID; // 00C8
+	int DisarmedTextID; // 00CC
+	int ArmingTextID; // 00D0
+	int ArmingInterruptedTextID; // 00D4
+	int DisarmingInterruptedTextID; // 00D8
+	int PreDetonateCinematicObjDef; // 00DC
+	int PostDetonateCinematicObjDef; // 00E0
+	int ExplosionObjDef; // 00E4
+	int IsNuke; // 00E8
+	StringClass ArmingAnimationName; // 00EC
+	bool RequiresSilo;
+	friend class BeaconGameObj;
+	friend class PresetDump;
 }; // 00F0
 
 #endif

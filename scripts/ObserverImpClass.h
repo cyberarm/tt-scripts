@@ -20,45 +20,31 @@
 * is the dummy implementations of all the abstract methods and the Get_Name() implementation so
 * the observer class can simply implement the events it is interested in.
 */
-class ObserverImpClass : public GameObjObserverClass {
+class ObserverImpClass : public GameObjObserverClass
+{
 public:
-    ObserverImpClass(StringClass name) { m_name = name; }
-
-    virtual const char *Get_Name() { return m_name.Peek_Buffer(); }
+  ObserverImpClass(StringClass name) { m_name = name; }
+  virtual const char* Get_Name() { return m_name.Peek_Buffer(); }
 
 protected:
-    // Provide dummy implementations of all GameObjObserverClass abstracts such that derived classes
-    // are not forced to provide their own stubs (that's basically the whole point of this class)
-    virtual void Attach(GameObject *obj) {};
-
-    virtual void Detach(GameObject *obj) {};
-
-    virtual void Animation_Complete(GameObject *obj, const char *animation_name) {};
-
-    virtual void Created(GameObject *obj) {};
-
-    virtual void Destroyed(GameObject *obj) {};
-
-    virtual void Killed(GameObject *obj, GameObject *pKiller) {};
-
-    virtual void Damaged(GameObject *obj, GameObject *pDamager, float amount) {};
-
-    virtual void Custom(GameObject *obj, int type, int param, GameObject *pSender) {};
-
-    virtual void Sound_Heard(GameObject *obj, const CombatSound &sound) {};
-
-    virtual void Enemy_Seen(GameObject *obj, GameObject *pEnemy) {};
-
-    virtual void Action_Complete(GameObject *obj, int action_id, ActionCompleteReason complete_reason) {};
-
-    virtual void Timer_Expired(GameObject *obj, int number) {};
-
-    virtual void Poked(GameObject *obj, GameObject *pPoker) {};
-
-    virtual void Entered(GameObject *obj, GameObject *pEnterer) {};
-
-    virtual void Exited(GameObject *obj, GameObject *pExiter) {};
+  // Provide dummy implementations of all GameObjObserverClass abstracts such that derived classes
+  // are not forced to provide their own stubs (that's basically the whole point of this class)
+  virtual void Attach(GameObject* obj) {};
+  virtual void Detach(GameObject* obj) {};
+  virtual void Animation_Complete(GameObject *obj, const char *animation_name) {};
+  virtual void Created(GameObject* obj) {};
+  virtual void Destroyed(GameObject* obj) {};
+  virtual void Killed(GameObject* obj,GameObject* pKiller) {};
+  virtual void Damaged(GameObject* obj,GameObject* pDamager,float amount) {};
+  virtual void Custom(GameObject* obj,int type,int param,GameObject* pSender) {};
+  virtual void Sound_Heard(GameObject* obj,const CombatSound & sound) {};
+  virtual void Enemy_Seen(GameObject* obj,GameObject* pEnemy) {};
+  virtual void Action_Complete(GameObject* obj,int action_id,ActionCompleteReason complete_reason) {};
+  virtual void Timer_Expired(GameObject* obj,int number) {};
+  virtual void Poked(GameObject* obj,GameObject* pPoker) {};
+  virtual void Entered(GameObject* obj, GameObject* pEnterer) {};
+  virtual void Exited(GameObject* obj, GameObject* pExiter) {};
 
 private:
-    StringClass m_name;
+  StringClass m_name;
 };

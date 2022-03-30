@@ -11,21 +11,17 @@
 */
 #ifndef TT_INCLUDE_BASEGAMEOBJDEF_H
 #define TT_INCLUDE_BASEGAMEOBJDEF_H
-
 #include "Definition.h"
 #include "scripts.h"
-
-class BaseGameObjDef : public DefinitionClass {
+class BaseGameObjDef : public DefinitionClass
+{
 public:
-    virtual bool Save(ChunkSaveClass &csave);
-
-    virtual bool Load(ChunkLoadClass &cload);
-
+	virtual bool								Save( ChunkSaveClass &csave );
+	virtual bool								Load( ChunkLoadClass &cload );
 #ifdef DDBEDIT
-    virtual void                        Dump (FileClass &file);
+	virtual void                        Dump (FileClass &file);
 #endif
-
-    friend class PresetDump;
+	friend class PresetDump;
 }; // 001C
 
 #endif

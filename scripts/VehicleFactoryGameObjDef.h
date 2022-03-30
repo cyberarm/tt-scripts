@@ -15,45 +15,32 @@
 #include "BuildingGameObjDef.h"
 
 
-class VehicleFactoryGameObjDef : public BuildingGameObjDef {
+class VehicleFactoryGameObjDef : public BuildingGameObjDef
+{
 public:
-    friend class VehicleFactoryGameObj;
-
-    VehicleFactoryGameObjDef(void);
-
-    ~VehicleFactoryGameObjDef(void);
-
-    uint32 Get_Class_ID(void) const;
-
-    PersistClass *Create(void) const;
-
-    bool Save(ChunkSaveClass &csave);
-
-    bool Load(ChunkLoadClass &cload);
-
-    const PersistFactoryClass &Get_Factory(void) const;
-
-    int Get_Pad_Clearing_Warhead(void) const { return PadClearingWarhead; }
-
-    float Get_Total_Building_Time(void) const { return TotalBuildingTime; }
-
-    bool Get_Flying_Waypaths_Enabled() const { return EnableFlyingWaypaths; }
-
-    bool Get_Build_Ground_Only() const { return BuildGroundOnly; }
-
+	friend class VehicleFactoryGameObj;
+	VehicleFactoryGameObjDef (void);
+	~VehicleFactoryGameObjDef (void);
+	uint32								Get_Class_ID (void) const;
+	PersistClass *						Create (void) const;
+	bool									Save (ChunkSaveClass &csave);
+	bool									Load (ChunkLoadClass &cload);
+	const PersistFactoryClass &	Get_Factory (void) const;
+	int									Get_Pad_Clearing_Warhead(void) const { return PadClearingWarhead; }
+	float									Get_Total_Building_Time(void) const { return TotalBuildingTime; }
+	bool									Get_Flying_Waypaths_Enabled() const { return EnableFlyingWaypaths; }
+	bool									Get_Build_Ground_Only() const { return BuildGroundOnly; }
 #ifdef DDBEDIT
-    virtual void                        Dump (FileClass &file);
+	virtual void                        Dump (FileClass &file);
 #endif
-    DECLARE_EDITABLE (VehicleFactoryGameObjDef, BuildingGameObjDef);
+	DECLARE_EDITABLE (VehicleFactoryGameObjDef, BuildingGameObjDef);
 protected:
-    void Load_Variables(ChunkLoadClass &cload);
-
-    int PadClearingWarhead;
-    float TotalBuildingTime;
-    bool EnableFlyingWaypaths;
-    bool BuildGroundOnly;
-
-    friend class PresetDump;
+	void					Load_Variables (ChunkLoadClass &cload);
+	int					PadClearingWarhead;
+	float					TotalBuildingTime;
+	bool                    EnableFlyingWaypaths;
+	bool					BuildGroundOnly;
+	friend class PresetDump;
 }; // size: 168
 
 

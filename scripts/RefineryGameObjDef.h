@@ -15,41 +15,30 @@
 #include "BuildingGameObjDef.h"
 
 
-class RefineryGameObjDef : public BuildingGameObjDef {
+class RefineryGameObjDef : public BuildingGameObjDef
+{
 public:
-    RefineryGameObjDef(void);
-
-    ~RefineryGameObjDef(void);
-
-    uint32 Get_Class_ID(void) const;
-
-    PersistClass *Create(void) const;
-
-    float Get_Funds_Gathered() const { return FundsGathered; }
-
-    float Get_Funds_Distributed_Per_Sec() const { return FundsDistributedPerSec; }
-
-    bool Save(ChunkSaveClass &csave);
-
-    bool Load(ChunkLoadClass &cload);
-
-    const PersistFactoryClass &Get_Factory(void) const;
-
+	RefineryGameObjDef (void);
+	~RefineryGameObjDef (void);
+	uint32								Get_Class_ID (void) const;
+	PersistClass *						Create (void) const;
+	float								Get_Funds_Gathered() const { return FundsGathered; }
+	float								Get_Funds_Distributed_Per_Sec() const { return FundsDistributedPerSec; }
+	bool									Save (ChunkSaveClass &csave);
+	bool									Load (ChunkLoadClass &cload);
+	const PersistFactoryClass &	Get_Factory (void) const;
 #ifdef DDBEDIT
-    virtual void                        Dump (FileClass &file);
+	virtual void                        Dump (FileClass &file);
 #endif
-    DECLARE_EDITABLE (RefineryGameObjDef, BuildingGameObjDef);
+	DECLARE_EDITABLE (RefineryGameObjDef, BuildingGameObjDef);
 protected:
-    void Load_Variables(ChunkLoadClass &cload);
-
-    float UnloadTime;
-    float FundsGathered;
-    float FundsDistributedPerSec;
-    int HarvesterDefID;
-
-    friend class RefineryGameObj;
-
-    friend class PresetDump;
+	void					Load_Variables (ChunkLoadClass &cload);
+	float			UnloadTime;
+	float			FundsGathered;	
+	float			FundsDistributedPerSec;
+	int			HarvesterDefID;
+	friend class RefineryGameObj;
+	friend class PresetDump;
 };
 
 #endif

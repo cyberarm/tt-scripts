@@ -11,65 +11,48 @@
 */
 #ifndef TT_INCLUDE_POWERUPGAMEOBJDEF_H
 #define TT_INCLUDE_POWERUPGAMEOBJDEF_H
-
 #include "SimpleGameObjDef.h"
-
 class SmartGameObj;
-
 class PowerUpGameObj;
-
-class PowerUpGameObjDef : public SimpleGameObjDef {
+class PowerUpGameObjDef : public SimpleGameObjDef
+{
 public:
-    PowerUpGameObjDef(void);
-
-    virtual uint32 Get_Class_ID(void) const;
-
-    virtual PersistClass *Create(void) const;
-
-    virtual bool Save(ChunkSaveClass &csave);
-
-    virtual bool Load(ChunkLoadClass &cload);
-
-    virtual const PersistFactoryClass &Get_Factory(void) const;
-
-    bool Grant(SmartGameObj *obj, PowerUpGameObj *p_powerup = NULL, bool hud_display = true) const;
-
-    int Get_Grant_Weapon_ID(void) const { return GrantWeaponID; }
-
-    bool Is_Persistant() const { return Persistent; }
-
-    bool Is_Always_Allow_Grant() const { return AlwaysAllowGrant; }
-
-    int Get_Grant_Sound() const { return GrantSoundID; }
-
+	PowerUpGameObjDef( void );
+	virtual uint32								Get_Class_ID( void ) const;
+	virtual PersistClass *					Create( void ) const ;
+	virtual bool								Save( ChunkSaveClass &csave );
+	virtual bool								Load( ChunkLoadClass &cload );
+	virtual const PersistFactoryClass &	Get_Factory( void ) const;
+	bool Grant( SmartGameObj * obj, PowerUpGameObj * p_powerup = NULL, bool hud_display = true ) const ;
+	int											Get_Grant_Weapon_ID (void) const	{ return GrantWeaponID; }
+	bool Is_Persistant() const {return Persistent;}
+	bool Is_Always_Allow_Grant() const {return AlwaysAllowGrant;}
+	int Get_Grant_Sound() const {return GrantSoundID;}
 #ifdef DDBEDIT
-    virtual void                        Dump (FileClass &file);
+	virtual void                        Dump (FileClass &file);
 #endif
-    DECLARE_EDITABLE (PowerUpGameObjDef, SimpleGameObjDef);
+	DECLARE_EDITABLE (PowerUpGameObjDef, SimpleGameObjDef);
 public:
-    int GrantShieldType;
-    float GrantShieldStrength;
-    float GrantShieldStrengthMax;
-    float GrantHealth;
-    float GrantHealthMax;
-    int GrantWeaponID;
-    bool GrantWeapon;
-    int GrantWeaponRounds;
-    bool GrantWeaponClips;
-    bool Persistent;
-    int GrantKey;
-    bool AlwaysAllowGrant;
-    int GrantSoundID;
-    StringClass GrantAnimationName;
-    int IdleSoundID;
-    StringClass IdleAnimationName;
-
-    friend class PowerUpGameObj;
-
-    friend class PresetDump;
-
-    bool GrantShieldStrengthMaxIsScaled;
-    bool GrantHealthMaxIsScaled;
+	int											GrantShieldType;
+	float											GrantShieldStrength;
+	float											GrantShieldStrengthMax;
+	float											GrantHealth;
+	float											GrantHealthMax;
+	int											GrantWeaponID;
+	bool											GrantWeapon;
+	int											GrantWeaponRounds;
+	bool											GrantWeaponClips;
+	bool											Persistent;
+	int											GrantKey;
+	bool											AlwaysAllowGrant;
+	int											GrantSoundID;
+	StringClass									GrantAnimationName;
+	int											IdleSoundID;
+	StringClass									IdleAnimationName;
+	friend	class								PowerUpGameObj;
+	friend class PresetDump;
+  bool                    GrantShieldStrengthMaxIsScaled;
+  bool                    GrantHealthMaxIsScaled;
 };
 
 #endif

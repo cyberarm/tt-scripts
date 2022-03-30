@@ -10,172 +10,114 @@
 	Only the source code to the module(s) containing the licenced code has to be released.
 */
 #pragma once
-
 class JFW_Nod_Turret : public ScriptImpClass {
-    unsigned int id1;
-    unsigned int id2;
-    unsigned int id3;
-
-    void Created(GameObject *obj);
-
-    void Killed(GameObject *obj, GameObject *killer);
-
-    void Enemy_Seen(GameObject *obj, GameObject *enemy);
-
-    void Action_Complete(GameObject *obj, int action_id, ActionCompleteReason complete_reason);
-
-    void Timer_Expired(GameObject *obj, int number);
-
-public:
-    void Register_Auto_Save_Variables();
+	unsigned int id1;
+	unsigned int id2;
+	unsigned int id3;
+	void Created(GameObject *obj);
+	void Killed(GameObject *obj,GameObject *killer);
+	void Enemy_Seen(GameObject *obj,GameObject *enemy);
+	void Action_Complete(GameObject *obj,int action_id,ActionCompleteReason complete_reason);
+	void Timer_Expired(GameObject *obj,int number);
+	public: void Register_Auto_Save_Variables();
 };
 
 class JFW_Nod_Obelisk_CnC : public ScriptImpClass {
-    int weaponid;
-
-    void Created(GameObject *obj);
-
-    void Killed(GameObject *obj, GameObject *killer);
-
-    void Custom(GameObject *obj, int type, int param, GameObject *sender);
-
-    void Timer_Expired(GameObject *obj, int number);
-
-public:
-    void Register_Auto_Save_Variables();
+	int weaponid;
+	void Created(GameObject *obj);
+	void Killed(GameObject *obj,GameObject *killer);
+	void Custom(GameObject *obj,int type,int param,GameObject *sender);
+	void Timer_Expired(GameObject *obj,int number);
+	public: void Register_Auto_Save_Variables();
 };
 
 class JFW_Obelisk_Weapon_CnC : public ScriptImpClass {
-    bool EnemySeen;
-    int attackid;
-    int effectid;
-    float range;
-    bool attack;
-
-    void Damaged(GameObject *obj, GameObject *damager, float amount);
-
-    void Created(GameObject *obj);
-
-    void Custom(GameObject *obj, int type, int param, GameObject *sender);
-
-    void Enemy_Seen(GameObject *obj, GameObject *enemy);
-
-    void Timer_Expired(GameObject *obj, int number);
-
-public:
-    void Register_Auto_Save_Variables();
+	bool EnemySeen;
+	int attackid;
+	int effectid;
+	float range;
+	bool attack;
+	void Damaged(GameObject *obj,GameObject *damager,float amount);
+	void Created(GameObject *obj);
+	void Custom(GameObject *obj,int type,int param,GameObject *sender);
+	void Enemy_Seen(GameObject *obj,GameObject *enemy);
+	void Timer_Expired(GameObject *obj,int number);
+	public: void Register_Auto_Save_Variables();
 };
 
 class JFW_Advanced_Guard_Tower : public ScriptImpClass {
-    int missileid;
-    int gun1id;
-    int gun2id;
-    int gun3id;
-    int gun4id;
-    bool enable;
-
-    void Created(GameObject *obj);
-
-    void Killed(GameObject *obj, GameObject *killer);
-
-    void Custom(GameObject *obj, int type, int param, GameObject *sender);
-
-    void Timer_Expired(GameObject *obj, int number);
-
-public:
-    void Register_Auto_Save_Variables();
+	int missileid;
+	int gun1id;
+	int gun2id;
+	int gun3id;
+	int gun4id;
+	bool enable;
+	void Created(GameObject *obj);
+	void Killed(GameObject *obj,GameObject *killer);
+	void Custom(GameObject *obj,int type,int param,GameObject *sender);
+	void Timer_Expired(GameObject *obj,int number);
+	public: void Register_Auto_Save_Variables();
 };
 
 class JFW_Advanced_Guard_Tower_2 : public ScriptImpClass {
-    int missileid;
-    int gun1id;
-    int gun2id;
-    int gun3id;
-    int gun4id;
-    bool enable;
-
-    void Created(GameObject *obj);
-
-    void Killed(GameObject *obj, GameObject *killer);
-
-    void Custom(GameObject *obj, int type, int param, GameObject *sender);
-
-    void Timer_Expired(GameObject *obj, int number);
-
-public:
-    void Register_Auto_Save_Variables();
+	int missileid;
+	int gun1id;
+	int gun2id;
+	int gun3id;
+	int gun4id;
+	bool enable;
+	void Created(GameObject *obj);
+	void Killed(GameObject *obj,GameObject *killer);
+	void Custom(GameObject *obj,int type,int param,GameObject *sender);
+	void Timer_Expired(GameObject *obj,int number);
+	public: void Register_Auto_Save_Variables();
 };
 
 class JFW_Advanced_Guard_Tower_Missile : public ScriptImpClass {
-    bool firing;
-
-    void Damaged(GameObject *obj, GameObject *damager, float amount);
-
-    void Created(GameObject *obj);
-
-    void Custom(GameObject *obj, int type, int param, GameObject *sender);
-
-    void Timer_Expired(GameObject *obj, int number);
+	bool firing;
+	void Damaged(GameObject *obj,GameObject *damager,float amount);
+	void Created(GameObject *obj);
+	void Custom(GameObject *obj,int type,int param,GameObject *sender);
+	void Timer_Expired(GameObject *obj,int number);
 };
 
 class JFW_Advanced_Guard_Tower_Gun : public ScriptImpClass {
-    int id;
-    bool disable;
-
-    void Damaged(GameObject *obj, GameObject *damager, float amount);
-
-    void Created(GameObject *obj);
-
-    void Custom(GameObject *obj, int type, int param, GameObject *sender);
-
-    void Enemy_Seen(GameObject *obj, GameObject *enemy);
-
-    void Timer_Expired(GameObject *obj, int number);
-
-public:
-    void Register_Auto_Save_Variables();
+	int id;
+	bool disable;
+	void Damaged(GameObject *obj,GameObject *damager,float amount);
+	void Created(GameObject *obj);
+	void Custom(GameObject *obj,int type,int param,GameObject *sender);
+	void Enemy_Seen(GameObject *obj,GameObject *enemy);
+	void Timer_Expired(GameObject *obj,int number);
+	public: void Register_Auto_Save_Variables();
 };
 
 class JFW_Guard_Duty_Helper : public ScriptImpClass {
-    void Created(GameObject *obj);
-
-    void Enemy_Seen(GameObject *obj, GameObject *enemy);
+	void Created(GameObject *obj);
+	void Enemy_Seen(GameObject *obj,GameObject *enemy);
 };
 
 class JFW_Guard_Duty : public ScriptImpClass {
-    int helperid;
-
-    void Created(GameObject *obj);
-
-    void Custom(GameObject *obj, int type, int param, GameObject *sender);
-
-    void Action_Complete(GameObject *obj, int action_id, ActionCompleteReason complete_reason);
-
-    void Timer_Expired(GameObject *obj, int number);
-
-public:
-    void Register_Auto_Save_Variables();
+	int helperid;
+	void Created(GameObject *obj);
+	void Custom(GameObject *obj,int type,int param,GameObject *sender);
+	void Action_Complete(GameObject *obj,int action_id,ActionCompleteReason complete_reason);
+	void Timer_Expired(GameObject *obj,int number);
+	public: void Register_Auto_Save_Variables();
 };
 
 class JFW_Hunt_Attack : public ScriptImpClass {
-    void Created(GameObject *obj);
-
-    void Enemy_Seen(GameObject *obj, GameObject *enemy);
-
-    void Action_Complete(GameObject *obj, int action_id, ActionCompleteReason complete_reason);
+	void Created(GameObject *obj);
+	void Enemy_Seen(GameObject *obj,GameObject *enemy);
+	void Action_Complete(GameObject *obj,int action_id,ActionCompleteReason complete_reason);
 };
 
 class JFW_Hunt_Blow_Up : public ScriptImpClass {
-    bool firsttime;
-
-    void Created(GameObject *obj);
-
-    void Enemy_Seen(GameObject *obj, GameObject *enemy);
-
-    void Action_Complete(GameObject *obj, int action_id, ActionCompleteReason complete_reason);
-
-public:
-    void Register_Auto_Save_Variables();
+	bool firsttime;
+	void Created(GameObject *obj);
+	void Enemy_Seen(GameObject *obj,GameObject *enemy);
+	void Action_Complete(GameObject *obj,int action_id,ActionCompleteReason complete_reason);
+	public: void Register_Auto_Save_Variables();
 };
 
 /*!
@@ -186,7 +128,7 @@ public:
 * Removes all weapons from an object when it enters a zone this script is attached to
 */
 class JFW_Clear_Weapons : public ScriptImpClass {
-    void Entered(GameObject *obj, GameObject *enterer);
+	void Entered(GameObject *obj,GameObject *enterer);
 };
 
 /*!
@@ -206,23 +148,23 @@ class JFW_Clear_Weapons : public ScriptImpClass {
 *   The player type (or, team) this script will trigger for. 0 = Nod, 1 = GDI, 2 = All
 */
 class JFW_Zone_Weapon : public ScriptImpClass {
-    void Entered(GameObject *obj, GameObject *enterer);
+	void Entered(GameObject *obj,GameObject *enterer);
 };
 
 class JFW_Weapon_Change_On_Custom : public ScriptImpClass {
-    void Custom(GameObject *obj, int type, int param, GameObject *sender);
+	void Custom(GameObject *obj,int type,int param,GameObject *sender);
 };
 
 class JFW_Weapon_Change_On_Custom_Sender : public ScriptImpClass {
-    void Custom(GameObject *obj, int type, int param, GameObject *sender);
+	void Custom(GameObject *obj,int type,int param,GameObject *sender);
 };
 
 class JFW_Weapon_Change_On_Custom_Multiple : public ScriptImpClass {
-    void Custom(GameObject *obj, int type, int param, GameObject *sender);
+	void Custom(GameObject *obj,int type,int param,GameObject *sender);
 };
 
 class JFW_Weapon_Change_On_Custom_Multiple_Sender : public ScriptImpClass {
-    void Custom(GameObject *obj, int type, int param, GameObject *sender);
+	void Custom(GameObject *obj,int type,int param,GameObject *sender);
 };
 
 /*!
@@ -239,15 +181,15 @@ class JFW_Weapon_Change_On_Custom_Multiple_Sender : public ScriptImpClass {
 *   Redundant parameter
 */
 class JFW_Clear_Weapons_On_Custom : public ScriptImpClass {
-    void Custom(GameObject *obj, int type, int param, GameObject *sender);
+	void Custom(GameObject *obj,int type,int param,GameObject *sender);
 };
 
 class JFW_Vehicle_Weapon_Preset : public ScriptImpClass {
-    void Custom(GameObject *obj, int type, int param, GameObject *sender);
+	void Custom(GameObject *obj,int type,int param,GameObject *sender);
 };
 
 class JFW_Vehicle_Weapon_Weapon : public ScriptImpClass {
-    void Custom(GameObject *obj, int type, int param, GameObject *sender);
+	void Custom(GameObject *obj,int type,int param,GameObject *sender);
 };
 
 /*!
@@ -260,11 +202,11 @@ class JFW_Vehicle_Weapon_Weapon : public ScriptImpClass {
 * weapons the object has at that time.
 */
 class JFW_Clear_Weapons_Create : public ScriptImpClass {
-    void Created(GameObject *obj);
+	void Created(GameObject *obj);
 };
 
 class JFW_Fire_Weapon_Custom : public ScriptImpClass {
-    void Custom(GameObject *obj, int type, int param, GameObject *sender);
+	void Custom(GameObject *obj,int type,int param,GameObject *sender);
 };
 
 /*!
@@ -289,25 +231,18 @@ class JFW_Fire_Weapon_Custom : public ScriptImpClass {
 */
 class JFW_Vehicle_Weapon_Switcher : public JFW_Key_Hook_Base {
 public:
-    bool switching;
-    bool newweap;
-    int pilotID;
-    const char *new_weapon;
-    const char *old_weapon;
-
-    void Created(GameObject *obj);
-
-    void Custom(GameObject *obj, int type, int param, GameObject *sender);
-
-    void Killed(GameObject *obj, GameObject *killer);
-
-    void Timer_Expired(GameObject *obj, int number);
-
-    void KeyHook();
-
-    JFW_Vehicle_Weapon_Switcher() { old_weapon = 0; }
-
-    ~JFW_Vehicle_Weapon_Switcher() { SAFE_DELETE_ARRAY(old_weapon); }
+	bool switching;
+	bool newweap;
+	int pilotID;
+	const char *new_weapon;
+	const char *old_weapon;
+	void Created(GameObject *obj);
+	void Custom(GameObject *obj,int type,int param,GameObject *sender);
+	void Killed(GameObject *obj,GameObject *killer);
+	void Timer_Expired(GameObject *obj,int number);
+	void KeyHook();
+	JFW_Vehicle_Weapon_Switcher() {old_weapon = 0;}
+	~JFW_Vehicle_Weapon_Switcher() {SAFE_DELETE_ARRAY(old_weapon);}
 };
 
 /*!
@@ -342,13 +277,10 @@ public:
 *   The name of the keyhook binding to trigger the weapon swap
 */
 class JFW_Char_Weapon_Switcher : public JFW_Key_Hook_Base {
-    time_t LastSwitch;
-    bool Weapon2;
-    bool InTimer;
-
-    void Created(GameObject *obj);
-
-    void KeyHook();
-
-    void Timer_Expired(GameObject *obj, int number);
+	time_t LastSwitch;
+	bool Weapon2;
+	bool InTimer;
+	void Created( GameObject *obj );
+	void KeyHook();
+	void Timer_Expired( GameObject *obj,int number );
 };

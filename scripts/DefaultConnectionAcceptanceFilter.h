@@ -14,25 +14,22 @@
 #include "ConnectionAcceptanceFilter.h"
 
 class cGameData;
-
 class StringClass;
-
 struct ConnectionRequest;
 
 
 class DefaultConnectionAcceptanceFilter :
-        public ConnectionAcceptanceFilter {
-    bool isPlayerNameAllowed(cGameData &gameData, const WideStringClass &playerName, int id);
+	public ConnectionAcceptanceFilter
+{
+	bool isPlayerNameAllowed(cGameData& gameData, const WideStringClass& playerName, int id);
 
 public:
-    virtual void handleInitiation(const ConnectionRequest &connectionRequest) {}
-
-    virtual void handleTermination(const ConnectionRequest &connectionRequest) {}
-
-    virtual void handleCancellation(const ConnectionRequest &connectionRequest) {}
-
-    virtual STATUS getStatus(const ConnectionRequest &connectionRequest, WideStringClass &refusalMessage);
+	virtual void handleInitiation(const ConnectionRequest& connectionRequest) {}
+	virtual void handleTermination(const ConnectionRequest& connectionRequest) {}
+	virtual void handleCancellation(const ConnectionRequest& connectionRequest) {}
+	virtual STATUS getStatus(const ConnectionRequest& connectionRequest, WideStringClass& refusalMessage);
 };
+
 
 
 extern DefaultConnectionAcceptanceFilter defaultConnectionAcceptanceFilter;

@@ -11,53 +11,19 @@
 */
 #ifndef SCRIPTS_INCLUDE__ENGINE_PHYS_H
 #define SCRIPTS_INCLUDE__ENGINE_PHYS_H
-
 class Vector3;
-
 class OBBoxClass;
-
-const char SCRIPTS_API
-*
-Get_Model(GameObject
-*obj); //get the name of the 3d model used by an object,opposite of Set_Model
-float SCRIPTS_API
-Get_Animation_Frame(GameObject
-*obj); //gets the current animation frame for obj,may not work for all objects
-float SCRIPTS_API
-Get_Animation_Target_Frame(GameObject
-*obj); //gets the target animation frame for obj,may not work for all objects
-void SCRIPTS_API
-Copy_Transform(GameObject
-*in,
-GameObject *out
-); //copies the complete transform (including rotation) from one object to another
-float SCRIPTS_API
-Get_Mass(GameObject
-*obj); //returns the mass of an object
-const char SCRIPTS_API
-*
-Get_Htree_Name(GameObject
-*obj); //returns the Hierarchy Tree name for an object
-char SCRIPTS_API
-Get_Sex(GameObject
-*obj); //gets the character (e.g. "A" for male or "B" for female) for use with animations
-void SCRIPTS_API
-
-Create_Effect_All_Stealthed_Objects_Area(const Vector3 &Position, float Distance, const char *object,
-                                         const Vector3 &offset,
-                                         int team); //creates an indicator object near every stealthed object in a given area
-void SCRIPTS_API
-
-Create_Effect_All_Of_Preset(const char *object, const char *preset, float ZAdjust,
-                            bool ZSet); //Create an object above all objects of a given preset, also set the facing to match the object its being created over.
-void SCRIPTS_API
-Wake_Up_Objects_In_Box(GameObject
-*obj,
-const char *box
-);
-void SCRIPTS_API
-Wake_Up_Objects_In_OBBox(OBBoxClass
-&BoundingBox);
+const char SCRIPTS_API *Get_Model(GameObject *obj); //get the name of the 3d model used by an object,opposite of Set_Model
+float SCRIPTS_API Get_Animation_Frame(GameObject *obj); //gets the current animation frame for obj,may not work for all objects
+float SCRIPTS_API Get_Animation_Target_Frame(GameObject *obj); //gets the target animation frame for obj,may not work for all objects
+void SCRIPTS_API Copy_Transform(GameObject *in,GameObject *out); //copies the complete transform (including rotation) from one object to another
+float SCRIPTS_API Get_Mass(GameObject *obj); //returns the mass of an object
+const char SCRIPTS_API *Get_Htree_Name(GameObject *obj); //returns the Hierarchy Tree name for an object
+char SCRIPTS_API Get_Sex(GameObject *obj); //gets the character (e.g. "A" for male or "B" for female) for use with animations
+void SCRIPTS_API Create_Effect_All_Stealthed_Objects_Area(const Vector3 &Position,float Distance,const char *object,const Vector3 &offset,int team); //creates an indicator object near every stealthed object in a given area
+void SCRIPTS_API Create_Effect_All_Of_Preset(const char *object,const char *preset,float ZAdjust,bool ZSet); //Create an object above all objects of a given preset, also set the facing to match the object its being created over.
+void SCRIPTS_API Wake_Up_Objects_In_Box(GameObject *obj,const char *box);
+void SCRIPTS_API Wake_Up_Objects_In_OBBox(OBBoxClass &BoundingBox);
 
 /*!
 * \brief Get current object animation
@@ -72,6 +38,6 @@ Wake_Up_Objects_In_OBBox(OBBoxClass
 *   The name of the current animation playing on the specified object or NULL if the object doesn't
 *   support animations or is not currently playing one
 */
-SCRIPTS_API const char *Get_Animation_Name(GameObject * pObj);
+SCRIPTS_API const char* Get_Animation_Name ( GameObject* pObj );
 
 #endif

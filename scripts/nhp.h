@@ -10,59 +10,41 @@
 	Only the source code to the module(s) containing the licenced code has to be released.
 */
 #pragma once
-
 class NHP_Smart_Targetting : public ScriptImpClass {
-    void Enemy_Seen(GameObject *obj, GameObject *enemy);
-
-    void Created(GameObject *obj);
+	void Enemy_Seen(GameObject *obj,GameObject *enemy);
+	void Created(GameObject *obj);
 };
 
 class NHP_Guard_Bot : public ScriptImpClass {
-    void Created(GameObject *obj);
-
-    void Damaged(GameObject *obj, GameObject *damager, float amount);
+	void Created(GameObject *obj);
+	void Damaged(GameObject *obj,GameObject *damager,float amount);
 };
 
 class NHP_Construction_AI : public ScriptImpClass {
-    int unitlim1;
-    int unitlim2;
-    int unitlim3;
-
-    void Created(GameObject *obj);
-
-    void Timer_Expired(GameObject *obj, int number);
-
-public:
-    void Register_Auto_Save_Variables();
+	int unitlim1;
+	int unitlim2;
+	int unitlim3;
+	void Created(GameObject *obj);
+	void Timer_Expired(GameObject *obj,int number);
+	public: void Register_Auto_Save_Variables();
 };
 
 class NHP_Sensor_Array_Zone : public ScriptImpClass {
-    bool SensorIsAlive;
-    int count;
-    int soundId;
-
-    void Created(GameObject *obj);
-
-    void Custom(GameObject *obj, int type, int param, GameObject *sender);
-
-    void Entered(GameObject *obj, GameObject *enterer);
-
-    void Exited(GameObject *obj, GameObject *exiter);
-
-public:
-    void Register_Auto_Save_Variables();
+	bool SensorIsAlive;
+	int count;
+	int soundId;
+	void Created(GameObject *obj);
+	void Custom(GameObject *obj,int type,int param,GameObject *sender);
+	void Entered(GameObject *obj,GameObject *enterer);
+	void Exited(GameObject *obj,GameObject *exiter);
+	public: void Register_Auto_Save_Variables();
 };
 
 class NHP_Sensorable_Object : public ScriptImpClass {
-    bool insideSensorZone;
-    int sensorZone;
-
-    void Created(GameObject *obj);
-
-    void Killed(GameObject *obj, GameObject *killer);
-
-    void Custom(GameObject *obj, int type, int param, GameObject *sender);
-
-public:
-    void Register_Auto_Save_Variables();
+	bool insideSensorZone;
+	int sensorZone;
+	void Created(GameObject *obj);
+	void Killed(GameObject *obj,GameObject *killer);
+	void Custom(GameObject *obj,int type,int param,GameObject *sender);
+	public: void Register_Auto_Save_Variables();
 };

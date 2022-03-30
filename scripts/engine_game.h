@@ -11,7 +11,6 @@
 */
 #ifndef SCRIPTS_INCLUDE__ENGINE_GAME_H
 #define SCRIPTS_INCLUDE__ENGINE_GAME_H
-
 #include "GameData.h"
 
 /*!
@@ -25,9 +24,7 @@
 *   whether to enable or disable power
 *
 */
-void SCRIPTS_API
-
-Power_Base(int team, bool powered);
+void SCRIPTS_API Power_Base(int team,bool powered);
 
 /*!
 * \ingroup api_teamcontrol
@@ -40,9 +37,7 @@ Power_Base(int team, bool powered);
 *   whether to enable or disable generation
 *
 */
-void SCRIPTS_API
-
-Set_Can_Generate_Soldiers(int team, bool cangenerate);
+void SCRIPTS_API Set_Can_Generate_Soldiers(int team,bool cangenerate);
 
 /*!
 * \ingroup api_teamcontrol
@@ -55,9 +50,7 @@ Set_Can_Generate_Soldiers(int team, bool cangenerate);
 *   whether to enable or disable generation
 *
 */
-void SCRIPTS_API
-
-Set_Can_Generate_Vehicles(int team, bool cangenerate);
+void SCRIPTS_API Set_Can_Generate_Vehicles(int team,bool cangenerate);
 
 /*!
 * \ingroup api_teamcontrol
@@ -67,9 +60,7 @@ Set_Can_Generate_Vehicles(int team, bool cangenerate);
 *   ID of the team to destroy the base of
 *
 */
-void SCRIPTS_API
-
-Destroy_Base(int team);
+void SCRIPTS_API Destroy_Base(int team);
 
 /*!
 * \ingroup api_teamcontrol
@@ -82,9 +73,7 @@ Destroy_Base(int team);
 *   whether to enable or disable the "beacon destroyed base" flag
 *
 */
-void SCRIPTS_API
-
-Beacon_Destroyed_Base(int team, bool destroyed);
+void SCRIPTS_API Beacon_Destroyed_Base(int team, bool destroyed);
 
 /*!
 * \ingroup api_teamcontrol
@@ -97,9 +86,7 @@ Beacon_Destroyed_Base(int team, bool destroyed);
 *   whether to enable or disable radar
 *
 */
-void SCRIPTS_API
-
-Enable_Base_Radar(int team, bool enable);
+void SCRIPTS_API Enable_Base_Radar(int team, bool enable);
 
 /*!
 * Check if an object is an AI harvester
@@ -110,9 +97,7 @@ Enable_Base_Radar(int team, bool enable);
 * \return
 *   True if the object is an AI harvester, false otherwise
 */
-bool SCRIPTS_API
-Is_Harvester(GameObject
-*obj);
+bool SCRIPTS_API Is_Harvester(GameObject *obj);
 
 /*!
 * \ingroup api_teamcontrol
@@ -124,9 +109,7 @@ Is_Harvester(GameObject
 * \return
 *   True if the specified teams radar is enabled, false otherwise
 */
-bool SCRIPTS_API
-
-Is_Radar_Enabled(int team);
+bool SCRIPTS_API Is_Radar_Enabled(int team);
 
 /*!
 * Get the building type for a building
@@ -137,9 +120,7 @@ Is_Radar_Enabled(int team);
 * \return
 *   building type of the building
 */
-int SCRIPTS_API
-Building_Type(GameObject
-*obj);
+int SCRIPTS_API Building_Type(GameObject *obj);
 
 /*!
 * Check if a building is dead
@@ -150,9 +131,7 @@ Building_Type(GameObject
 * \return
 *   True if the building is dead, false otherwise
 */
-bool SCRIPTS_API
-Is_Building_Dead(GameObject
-*obj);
+bool SCRIPTS_API Is_Building_Dead(GameObject *obj);
 
 /*!
 * \ingroup api_objects_find
@@ -167,10 +146,7 @@ Is_Building_Dead(GameObject
 * \return
 *   First building for this team of this type (if any)
 */
-GameObject SCRIPTS_API
-*
-
-Find_Building_By_Type(int team, int type);
+GameObject SCRIPTS_API *Find_Building_By_Type(int team,int type);
 
 /*!
 * \ingroup api_objects_find
@@ -182,10 +158,7 @@ Find_Building_By_Type(int team, int type);
 * \return
 *   First base defense building for this team (if any)
 */
-GameObject SCRIPTS_API
-*
-
-Find_Base_Defense(int team);
+GameObject SCRIPTS_API *Find_Base_Defense(int team);
 
 /*!
 * Check if the current map is a flying map
@@ -193,14 +166,9 @@ Find_Base_Defense(int team);
 * \return
 *   True if the map is a flying time map
 */
-bool SCRIPTS_API
+bool SCRIPTS_API Is_Map_Flying();
 
-Is_Map_Flying();
-
-GameObject SCRIPTS_API
-*
-
-Create_Building(const char *preset, const Vector3 &Position); //Create a building controller
+GameObject SCRIPTS_API *Create_Building(const char *preset,const Vector3 & Position); //Create a building controller
 
 /*!
 * \ingroup api_objects_find
@@ -212,10 +180,7 @@ Create_Building(const char *preset, const Vector3 &Position); //Create a buildin
 * \return
 *   AI harvester object
 */
-GameObject SCRIPTS_API
-*
-
-Find_Harvester(int team);
+GameObject SCRIPTS_API *Find_Harvester(int team);
 
 /*!
 * \ingroup api_teamcontrol
@@ -227,9 +192,7 @@ Find_Harvester(int team);
 * \return
 *   True if the specified teams base is powered, false otherwise
 */
-bool SCRIPTS_API
-
-Is_Base_Powered(int team);
+bool SCRIPTS_API Is_Base_Powered(int team);
 
 /*!
 * \ingroup api_teamcontrol
@@ -241,9 +204,7 @@ Is_Base_Powered(int team);
 * \return
 *   True if the specified team can purchase vehicles, false otherwise
 */
-bool SCRIPTS_API
-
-Can_Generate_Vehicles(int team);
+bool SCRIPTS_API Can_Generate_Vehicles(int team);
 
 /*!
 * \ingroup api_teamcontrol
@@ -255,9 +216,7 @@ Can_Generate_Vehicles(int team);
 * \return
 *   True if the specified team can purchase advanced infantry characters, false otherwise
 */
-bool SCRIPTS_API
-
-Can_Generate_Soldiers(int team);
+bool SCRIPTS_API Can_Generate_Soldiers(int team);
 
 /*!
 * Get the current cGameData
@@ -265,10 +224,7 @@ Can_Generate_Soldiers(int team);
 * \return
 *   current cGameData
 */
-cGameData SCRIPTS_API
-*
-
-The_Game();
+cGameData SCRIPTS_API *The_Game();
 
 /*!
 * Get the current cGameDataSkirmish, if any
@@ -276,10 +232,7 @@ The_Game();
 * \return
 *   current cGameDataSirmish, if any
 */
-cGameDataSkirmish SCRIPTS_API
-*
-
-The_Skirmish_Game();
+cGameDataSkirmish SCRIPTS_API *The_Skirmish_Game();
 
 /*!
 * Get the current cGameDataCnc, if any
@@ -287,10 +240,7 @@ The_Skirmish_Game();
 * \return
 *   current cGameDataCnc, if any
 */
-cGameDataCnc SCRIPTS_API
-*
-
-The_Cnc_Game();
+cGameDataCnc SCRIPTS_API *The_Cnc_Game();
 
 /*!
 * Get the current cGameDataSinglePlayer, if any
@@ -298,10 +248,7 @@ The_Cnc_Game();
 * \return
 *   current cGameDataSinglePlayer, if any
 */
-cGameDataSinglePlayer SCRIPTS_API
-*
-
-The_Single_Player_Game();
+cGameDataSinglePlayer SCRIPTS_API *The_Single_Player_Game();
 
 /*!
 * \ingroup api_teamcontrol
@@ -313,9 +260,7 @@ The_Single_Player_Game();
 * \return
 *   count of the buildings for that team
 */
-int SCRIPTS_API
-
-Get_Building_Count_Team(int Team);
+int SCRIPTS_API Get_Building_Count_Team(int Team);
 
 /*!
 * \ingroup api_objects_find
@@ -327,10 +272,7 @@ Get_Building_Count_Team(int Team);
 * \return
 *   First building for this team
 */
-GameObject SCRIPTS_API
-*
-
-Find_Building_By_Team(int Team);
+GameObject SCRIPTS_API *Find_Building_By_Team(int Team);
 
 /*!
 * \ingroup api_objects_find
@@ -345,10 +287,7 @@ Find_Building_By_Team(int Team);
 * \return
 *   First building for this team of this preset (if any)
 */
-GameObject SCRIPTS_API
-*
-
-Find_Building_By_Preset(int Team, const char *Preset_Name);
+GameObject SCRIPTS_API *Find_Building_By_Preset(int Team,const char *Preset_Name);
 
 /*!
 * \ingroup api_objects_find
@@ -360,10 +299,7 @@ Find_Building_By_Preset(int Team, const char *Preset_Name);
 * \return
 *   First power plant for this team (if any)
 */
-GameObject SCRIPTS_API
-*
-
-Find_Power_Plant(int Team);
+GameObject SCRIPTS_API *Find_Power_Plant(int Team);
 
 /*!
 * \ingroup api_objects_find
@@ -375,10 +311,7 @@ Find_Power_Plant(int Team);
 * \return
 *   First construction yard for this team (if any)
 */
-GameObject SCRIPTS_API
-*
-
-Find_Construction_Yard(int Team);
+GameObject SCRIPTS_API *Find_Construction_Yard(int Team);
 
 /*!
 * \ingroup api_objects_find
@@ -390,10 +323,7 @@ Find_Construction_Yard(int Team);
 * \return
 *   First refinery for this team (if any)
 */
-GameObject SCRIPTS_API
-*
-
-Find_Refinery(int Team);
+GameObject SCRIPTS_API *Find_Refinery(int Team);
 
 /*!
 * \ingroup api_objects_find
@@ -405,10 +335,7 @@ Find_Refinery(int Team);
 * \return
 *   First repair bay for this team (if any)
 */
-GameObject SCRIPTS_API
-*
-
-Find_Repair_Bay(int Team);
+GameObject SCRIPTS_API *Find_Repair_Bay(int Team);
 
 /*!
 * \ingroup api_objects_find
@@ -420,10 +347,7 @@ Find_Repair_Bay(int Team);
 * \return
 *   First soldier factory for this team (if any)
 */
-GameObject SCRIPTS_API
-*
-
-Find_Soldier_Factory(int Team);
+GameObject SCRIPTS_API *Find_Soldier_Factory(int Team);
 
 /*!
 * \ingroup api_objects_find
@@ -435,10 +359,7 @@ Find_Soldier_Factory(int Team);
 * \return
 *   First vehicle factory for this team (if any)
 */
-GameObject SCRIPTS_API
-*
-
-Find_Vehicle_Factory(int Team);
+GameObject SCRIPTS_API *Find_Vehicle_Factory(int Team);
 
 /*!
 * \ingroup api_objects_find
@@ -450,10 +371,7 @@ Find_Vehicle_Factory(int Team);
 * \return
 *   First com center for this team (if any)
 */
-GameObject SCRIPTS_API
-*
-
-Find_Com_Center(int Team);
+GameObject SCRIPTS_API *Find_Com_Center(int Team);
 
 /*!
 * \ingroup api_objects_find
@@ -465,10 +383,7 @@ Find_Com_Center(int Team);
 * \return
 *   First special building for this team (if any)
 */
-GameObject SCRIPTS_API
-*
-
-Find_Special(int Team);
+GameObject SCRIPTS_API *Find_Special(int Team);
 
 /*!
 * \ingroup api_objects_find
@@ -480,10 +395,7 @@ Find_Special(int Team);
 * \return
 *   First naval factory for this team (if any)
 */
-GameObject SCRIPTS_API
-*
-
-Find_Naval_Factory(int Team);
+GameObject SCRIPTS_API *Find_Naval_Factory(int Team);
 
 /*!
 * \ingroup api_objects_find
@@ -495,10 +407,7 @@ Find_Naval_Factory(int Team);
 * \return
 *   First tech center for this team (if any)
 */
-GameObject SCRIPTS_API
-*
-
-Find_Tech_Center(int Team);
+GameObject SCRIPTS_API *Find_Tech_Center(int Team);
 
 /*!
 * \ingroup api_objects_find
@@ -510,10 +419,7 @@ Find_Tech_Center(int Team);
 * \return
 *   First helipad for this team (if any)
 */
-GameObject SCRIPTS_API
-*
-
-Find_Helipad(int Team);
+GameObject SCRIPTS_API *Find_Helipad(int Team);
 
 /*!
 * \ingroup api_objects_find
@@ -525,14 +431,9 @@ Find_Helipad(int Team);
 * \return
 *   First shrine for this team (if any)
 */
-GameObject SCRIPTS_API
-*
+GameObject SCRIPTS_API *Find_Shrine(int Team);
 
-Find_Shrine(int Team);
-
-void SCRIPTS_API
-Restore_Building(GameObject
-* obj); //restores a building to life
+void SCRIPTS_API Restore_Building(GameObject* obj); //restores a building to life
 
 /*!
 * Check if gameplay is permitted
@@ -540,9 +441,7 @@ Restore_Building(GameObject
 * \return
 *   True if gameplay is permitted
 */
-bool SCRIPTS_API
-
-Is_Gameplay_Permitted();
+bool SCRIPTS_API Is_Gameplay_Permitted();
 
 /*!
 * Check if running on the FDS
@@ -550,9 +449,7 @@ Is_Gameplay_Permitted();
 * \return
 *   True if running on the FDS
 */
-bool SCRIPTS_API
-
-Is_Dedicated();
+bool SCRIPTS_API Is_Dedicated();
 
 /*!
 * Get current game mode, 0 = error, 1 = single player, 2 = skirmish, 3 = WOL, 4 = GameSpy, 5 = LAN.
@@ -561,16 +458,10 @@ Is_Dedicated();
 * \return
 *   Current game mode
 */
-unsigned int SCRIPTS_API
+unsigned int SCRIPTS_API Get_Current_Game_Mode();
 
-Get_Current_Game_Mode();
-
-void SCRIPTS_API
-
-Get_Private_Message_Color(unsigned int *red, unsigned int *green, unsigned int *blue); //get color for private messages
-void SCRIPTS_API
-
-Get_Public_Message_Color(unsigned int *red, unsigned int *green, unsigned int *blue); //get color for public messages
+void SCRIPTS_API Get_Private_Message_Color(unsigned int *red, unsigned int *green, unsigned int *blue); //get color for private messages
+void SCRIPTS_API Get_Public_Message_Color(unsigned int *red, unsigned int *green, unsigned int *blue); //get color for public messages
 
 /*!
 * Get the AI harvester preset ID of a specific team
@@ -581,9 +472,7 @@ Get_Public_Message_Color(unsigned int *red, unsigned int *green, unsigned int *b
 * \return
 *   ID of the AI harvester preset for this team
 */
-int SCRIPTS_API
-
-Get_Harvester_Preset_ID(int Team);
+int SCRIPTS_API Get_Harvester_Preset_ID(int Team);
 
 /*!
 * Check if a preset matches the AI harvester preset set in the refinery
@@ -594,9 +483,7 @@ Get_Harvester_Preset_ID(int Team);
 * \return
 *   True if the preset matches the AI harvester preset set in the refinery
 */
-bool SCRIPTS_API
-Is_Harvester_Preset(GameObject
-*obj);
+bool SCRIPTS_API Is_Harvester_Preset(GameObject *obj);
 
 /*!
 * Check if a preset is an air unit
@@ -607,9 +494,7 @@ Is_Harvester_Preset(GameObject
 * \return
 *   True if the preset is an air unit (i.e. will be built at the air factory when its built)
 */
-bool SCRIPTS_API
-
-Vehicle_Preset_Is_Air(int preset);
+bool SCRIPTS_API Vehicle_Preset_Is_Air(int preset);
 
 /*!
 * Check if a preset is a naval unit
@@ -620,9 +505,7 @@ Vehicle_Preset_Is_Air(int preset);
 * \return
 *   True if the preset is a naval unit (i.e. will be built at the naval factory when its built)
 */
-bool SCRIPTS_API
-
-Vehicle_Preset_Is_Naval(int preset);
+bool SCRIPTS_API Vehicle_Preset_Is_Naval(int preset);
 
 /*!
 * \ingroup api_teamcontrol
@@ -634,12 +517,7 @@ Vehicle_Preset_Is_Naval(int preset);
 * \return
 *   Center of that teams base
 */
-Vector3 SCRIPTS_API
+Vector3 SCRIPTS_API Get_Base_Center(int Team);
 
-Get_Base_Center(int Team);
-
-void SCRIPTS_API
-
-Seconds_To_Hms(float secs, int &hours, int &minutes, int &seconds);
-
+void SCRIPTS_API Seconds_To_Hms(float secs, int &hours, int &minutes, int &seconds);
 #endif

@@ -11,41 +11,33 @@
 */
 #ifndef TT_INCLUDE_ARMEDGAMEOBJDEF_H
 #define TT_INCLUDE_ARMEDGAMEOBJDEF_H
-
 #include "PhysicalGameObjDef.h"
-
-class ArmedGameObjDef : public PhysicalGameObjDef {
+class ArmedGameObjDef : public PhysicalGameObjDef
+{
 public:
-    ArmedGameObjDef(void);
-
-    virtual bool Save(ChunkSaveClass &csave);
-
-    virtual bool Load(ChunkLoadClass &cload);
-
-    int Get_Weapon_Def_ID() const { return WeaponDefID; }
-
-    int Get_Secondary_Weapon_Def_ID() const { return SecondaryWeaponDefID; }
-
+	ArmedGameObjDef( void );
+	virtual bool								Save( ChunkSaveClass &csave );
+	virtual bool								Load( ChunkLoadClass &cload );
+	int											Get_Weapon_Def_ID() const { return WeaponDefID; }
+	int											Get_Secondary_Weapon_Def_ID() const { return SecondaryWeaponDefID; }
 #ifdef DDBEDIT
-    virtual void                        Dump (FileClass &file);
+	virtual void                        Dump (FileClass &file);
 #endif
-    DECLARE_EDITABLE(ArmedGameObjDef, PhysicalGameObjDef);
+	DECLARE_EDITABLE(ArmedGameObjDef,PhysicalGameObjDef);
 protected:
-    //All of these floats are in radians (although leveledit shows degrees)
-    float WeaponTiltRate; // 00A8
-    float WeaponTiltMin; // 00AC
-    float WeaponTiltMax; // 00B0
-    float WeaponTurnRate; // 00B4
-    float WeaponTurnMin; // 00B8
-    float WeaponTurnMax; // 00BC
-    float WeaponError; // 00C0
-    int WeaponDefID;
-    int SecondaryWeaponDefID;
-    safe_int WeaponRounds;
-
-    friend class ArmedGameObj;
-
-    friend class PresetDump;
+	//All of these floats are in radians (although leveledit shows degrees)
+	float WeaponTiltRate; // 00A8
+	float WeaponTiltMin; // 00AC
+	float WeaponTiltMax; // 00B0
+	float WeaponTurnRate; // 00B4
+	float WeaponTurnMin; // 00B8
+	float WeaponTurnMax; // 00BC
+	float WeaponError; // 00C0
+  	int											WeaponDefID;
+  	int											SecondaryWeaponDefID;
+  	safe_int										WeaponRounds;
+	friend	class								ArmedGameObj;
+	friend class PresetDump;
 }; // 00D0
 
 #endif

@@ -17,27 +17,21 @@
 
 class ActionParamsStruct;
 
-class Pathfind_Help_Implementer {
+class Pathfind_Help_Implementer
+{
 public:
-    virtual ~Pathfind_Help_Implementer() {};
-
-    virtual bool Should_Ignore_Blocked_Checking(GameObject *obj) = 0;
-
-    virtual void Prepare_Getting_Around(GameObject *obj) = 0;
-
-    virtual void Stop_Getting_Around(GameObject *obj) = 0;
-
-    virtual void On_Unable_To_Get_Unstuck(GameObject *obj) = 0;
-
-    // Modify action params during getting unstuck to include target shooting, if any exist
-    virtual ActionParamsStruct Get_Param_Attack_Modifications(ActionParamsStruct params) = 0;
+	virtual ~Pathfind_Help_Implementer() {};
+	virtual bool Should_Ignore_Blocked_Checking(GameObject *obj) = 0;
+	virtual void Prepare_Getting_Around(GameObject *obj) = 0;
+	virtual void Stop_Getting_Around(GameObject *obj) = 0;
+	virtual void On_Unable_To_Get_Unstuck(GameObject *obj) = 0;
+	// Modify action params during getting unstuck to include target shooting, if any exist
+	virtual ActionParamsStruct Get_Param_Attack_Modifications(ActionParamsStruct params) = 0;
 };
 
 // Forward declaration
 class VehicleGameObj;
-
 class dp88_AI_Objective;
-
 class dp88_AI_ChargedTurret_AnimationObserver;
 
 /*------------------------
@@ -61,124 +55,111 @@ Base class for custom AI's
 *     <tr>  <td>-637140988</td>      <td>Enable the AI</td></tr>
 *   </table>
 */
-class dp88_customAI : public ScriptImpClass {
+class dp88_customAI : public ScriptImpClass
+{
 public:
 
-    /* -----
-    Constructor / Destructor (cleanup debug file if applicable
-    ----- */
+  /* -----
+  Constructor / Destructor (cleanup debug file if applicable
+  ----- */
 
-    dp88_customAI() { debugFile = NULL; };
-
-    ~dp88_customAI() { if (debugFile != NULL) { fclose(debugFile); }};
-
-
-
-
-    /* -----
-    Variables
-    ----- */
-
-    // Priority and weapon choice for each target type
-    float priority_infantry;
-    bool primary_infantry;
-    float priority_lightVehicle;
-    bool primary_lightVehicle;
-    float priority_heavyVehicle;
-    bool primary_heavyVehicle;
-    float priority_VTOL;
-    bool primary_VTOL;
-    float priority_building;
-    bool primary_building;
-
-    // Priority modifiers
-    float modifier_distance, modifier_target_damage, modifier_target_value;
-
-    // Attack ranges
-    int primary_minRange, primary_maxRange;
-    int secondary_minRange, secondary_maxRange;
-
-    // Current target state
-    //int targetID;
-    ReferencerClass m_target;
-    bool hasTarget;
-    int targetLastSeen;
-    float targetPriority;
-    bool m_bTargetPrimaryFire;
-
-    // Brain speed
-    float thinkTime;
-
-    // Other settings
-    bool m_bAiEnabled;
-    bool m_bCanDetectStealth;
-
-    // Debug state
-    bool debug;
-    FILE *debugFile;
-
-    // Target types
-    enum TargetType {
-        SOLDIER = 0,
-        LIGHT_VEHICLE,
-        HEAVY_VEHICLE,
-        FLYING,
-        BUILDING,
-        REPAIRABLE,
-        UNKNOWN
-    };
-
-
-    /* -----
-    Events
-    ----- */
-
-    virtual void Created(GameObject *obj);
-
-    virtual void Timer_Expired(GameObject *obj, int number);
-
-    virtual void Custom(GameObject *pObj, int message, int param, GameObject *pSender);
-
-    virtual void Action_Complete(GameObject *obj, int action_id, ActionCompleteReason complete_reason);
-    //virtual void Enemy_Seen ( GameObject *obj, GameObject *enemy );
-    //virtual void Timer_Expired( GameObject *obj, int number );
+  dp88_customAI() { debugFile = NULL; };
+  ~dp88_customAI() { if ( debugFile != NULL ) { fclose(debugFile); } };
 
 
 
 
-    /* ----
-    Functions
-    ----- */
+  /* -----
+  Variables
+  ----- */
 
-    virtual void Init(GameObject *obj);
+  // Priority and weapon choice for each target type
+  float priority_infantry;        bool primary_infantry;
+  float priority_lightVehicle;    bool primary_lightVehicle;
+  float priority_heavyVehicle;    bool primary_heavyVehicle;
+  float priority_VTOL;            bool primary_VTOL;
+  float priority_building;        bool primary_building;
 
-    virtual void loadSettings(GameObject *obj, bool loadSecondaryFireSettings, bool loadBuildingTargetSettings);
+  // Priority modifiers
+  float modifier_distance, modifier_target_damage, modifier_target_value;
 
-    virtual void AIStateChanged(GameObject *pObj, bool bEnabled);
+  // Attack ranges
+  int primary_minRange, primary_maxRange;
+  int secondary_minRange, secondary_maxRange;
 
-    /*!
-    * Called by derived classes to cancel all ongoing actions, can be overridden in a derived class
-    * to reset variable states as necessary
-    */
-    virtual void ResetAllActions(GameObject *obj);
+  // Current target state
+  //int targetID;
+  ReferencerClass m_target;
+  bool hasTarget;
+  int targetLastSeen;
+  float targetPriority;
+  bool m_bTargetPrimaryFire;
 
-    static float getDistance(GameObject *obj1, GameObject *obj2);
+  // Brain speed
+  float thinkTime;
 
-    virtual float getBasePriority(GameObject *target);
+  // Other settings
+  bool m_bAiEnabled;
+  bool m_bCanDetectStealth;
 
-    virtual float getPriority(GameObject *obj, GameObject *target);
+  // Debug state
+  bool debug;
+  FILE* debugFile;
 
-    virtual float getPriority(GameObject *obj, int target_id);
+  // Target types
+  enum TargetType {
+	  SOLDIER = 0,
+	  LIGHT_VEHICLE,
+	  HEAVY_VEHICLE,
+	  FLYING,
+	  BUILDING,
+	  REPAIRABLE,
+	  UNKNOWN
+  };
 
-    bool getPrimary(GameObject *target);
 
-    /* Utility functions for both priority calculations and AI scripts to utilise */
-    virtual bool IsVehicleEmpty(VehicleGameObj *vobj);
 
-    virtual bool IsVehicleAIEnabled(VehicleGameObj *vobj);
+  /* -----
+  Events
+  ----- */
 
-    // "Global" decider about what a unit type is
-    static TargetType GetTargetType(GameObject *obj);
+  virtual void Created( GameObject *obj );
+  virtual void Timer_Expired(GameObject *obj, int number);
+  virtual void Custom ( GameObject* pObj, int message, int param, GameObject* pSender );
+  virtual void Action_Complete( GameObject *obj, int action_id, ActionCompleteReason complete_reason  );
+  //virtual void Enemy_Seen ( GameObject *obj, GameObject *enemy );
+  //virtual void Timer_Expired( GameObject *obj, int number );
+
+
+
+
+  /* ----
+  Functions
+  ----- */
+
+  virtual void Init( GameObject *obj );
+  virtual void loadSettings( GameObject *obj, bool loadSecondaryFireSettings, bool loadBuildingTargetSettings );
+  
+  virtual void AIStateChanged( GameObject* pObj, bool bEnabled );
+
+  /*!
+  * Called by derived classes to cancel all ongoing actions, can be overridden in a derived class
+  * to reset variable states as necessary
+  */
+  virtual void ResetAllActions(GameObject* obj);
+
+  static float getDistance ( GameObject *obj1, GameObject *obj2 );
+  virtual float getBasePriority(GameObject *target );
+  virtual float getPriority( GameObject *obj, GameObject *target );
+  virtual float getPriority( GameObject *obj, int target_id );
+  bool getPrimary ( GameObject *target );
+
+  /* Utility functions for both priority calculations and AI scripts to utilise */
+  virtual bool IsVehicleEmpty( VehicleGameObj* vobj );
+  virtual bool IsVehicleAIEnabled( VehicleGameObj* vobj );
+
+  // "Global" decider about what a unit type is
+  static TargetType GetTargetType(GameObject* obj);
 };
 
 // -------------------------------------------------------------------------------------------------
@@ -191,8 +172,9 @@ public:
 * my custom AI scripts should treat this as a heavy vehicle. Any vehicle without this script will be
 * considered to be a light vehicle.
 */
-class dp88_AI_heavyVehicleMarker : public ScriptImpClass {
-    void Created(GameObject *obj);
+class dp88_AI_heavyVehicleMarker : public ScriptImpClass
+{
+	void Created(GameObject* obj);
 };
 
 // -------------------------------------------------------------------------------------------------
@@ -204,8 +186,7 @@ class dp88_AI_heavyVehicleMarker : public ScriptImpClass {
 * This is a dummy script with no functionality which can be attached to an object to indicate all of
 * my custom AI scripts should treat this as a building.
 */
-class dp88_AI_Marker_Building : public ScriptImpClass {
-};
+class dp88_AI_Marker_Building : public ScriptImpClass {};
 
 // -------------------------------------------------------------------------------------------------
 
@@ -217,8 +198,7 @@ class dp88_AI_Marker_Building : public ScriptImpClass {
 * my custom AI scripts should treat this as a heavy vehicle. Any vehicle without this script will be
 * considered to be a light vehicle.
 */
-class dp88_AI_Marker_HeavyVehicle : public ScriptImpClass {
-};
+class dp88_AI_Marker_HeavyVehicle : public ScriptImpClass {};
 
 // -------------------------------------------------------------------------------------------------
 
@@ -229,12 +209,11 @@ class dp88_AI_Marker_HeavyVehicle : public ScriptImpClass {
 * This is a dummy script with no functionality which can be attached to an object to indicate all of
 * my custom AI scripts should treat this as a repair target.
 */
-class dp88_AI_Marker_Repairable : public ScriptImpClass {
+class dp88_AI_Marker_Repairable : public ScriptImpClass
+{
 public:
-    void Created(GameObject *obj);
-
+    void Created(GameObject* obj);
     float Get_Distance_From_Pathfind();
-
 protected:
     float pathfindDistance;
 };
@@ -248,78 +227,74 @@ protected:
 * The base class for unit AI classes, this defines some common functions and logic but leaves
 * the specific implementation up to the derived classes
 */
-class dp88_AI_Unit : public dp88_customAI {
+class dp88_AI_Unit : public dp88_customAI
+{
 public:
-    // Game Events
-    void Created(GameObject *obj);
+  // Game Events
+  void Created(GameObject *obj);
+  void Detach(GameObject *obj);
+  void Timer_Expired(GameObject *obj, int number);
+  void Action_Complete(GameObject *obj, int action_id, ActionCompleteReason reason);
 
-    void Detach(GameObject *obj);
+  // Custom AI initialisation script overloads
+  virtual void Init(GameObject *obj);
+  virtual void loadSettings(GameObject *obj, bool loadSecondaryFireSettings, bool loadBuildingTargetSettings);
 
-    void Timer_Expired(GameObject *obj, int number);
+  virtual void Force_Clear_Current_Objective();
+  dp88_AI_Objective* Get_Current_Objective() { return m_pCurrentObjective; }
 
-    void Action_Complete(GameObject *obj, int action_id, ActionCompleteReason reason);
-
-    // Custom AI initialisation script overloads
-    virtual void Init(GameObject *obj);
-
-    virtual void loadSettings(GameObject *obj, bool loadSecondaryFireSettings, bool loadBuildingTargetSettings);
-
-    virtual void Force_Clear_Current_Objective();
-
-    dp88_AI_Objective *Get_Current_Objective() { return m_pCurrentObjective; }
-
-    // used in combination with Force_Clear_Current_Objective() to invalidate references to objectives when they are deleted (prevents use-after-free bugs)
-    static DynamicVectorClass<dp88_AI_Unit *> ListOfAIUnits;
+  // used in combination with Force_Clear_Current_Objective() to invalidate references to objectives when they are deleted (prevents use-after-free bugs)
+  static DynamicVectorClass<dp88_AI_Unit*> ListOfAIUnits;
 
 protected:
-    static const int ACTION_ID_MOVE_TO_OBJECTIVE = 7850001;
-    static const int ACTION_ID_ATTACK_TARGET = 7850002;
+  static const int ACTION_ID_MOVE_TO_OBJECTIVE  = 7850001;
+  static const int ACTION_ID_ATTACK_TARGET      = 7850002;
 
-    // Action reset handler
-    void ResetAllActions(GameObject *obj);
+  // Action reset handler
+  void ResetAllActions(GameObject* obj);
 
-    // Go to the location of the current objective
-    virtual void GoToObjective(GameObject *obj, float speed = 1.0f);
+  // Go to the location of the current objective
+  virtual void GoToObjective(GameObject *obj, float speed = 1.0f);
 
-    // Attack the specified target
-    virtual void AttackTarget(GameObject *obj, GameObject *target);
+  // Attack the specified target
+  virtual void AttackTarget(GameObject *obj, GameObject *target);
 
-    /*!
-    * Used by AttackTarget to decide if the unit should give chase to the target (or, if already
-    * within preferred range, hold position) or whether it should continue with its existing
-    * pathfinding operation (or, if none, hold position).
-    *
-    * The default implementation will return true if the target base priority is >= 0 or there is
-    * no current objective to complete, otherwise it will return false
-    */
-    virtual bool ShouldPursueTarget(GameObject *obj, GameObject *target);
+  /*!
+  * Used by AttackTarget to decide if the unit should give chase to the target (or, if already
+  * within preferred range, hold position) or whether it should continue with its existing
+  * pathfinding operation (or, if none, hold position).
+  *
+  * The default implementation will return true if the target base priority is >= 0 or there is
+  * no current objective to complete, otherwise it will return false
+  */
+  virtual bool ShouldPursueTarget(GameObject *obj, GameObject *target);
 
-    /*!
-    * Get the preferred attack range for the specified target
-    */
-    virtual int GetPreferredAttackRange(GameObject *obj, GameObject *target) = 0;
+  /*!
+  * Get the preferred attack range for the specified target
+  */
+  virtual int GetPreferredAttackRange(GameObject* obj, GameObject *target) = 0;
 
-    /*!
-    * Check if the specified object is a valid target at this time
-    */
-    virtual bool IsValidTarget(GameObject *obj, GameObject *target) = 0;
+  /*!
+  * Check if the specified object is a valid target at this time
+  */
+  virtual bool IsValidTarget(GameObject* obj, GameObject *target) = 0;
 
-    /*!
-    * Select a new objective
-    */
-    virtual dp88_AI_Objective *ChooseNewObjective(GameObject *obj) = 0;
+  /*!
+  * Select a new objective
+  */
+  virtual dp88_AI_Objective* ChooseNewObjective(GameObject* obj) = 0;
 
-    // -----------------------------------------------------------------------------------------------
-    // Member variables
+  // -----------------------------------------------------------------------------------------------
+  // Member variables
 
-    /*! True if moving towards an objective */
-    bool m_bMovingToObjective;
+  /*! True if moving towards an objective */
+  bool m_bMovingToObjective;
 
-    /*! True if moving towards an attack target */
-    bool m_bMovingToTarget;
+  /*! True if moving towards an attack target */
+  bool m_bMovingToTarget;
 
-    // Current objective
-    dp88_AI_Objective *m_pCurrentObjective;
+  // Current objective
+  dp88_AI_Objective* m_pCurrentObjective;
 };
 
 // -------------------------------------------------------------------------------------------------
@@ -331,40 +306,39 @@ protected:
 * This is a somewhat experimental AI for vehicles which can track targets over a predefined distance
 * and attack them. This script is not yet suitable for use in maps or mods and is subject to change.
 */
-class dp88_AI_Tank_Offensive : public dp88_AI_Unit {
+class dp88_AI_Tank_Offensive : public dp88_AI_Unit
+{
 public:
-    // Game Events
-    void Created(GameObject *obj);
+  // Game Events
+  void Created(GameObject *obj);
+  void Enemy_Seen(GameObject *obj, GameObject *enemy);
 
-    void Enemy_Seen(GameObject *obj, GameObject *enemy);
-
-    // Custom AI initialisation script overloads
-    virtual void Init(GameObject *obj);
-
-    virtual void loadSettings(GameObject *obj, bool loadSecondaryFireSettings, bool loadBuildingTargetSettings);
+  // Custom AI initialisation script overloads
+  virtual void Init(GameObject *obj);
+  virtual void loadSettings(GameObject *obj, bool loadSecondaryFireSettings, bool loadBuildingTargetSettings);
 
 protected:
 
-    /*!
-    * Get the preferred attack range for the specified target
-    */
-    virtual int GetPreferredAttackRange(GameObject *obj, GameObject *target);
+  /*!
+  * Get the preferred attack range for the specified target
+  */
+  virtual int GetPreferredAttackRange(GameObject* obj, GameObject *target);
 
-    /*!
-    * Check if the specified object is a valid target at this time
-    */
-    virtual bool IsValidTarget(GameObject *obj, GameObject *target);
+  /*!
+  * Check if the specified object is a valid target at this time
+  */
+  virtual bool IsValidTarget(GameObject* obj, GameObject *target);
 
-    /*!
-    * Select a new objective
-    */
-    virtual dp88_AI_Objective *ChooseNewObjective(GameObject *obj);
+  /*!
+  * Select a new objective
+  */
+  virtual dp88_AI_Objective* ChooseNewObjective(GameObject* obj);
 
-    /*! \name Cached Script Parameters */
-    /*! @{ */
-    int m_primary_prefRange, m_secondary_prefRange;
-    int retreatDamageAmount;
-    /*! @} */
+  /*! \name Cached Script Parameters */
+  /*! @{ */
+  int m_primary_prefRange, m_secondary_prefRange;
+  int retreatDamageAmount;
+  /*! @} */
 };
 
 // -------------------------------------------------------------------------------------------------
@@ -439,55 +413,51 @@ protected:
 *   Never leave the Debug parameter enabled when releasing your mod, it will clog up everyones
 *   machines with useless text files everywhere... people usually don't like that :D
 */
-class dp88_AI_Turret : public dp88_customAI {
+class dp88_AI_Turret : public dp88_customAI
+{
 public:
-    // Events
-    virtual void Enemy_Seen(GameObject *obj, GameObject *enemy);
+  // Events
+  virtual void Enemy_Seen ( GameObject *obj, GameObject *enemy );
+  virtual void Timer_Expired( GameObject *obj, int number );
+  virtual void Damaged(GameObject *obj, GameObject *damager, float amount);
 
-    virtual void Timer_Expired(GameObject *obj, int number);
+  // Custom AI initialisation script overrides
+  virtual void Init( GameObject *obj );
+  virtual void loadSettings( GameObject *obj, bool loadSecondaryFireSettings, bool loadBuildingTargetSettings );
 
-    virtual void Damaged(GameObject *obj, GameObject *damager, float amount);
-
-    // Custom AI initialisation script overrides
-    virtual void Init(GameObject *obj);
-
-    virtual void loadSettings(GameObject *obj, bool loadSecondaryFireSettings, bool loadBuildingTargetSettings);
-
-    // Custom AI event overrides
-    virtual void AIStateChanged(GameObject *pObj, bool bEnabled);
+  // Custom AI event overrides
+  virtual void AIStateChanged( GameObject* pObj, bool bEnabled );
 
 protected:
-    bool requiresPower, splashInfantry;
+  bool requiresPower, splashInfantry;
 
-    // These can be overloaded from their default functionality as required, allowing the default
-    // enemy seen procedure to be reused even when the behaviour of these checks has been altered
-    virtual bool checkTeam(GameObject *obj, GameObject *target);
-
-    virtual bool checkRange(GameObject *obj, GameObject *target, bool primary);
-
-    virtual bool checkPowerState(GameObject *obj);
+  // These can be overloaded from their default functionality as required, allowing the default
+  // enemy seen procedure to be reused even when the behaviour of these checks has been altered
+  virtual bool checkTeam ( GameObject* obj, GameObject* target );
+  virtual bool checkRange ( GameObject* obj, GameObject* target, bool primary );
+  virtual bool checkPowerState( GameObject* obj );
 
 
 
 
-    /* These functions are used to initiate and control the AI actions and can be overloaded from
-    their defaults if required to provide custom functionality, such as delaying an attack whilst
-    waiting for a chargeup / popup animation to occur. */
+  /* These functions are used to initiate and control the AI actions and can be overloaded from
+  their defaults if required to provide custom functionality, such as delaying an attack whilst
+  waiting for a chargeup / popup animation to occur. */
 
-    // These is called when a valid target has been identified and selected as the highest priority
-    // target, the turret should begin attacking in this function. Note that this may be called
-    // while another attack is already in progress, either normal or splash.
-    virtual void attackTarget(GameObject *obj, GameObject *target, bool primary);
+  // These is called when a valid target has been identified and selected as the highest priority
+  // target, the turret should begin attacking in this function. Note that this may be called
+  // while another attack is already in progress, either normal or splash.
+  virtual void attackTarget ( GameObject* obj, GameObject* target, bool primary );
 
-    // This is called instead of attackTarget when we are set to splash infantry instead of shooting
-    // at them directly. Whilst we are attacking an infantry unit with splash this will be called
-    // regularly on a timer to update the location of the target. Note that this may be called
-    // while another attack is already in progress, either normal or splash.
-    virtual void attackLocation(GameObject *obj, Vector3 location, bool primary);
+  // This is called instead of attackTarget when we are set to splash infantry instead of shooting
+  // at them directly. Whilst we are attacking an infantry unit with splash this will be called
+  // regularly on a timer to update the location of the target. Note that this may be called
+  // while another attack is already in progress, either normal or splash.
+  virtual void attackLocation ( GameObject* obj, Vector3 location, bool primary );
 
-    // This is called when the target is no longer valid and the turret should stop attacking, this
-    // is called to stop both attackTarget and splashLocation attacks.
-    virtual void stopAttacking(GameObject *obj);
+  // This is called when the target is no longer valid and the turret should stop attacking, this
+  // is called to stop both attackTarget and splashLocation attacks.
+  virtual void stopAttacking ( GameObject* obj );
 };
 
 // -------------------------------------------------------------------------------------------------
@@ -574,50 +544,47 @@ protected:
 *   Never leave the Debug parameter enabled when releasing your mod, it will clog up everyones
 *   machines with useless text files everywhere... people usually don't like that :D
 */
-class dp88_AI_PopupTurret : public dp88_AI_Turret {
+class dp88_AI_PopupTurret : public dp88_AI_Turret
+{
 public:
-    // Game events
-    virtual void Created(GameObject *pSelf);
-
-    virtual void Timer_Expired(GameObject *pSelf, int number);
-
-    virtual void Custom(GameObject *pSelf, int type, int param, GameObject *pSender);
-
-    virtual void Animation_Complete(GameObject *pSelf, const char *animation_name);
-
-    virtual void Destroyed(GameObject *pSelf);
+  // Game events
+  virtual void Created ( GameObject* pSelf );
+  virtual void Timer_Expired ( GameObject* pSelf, int number );
+  virtual void Custom ( GameObject* pSelf, int type, int param, GameObject* pSender );
+  virtual void Animation_Complete ( GameObject* pSelf, const char* animation_name );
+  virtual void Destroyed( GameObject* pSelf );
 
 
 protected:
-    static const unsigned char STATE_UNDEPLOYED = 0x00;
-    static const unsigned char STATE_DEPLOYING = 0x01;
-    static const unsigned char STATE_DEPLOYED = 0x02;
-    static const unsigned char STATE_UNDEPLOYING = 0x03;
+  static const unsigned char    STATE_UNDEPLOYED  = 0x00;
+  static const unsigned char    STATE_DEPLOYING   = 0x01;
+  static const unsigned char    STATE_DEPLOYED    = 0x02;
+  static const unsigned char    STATE_UNDEPLOYING = 0x03;
 
-    /*! Current deployment state */
-    unsigned char m_deploymentState;
+  /*! Current deployment state */
+  unsigned char m_deploymentState;
 
-    /*! Time at which we will undeploy unless we see a target in the meantime */
-    time_t m_undeployTime;
+  /*! Time at which we will undeploy unless we see a target in the meantime */
+  time_t m_undeployTime;
 
-    /*! ID of the spotter turret we have created for ourselves */
-    int m_spotterId;
-
-
-    /*! Overloaded form of dp88_AI_Turret::attackTarget to check deployment state prior to initiating attack */
-    virtual void attackTarget(GameObject *pSelf, GameObject *pTarget, bool primary);
-
-    /*! Overloaded form of dp88_AI_Turret::attackLocation to check deployment state prior to initiating attack */
-    virtual void attackLocation(GameObject *pSelf, Vector3 location, bool primary);
+  /*! ID of the spotter turret we have created for ourselves */
+  int m_spotterId;
 
 
-    /*! Function to initiate the deployment sequence if it is not already in process, this is called
-    when we want to start shooting things */
-    virtual void Deploy(GameObject *pSelf);
+  /*! Overloaded form of dp88_AI_Turret::attackTarget to check deployment state prior to initiating attack */
+  virtual void attackTarget ( GameObject* pSelf, GameObject* pTarget, bool primary );
 
-    /*! Function to initiate the undeployment sequence if it is not already in process, this is called
-    when we are bored because we haven't had anything to shoot at for a while...*/
-    virtual void Undeploy(GameObject *pSelf);
+  /*! Overloaded form of dp88_AI_Turret::attackLocation to check deployment state prior to initiating attack */
+  virtual void attackLocation ( GameObject* pSelf, Vector3 location, bool primary );
+
+
+  /*! Function to initiate the deployment sequence if it is not already in process, this is called
+  when we want to start shooting things */
+  virtual void Deploy ( GameObject* pSelf );
+
+  /*! Function to initiate the undeployment sequence if it is not already in process, this is called
+  when we are bored because we haven't had anything to shoot at for a while...*/
+  virtual void Undeploy ( GameObject* pSelf );
 };
 
 // -------------------------------------------------------------------------------------------------
@@ -630,8 +597,9 @@ protected:
 * turret to allow it to 'see' enemies when whilst the muzzle is underground. Simply fires off a
 * custom event to the parent turret each time it sees an enemy with the ID of that enemy.
 */
-class dp88_AI_PopupTurret_Spotter : public ScriptImpClass {
-    void Enemy_Seen(GameObject *pSelf, GameObject *pEnemy);
+class dp88_AI_PopupTurret_Spotter : public ScriptImpClass
+{
+  void Enemy_Seen ( GameObject* pSelf, GameObject* pEnemy );
 };
 
 // -------------------------------------------------------------------------------------------------
@@ -743,71 +711,69 @@ class dp88_AI_PopupTurret_Spotter : public ScriptImpClass {
 *   Never leave the Debug parameter enabled when releasing your mod, it will clog up everyones
 *   machines with useless text files everywhere... people usually don't like that :D
 */
-class dp88_AI_ChargedTurret : public dp88_AI_Turret {
+class dp88_AI_ChargedTurret : public dp88_AI_Turret
+{
 public:
-    // Game events
-    virtual void Timer_Expired(GameObject *pSelf, int number);
+  // Game events
+  virtual void Timer_Expired ( GameObject* pSelf, int number );
+  virtual void Animation_Complete ( GameObject* pSelf, const char* animation_name );
+  virtual void Destroyed( GameObject* pSelf );
 
-    virtual void Animation_Complete(GameObject *pSelf, const char *animation_name);
-
-    virtual void Destroyed(GameObject *pSelf);
-
-    // Custom AI initialisation script overloads
-    virtual void Init(GameObject *pSelf);
-
-    virtual void loadSettings(GameObject *pSelf, bool loadSecondaryFireSettings, bool loadBuildingTargetSettings);
+  // Custom AI initialisation script overloads
+  virtual void Init( GameObject* pSelf );
+  virtual void loadSettings( GameObject* pSelf, bool loadSecondaryFireSettings, bool loadBuildingTargetSettings );
 
 
 protected:
-    unsigned int m_myObjId; //!< My own GameObject ID, used by the observer callbacks
+  unsigned int m_myObjId; //!< My own GameObject ID, used by the observer callbacks
 
-    /*! Are we currently charging ready for an attack? */
-    bool m_bIsCharging;
+  /*! Are we currently charging ready for an attack? */
+  bool m_bIsCharging;
 
-    /*! Are we currently discharging (ie: attacking an enemy)? */
-    bool m_bIsDischarging;
+  /*! Are we currently discharging (ie: attacking an enemy)? */
+  bool m_bIsDischarging;
 
-    /*! This is true if the turret is reloading AND the remaining reload duration exceeds the
-    * charge up time. Prevents the charge animation starting prematurely and then hanging around
-    * waiting for the reload to be finished before firing */
-    bool m_bIsPreReloading;
+  /*! This is true if the turret is reloading AND the remaining reload duration exceeds the
+  * charge up time. Prevents the charge animation starting prematurely and then hanging around
+  * waiting for the reload to be finished before firing */
+  bool m_bIsPreReloading;
 
-    /*! ID of the charge animation object we have created for ourselves */
-    int m_chargeAnimObjId;
+  /*! ID of the charge animation object we have created for ourselves */
+  int m_chargeAnimObjId;
 
-    /*! Power state last time it was checked - if this changes we need to update our animation */
-    bool m_bPowerState;
+  /*! Power state last time it was checked - if this changes we need to update our animation */
+  bool m_bPowerState;
 
-    /*! A looped animation controller for the idle and low power state animations */
-    LoopedAnimationController *m_pLoopedAnimCtrl;
-
-    /*! An animation observer for the object identified by m_chargeAnimObjId, if used */
-    dp88_AI_ChargedTurret_AnimationObserver *m_pAnimationObserver;
-
-
-    /*! Overloaded form of dp88_AI_Turret::attackTarget which initiates turret charging (if it is not
-    * currently in progress) rather than actually attacking anything */
-    virtual void attackTarget(GameObject *pSelf, GameObject *pTarget, bool primary);
-
-    /*! Overloaded form of dp88_AI_Turret::attackLocation which initiates turret charging (if it is
-    * not currently in progress) rather than actually attacking anything */
-    virtual void attackLocation(GameObject *pSelf, Vector3 location, bool primary);
+  /*! A looped animation controller for the idle and low power state animations */
+  LoopedAnimationController* m_pLoopedAnimCtrl;
+  
+  /*! An animation observer for the object identified by m_chargeAnimObjId, if used */
+  dp88_AI_ChargedTurret_AnimationObserver* m_pAnimationObserver;
 
 
-    /*! This function is called to initiate the charge up process, if it is not already in progress */
-    virtual void StartCharging(GameObject *pSelf);
+  /*! Overloaded form of dp88_AI_Turret::attackTarget which initiates turret charging (if it is not
+  * currently in progress) rather than actually attacking anything */
+  virtual void attackTarget ( GameObject* pSelf, GameObject* pTarget, bool primary );
 
-    /*! This function is called when the turret is fully charged and is ready to fire at something */
-    virtual void StartDischarging(GameObject *pSelf);
+  /*! Overloaded form of dp88_AI_Turret::attackLocation which initiates turret charging (if it is
+  * not currently in progress) rather than actually attacking anything */
+  virtual void attackLocation ( GameObject* pSelf, Vector3 location, bool primary );
 
 
-    /*! Internal utility function to get a pointer to the object upon which the charge animation will
-    * be applied - this will either be the turret itself or the seperate charge animation object if
-    * one was specified in the script parameters */
-    virtual GameObject *GetAnimationObject(GameObject *pSelf);
+  /*! This function is called to initiate the charge up process, if it is not already in progress */
+  virtual void StartCharging ( GameObject* pSelf );
 
-    /*! Called when the turret is idle or unpowered to apply the correct animation frames */
-    virtual void ApplyIdleAnimation(GameObject *pSelf);
+  /*! This function is called when the turret is fully charged and is ready to fire at something */
+  virtual void StartDischarging ( GameObject* pSelf );
+
+
+  /*! Internal utility function to get a pointer to the object upon which the charge animation will
+  * be applied - this will either be the turret itself or the seperate charge animation object if
+  * one was specified in the script parameters */
+  virtual GameObject* GetAnimationObject ( GameObject* pSelf );
+
+  /*! Called when the turret is idle or unpowered to apply the correct animation frames */
+  virtual void ApplyIdleAnimation ( GameObject* pSelf );
 };
 
 /*!
@@ -816,15 +782,16 @@ protected:
 *
 * An observer to detect animations if the "separate object" feature is used
 */
-class dp88_AI_ChargedTurret_AnimationObserver : public ObserverImpClass {
+class dp88_AI_ChargedTurret_AnimationObserver : public ObserverImpClass
+{
 public:
-    dp88_AI_ChargedTurret_AnimationObserver(dp88_AI_ChargedTurret *pParent);
+  dp88_AI_ChargedTurret_AnimationObserver(dp88_AI_ChargedTurret* pParent);
 
-    // Game events
-    virtual void Animation_Complete(GameObject *pSelf, const char *animation_name);
-
+  // Game events
+  virtual void Animation_Complete(GameObject* pSelf, const char* animation_name);
+  
 private:
-    dp88_AI_ChargedTurret *m_pParent;
+  dp88_AI_ChargedTurret* m_pParent;
 };
 
 // -------------------------------------------------------------------------------------------------
@@ -856,76 +823,72 @@ private:
 * \param Priority_Aircraft
 *   Objective priority for aircraft, or 0 is this objective is not suitable for aircraft
 */
-class dp88_AI_Objective : public ScriptImpClass {
+class dp88_AI_Objective : public ScriptImpClass
+{
 public:
-    void Created(GameObject *obj);
+  void Created ( GameObject* obj );
+  void Detach ( GameObject* obj );
 
-    void Detach(GameObject *obj);
+  GameObject* GetGameObject();
 
-    GameObject *GetGameObject();
+  unsigned int GetType()    { return m_type; }
+  int GetTeam()             { return m_team; }
+  int GetRange()            { return m_range; }
+  const char* GetDebugTag() { return m_debugTag; }
 
-    unsigned int GetType() { return m_type; }
+  /*! Get the priority of this objective for the specified AI unit */
+  float GetPriority(GameObject* obj, float distance_modifier);
 
-    int GetTeam() { return m_team; }
+  /*!
+  * Finds the most suitable objective of a given type for the specified unit, based on the distance
+  * to the objective and their distance modifier
+  */
+  static dp88_AI_Objective* GetBestObjective ( GameObject* obj, unsigned int objective_type, float distance_modifier, DynamicVectorClass<int> ignoredObjectives );
 
-    int GetRange() { return m_range; }
+  /*!
+  * Counts the existing objectives of a given type for the specified team
+  */
+  static int CountObjectives( int team, unsigned int objective_type );
 
-    const char *GetDebugTag() { return m_debugTag; }
+  /*!
+  * Counts the existing valid objectives of a given type for the specified unit
+  */
+  static int CountUnitObjectives( int team, unsigned int objective_type, GameObject* obj, float distance_modifier );
 
-    /*! Get the priority of this objective for the specified AI unit */
-    float GetPriority(GameObject *obj, float distance_modifier);
+  /*! Checks if the specified objective is still valid */
+  static bool IsValidObjective ( dp88_AI_Objective* pObjective );
 
-    /*!
-    * Finds the most suitable objective of a given type for the specified unit, based on the distance
-    * to the objective and their distance modifier
-    */
-    static dp88_AI_Objective *GetBestObjective(GameObject *obj, unsigned int objective_type, float distance_modifier,
-                                               DynamicVectorClass<int> ignoredObjectives);
-
-    /*!
-    * Counts the existing objectives of a given type for the specified team
-    */
-    static int CountObjectives(int team, unsigned int objective_type);
-
-    /*!
-    * Counts the existing valid objectives of a given type for the specified unit
-    */
-    static int CountUnitObjectives(int team, unsigned int objective_type, GameObject *obj, float distance_modifier);
-
-    /*! Checks if the specified objective is still valid */
-    static bool IsValidObjective(dp88_AI_Objective *pObjective);
-
-    /*! \name Objective types */
-    /*! @{ */
-    const static unsigned int TYPE_OFFENSIVE = 1;
-    const static unsigned int TYPE_DEFENSIVE = 2;
-    const static unsigned int TYPE_ENGINEERING = 3;
-    /*! @} */
+  /*! \name Objective types */
+  /*! @{ */
+  const static unsigned int TYPE_OFFENSIVE = 1;
+  const static unsigned int TYPE_DEFENSIVE = 2;
+  const static unsigned int TYPE_ENGINEERING = 3;
+  /*! @} */
 
 protected:
-    /*! \name Unit types */
-    /*! @{ */
-    const static unsigned char UNITTYPE_SOLDIER = 0;
-    const static unsigned char UNITTYPE_LVEHICLE = 1;
-    const static unsigned char UNITTYPE_HVEHICLE = 2;
-    const static unsigned char UNITTYPE_AIRCRAFT = 3;
-    const static unsigned char UNITTYPE_MAX = UNITTYPE_AIRCRAFT;
-    const static unsigned char UNITTYPE_UNKNOWN = UCHAR_MAX;
-    /*! @} */
+  /*! \name Unit types */
+  /*! @{ */
+  const static unsigned char UNITTYPE_SOLDIER = 0;
+  const static unsigned char UNITTYPE_LVEHICLE = 1;
+  const static unsigned char UNITTYPE_HVEHICLE = 2;
+  const static unsigned char UNITTYPE_AIRCRAFT = 3;
+  const static unsigned char UNITTYPE_MAX = UNITTYPE_AIRCRAFT;
+  const static unsigned char UNITTYPE_UNKNOWN = UCHAR_MAX;
+  /*! @} */
 
-    /*! Get the unit type of the specified unit */
-    unsigned char GetUnitType(GameObject *obj);
+  /*! Get the unit type of the specified unit */
+  unsigned char GetUnitType(GameObject* obj);
 
-    //int m_objID;;
+  //int m_objID;;
 
-    /*! \name Cached Script Parameters */
-    /*! @{ */
-    unsigned int m_type;
-    int m_priority[UNITTYPE_MAX + 1];
-    int m_range;
-    int m_team;
-    const char *m_debugTag;
-    /*! @} */
+  /*! \name Cached Script Parameters */
+  /*! @{ */
+  unsigned int m_type;
+  int m_priority[UNITTYPE_MAX + 1];
+  int m_range;
+  int m_team;
+  const char* m_debugTag;
+  /*! @} */
 
-    static DynamicVectorClass<dp88_AI_Objective *> Objectives;
+  static DynamicVectorClass<dp88_AI_Objective *> Objectives;
 };

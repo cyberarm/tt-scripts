@@ -19,33 +19,25 @@ public:
 #ifndef TTLE_EXPORTS
     std::string subdirectories;
 #else
-    StringClass SubDirectory;
+	StringClass SubDirectory;
 #endif
-    bool IsStripPath;
-    mutable CriticalSectionClass Mutex;
-
-    SimpleFileFactoryClass();
-
-    virtual ~SimpleFileFactoryClass() {};
-
-    virtual FileClass *Get_File(const char *filename);
-
-    virtual void Return_File(FileClass *file);
-
-    void Get_Sub_Directory(StringClass &new_dir) const;
-
-    void Set_Sub_Directory(const char *sub_directory);
-
-    void Append_Sub_Directory(const char *sub_directory);
-
-    void Prepend_Sub_Directory(const char *sub_directory);
-
-    void Set_Strip_Path(bool strip) {
-        IsStripPath = strip;
-    }
-
-    bool Get_Strip_Path() const {
-        return IsStripPath;
-    }
+	bool IsStripPath;
+	mutable CriticalSectionClass Mutex;
+	SimpleFileFactoryClass();
+	virtual ~SimpleFileFactoryClass() {};
+	virtual FileClass* Get_File    (const char* filename);
+	virtual void       Return_File (FileClass* file);
+	void Get_Sub_Directory(StringClass& new_dir) const;
+	void Set_Sub_Directory(const char* sub_directory);
+	void Append_Sub_Directory(const char* sub_directory);
+	void Prepend_Sub_Directory(const char* sub_directory);
+	void Set_Strip_Path(bool strip)
+	{
+		IsStripPath = strip;
+	}
+	bool Get_Strip_Path() const
+	{
+		return IsStripPath;
+	}
 };
 

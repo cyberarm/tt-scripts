@@ -15,35 +15,26 @@
 #include "BuildingGameObjDef.h"
 
 
-class RepairBayGameObjDef : public BuildingGameObjDef {
+class RepairBayGameObjDef : public BuildingGameObjDef
+{
 public:
-    friend class RepairBayGameObj;
-
-    RepairBayGameObjDef(void);
-
-    ~RepairBayGameObjDef(void);
-
-    uint32 Get_Class_ID(void) const;
-
-    PersistClass *Create(void) const;
-
-    bool Save(ChunkSaveClass &csave);
-
-    bool Load(ChunkLoadClass &cload);
-
-    const PersistFactoryClass &Get_Factory(void) const;
-
+	friend class RepairBayGameObj;
+	RepairBayGameObjDef (void);
+	~RepairBayGameObjDef (void);
+	uint32								Get_Class_ID (void) const;
+	PersistClass *						Create (void) const;
+	bool									Save (ChunkSaveClass &csave);
+	bool									Load (ChunkLoadClass &cload);
+	const PersistFactoryClass &	Get_Factory (void) const;
 #ifdef DDBEDIT
-    virtual void                        Dump (FileClass &file);
+	virtual void                        Dump (FileClass &file);
 #endif
-    DECLARE_EDITABLE (RepairBayGameObjDef, BuildingGameObjDef);
+	DECLARE_EDITABLE (RepairBayGameObjDef, BuildingGameObjDef);
 protected:
-    void Load_Variables(ChunkLoadClass &cload);
-
-    float RepairPerSec;
-    int RepairingStaticAnimDefID;
-
-    friend class PresetDump;
+	void					Load_Variables (ChunkLoadClass &cload);
+	float					RepairPerSec;
+	int					RepairingStaticAnimDefID;
+	friend class PresetDump;
 };
 
 

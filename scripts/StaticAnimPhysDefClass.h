@@ -15,58 +15,40 @@
 #include "StaticPhysDefClass.h"
 #include "ProjectorManagerClass.h"
 #include "AnimCollisionManagerClass.h"
-
-class StaticAnimPhysDefClass : public StaticPhysDefClass {
+class StaticAnimPhysDefClass : public StaticPhysDefClass
+{
 public:
-    StaticAnimPhysDefClass(void);
-
-    virtual uint32 Get_Class_ID(void) const;
-
-    virtual PersistClass *Create(void) const;
-
-    virtual const char *Get_Type_Name(void) { return "StaticAnimPhysDef"; }
-
-    virtual bool Is_Type(const char *);
-
-    virtual const PersistFactoryClass &Get_Factory(void) const;
-
-    virtual bool Save(ChunkSaveClass &csave);
-
-    virtual bool Load(ChunkLoadClass &cload);
-
+	StaticAnimPhysDefClass(void);
+	virtual uint32								Get_Class_ID (void) const;
+	virtual PersistClass *					Create(void) const;
+	virtual const char *						Get_Type_Name(void)			{ return "StaticAnimPhysDef"; }
+	virtual bool								Is_Type(const char *);
+	virtual const PersistFactoryClass &	Get_Factory (void) const;
+	virtual bool								Save(ChunkSaveClass &csave);
+	virtual bool								Load(ChunkLoadClass &cload);
 #ifdef DDBEDIT
-    virtual void                        Dump (FileClass &file);
+	virtual void                        Dump (FileClass &file);
 #endif
-    DECLARE_EDITABLE(StaticAnimPhysDefClass, StaticPhysDefClass);
-
-    bool Shadow_Dynamic_Objs(void) { return ShadowDynamicObjs; }
-
-    bool Shadow_Is_Additive(void) { return ShadowIsAdditive; }
-
-    bool Shadow_Ignores_Z_Rotation(void) { return ShadowIgnoresZRotation; }
-
-    float Shadow_NearZ(void) { return ShadowNearZ; }
-
-    float Shadow_FarZ(void) { return ShadowFarZ; }
-
-    float Shadow_Intensity(void) { return ShadowIntensity; }
-
-    bool Does_Collide_In_Pathfind(void) { return DoesCollideInPathfind; }
-
+	DECLARE_EDITABLE(StaticAnimPhysDefClass,StaticPhysDefClass);
+	bool											Shadow_Dynamic_Objs(void)			{ return ShadowDynamicObjs; }
+	bool											Shadow_Is_Additive(void)			{ return ShadowIsAdditive; }
+	bool											Shadow_Ignores_Z_Rotation(void)	{ return ShadowIgnoresZRotation; }
+	float											Shadow_NearZ(void)					{ return ShadowNearZ; }
+	float											Shadow_FarZ(void)						{ return ShadowFarZ; }
+	float											Shadow_Intensity(void)				{ return ShadowIntensity; }
+	bool											Does_Collide_In_Pathfind(void)	{ return DoesCollideInPathfind; }
 protected:
-    bool IsCosmetic;
-    AnimCollisionManagerDefClass AnimManagerDef;
-    ProjectorManagerDefClass ProjectorManagerDef;
-    bool ShadowDynamicObjs;
-    bool ShadowIsAdditive;
-    bool ShadowIgnoresZRotation;
-    float ShadowNearZ;
-    float ShadowFarZ;
-    float ShadowIntensity;
-    bool DoesCollideInPathfind;
-
-    friend class StaticAnimPhysClass;
-
-    friend class PresetDump;
+	bool											IsCosmetic;
+	AnimCollisionManagerDefClass			AnimManagerDef;
+	ProjectorManagerDefClass				ProjectorManagerDef;
+	bool											ShadowDynamicObjs;
+	bool											ShadowIsAdditive;
+	bool											ShadowIgnoresZRotation;
+	float											ShadowNearZ;
+	float											ShadowFarZ;
+	float											ShadowIntensity;
+	bool											DoesCollideInPathfind;
+	friend class StaticAnimPhysClass;
+	friend class PresetDump;
 }; // RH7: 116
 #endif

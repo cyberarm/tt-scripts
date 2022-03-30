@@ -105,55 +105,56 @@ Random weather script
 *   precipitation_probability_volcanic_ash is 1 the probability of clear conditions will be 100 -
 *   5 - 15 - 1 = 79%
 */
-class dp88_randomWeather : public ScriptImpClass {
-    void Created(GameObject *obj);
-
-    void Timer_Expired(GameObject *obj, int number);
+class dp88_randomWeather : public ScriptImpClass
+{
+	void Created ( GameObject* obj );
+	void Timer_Expired ( GameObject* obj, int number );
 };
+
+
+
 
 
 /*------------------------
 Unit sounds script
 --------------------------*/
 
-class dp88_unitSounds : public ScriptImpClass {
-    void Created(GameObject *obj);
+class dp88_unitSounds : public ScriptImpClass
+{
+	void Created ( GameObject* obj );
+	void Damaged( GameObject *obj, GameObject *damager, float amount );
+	void Killed ( GameObject *obj, GameObject *killer );
+	void Timer_Expired ( GameObject* obj, int number );
+	void Custom ( GameObject* obj, int type, int param, GameObject* sender );
 
-    void Damaged(GameObject *obj, GameObject *damager, float amount);
+	// Enabled states
+	bool damagedEnabled;
+	bool heavilyDamagedEnabled;
+	bool healedEnabled;
+	bool fallingDamageEnabled;
 
-    void Killed(GameObject *obj, GameObject *killer);
-
-    void Timer_Expired(GameObject *obj, int number);
-
-    void Custom(GameObject *obj, int type, int param, GameObject *sender);
-
-    // Enabled states
-    bool damagedEnabled;
-    bool heavilyDamagedEnabled;
-    bool healedEnabled;
-    bool fallingDamageEnabled;
-
-    // Counters
-    int healAmount;
+	// Counters
+	int healAmount;
 };
+
 
 
 /*------------------------
 Unique Infantry Controller
 --------------------------*/
 
-class dp88_uniqueInfantry_controller : public JFW_Object_Created_Hook_Base {
-    void Created(GameObject *obj);
+class dp88_uniqueInfantry_controller : public JFW_Object_Created_Hook_Base
+{
+	void Created ( GameObject* obj );
+	void ObjectCreateHook ( GameObject* obj );
+	void Destroyed ( GameObject* obj );
 
-    void ObjectCreateHook(GameObject *obj);
-
-    void Destroyed(GameObject *obj);
-
-    char *infantry_preset;
-    int team_id;
-    int max_count;
-    int percent_chance;
+	char* infantry_preset;
+	int team_id;
+	int max_count;
+	int percent_chance;
 };
+
 
 
 /*!
@@ -262,127 +263,121 @@ class dp88_uniqueInfantry_controller : public JFW_Object_Created_Hook_Base {
 *   animation will not change again until it is repaired to 100% health
 */
 
-class dp88_damageAnimation : public ScriptImpClass {
-    void Created(GameObject *obj);
+class dp88_damageAnimation : public ScriptImpClass
+{
+  void Created ( GameObject* obj );
+  void Detach ( GameObject* obj );
+  void Damaged( GameObject *obj, GameObject *damager, float amount );
+  void Timer_Expired ( GameObject* obj, int number );
 
-    void Detach(GameObject *obj);
+  void SetDamageAnimation ( GameObject* obj );
 
-    void Damaged(GameObject *obj, GameObject *damager, float amount);
+  int currentDamageLevel;
+  bool basePowerState;
+  bool m_bIsDestroyed;
 
-    void Timer_Expired(GameObject *obj, int number);
-
-    void SetDamageAnimation(GameObject *obj);
-
-    int currentDamageLevel;
-    bool basePowerState;
-    bool m_bIsDestroyed;
-
-    /*! \name Cached Script Parameters */
-    /*! @{ */
-    int damageLevelBoundaries[6];
-    int damageLevelStartFrames[6];
-    int damageLevelEndFrames[6];
-    int damageLevelLowPowerStartFrames[6];
-    int damageLevelLowPowerEndFrames[6];
-    bool loopAnimation;
-    bool m_bUseDestroyedMode;
-    /*! @} */
+  /*! \name Cached Script Parameters */
+  /*! @{ */
+  int damageLevelBoundaries[6];
+  int damageLevelStartFrames[6];
+  int damageLevelEndFrames[6];
+  int damageLevelLowPowerStartFrames[6];
+  int damageLevelLowPowerEndFrames[6];
+  bool loopAnimation;
+  bool m_bUseDestroyedMode;
+  /*! @} */
 protected:
-    LoopedAnimationController *m_pLoopedAnimCtrl;
+  LoopedAnimationController* m_pLoopedAnimCtrl;
 public:
-    dp88_damageAnimation() : m_pLoopedAnimCtrl(0) {}
+  dp88_damageAnimation() : m_pLoopedAnimCtrl(0) {}
 };
+
 
 
 /*------------------------
 Object Annoucements script
 --------------------------*/
 
-class dp88_objectAnnouncements : public ScriptImpClass {
-    void Created(GameObject *obj);
+class dp88_objectAnnouncements : public ScriptImpClass
+{
+	void Created ( GameObject* obj );
+	void Damaged ( GameObject *obj, GameObject *damager, float amount );
+	void Killed ( GameObject *obj, GameObject *killer );
 
-    void Damaged(GameObject *obj, GameObject *damager, float amount);
+	time_t lastAnnouncementTime;
+	int minimumAnnounceInterval;
 
-    void Killed(GameObject *obj, GameObject *killer);
+	unsigned long team0_underAttackStringId;
+	unsigned long team1_underAttackStringId;
+	unsigned long team0_destroyedStringId;
+	unsigned long team1_destroyedStringId;
 
-    time_t lastAnnouncementTime;
-    int minimumAnnounceInterval;
-
-    unsigned long team0_underAttackStringId;
-    unsigned long team1_underAttackStringId;
-    unsigned long team0_destroyedStringId;
-    unsigned long team1_destroyedStringId;
-
-    unsigned long team0_underAttackSoundId;
-    unsigned long team1_underAttackSoundId;
-    unsigned long team0_destroyedSoundId;
-    unsigned long team1_destroyedSoundId;
+	unsigned long team0_underAttackSoundId;
+	unsigned long team1_underAttackSoundId;
+	unsigned long team0_destroyedSoundId;
+	unsigned long team1_destroyedSoundId;
 };
+
+
+
 
 
 /*------------------------
 Chrono Tank Script
 --------------------------*/
 
-class dp88_chronoTank : public JFW_Key_Hook_Base {
-    void Created(GameObject *obj);
+class dp88_chronoTank : public JFW_Key_Hook_Base
+{
+	void Created ( GameObject* obj );
+	void Killed ( GameObject *obj, GameObject *killer );
+	void Custom( GameObject *obj, int type, int param, GameObject *sender );
+	void Timer_Expired ( GameObject* obj, int number );
+	void KeyHook();
 
-    void Killed(GameObject *obj, GameObject *killer);
+	void Shift_Out_Begin(GameObject* obj);
+	void Shift_Out_Complete(GameObject* obj);
+	void Shift_Out_Cleanup(GameObject* obj);
+	void Shift_In_Begin(GameObject* obj);
+	void Shift_In_Complete(GameObject* obj);
+	void Shift_In_Cleanup(GameObject* obj);
 
-    void Custom(GameObject *obj, int type, int param, GameObject *sender);
-
-    void Timer_Expired(GameObject *obj, int number);
-
-    void KeyHook();
-
-    void Shift_Out_Begin(GameObject *obj);
-
-    void Shift_Out_Complete(GameObject *obj);
-
-    void Shift_Out_Cleanup(GameObject *obj);
-
-    void Shift_In_Begin(GameObject *obj);
-
-    void Shift_In_Complete(GameObject *obj);
-
-    void Shift_In_Cleanup(GameObject *obj);
-
-    int state;
-    int object_id;        // For KeyHook (obj is not provided)
-    int driver_id;
-    int shifted_vehicle_object_id;
+	int state;
+	int object_id;		// For KeyHook (obj is not provided)
+	int driver_id;
+	int shifted_vehicle_object_id;
 
 private:
-    // Define states
-    enum CT_STATES {
-        CT_STATE_CHARGING,
-        CT_STATE_CHARGED,
-        CT_STATE_SHIFTING_OUT,
-        CT_STATE_SHIFTED_OUT_PENDING_CLEANUP_1,
-        CT_STATE_SHIFTED_OUT_PENDING_CLEANUP_2,
-        CT_STATE_SHIFTED_OUT,
-        CT_STATE_SHIFTING_IN,
-        CT_STATE_SHIFTED_IN_PENDING_CLEANUP_1,
-        CT_STATE_SHIFTED_IN_PENDING_CLEANUP_2
-    };
+	// Define states
+	enum CT_STATES
+	{
+		CT_STATE_CHARGING,
+		CT_STATE_CHARGED,
+		CT_STATE_SHIFTING_OUT,
+		CT_STATE_SHIFTED_OUT_PENDING_CLEANUP_1,
+		CT_STATE_SHIFTED_OUT_PENDING_CLEANUP_2,
+		CT_STATE_SHIFTED_OUT,
+		CT_STATE_SHIFTING_IN,
+		CT_STATE_SHIFTED_IN_PENDING_CLEANUP_1,
+		CT_STATE_SHIFTED_IN_PENDING_CLEANUP_2
+	};
 };
+
 
 
 /*------------------------
 Spawn Vehicle Part script
 --------------------------*/
 
-class dp88_spawnVehiclePart : public ScriptImpClass {
-    void Created(GameObject *obj);
+class dp88_spawnVehiclePart : public ScriptImpClass
+{
+	void Created ( GameObject* obj );
+	void Timer_Expired( GameObject *obj, int number );
+	void Killed ( GameObject* obj, GameObject *killer );
+	void Destroyed( GameObject* obj );
 
-    void Timer_Expired(GameObject *obj, int number);
-
-    void Killed(GameObject *obj, GameObject *killer);
-
-    void Destroyed(GameObject *obj);
-
-    int partObjectId;
+	int partObjectId;
 };
+
 
 
 /*!
@@ -411,43 +406,41 @@ class dp88_spawnVehiclePart : public ScriptImpClass {
 * \param repairMoney
 *   Amount of credits to award per hitpoint repaired on object
 */
-class dp88_customPoints : public ScriptImpClass {
+class dp88_customPoints : public ScriptImpClass
+{
 protected:
-    void Created(GameObject *obj);
+  void Created ( GameObject* obj );
+  void Damaged ( GameObject *obj, GameObject *damager, float amount );
+  void Killed ( GameObject* obj, GameObject *killer );
 
-    void Damaged(GameObject *obj, GameObject *damager, float amount);
+  void GivePointsAndMoney ( GameObject* obj, float points, float money );
 
-    void Killed(GameObject *obj, GameObject *killer);
-
-    void GivePointsAndMoney(GameObject *obj, float points, float money);
-
-    /*! \name Cached Script Parameters */
-    /*! @{ */
-    float m_killPoints;
-    float m_damagePoints;
-    float m_repairPoints;
-    float m_killMoney;
-    float m_damageMoney;
-    float m_repairMoney;
-    /*! @} */
+  /*! \name Cached Script Parameters */
+  /*! @{ */
+  float m_killPoints;
+  float m_damagePoints;
+  float m_repairPoints;
+  float m_killMoney;
+  float m_damageMoney;
+  float m_repairMoney;
+  /*! @} */
 };
 
-class dp88_customPointsPercentage : public ScriptImpClass {
+class dp88_customPointsPercentage : public ScriptImpClass
+{
 protected:
-    void Created(GameObject *obj);
+	void Created(GameObject* obj);
+	void Damaged(GameObject *obj, GameObject *damager, float amount);
+	void Killed(GameObject* obj, GameObject *killer);
 
-    void Damaged(GameObject *obj, GameObject *damager, float amount);
+	void GivePointsAndMoney(GameObject* obj, float points, float money);
 
-    void Killed(GameObject *obj, GameObject *killer);
-
-    void GivePointsAndMoney(GameObject *obj, float points, float money);
-
-    float m_killPoints;
-    float m_damagePoints;
-    float m_repairPoints;
-    float m_killMoney;
-    float m_damageMoney;
-    float m_repairMoney;
+	float m_killPoints;
+	float m_damagePoints;
+	float m_repairPoints;
+	float m_killMoney;
+	float m_damageMoney;
+	float m_repairMoney;
 };
 
 // -------------------------------------------------------------------------------------------------
@@ -519,37 +512,34 @@ protected:
 *    <tr><td>%%TEAM1SCORENEEDED%</td>       <td>Points required before team 1 will win</td></tr>
 *   </table>
 */
-class dp88_conquestController : public ScriptImpClass {
-    void Created(GameObject *pSelf);
+class dp88_conquestController : public ScriptImpClass
+{
+  void Created ( GameObject* pSelf );
+  void Destroyed ( GameObject* pSelf );
+  void Timer_Expired ( GameObject* pSelf, int number );
+  void Custom ( GameObject* pSelf, int type, int param, GameObject* pSender );
 
-    void Destroyed(GameObject *pSelf);
+  int GetWinningTeamID();
+  int GetLosingTeamID();
 
-    void Timer_Expired(GameObject *pSelf, int number);
-
-    void Custom(GameObject *pSelf, int type, int param, GameObject *pSender);
-
-    int GetWinningTeamID();
-
-    int GetLosingTeamID();
-
-    void DisplayMessage(StringClass message);
+  void DisplayMessage(StringClass message);
 
 protected:
-    /*!
-    * \name Scoring Modes
-    * Scoring mode definitions, see the class description for an explaination of these modes
-    */
-    ///@{
-    static const unsigned char MODE_DEFAULT = 0;  /*!< Default, points accumulation mode */
-    static const unsigned char MODE_DEDUCTION = 1;  /*!< Points deduction mode */
-    ///@}
+  /*!
+  * \name Scoring Modes
+  * Scoring mode definitions, see the class description for an explaination of these modes
+  */
+  ///@{
+  static const unsigned char MODE_DEFAULT   = 0;  /*!< Default, points accumulation mode */
+  static const unsigned char MODE_DEDUCTION = 1;  /*!< Points deduction mode */
+  ///@}
 
-    unsigned char m_scoringMode;  /*!< The scoring mode being used */
-    int m_points[2];              /*!< Current points total for each team */
-    int m_targets[2];             /*!< Target for each team, or starting points in deduction mode */
+  unsigned char m_scoringMode;  /*!< The scoring mode being used */
+  int m_points[2];              /*!< Current points total for each team */
+  int m_targets[2];             /*!< Target for each team, or starting points in deduction mode */
 
 private:
-    int m_objectCreateHookId;
+  int m_objectCreateHookId;
 };
 
 // -------------------------------------------------------------------------------------------------
@@ -676,43 +666,42 @@ private:
 *    <tr><td>%%ZONENAME%</td>               <td>The translated name of the object this script is attached to</td></tr>
 *   </table>
 */
-class dp88_conquestControlZone : public ScriptImpClass {
+class dp88_conquestControlZone : public ScriptImpClass
+{
 public:
-    void Created(GameObject *pObj);
-
-    void Timer_Expired(GameObject *pObj, int number);
+  void Created( GameObject* pObj );
+  void Timer_Expired( GameObject* pObj, int number );
 
 protected:
-    void IncrementCaptureProgress(GameObject *pObj, int team, int nPlayers);
+  void IncrementCaptureProgress( GameObject* pObj, int team, int nPlayers );
+  void UpdateAnimationFrame( GameObject* pObj );
 
-    void UpdateAnimationFrame(GameObject *pObj);
+  /*!
+  * This function is called when the zone has been captured or made neutral
+  */
+  void ChangeOwner(GameObject* pObj, int team);
 
-    /*!
-    * This function is called when the zone has been captured or made neutral
-    */
-    void ChangeOwner(GameObject *pObj, int team);
+  void DisplayMessage(GameObject* pObj, StringClass message, int sendtoteam = 2);
 
-    void DisplayMessage(GameObject *pObj, StringClass message, int sendtoteam = 2);
+  int m_controllerID;       /*!< ID of the GameObject with the controller script attached */
+  int m_zoneID;             /*!< ID of the control zone GameObject */
+  float m_captureState;     /*!< Current capture progress. 0 = neutral, negative = team0, positive = team1 */
 
-    int m_controllerID;       /*!< ID of the GameObject with the controller script attached */
-    int m_zoneID;             /*!< ID of the control zone GameObject */
-    float m_captureState;     /*!< Current capture progress. 0 = neutral, negative = team0, positive = team1 */
+  bool m_bTickRunning;      /*!< True if the tick timer is currently running, false otherwise */
 
-    bool m_bTickRunning;      /*!< True if the tick timer is currently running, false otherwise */
-
-    /*! \name Cached Script Parameters */
-    /*! @{ */
-    int m_captureTime;
-    int m_multiCaptureCap;
-    float m_multiCaptureMultiplier;
-    bool m_bAllowMajorityCapture;
-    int m_nAnimTransitionFrames;
-
-    int m_aiPriority_soldier;
-    int m_aiPriority_lvehicle;
-    int m_aiPriority_hvehicle;
-    int m_aiPriority_aircraft;
-    /*! @} */
+  /*! \name Cached Script Parameters */
+  /*! @{ */
+  int m_captureTime;
+  int m_multiCaptureCap;
+  float m_multiCaptureMultiplier;
+  bool m_bAllowMajorityCapture;
+  int m_nAnimTransitionFrames;
+  
+  int m_aiPriority_soldier;
+  int m_aiPriority_lvehicle;
+  int m_aiPriority_hvehicle;
+  int m_aiPriority_aircraft;
+  /*! @} */
 };
 
 // -------------------------------------------------------------------------------------------------
@@ -735,14 +724,14 @@ protected:
 * \param TickInterval
 *   Tick interval, in seconds, at which to give conquest points to the objects current owner
 */
-class dp88_conquestControlObject : public ScriptImpClass {
+class dp88_conquestControlObject : public ScriptImpClass
+{
 public:
-    void Created(GameObject *pObj);
-
-    void Timer_Expired(GameObject *pObj, int number);
+  void Created( GameObject* pObj );
+  void Timer_Expired( GameObject* pObj, int number );
 
 protected:
-    int m_controllerID;       /*!< ID of the GameObject with the controller script attached */
+  int m_controllerID;       /*!< ID of the GameObject with the controller script attached */
 };
 
 // -------------------------------------------------------------------------------------------------
@@ -756,26 +745,24 @@ protected:
 * will restore the original radar state. If this script is attached to a vehicle it will also make
 * passengers radar-invisible until they leave the vehicle again.
 */
-class dp88_radarInvisibility : public ScriptImpClass {
+class dp88_radarInvisibility : public ScriptImpClass
+{
 public:
-    /*! Constructor to prevent crashes in LE due to uninitialised variables */
-    dp88_radarInvisibility() : m_pPassengerIds(0), m_pPassengerRadarModes(0), m_nSeats(0) {};
+  /*! Constructor to prevent crashes in LE due to uninitialised variables */
+  dp88_radarInvisibility() : m_pPassengerIds(0), m_pPassengerRadarModes(0), m_nSeats(0) {};
 
 protected:
-    void Created(GameObject *pObj);
+  void Created ( GameObject* pObj );
+  void Custom ( GameObject* pObj, int type, int param, GameObject* pSender );
+  void Detach ( GameObject* pObj );
 
-    void Custom(GameObject *pObj, int type, int param, GameObject *pSender);
+  void HidePassengerBlip ( class VehicleGameObj* pVehicle, class SoldierGameObj* pSoldier );
+  void RestorePassengerBlip ( class SoldierGameObj* pSoldier );
 
-    void Detach(GameObject *pObj);
-
-    void HidePassengerBlip(class VehicleGameObj *pVehicle, class SoldierGameObj *pSoldier);
-
-    void RestorePassengerBlip(class SoldierGameObj *pSoldier);
-
-    int m_originalRadarMode;      //!< The original radar mode of this object
-    int *m_pPassengerIds;         //!< For vehicles, the ID of each passenger
-    int *m_pPassengerRadarModes;  //!< For vehicles, the original radar mode of each passenger
-    int m_nSeats;                 //!< For vehicles, cache the number of seats (for Detach() to use)
+  int m_originalRadarMode;      //!< The original radar mode of this object
+  int* m_pPassengerIds;         //!< For vehicles, the ID of each passenger
+  int* m_pPassengerRadarModes;  //!< For vehicles, the original radar mode of each passenger
+  int m_nSeats;                 //!< For vehicles, cache the number of seats (for Detach() to use)
 };
 
 // -------------------------------------------------------------------------------------------------
@@ -799,27 +786,24 @@ protected:
 *   The minimum difference in the turret rotation, in radians, to be considered as "rotating", this
 *   helps to filter out tiny movements caused by driving along uneven terrain.
 */
-class dp88_turretSound : public ScriptImpClass {
+class dp88_turretSound : public ScriptImpClass
+{
 protected:
-    void Created(GameObject *pObj);
+  void Created ( GameObject* pObj );
+  void Timer_Expired ( GameObject* pObj, int number );
+  void Custom ( GameObject* pObj, int type, int param, GameObject* pSender );
 
-    void Timer_Expired(GameObject *pObj, int number);
+  float Get_Turret_Facing ( class RenderObjClass* pRenderObj );
+  void Play_Sound ( GameObject* pObj );
+  void Stop_Sound ( GameObject* pObj );
 
-    void Custom(GameObject *pObj, int type, int param, GameObject *pSender);
+  float m_lastFacing;
+  int m_nSoundId;
 
-    float Get_Turret_Facing(class RenderObjClass *pRenderObj);
-
-    void Play_Sound(GameObject *pObj);
-
-    void Stop_Sound(GameObject *pObj);
-
-    float m_lastFacing;
-    int m_nSoundId;
-
-    /*! \name Cached Script Parameters */
-    /*! @{ */
-    float m_nMinDifferential;
-    /*! @} */
+  /*! \name Cached Script Parameters */
+  /*! @{ */
+  float m_nMinDifferential;
+  /*! @} */
 };
 
 // -------------------------------------------------------------------------------------------------
@@ -851,25 +835,23 @@ protected:
 *   If you only want to teleport players and not AI controlled units use a script zone and tick the
 *   <i>CheckStarsOnly</i> box in LevelEdit.
 */
-class dp88_teleport : public ScriptImpClass {
+class dp88_teleport : public ScriptImpClass
+{
 protected:
-    void Created(GameObject *pObj);
+  void Created ( GameObject* pObj );
+  void Entered ( GameObject* pObj, GameObject* pEnterer );
+  void Custom ( GameObject* pObj, int type, int param, GameObject* pSender );
+  void Poked ( GameObject* pObj, GameObject* pPoker );
 
-    void Entered(GameObject *pObj, GameObject *pEnterer);
+  /*! \name Cached Script Parameters */
+  /*! @{ */
+  int m_nObjectID;
+  bool m_bUseBone;
+  Vector3 m_offset;
 
-    void Custom(GameObject *pObj, int type, int param, GameObject *pSender);
-
-    void Poked(GameObject *pObj, GameObject *pPoker);
-
-    /*! \name Cached Script Parameters */
-    /*! @{ */
-    int m_nObjectID;
-    bool m_bUseBone;
-    Vector3 m_offset;
-
-    bool m_bTeleportInfantry;
-    bool m_bTeleportVehicles;
-    /*! @} */
+  bool m_bTeleportInfantry;
+  bool m_bTeleportVehicles;
+  /*! @} */
 };
 
 // -------------------------------------------------------------------------------------------------
@@ -901,26 +883,26 @@ protected:
 *   which that model should be attached. This also allows the animation model to be moved by the
 *   animation set executing on the parent.
 */
-class dp88_Ammo_Animation : public ScriptImpClass {
+class dp88_Ammo_Animation : public ScriptImpClass
+{
 public:
-    void Created(GameObject *pObj);
-
-    void Timer_Expired(GameObject *pObj, int number);
+  void Created ( GameObject* pObj );
+  void Timer_Expired ( GameObject* pObj, int number );
 
 protected:
-    void UpdateAnimationFrame(GameObject *pObj);
+  void UpdateAnimationFrame ( GameObject* pObj );
 
-    int m_nBullets;
+  int m_nBullets;
 
-    /*! ID of the animation object we have created for ourselves */
-    int m_ammoAnimObjId;
+  /*! ID of the animation object we have created for ourselves */
+  int m_ammoAnimObjId;
 
-    /*! \name Cached Script Parameters */
-    /*! @{ */
-    const char *m_strAnimation;
-    int m_nFrames;
-    bool m_bUseTotal;
-    /*! @} */
+  /*! \name Cached Script Parameters */
+  /*! @{ */
+  const char* m_strAnimation;
+  int m_nFrames;
+  bool m_bUseTotal;
+  /*! @} */
 };
 
 // -------------------------------------------------------------------------------------------------
@@ -941,14 +923,15 @@ protected:
 * \param Camouflage
 *   The ID of the camouflage variant to use for this map
 */
-class dp88_Camo_Controller : public ScriptImpClass {
+class dp88_Camo_Controller : public ScriptImpClass
+{
 public:
-    virtual void Created(GameObject *pObj);
+  virtual void Created ( GameObject* pObj );
 
-    const char *GetCamoVariant() const { return m_camoVariant; };
+  const char* GetCamoVariant() const { return m_camoVariant; };
 
 protected:
-    const char *m_camoVariant;
+  const char* m_camoVariant;
 };
 
 // -------------------------------------------------------------------------------------------------
@@ -971,9 +954,10 @@ protected:
 *   The filename of the model to use if the <i>Camouflage</i> value matches the controllers value,
 *   this should include the .w3d extension
 */
-class dp88_Camo_Object : public ScriptImpClass {
+class dp88_Camo_Object : public ScriptImpClass
+{
 public:
-    virtual void Created(GameObject *pObj);
+  virtual void Created ( GameObject* pObj );
 };
 
 // -------------------------------------------------------------------------------------------------
@@ -1010,14 +994,14 @@ public:
 *   it to start taking damage. If you do not send this custom the object will be permanently immune
 *   from all damage.
 */
-class dp88_Create_Object_Cinematic : public ScriptImpClass {
+class dp88_Create_Object_Cinematic: public ScriptImpClass
+{
 public:
-    void Created(GameObject *pObj);
-
-    void Custom(GameObject *pObj, int type, int param, GameObject *pSender);
+  void Created ( GameObject* pObj );
+  void Custom ( GameObject* pObj, int type, int param, GameObject* pSender );
 
 protected:
-    void Create_Object(GameObject *pobj, GameObject *pOwner);
+  void Create_Object ( GameObject* pobj, GameObject* pOwner );
 };
 
 // -------------------------------------------------------------------------------------------------
@@ -1042,9 +1026,10 @@ protected:
 *   This is compatible with capturable buildings using the \ref scripts_dp88BuildingScripts "dp88_buildingScripts"
 *   set of scripts
 */
-class dp88_Set_Team_On_Custom : public ScriptImpClass {
+class dp88_Set_Team_On_Custom : public ScriptImpClass
+{
 public:
-    void Custom(GameObject *pObj, int type, int param, GameObject *pSender);
+  void Custom ( GameObject* pObj, int type, int param, GameObject* pSender );
 };
 
 // -------------------------------------------------------------------------------------------------
@@ -1125,48 +1110,44 @@ public:
 *   is recommended that you either use no warhead or use a warhead which only affects the hitpoints
 *   you want to heal.
 */
-class dp88_RegenerateHitpoints : public ScriptImpClass {
+class dp88_RegenerateHitpoints : public ScriptImpClass
+{
 protected:
-    const static int MODE_HEALTH = 1;
-    const static int MODE_ARMOUR = 2;
-    const static int MODE_PILOTED_HEALTH = 4;
-    const static int MODE_PILOTED_ARMOUR = 8;
-    const static int MODE_OCCUPIED_HEALTH = 16;
-    const static int MODE_OCCUPIED_ARMOUR = 32;
-    const static int MODE_DRIVER_HEALTH = 64;
-    const static int MODE_DRIVER_ARMOUR = 128;
-    const static int MODE_PASSENGERS_HEALTH = 256;
-    const static int MODE_PASSENGERS_ARMOUR = 512;
+  const static int MODE_HEALTH                = 1;
+  const static int MODE_ARMOUR                = 2;
+  const static int MODE_PILOTED_HEALTH        = 4;
+  const static int MODE_PILOTED_ARMOUR        = 8;
+  const static int MODE_OCCUPIED_HEALTH       = 16;
+  const static int MODE_OCCUPIED_ARMOUR       = 32;
+  const static int MODE_DRIVER_HEALTH         = 64;
+  const static int MODE_DRIVER_ARMOUR         = 128;
+  const static int MODE_PASSENGERS_HEALTH     = 256;
+  const static int MODE_PASSENGERS_ARMOUR     = 512;
 
 public:
-    void Created(GameObject *obj);
-
-    void Timer_Expired(GameObject *obj, int number);
-
-    void Damaged(GameObject *obj, GameObject *damager, float amount);
-
-    void Custom(GameObject *obj, int type, int param, GameObject *sender);
+  void Created( GameObject *obj );
+  void Timer_Expired( GameObject *obj, int number );
+  void Damaged ( GameObject *obj, GameObject *damager, float amount );
+  void Custom( GameObject *obj, int type, int param, GameObject *sender );
 
 protected:
-    bool IsModeEnabled(int mode);
-
-    void RegenObject(GameObject *obj, bool bHealth, bool bArmour);
-
-    void ApplyNonWarheadRepairs(GameObject *obj, float amount, bool bHealth, bool bArmour);
+  bool IsModeEnabled(int mode);
+  void RegenObject(GameObject* obj, bool bHealth, bool bArmour);
+  void ApplyNonWarheadRepairs(GameObject* obj, float amount, bool bHealth, bool bArmour);
 
 private:
-    /*! Time of the last non-repair damage event */
-    time_t m_lastDamage;
-
-    /*! \name Cached Script Parameters */
-    /*! @{ */
-    int m_mode;
-    float m_amount;
-    float m_interval;
-    float m_maxPercent;
-    int m_warheadId;
-    int m_lastDamageTimeout;
-    /*! @} */
+  /*! Time of the last non-repair damage event */
+  time_t m_lastDamage;
+  
+  /*! \name Cached Script Parameters */
+  /*! @{ */
+  int m_mode;
+  float m_amount;
+  float m_interval;
+  float m_maxPercent;
+  int m_warheadId;
+  int m_lastDamageTimeout;
+  /*! @} */
 };
 
 // -------------------------------------------------------------------------------------------------
@@ -1207,15 +1188,14 @@ private:
 * \param DriverExitCustom
 *   Custom message to send to the spawned object when a driver leaves the object
 */
-class dp88_CreateAttachedObject : public ScriptImpClass {
-    void Created(GameObject *obj);
+class dp88_CreateAttachedObject : public ScriptImpClass
+{
+  void Created(GameObject* obj);
+  void Killed(GameObject* obj, GameObject *killer);
+  void Custom(GameObject *obj, int type, int param, GameObject *sender);
 
-    void Killed(GameObject *obj, GameObject *killer);
-
-    void Custom(GameObject *obj, int type, int param, GameObject *sender);
-
-    int m_spawnedObjectId;
-    bool m_hasDriver;
+  int m_spawnedObjectId;
+  bool m_hasDriver;
 };
 
 // -------------------------------------------------------------------------------------------------
@@ -1263,8 +1243,8 @@ class dp88_CreateAttachedObject : public ScriptImpClass {
 *   team weightings, with 1 number per team specified in <i>Number_Of_Teams</i>. If no value is provided
 *   and <i>Number_Of_Teams</i> is > 2 it will distribute players evenly between all teams
 */
-class dp88_DynamicSpawner_Controller : ScriptImpClass {
-};
+class dp88_DynamicSpawner_Controller : ScriptImpClass
+{};
 
 // -------------------------------------------------------------------------------------------------
 
@@ -1290,8 +1270,8 @@ class dp88_DynamicSpawner_Controller : ScriptImpClass {
 *   at it dies. This is useful for creating single-instance special units or restricting the number
 *   of players in an area
 */
-class dp88_DynamicSpawner_Spawner : ScriptImpClass {
-};
+class dp88_DynamicSpawner_Spawner : ScriptImpClass
+{};
 
 // -------------------------------------------------------------------------------------------------
 
@@ -1331,5 +1311,5 @@ class dp88_DynamicSpawner_Spawner : ScriptImpClass {
 *   appropriate time to allow it to start taking damage. If you do not send this custom the vehicle
 *   will permanently be immune to all damage. 
 */
-class dp88_DynamicSpawner_VehicleSpawner : dp88_DynamicSpawner_Spawner {
-};
+class dp88_DynamicSpawner_VehicleSpawner : dp88_DynamicSpawner_Spawner
+{};

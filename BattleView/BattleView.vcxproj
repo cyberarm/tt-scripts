@@ -186,19 +186,6 @@ copy "$(TargetPath)" "%RenServerPath%\$(TargetFileName)"
     </PostBuildEvent>
   </ItemDefinitionGroup>
   <ItemGroup>
-    <ClCompile Include="BattleView.cpp" />
-    <ClCompile Include="General.cpp">
-      <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">Create</PrecompiledHeader>
-      <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Debug SSGM|Win32'">Create</PrecompiledHeader>
-      <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">Create</PrecompiledHeader>
-      <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Release SSGM|Win32'">Create</PrecompiledHeader>
-    </ClCompile>
-  </ItemGroup>
-  <ItemGroup>
-    <ClInclude Include="BattleView.h" />
-    <ClInclude Include="General.h" />
-  </ItemGroup>
-  <ItemGroup>
     <ProjectReference Include="..\MemoryManager\MemoryManager.vcxproj">
       <Project>{2fef1c76-9e4a-4921-b2d3-e536da918810}</Project>
       <ReferenceOutputAssembly>false</ReferenceOutputAssembly>
@@ -211,6 +198,14 @@ copy "$(TargetPath)" "%RenServerPath%\$(TargetFileName)"
       <Project>{9B549C98-0BF4-4092-AE2A-AD7F780F8405}</Project>
       <ReferenceOutputAssembly>false</ReferenceOutputAssembly>
     </ProjectReference>
+  </ItemGroup>
+  <ItemGroup>
+    <ClInclude Include="include\BattleView.h" />
+    <ClInclude Include="include\General.h" />
+  </ItemGroup>
+  <ItemGroup>
+    <ClCompile Include="src\BattleView.cpp" />
+    <ClCompile Include="src\General.cpp" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">

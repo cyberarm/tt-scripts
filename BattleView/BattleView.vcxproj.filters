@@ -18,7 +18,13 @@
     <ClInclude Include="include\BattleView.h">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="include\General.h">
+    <ClInclude Include="include\BattleView_Entity.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="include\BattleView_HTTPClient.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="General.h">
       <Filter>Header Files</Filter>
     </ClInclude>
   </ItemGroup>
@@ -26,7 +32,10 @@
     <ClCompile Include="src\BattleView.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="src\General.cpp">
+    <ClCompile Include="src\BattleView_HTTPClient.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="General.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
   </ItemGroup>

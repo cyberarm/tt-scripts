@@ -15,4 +15,17 @@
 #include "Defines.h"
 #include "Standard.h"
 
+#include "include/BattleView.h"
+
+#include "GameObjManager.h"
+#include "BuildingGameObj.h"
+#include "BuildingGameObjDef.h"
+#include "SoldierGameObj.h"
+#include "VehicleGameObj.h"
+
+#include "scripts.h"
+#include "engine_tt.h"
+#include "engine_io.h"
+#include "gmgame.h"
+
 #endif

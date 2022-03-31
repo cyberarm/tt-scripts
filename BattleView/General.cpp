@@ -9,4 +9,4 @@
 	In addition, an exemption is given to allow Run Time Dynamic Linking of this code with any closed source module that does not contain code covered by this licence.
 	Only the source code to the module(s) containing the licenced code has to be released.
 */
-#include "general.h"
+#include "General.h"

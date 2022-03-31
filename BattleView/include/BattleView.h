@@ -11,6 +11,8 @@
 */
 #pragma once
 
+#include "BattleView_Entity.h"
+#include "BattleView_HTTPClient.h"
 #include "gmplugin.h"
 
 #define BATTLEVIEW_PLUGIN_VERSION 0.0f
@@ -20,19 +22,6 @@ struct BattleViewPlayer
     int player_id;
     int entity_id;
     const char* username;
-};
-
-struct BattleViewEntity
-{
-    int id;
-    int team;
-    const char* name;
-    Vector3 position;
-    const char* type;
-    double health;
-    const char* icon; // Handle on BattleView Frontend?
-    const char* character_name;
-    const char* vehicle_name;
 };
 
 class BattleViewPlugin : public Plugin
@@ -48,6 +37,8 @@ class BattleViewPlugin : public Plugin
     // TODO: Why angry?
     // VectorClass<BattleViewPlayer> m_battleview_players;
     // VectorClass<BattleViewEntity> m_battleview_entities;
+
+    BattleViewHTTPClient* m_http_client;
 
 public:
     BattleViewPlugin();

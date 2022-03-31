@@ -11,20 +11,6 @@
 */
 
 #include "General.h"
-#include "Defines.h"
-
-#include "include/BattleView.h"
-
-#include "GameObjManager.h"
-#include "BuildingGameObj.h"
-#include "BuildingGameObjDef.h"
-#include "SoldierGameObj.h"
-#include "VehicleGameObj.h"
-
-#include "scripts.h"
-#include "engine_tt.h"
-#include "engine_io.h"
-#include "gmgame.h"
 
 BattleViewPlugin::BattleViewPlugin() {
     Console_Output("[BattleView] Loading cyberarm's BattleView Plugin v%d\n", BATTLEVIEW_PLUGIN_VERSION);
@@ -38,7 +24,9 @@ BattleViewPlugin::BattleViewPlugin() {
     RegisterEvent(EVENT_THINK_HOOK, this);
 
     m_think_interval = 500; // 60;
-    m_think_counter = m_think_counter; // Run at first call
+    m_think_counter = m_think_interval; // Run at first call
+
+    m_http_client = nullptr;
 }
 
 BattleViewPlugin::~BattleViewPlugin() {
@@ -61,6 +49,18 @@ void BattleViewPlugin::HandleINIConfiguration(INIClass* ssgm_ini, bool is_map)
 {
     m_config_mode            = ssgm_ini->Get_Int ("BattleView", "mode",            is_map ? m_config_mode : 0); // BattleView Frontend is currently fixed at mode 7
     m_config_bots_as_players = ssgm_ini->Get_Bool("BattleView", "bots_as_players", is_map ? m_config_bots_as_players : true); // Appease SkyNET
+
+    /* Initializing HTTPClient may only happen once, via GlobalINI */
+    if (!is_map && m_http_client != nullptr)
+        return;
+
+    char endpoint[1024];
+    char token[256];
+
+    ssgm_ini->Get_String("BattleView", "endpoint", "http://localhost:80/api/v1/battleview", endpoint, 1024);
+    ssgm_ini->Get_String("BattleView", "token", nullptr, token, 256);
+
+    m_http_client = new BattleViewHTTPClient(reinterpret_cast<const char*>(endpoint), reinterpret_cast<const char*>(token));
 }
 
 
@@ -137,6 +137,10 @@ void BattleViewPlugin::OnPlayerLeave(int player_id) {
 
 // This will probably be our favorite callback
 void BattleViewPlugin::OnThink() {
+    // Don't think unless the http client is set
+    if (m_http_client == nullptr)
+        return;
+
     m_think_counter += 1;
 
     if (m_think_counter < m_think_interval)
@@ -202,6 +206,11 @@ void BattleViewPlugin::OnThink() {
             "ID: %i, TEAM: %i, NAME: %s, POSITION: [%0.2f, %0.2f, %0.2f], TYPE: %s, HEALTH: %0.2f, ICON: %s, CHAR: %s, VEHICLE: %s\n",
             entity.id, entity.team, entity.name, entity.position.X, entity.position.Y, entity.position.Z, entity.type, entity.health, entity.icon, entity.character_name, entity.vehicle_name
         );
+    }
+
+    if (m_http_client->is_ready()) {
+        m_http_client->enqueue(nullptr);
+        m_http_client->post();
     }
 }
 

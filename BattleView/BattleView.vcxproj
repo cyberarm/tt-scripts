@@ -70,7 +70,7 @@
       <EnableEnhancedInstructionSet>StreamingSIMDExtensions2</EnableEnhancedInstructionSet>
       <FloatingPointModel>Precise</FloatingPointModel>
       <RuntimeTypeInfo>true</RuntimeTypeInfo>
-      <PrecompiledHeader>Use</PrecompiledHeader>
+      <PrecompiledHeader>Create</PrecompiledHeader>
       <PrecompiledHeaderFile>General.h</PrecompiledHeaderFile>
       <PrecompiledHeaderOutputFile>$(IntDir)$(TargetName).$(Configuration).pch</PrecompiledHeaderOutputFile>
       <WarningLevel>Level4</WarningLevel>
@@ -79,7 +79,7 @@
       <MultiProcessorCompilation>true</MultiProcessorCompilation>
     </ClCompile>
     <Link>
-      <AdditionalDependencies>%(AdditionalDependencies)</AdditionalDependencies>
+      <AdditionalDependencies>wininet.lib;ws2_32.lib;%(AdditionalDependencies)</AdditionalDependencies>
       <OutputFile>$(OutDir)$(TargetName)$(TargetExt)</OutputFile>
       <IgnoreSpecificDefaultLibraries>%(IgnoreSpecificDefaultLibraries)</IgnoreSpecificDefaultLibraries>
       <GenerateDebugInformation>true</GenerateDebugInformation>
@@ -145,7 +145,7 @@ copy "$(TargetPath)" "%RenServerPath%\$(TargetFileName)"
       <EnableEnhancedInstructionSet>StreamingSIMDExtensions2</EnableEnhancedInstructionSet>
     </ClCompile>
     <Link>
-      <AdditionalDependencies>%(AdditionalDependencies)</AdditionalDependencies>
+      <AdditionalDependencies>wininet.lib;ws2_32.lib;%(AdditionalDependencies)</AdditionalDependencies>
       <OutputFile>$(OutDir)$(TargetName)$(TargetExt)</OutputFile>
       <IgnoreSpecificDefaultLibraries>%(IgnoreSpecificDefaultLibraries)</IgnoreSpecificDefaultLibraries>
       <GenerateDebugInformation>true</GenerateDebugInformation>
@@ -201,11 +201,14 @@ copy "$(TargetPath)" "%RenServerPath%\$(TargetFileName)"
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="include\BattleView.h" />
-    <ClInclude Include="include\General.h" />
+    <ClInclude Include="include\BattleView_Entity.h" />
+    <ClInclude Include="include\BattleView_HTTPClient.h" />
+    <ClInclude Include="General.h" />
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="src\BattleView.cpp" />
-    <ClCompile Include="src\General.cpp" />
+    <ClCompile Include="src\BattleView_HTTPClient.cpp" />
+    <ClCompile Include="General.cpp" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">

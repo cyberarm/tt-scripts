@@ -137,8 +137,8 @@ void BattleViewPlugin::OnPlayerLeave(int player_id) {
 
 // This will probably be our favorite callback
 void BattleViewPlugin::OnThink() {
-    // Don't think unless the http client is set
-    if (m_http_client == nullptr)
+    // Don't think unless the http client is ready
+    if (!m_http_client || (m_http_client && !m_http_client->is_ready()))
         return;
 
     m_think_counter += 1;

@@ -1,7 +1,7 @@
 #include "General.h"
 #include "include/BattleView_HTTPClient.h"
 
-BattleViewHTTPClient::BattleViewHTTPClient(const char* endpoint, const char* token)
+BattleViewHTTPClient::BattleViewHTTPClient(const char *endpoint, const char *token)
 {
 	m_endpoint = endpoint;
 	m_token = token;
@@ -22,14 +22,13 @@ BattleViewHTTPClient::BattleViewHTTPClient(const char* endpoint, const char* tok
 	Console_Output("Init: WSAGetLastError: %i\n", error);
 
 	m_session = InternetOpen(
-		m_user_agent,
-		INTERNET_OPEN_TYPE_PRECONFIG,
-		NULL,
-		NULL,
-		INTERNET_FLAG_ASYNC
-	);
+			m_user_agent,
+			INTERNET_OPEN_TYPE_PRECONFIG,
+			NULL,
+			NULL,
+			INTERNET_FLAG_ASYNC);
 
-	InternetSetStatusCallback(m_session, (INTERNET_STATUS_CALLBACK) BattleViewHTTPClient_StatusCallback);
+	InternetSetStatusCallback(m_session, (INTERNET_STATUS_CALLBACK)BattleViewHTTPClient_StatusCallback);
 
 	error = WSAGetLastError();
 	Console_Output("Session: WSAGetLastError: %i\n", error);
@@ -38,46 +37,46 @@ BattleViewHTTPClient::BattleViewHTTPClient(const char* endpoint, const char* tok
 	if (!m_session)
 		Console_Output("FAILED FAILED SESSION\n");
 
-	m_connection = InternetOpenUrl(
-		m_session,
-		m_endpoint,
-		NULL,
-		0,
-		INTERNET_FLAG_RELOAD | INTERNET_FLAG_PRAGMA_NOCACHE | INTERNET_FLAG_NO_CACHE_WRITE,
-		(LPARAM)this
-	);
+	// m_connection = InternetOpenUrl(
+	// 	m_session,
+	// 	m_endpoint,
+	// 	NULL,
+	// 	0,
+	// 	INTERNET_FLAG_RELOAD | INTERNET_FLAG_PRAGMA_NOCACHE | INTERNET_FLAG_NO_CACHE_WRITE,
+	// 	(LPARAM)this
+	// );
 
-	error = WSAGetLastError();
-	Console_Output("Connection: WSAGetLastError: %i\n", error);
+	// error = WSAGetLastError();
+	// Console_Output("Connection: WSAGetLastError: %i\n", error);
 
 	// TODO: Check status of m_connection?
-	if (!m_connection)
-		Console_Output("FAILED FAILED CONNECTION\n");
+	// if (!m_connection)
+	// 	Console_Output("FAILED FAILED CONNECTION\n");
 
-	m_response = HttpOpenRequest(
-		m_connection,
-		"POST",
-		m_endpoint_path,
-		"HTTP/1.1",
-		NULL,
-		NULL,
-		INTERNET_FLAG_NO_CACHE_WRITE,
-		0
-	);
+	// m_response = HttpOpenRequest(
+	// 	m_connection,
+	// 	"POST",
+	// 	m_endpoint_path,
+	// 	"HTTP/1.1",
+	// 	NULL,
+	// 	NULL,
+	// 	INTERNET_FLAG_NO_CACHE_WRITE,
+	// 	0
+	// );
 
-	error = WSAGetLastError();
-	Console_Output("Response: WSAGetLastError: %i\n", error);
+	// error = WSAGetLastError();
+	// Console_Output("Response: WSAGetLastError: %i\n", error);
 
 	// COMMENT
-	if (!m_response)
-		Console_Output("FAILED FAILED RESPONSE\n");
+	// if (!m_response)
+	// 	Console_Output("FAILED FAILED RESPONSE\n");
 }
 
 BattleViewHTTPClient::~BattleViewHTTPClient()
 {
 }
 
-bool BattleViewHTTPClient::enqueue(BattleViewEntity* entity)
+bool BattleViewHTTPClient::enqueue(BattleViewEntity *entity)
 {
 	return false;
 }
@@ -88,16 +87,40 @@ bool BattleViewHTTPClient::post()
 	error = WSAGetLastError();
 	Console_Output("Pre-Send: WSAGetLastError: %i\n", error);
 
-	HttpSendRequest(
-		m_response,
-		"TODO_HEADERS",
-		1024,
-		"TODO_BODY",
-		1024
-	);
+	// HttpSendRequest(
+	// 	m_response,
+	// 	"TODO_HEADERS",
+	// 	1024,
+	// 	"TODO_BODY",
+	// 	1024
+	// );'
+
+	m_connection = InternetOpenUrl(
+			m_session,
+			m_endpoint,
+			NULL,
+			0,
+			INTERNET_FLAG_RELOAD | INTERNET_FLAG_PRAGMA_NOCACHE | INTERNET_FLAG_NO_CACHE_WRITE,
+			(LPARAM)this);
+
+	error = WSAGetLastError();
+	Console_Output("Connection: WSAGetLastError: %i\n", error);
+
+	m_response = HttpOpenRequest(
+			m_connection,
+			"POST",
+			m_endpoint_path,
+			"HTTP/1.1",
+			NULL,
+			NULL,
+			INTERNET_FLAG_NO_CACHE_WRITE,
+			0);
+
+	error = WSAGetLastError();
+	Console_Output("Response: WSAGetLastError: %i\n", error);
 
 	// if (true) {
-		// TODO: Get response?
+	// TODO: Get response?
 	// }
 
 	error = WSAGetLastError();
@@ -108,11 +131,13 @@ bool BattleViewHTTPClient::post()
 
 bool BattleViewHTTPClient::is_ready()
 {
-	return m_ready;
+	return m_session != nullptr;
 }
 
 void CALLBACK BattleViewHTTPClient_StatusCallback(HINTERNET internet, DWORD context, DWORD internet_status,
-	                                              LPVOID status_information, DWORD status_information_length) {
+																									LPVOID status_information, DWORD status_information_length)
+{
 
 	Console_Output("STATUS: %i\n", internet_status);
+	Console_Output("IS_READY: %i\n", ((BattleViewHTTPClient *)context)->is_ready());
 }

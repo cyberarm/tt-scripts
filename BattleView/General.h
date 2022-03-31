@@ -16,12 +16,14 @@
 #include "Standard.h"
 
 #include "include/BattleView.h"
+#include "include/BattleView_JSONify.h"
 
 #include "GameObjManager.h"
 #include "BuildingGameObj.h"
 #include "BuildingGameObjDef.h"
 #include "SoldierGameObj.h"
 #include "VehicleGameObj.h"
+#include "SmartGameObj.h"
 
 #include "scripts.h"
 #include "engine_tt.h"

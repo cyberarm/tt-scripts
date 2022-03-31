@@ -4,24 +4,23 @@
 
 class BattleViewHTTPClient
 {
-	const char* m_user_agent;
-	const char* m_endpoint_path;
-	const char* m_endpoint;
-	const char* m_token;
+	const char *m_user_agent;
+	const char *m_endpoint_path;
+	const char *m_endpoint;
+	const char *m_token;
 
 	HINTERNET m_session;
 	HINTERNET m_connection;
 	HINTERNET m_response;
 	bool m_ready;
 
-	public:
-		BattleViewHTTPClient(const char* endpoint, const char* token);
-		~BattleViewHTTPClient();
-		bool enqueue(BattleViewEntity* entity);
-		bool post();
-		bool is_ready();
+public:
+	BattleViewHTTPClient(const char *endpoint, const char *token);
+	~BattleViewHTTPClient();
+	bool enqueue(BattleViewEntity *entity);
+	bool post();
+	bool is_ready();
 };
 
 void CALLBACK BattleViewHTTPClient_StatusCallback(HINTERNET hInternet,
-	DWORD dwContext, DWORD dwInternetStatus, LPVOID
-	lpvStatusInformation, DWORD dwStatusInformationLength);
+																									DWORD dwContext, DWORD dwInternetStatus, LPVOID lpvStatusInformation, DWORD dwStatusInformationLength);

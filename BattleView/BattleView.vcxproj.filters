@@ -27,6 +27,9 @@
     <ClInclude Include="General.h">
       <Filter>Header Files</Filter>
     </ClInclude>
+    <ClInclude Include="include\BattleView_JSONify.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="src\BattleView.cpp">
@@ -36,6 +39,12 @@
       <Filter>Source Files</Filter>
     </ClCompile>
     <ClCompile Include="General.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="src\BattleView_JSONify.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="src\BattleView_Entity.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
   </ItemGroup>

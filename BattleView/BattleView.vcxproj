@@ -204,11 +204,14 @@ copy "$(TargetPath)" "%RenServerPath%\$(TargetFileName)"
     <ClInclude Include="include\BattleView_Entity.h" />
     <ClInclude Include="include\BattleView_HTTPClient.h" />
     <ClInclude Include="General.h" />
+    <ClInclude Include="include\BattleView_JSONify.h" />
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="src\BattleView.cpp" />
+    <ClCompile Include="src\BattleView_Entity.cpp" />
     <ClCompile Include="src\BattleView_HTTPClient.cpp" />
     <ClCompile Include="General.cpp" />
+    <ClCompile Include="src\BattleView_JSONify.cpp" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">

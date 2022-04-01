@@ -11,14 +11,14 @@ class BattleViewHTTPClient
 
 	HINTERNET m_session;
 	HINTERNET m_connection;
-	HINTERNET m_response;
+	HINTERNET m_request;
 	bool m_ready;
 
 public:
 	BattleViewHTTPClient(const char *endpoint, const char *token);
 	~BattleViewHTTPClient();
 	bool enqueue(BattleViewEntity *entity);
-	bool post();
+	bool post(const char* json);
 	bool is_ready();
 };
 

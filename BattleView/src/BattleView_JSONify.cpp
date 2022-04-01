@@ -43,6 +43,7 @@ const char *BattleViewJSONify::to_json()
     buffer += BattleViewJSONify::entity_list_to_json_array(m_vehicles);
 
     buffer += "}";
+    buffer += "}";
 
     return buffer;
 }
@@ -63,7 +64,10 @@ StringClass BattleViewJSONify::entity_list_to_json_array(DynamicVectorClass<Batt
         buffer += "\"team\":";
         buffer += buffer.getFormattedString("%i,", entity->team());
         buffer += "\"name\":";
-        buffer += buffer.getFormattedString("\"%s\",", entity->name());
+        if (entity->name())
+            buffer += buffer.getFormattedString("\"%s\",", entity->name());
+        if (!entity->name())
+            buffer += "null,";
         buffer += "\"position\":";
         buffer += buffer.getFormattedString("[%.2f,%.2f,%.2f],", entity->position().X, entity->position().Y, entity->position().Z);
         buffer += "\"type\":";
@@ -77,7 +81,7 @@ StringClass BattleViewJSONify::entity_list_to_json_array(DynamicVectorClass<Batt
             buffer += buffer.getFormattedString("\"%s\",", entity->character_name()); // nullible
         if (!entity->character_name())
             buffer += "null,";
-        buffer += "\"vehicle\":";
+        buffer += "\"vehicle_name\":";
         if (entity->vehicle_name())
             buffer += buffer.getFormattedString("\"%s\"", entity->vehicle_name()); // nullible
         if (!entity->vehicle_name())

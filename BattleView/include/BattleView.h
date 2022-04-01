@@ -29,17 +29,23 @@ class BattleViewPlugin : public Plugin
     // Settings
     int m_config_mode;
     bool m_config_bots_as_players;
+    const char* m_endpoint;
+    const char* m_token;
 
     // Think Limiter
     int m_think_interval;
     int m_think_counter;
+
+    bool m_level_loaded;
 
     // Entity Store
     DynamicVectorClass<BattleViewEntity *> m_structures;
     DynamicVectorClass<BattleViewEntity *> m_players;
     DynamicVectorClass<BattleViewEntity *> m_vehicles;
 
-    BattleViewHTTPClient *m_http_client;
+    BattleViewHTTPClient* m_http_client;
+    SOCKET m_udp_socket;
+    sockaddr_in m_udp_socket_addr;
 
 public:
     BattleViewPlugin();

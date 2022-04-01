@@ -12,6 +12,16 @@
 #ifndef EXAMPLEPLUGIN_INCLUDE__GENERAL_H
 #define EXAMPLEPLUGIN_INCLUDE__GENERAL_H
 
+#define BATTLEVIEW_DEBUG_FUNCTIONS false
+#define BATTLEVIEW_DEBUG_ENTITIES false
+#define BATTLEVIEW_DEBUG_JSON false
+#define BATTLEVIEW_DEBUG_HTTPCLIENT false
+
+// Enable for debugging, disable for release
+#ifdef _DEBUG
+#pragma warning( disable : 4127) // 4101
+#endif
+
 #include "Defines.h"
 #include "Standard.h"
 

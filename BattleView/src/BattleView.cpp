@@ -14,7 +14,8 @@
 
 BattleViewPlugin::BattleViewPlugin()
 {
-    Console_Output("[BattleView] Loading cyberarm's BattleView Plugin v%d\n", BATTLEVIEW_PLUGIN_VERSION);
+    if (BATTLEVIEW_DEBUG_FUNCTIONS)
+        Console_Output("[BattleView] Loading cyberarm's BattleView Plugin v%d\n", BATTLEVIEW_PLUGIN_VERSION);
     RegisterEvent(EVENT_GLOBAL_INI, this);
     RegisterEvent(EVENT_MAP_INI, this);
     RegisterEvent(EVENT_CHAT_HOOK, this);
@@ -24,15 +25,41 @@ BattleViewPlugin::BattleViewPlugin()
     RegisterEvent(EVENT_PLAYER_LEAVE_HOOK, this);
     RegisterEvent(EVENT_THINK_HOOK, this);
 
-    m_think_interval = 500;             // 60;
+    m_think_interval = 10; // 500;             // 60;
     m_think_counter = m_think_interval; // Run at first call
 
     m_http_client = nullptr;
+
+    m_level_loaded = false;
+
+    int iResult;
+    WSADATA wsaData;
+
+    iResult = WSAStartup(MAKEWORD(2, 2), &wsaData);
+    if (iResult != NO_ERROR) {
+        Console_Output("WSAStartup failed with error: %d\n", iResult);
+        return;
+    }
+
+    m_udp_socket = socket(AF_INET, SOCK_DGRAM, IPPROTO_UDP);
+    if (m_udp_socket == INVALID_SOCKET) {
+        Console_Output("socket failed with error: %ld\n", WSAGetLastError());
+        WSACleanup();
+        return;
+    }
+
+    m_udp_socket_addr.sin_family = AF_INET;
+    m_udp_socket_addr.sin_port = htons(50789);
+    m_udp_socket_addr.sin_addr.s_addr = inet_addr("192.168.195.29");
 }
 
 BattleViewPlugin::~BattleViewPlugin()
 {
-    Console_Output("[BattleView] Unloading cyberarm's BattleView Plugin v%d\n", BATTLEVIEW_PLUGIN_VERSION);
+    closesocket(m_udp_socket);
+    WSACleanup();
+
+    if (BATTLEVIEW_DEBUG_FUNCTIONS)
+        Console_Output("[BattleView] Unloading cyberarm's BattleView Plugin v%d\n", BATTLEVIEW_PLUGIN_VERSION);
     UnregisterEvent(EVENT_GLOBAL_INI, this);
     UnregisterEvent(EVENT_MAP_INI, this);
     UnregisterEvent(EVENT_CHAT_HOOK, this);
@@ -53,7 +80,7 @@ void BattleViewPlugin::HandleINIConfiguration(INIClass *ssgm_ini, bool is_map)
     m_config_bots_as_players = ssgm_ini->Get_Bool("BattleView", "bots_as_players", is_map ? m_config_bots_as_players : true); // Appease SkyNET
 
     /* Initializing HTTPClient may only happen once, via GlobalINI */
-    if (!is_map && m_http_client != nullptr)
+    if (!is_map && false)//!m_http_client)
         return;
 
     char endpoint[1024];
@@ -62,7 +89,8 @@ void BattleViewPlugin::HandleINIConfiguration(INIClass *ssgm_ini, bool is_map)
     ssgm_ini->Get_String("BattleView", "endpoint", "http://localhost:80/api/v1/battleview", endpoint, 1024);
     ssgm_ini->Get_String("BattleView", "token", nullptr, token, 256);
 
-    m_http_client = new BattleViewHTTPClient(reinterpret_cast<const char *>(endpoint), reinterpret_cast<const char *>(token));
+    m_endpoint = reinterpret_cast<const char*>(endpoint);
+    m_token = reinterpret_cast<const char*>(token);
 }
 
 /*************************
@@ -70,8 +98,10 @@ void BattleViewPlugin::HandleINIConfiguration(INIClass *ssgm_ini, bool is_map)
  */
 void BattleViewPlugin::OnLoadGlobalINISettings(INIClass *ssgm_ini)
 {
-    Console_Output(__FUNCTION__ "\n");
-    Console_Output("[BattleView] Attempting to load global INI settings...\n");
+    if (BATTLEVIEW_DEBUG_FUNCTIONS) {
+        Console_Output(__FUNCTION__ "\n");
+        Console_Output("[BattleView] Attempting to load global INI settings...\n");
+    }
 
     HandleINIConfiguration(ssgm_ini, false);
 }
@@ -79,26 +109,30 @@ void BattleViewPlugin::OnLoadGlobalINISettings(INIClass *ssgm_ini)
 // Don't need? What do?
 void BattleViewPlugin::OnFreeData()
 {
-    Console_Output(__FUNCTION__ "\n");
+    if (BATTLEVIEW_DEBUG_FUNCTIONS)
+        Console_Output(__FUNCTION__ "\n");
 }
 
 // Configure Mode level
 void BattleViewPlugin::OnLoadMapINISettings(INIClass *ssgm_ini)
 {
-    Console_Output("[BattleView] Attempting to load map INI settings...\n");
+    if (BATTLEVIEW_DEBUG_FUNCTIONS)
+        Console_Output("[BattleView] Attempting to load map INI settings...\n");
 
     HandleINIConfiguration(ssgm_ini, true);
 }
 
 void BattleViewPlugin::OnFreeMapData()
 {
-    Console_Output(__FUNCTION__ "\n");
+    if (BATTLEVIEW_DEBUG_FUNCTIONS)
+        Console_Output(__FUNCTION__ "\n");
 }
 
 // Maybe handle configuration chat commands?
 bool BattleViewPlugin::OnChat(int player_id, TextMessageEnum type, const wchar_t *message, int receiver_id)
 {
-    Console_Output(__FUNCTION__ "\n");
+    if (BATTLEVIEW_DEBUG_FUNCTIONS)
+        Console_Output(__FUNCTION__ "\n");
 
     const char *message_type = "UNKNOWN";
 
@@ -120,40 +154,51 @@ bool BattleViewPlugin::OnChat(int player_id, TextMessageEnum type, const wchar_t
         break;
     }
 
-    Console_Output("[%s] (%i) %s wrote: %s [%i]\n", message_type, player_id, "?sender_name?", message, receiver_id);
+    if (BATTLEVIEW_DEBUG_FUNCTIONS)
+        Console_Output("[%s] (%i) %s wrote: %s [%i]\n", message_type, player_id, "?sender_name?", message, receiver_id);
     return true;
 }
 
 // TODO: Cache current server and map name
 void BattleViewPlugin::OnLoadLevel()
 {
-    Console_Output(__FUNCTION__ "\n");
+    if (BATTLEVIEW_DEBUG_FUNCTIONS)
+        Console_Output(__FUNCTION__ "\n");
+
+    m_level_loaded = true;
 }
 
 void BattleViewPlugin::OnGameOver()
 {
-    Console_Output(__FUNCTION__ "\n");
+    if (BATTLEVIEW_DEBUG_FUNCTIONS)
+        Console_Output(__FUNCTION__ "\n");
+
+    m_level_loaded = false;
 }
 
 void BattleViewPlugin::OnPlayerJoin(int player_id, const char *player_name)
 {
-    Console_Output(__FUNCTION__ "\n");
+    if (BATTLEVIEW_DEBUG_FUNCTIONS)
+        Console_Output(__FUNCTION__ "\n");
 }
 
 void BattleViewPlugin::OnPlayerLeave(int player_id)
 {
-    Console_Output(__FUNCTION__ "\n");
+    if (BATTLEVIEW_DEBUG_FUNCTIONS)
+        Console_Output(__FUNCTION__ "\n");
 }
 
 // This will probably be our favorite callback
 void BattleViewPlugin::OnThink()
 {
     // Don't think unless the http client is ready
-    if (!m_http_client || (m_http_client && !m_http_client->is_ready()))
-    {
-        Console_Output("HTTPClient not ready.\n");
-        return;
-    }
+    // if (!m_http_client || (m_http_client && !m_http_client->is_ready()))
+    // {
+        // Console_Output("HTTPClient not ready.\n");
+        // return;
+    // }
+
+    if (!m_level_loaded) return;
 
     m_think_counter += 1;
 
@@ -162,7 +207,8 @@ void BattleViewPlugin::OnThink()
 
     m_think_counter = 0;
 
-    Console_Output(__FUNCTION__ "\n");
+    if (BATTLEVIEW_DEBUG_FUNCTIONS)
+        Console_Output(__FUNCTION__ "\n");
 
     m_structures.Clear();
     m_players.Clear();
@@ -171,7 +217,9 @@ void BattleViewPlugin::OnThink()
     // TODO: Some base defenses are actually VEHICLES, like turrets
     //       Inter
 
-    Console_Output("Buildings:\n");
+    if (BATTLEVIEW_DEBUG_ENTITIES)
+        Console_Output("Buildings:\n");
+
     for (SLNode<BuildingGameObj> *z = GameObjManager::BuildingGameObjList.Head(); z; z = z->Next())
     {
         BuildingGameObj *obj = z->Data();
@@ -179,7 +227,9 @@ void BattleViewPlugin::OnThink()
         game_object_to_entity(obj);
     }
 
-    Console_Output("Players:\n");
+    if (BATTLEVIEW_DEBUG_ENTITIES)
+        Console_Output("Players:\n");
+
     for (SLNode<SoldierGameObj> *z = GameObjManager::SoldierGameObjList.Head(); z; z = z->Next())
     {
         SoldierGameObj *obj = z->Data();
@@ -190,7 +240,9 @@ void BattleViewPlugin::OnThink()
         game_object_to_entity(obj);
     }
 
-    Console_Output("Vehicles:\n");
+    if (BATTLEVIEW_DEBUG_ENTITIES)
+        Console_Output("Vehicles:\n");
+
     for (SLNode<VehicleGameObj> *z = GameObjManager::VehicleGameObjList.Head(); z; z = z->Next())
     {
         VehicleGameObj *obj = z->Data();
@@ -214,12 +266,18 @@ void BattleViewPlugin::OnThink()
 
     const char *json;
     json = BattleViewJSONify::BattleViewJSONify(0, 7, sane, The_Game()->Get_Map_Name(), m_structures, m_players, m_vehicles).to_json();
-    Console_Output("JSON: %s\n", json);
+    if (BATTLEVIEW_DEBUG_JSON)
+        Console_Output("JSON: %s\n", json);
 
-    // if (false && m_http_client->is_ready()) {
-    //    m_http_client->enqueue(nullptr);
-    //    m_http_client->post();
-    // }
+    //if (m_http_client->is_ready()) {
+    //    m_http_client->post(json);
+    //}
+
+    // TODO: fail if m_udp_socket is bad
+    int iResult = sendto(m_udp_socket, json, strlen(json), 0, (SOCKADDR*)&m_udp_socket_addr, sizeof(m_udp_socket_addr));
+    if (iResult == SOCKET_ERROR) {
+        Console_Output("closesocket failed with error: %d\n", WSAGetLastError());
+    }
 }
 
 // For SoldierGameObj and VehicleGameObj
@@ -255,6 +313,9 @@ BattleViewEntity *BattleViewPlugin::game_object_to_entity(SmartGameObj *obj)
             character_name = Get_Translated_Preset_Name(Get_Vehicle_Driver(obj)->As_SoldierGameObj());
         }
     }
+    else {
+        name = Get_Player_Name(obj);
+    }
     if (Get_Vehicle_Mode(obj) == VEHICLE_TYPE_TURRET)
     {
         type = "BASE_DEFENSE";
@@ -281,13 +342,15 @@ BattleViewEntity *BattleViewPlugin::game_object_to_entity(SmartGameObj *obj)
         pos,  // X, Y[Actually .Z here], FACING
         type, // SOLDIER, VEHICLE, AIRCRAFT, SHIP, HARVESTER
         health,
-        "",
+        Commands->Get_Preset_Name(obj),
         character_name,
         vehicle_name);
 
-    Console_Output(
-        "ID: %i, TEAM: %i, NAME: %s, POSITION: [%0.2f, %0.2f, %0.2f], TYPE: %s, HEALTH: %0.2f, ICON: %s, CHAR: %s, VEHICLE: %s\n",
-        entity->id(), entity->team(), entity->name(), entity->position().X, entity->position().Y, entity->position().Z, entity->type(), entity->health(), entity->icon(), entity->character_name(), entity->vehicle_name());
+    if (BATTLEVIEW_DEBUG_ENTITIES) {
+        Console_Output(
+          "ID: %i, TEAM: %i, NAME: %s, POSITION: [%0.2f, %0.2f, %0.2f], TYPE: %s, HEALTH: %0.2f, ICON: %s, CHAR: %s, VEHICLE: %s\n",
+          entity->id(), entity->team(), entity->name(), entity->position().X, entity->position().Y, entity->position().Z, entity->type(), entity->health(), entity->icon(), entity->character_name(), entity->vehicle_name());
+    }
 
     if (is_structure)
     {
@@ -326,13 +389,15 @@ BattleViewEntity *BattleViewPlugin::game_object_to_entity(BuildingGameObj *obj)
         pos,
         base_defense ? "BASE_DEFENSE" : "BUILDING",
         health,
-        "",
+        Commands->Get_Preset_Name(obj),
         nullptr,
         nullptr);
 
-    Console_Output(
-        "ID: %i, TEAM: %i, NAME: %s, POSITION: [%0.2f, %0.2f, %0.2f], TYPE: %s, HEALTH: %0.2f, ICON: %s, CHAR: %s, VEHICLE: %s\n",
-        entity->id(), entity->team(), entity->name(), entity->position().X, entity->position().Y, entity->position().Z, entity->type(), entity->health(), entity->icon(), entity->character_name(), entity->vehicle_name());
+    if (BATTLEVIEW_DEBUG_ENTITIES) {
+        Console_Output(
+            "ID: %i, TEAM: %i, NAME: %s, POSITION: [%0.2f, %0.2f, %0.2f], TYPE: %s, HEALTH: %0.2f, ICON: %s, CHAR: %s, VEHICLE: %s\n",
+            entity->id(), entity->team(), entity->name(), entity->position().X, entity->position().Y, entity->position().Z, entity->type(), entity->health(), entity->icon(), entity->character_name(), entity->vehicle_name());
+    }
 
     m_structures.Add(entity);
 
